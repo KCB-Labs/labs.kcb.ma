@@ -47,6 +47,13 @@
 - **Review:** Adversarial Task PASS with advisory (dark shadow duplication) fixed in `9bdd336`. Review-type sort: **agentic — Done** (deterministic, no UX judgment beyond restrained palette). Comment posted to Plane.
 - **Close-out:** Plane `kcb/KCBLABS-2` → Done, `plans/README.md` → Done, commits `85e75a3, 9bdd336` on `master`. Next actionable: `PBI-003` (needs PBI-002 Done) and `PBI-004` (needs PBI-001 Done, still Proposed) — both ready; execution order picks PBI-003 next.
 
+---
+
+## 2026-08-27 — PBI-003 Active (asdlc-execute)
+
+- **Selected:** `PBI-003` (Core Layouts & Navigation) — dependencies PBI-001 Done + PBI-002 Done satisfied. Plane `kcb/KCBLABS-3` → `In Progress`, `plans/README.md` → Active.
+- **Pre-flight:** Targets: src/layouts/BaseLayout.astro, Lab/Project/Article shells, src/components/astro/* (SiteHeader, SiteFooter, Container, Section, Breadcrumbs, PageHeader, Prose). All Astro, no React islands, tokens only.
+
 ## PBI Log
 
 | Date | PBI | Plane | Transition | Gates | Review | Commits | Notes |
@@ -55,5 +62,4 @@
 | 2026-08-27 | PBI-001 | kcb/KCBLABS-1 | Active→Done | check 0 err, build ok, test 6 pass | agentic | f863b5f, 7ca18e0 | Astro server scaffold + Keystatic + React + Node standalone |
 | 2026-08-27 | PBI-002 | kcb/KCBLABS-2 | Proposed→Active | — | — | — | Tokens started |
 | 2026-08-27 | PBI-002 | kcb/KCBLABS-2 | Active→Done | check 0 err, build ok, test 6 pass | agentic | 85e75a3, 9bdd336 | Tokens + globals + light/dark + motion |
-| — | PBI-003 | kcb/KCBLABS-3 | Proposed | — | — | — | Next: Core layouts (depends PBI-001,002) |
-| — | PBI-004 | kcb/KCBLABS-4 | Proposed | — | — | — | Also ready (depends PBI-001) |
+| 2026-08-27 | PBI-003 | kcb/KCBLABS-3 | Proposed→Active | — | — | — | Layouts + nav; started |

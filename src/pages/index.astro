@@ -1,20 +1,19 @@
 ---
-import "../styles/globals.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/astro/SiteHeader.astro";
+import SiteFooter from "../components/astro/SiteFooter.astro";
+import Container from "../components/astro/Container.astro";
+import Section from "../components/astro/Section.astro";
 export const prerender = true;
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>KCB Labs — Foundation</title>
-    <meta name="description" content="KCB Labs foundation shell — labs.kcb.ma" />
-    <link rel="canonical" href="https://labs.kcb.ma/" />
-  </head>
-  <body>
-    <main>
+<BaseLayout title="KCB Labs — Foundation" description="KCB Labs explores ideas that could become technology, products and companies.">
+  <SiteHeader />
+  <Container>
+    <Section>
       <h1>KCB Labs — Foundation Ready</h1>
-      <p>PBI-001 scaffold: Astro server + React + Keystatic + Node standalone.</p>
-    </main>
-  </body>
-</html>
+      <p class="text-body" style="max-width: var(--container-content); color: var(--color-muted);">PBI-001 scaffold: Astro server + React + Keystatic + Node standalone. PBI-002 tokens + PBI-003 layouts.</p>
+    </Section>
+  </Container>
+  <SiteFooter />
+</BaseLayout>

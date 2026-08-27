@@ -1,0 +1,76 @@
+---
+import Container from "./Container.astro";
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <Container>
+    <div class="grid">
+      <div>
+        <p class="brand">KCB Labs</p>
+        <p class="text-small">A public R&amp;D and innovation platform documenting how ideas become experiments, projects and outcomes.</p>
+      </div>
+      <div>
+        <p class="text-metadata">Explore</p>
+        <ul>
+          <li><a href="/labs">Labs</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <li><a href="/open-source">Open Source</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-metadata">Journal</p>
+        <ul>
+          <li><a href="/journal">Articles</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-metadata">Participate</p>
+        <ul>
+          <li><a href="/participate/sponsorship">Sponsorship</a></li>
+          <li><a href="/participate/collaboration">Collaboration</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="text-small" style="margin-top: var(--space-6); color: var(--color-muted);">© {year} KCB Labs — labs.kcb.ma</p>
+  </Container>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--space-8);
+    border-top: var(--border-subtle);
+    padding-block: var(--space-8);
+    background: var(--color-surface);
+  }
+  .grid {
+    display: grid;
+    gap: var(--space-6);
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  }
+  .brand {
+    font-family: var(--font-display);
+    font-weight: var(--weight-display);
+    margin-bottom: var(--space-2);
+  }
+  .site-footer ul {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-2);
+    display: grid;
+    gap: var(--space-1);
+  }
+  .site-footer a {
+    text-decoration: none;
+    color: var(--color-muted);
+    font-size: var(--text-small);
+  }
+  .site-footer a:hover {
+    color: var(--color-text);
+  }
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

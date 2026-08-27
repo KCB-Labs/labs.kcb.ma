@@ -1,0 +1,108 @@
+---
+import Container from "./Container.astro";
+---
+<header class="site-header">
+  <Container>
+    <nav class="nav" aria-label="Primary">
+      <a href="/" class="brand">KCB Labs</a>
+      <div class="links">
+        <div class="group">
+          <a href="/labs">Explore</a>
+          <div class="dropdown" role="group" aria-label="Explore submenu">
+            <a href="/labs">Labs</a>
+            <a href="/projects">Projects</a>
+            <a href="/open-source">Open Source</a>
+          </div>
+        </div>
+        <a href="/journal">Journal</a>
+        <div class="group">
+          <a href="/about">About</a>
+          <div class="dropdown" role="group" aria-label="About submenu">
+            <a href="/about/vision">Vision</a>
+            <a href="/about/people">People</a>
+            <a href="/about/ecosystem">Ecosystem</a>
+            <a href="/about/roadmap">Roadmap</a>
+          </div>
+        </div>
+        <div class="group">
+          <a href="/participate">Participate</a>
+          <div class="dropdown" role="group" aria-label="Participate submenu">
+            <a href="/participate/sponsorship">Sponsorship</a>
+            <a href="/participate/collaboration">Collaboration</a>
+            <a href="/contact">Contact</a>
+          </div>
+        </div>
+        <a href="/search" aria-label="Search">Search</a>
+      </div>
+    </nav>
+  </Container>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    background: var(--color-surface);
+    border-bottom: var(--border-subtle);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 3.5rem;
+    gap: var(--space-6);
+  }
+  .brand {
+    font-family: var(--font-display);
+    font-weight: var(--weight-display);
+    letter-spacing: var(--tracking-tight);
+    text-decoration: none;
+  }
+  .links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    font-size: var(--text-small);
+  }
+  .links a {
+    text-decoration: none;
+    color: var(--color-muted-strong);
+  }
+  .links a:hover {
+    color: var(--color-text);
+  }
+  .group {
+    position: relative;
+  }
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 12rem;
+    background: var(--color-surface);
+    border: var(--border-subtle);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-2);
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  .group:hover .dropdown,
+  .group:focus-within .dropdown {
+    display: flex;
+  }
+  .dropdown a {
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+  }
+  .dropdown a:hover {
+    background: var(--color-bg);
+  }
+  @media (max-width: 768px) {
+    .links {
+      display: none;
+    }
+  }
+</style>
