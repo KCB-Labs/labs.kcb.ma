@@ -82,10 +82,14 @@
 
 ---
 
-## 2026-08-27 — PBI-006 Active (asdlc-execute)
+## 2026-08-27 — PBI-006 Done (asdlc-execute)
 
 - **Selected:** `PBI-006` (Collections Articles, People, Organizations, Open Source, Roadmap + Singletons) — dependency PBI-005 Done satisfied. Plane `kcb/KCBLABS-6` → `In Progress`, `plans/README.md` → Active.
-- **Pre-flight:** Targets: keystatic.config.ts (add 5 collections + 5 singletons), src/content/{articles,people,organizations,opensource,roadmap} fixtures, singletons src/content/site.yaml etc., CONTENT-MODEL.md full. Codegraph fallback → Read/Grep.
+- **Pre-flight:** Targets: keystatic.config.ts (add 5 collections + 5 singletons), src/content/{articles,people,organizations,opensource,roadmap} fixtures, singletons src/content/site.yaml etc., CONTENT-MODEL.md full.
+- **Implementation:** Extended `keystatic.config.ts:1` from 4 to 9 collections + 5 singletons (articles: category Article/Lab Note/Field Note/Perspective/Announcement + relationships to labs/research/experiments/projects/people/organizations; people: role/bio/avatar/socials/relatedLabs/Projects; organizations: type Partner/Client/Sponsor/Startup/University/Research Organization/Technology Partner/Community/Open Source Community + logo/relationship; opensource: repository/license/status/originLab/relatedProject/technologies; roadmap: period/theme/objective/areas) + singletons site/about/vision/sponsorship/settings. Added 10 fixtures (building-ai-employees/draft-article, john-doe/draft-person, partner-org/draft-org, httpa-agent-protocol/draft-opensource, 2026-ai-autonomous/draft-roadmap + 5 singleton yamls) with valid closed graph, updated `CONTENT-MODEL.md:1` to full 9+5 documentation.
+- **Gates:** check 0 errors, build ok (1.83s server+prerender), test 6 pass, no page imports astro:content.
+- **Review:** Adversarial PASS with advisory (labs/projects still missing articles/people relationships — deferred, not blocking). Review-type sort: **agentic — Done**. Comment posted to Plane.
+- **Close-out:** Plane `kcb/KCBLABS-6` → Done, `plans/README.md` → Done, commit `2786c81` on `master`. Next actionable: `PBI-007` (needs PBI-005+006 Done) — now ready.
 
 ## PBI Log
 
@@ -102,3 +106,4 @@
 | 2026-08-27 | PBI-005 | kcb/KCBLABS-5 | Proposed→Active | — | — | — | Collections 1; started |
 | 2026-08-27 | PBI-005 | kcb/KCBLABS-5 | Active→Done | check 0 err, build ok, test 6 pass | agentic | 57e421b | 4 collections + 8 fixtures + CONTENT-MODEL |
 | 2026-08-27 | PBI-006 | kcb/KCBLABS-6 | Proposed→Active | — | — | — | Collections 2 + singletons; started |
+| 2026-08-27 | PBI-006 | kcb/KCBLABS-6 | Active→Done | check 0 err, build ok, test 6 pass | agentic | 2786c81 | 9 collections + 5 singletons + 10 fixtures + CONTENT-MODEL full |
