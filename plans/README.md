@@ -67,7 +67,7 @@ Each spec's **Goal / Scope / Contracts / Anti-patterns / Decisions** are the gua
 | 2 | PBI-002 | Foundation — Design tokens & global styles | kcb/KCBLABS-2 | Done | PBI-001 | master | agentic |
 | 3 | PBI-003 | Foundation — Core layouts & navigation (BaseLayout/Header/Footer) | kcb/KCBLABS-3 | Done | PBI-001, PBI-002 | master | agentic |
 | 4 | PBI-004 | Foundation — Docker + health endpoint + MCP config | kcb/KCBLABS-4 | Done | PBI-001 | master | agentic |
-| 5 | PBI-005 | Content Model — Collections Labs/Research/Experiments/Projects | kcb/KCBLABS-5 | Active | PBI-001, PBI-004 | master | — |
+| 5 | PBI-005 | Content Model — Collections Labs/Research/Experiments/Projects | kcb/KCBLABS-5 | Done | PBI-001, PBI-004 | master | agentic |
 | 6 | PBI-006 | Content Model — Collections Articles/People/Orgs/OS/Roadmap + Singletons | kcb/KCBLABS-6 | Proposed | PBI-005 | — | — |
 | 7 | PBI-007 | Content Model — Data access layer src/lib/content | kcb/KCBLABS-7 | Proposed | PBI-005, PBI-006 | — | — |
 | 8 | PBI-008 | Content Model — Validation + publishing filter + slug stability + seed graph | kcb/KCBLABS-8 | Proposed | PBI-007 | — | — |

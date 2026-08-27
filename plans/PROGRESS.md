@@ -71,10 +71,14 @@
 
 ---
 
-## 2026-08-27 — PBI-005 Active (asdlc-execute)
+## 2026-08-27 — PBI-005 Done (asdlc-execute)
 
 - **Selected:** `PBI-005` (Keystatic Collections — Labs, Research, Experiments, Projects) — dependencies PBI-001 Done + PBI-004 Done satisfied. Plane `kcb/KCBLABS-5` → `In Progress`, `plans/README.md` → Active.
-- **Pre-flight:** Targets: keystatic.config.ts (4 collections), src/content/{labs,research,experiments,projects} with fixtures, CONTENT-MODEL.md partial. Codegraph fallback → Read/Grep.
+- **Pre-flight:** Targets: keystatic.config.ts (4 collections), src/content/{labs,research,experiments,projects} with fixtures, CONTENT-MODEL.md partial.
+- **Implementation:** Replaced `keystatic.config.ts:1` skeleton with 4 typed collections (labs: status Active/Exploring/Paused/Archived + research/experiments/projects/technologies relationships; research: lab+experiments+projects+question/hypothesis; experiments: lab+research+project+outcome VALIDATED/INCONCLUSIVE/FAILED/PARTIAL+objective; projects: originLab+research+experiments+type Internal/Client/Startup/Collaboration/Open Source/Research+stage Idea→Archived) all with identity 4 + publishing 3 + metadata 3 + SEO 4 groups per §49, storage local. Added 8 fixtures (ai-employees/draft-lab, local-ai-research/draft-research, local-llm-benchmark/draft-experiment, operant/draft-project) with closed graph, created `CONTENT-MODEL.md:1` documenting 4 collections + graph.
+- **Gates:** check 0 errors (16 files), build ok (1.64s server+prerender), test 6 pass — all fixtures valid, no page imports astro:content.
+- **Review:** Adversarial PASS with advisories (slug short-form allowed per §38, alt-required deferred to PBI-008). Review-type sort: **agentic — Done**. Comment posted to Plane.
+- **Close-out:** Plane `kcb/KCBLABS-5` → Done, `plans/README.md` → Done, commit `57e421b` on `master`. Next actionable: `PBI-006` (needs PBI-005 Done) — now ready.
 
 ## PBI Log
 
@@ -89,3 +93,4 @@
 | 2026-08-27 | PBI-004 | kcb/KCBLABS-4 | Proposed→Active | — | — | — | Docker + health started |
 | 2026-08-27 | PBI-004 | kcb/KCBLABS-4 | Active→Done | check 0 err, build ok, health ok | agentic | 8155d4a, 8f3d012 | Docker + health + MCP + DEPLOYMENT |
 | 2026-08-27 | PBI-005 | kcb/KCBLABS-5 | Proposed→Active | — | — | — | Collections 1; started |
+| 2026-08-27 | PBI-005 | kcb/KCBLABS-5 | Active→Done | check 0 err, build ok, test 6 pass | agentic | 57e421b | 4 collections + 8 fixtures + CONTENT-MODEL |
