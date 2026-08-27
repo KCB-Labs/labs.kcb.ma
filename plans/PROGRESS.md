@@ -60,10 +60,14 @@
 
 ---
 
-## 2026-08-27 — PBI-004 Active (asdlc-execute)
+## 2026-08-27 — PBI-004 Done (asdlc-execute)
 
-- **Selected:** `PBI-004` (Docker + Health Endpoint + MCP Config) — dependency PBI-001 Done satisfied (parallel with PBI-002/003, now picked). Plane `kcb/KCBLABS-4` → `In Progress`, `plans/README.md` → Active.
+- **Selected:** `PBI-004` (Docker + Health Endpoint + MCP Config) — dependency PBI-001 Done satisfied. Plane `kcb/KCBLABS-4` → `In Progress`, `plans/README.md` → Active.
 - **Pre-flight:** Targets: src/pages/api/health.ts, Dockerfile, .dockerignore, .opencode/opencode.jsonc, DEPLOYMENT.md, src/lib/env.ts.
+- **Implementation:** Created `src/pages/api/health.ts:1` (prerender false, GET → 200 {"status":"ok"} JSON, no deps), `Dockerfile:1` (multi-stage node:20-alpine builder npm ci + build → runtime dist+node_modules, EXPOSE 4321, CMD node ./dist/server/entry.mjs), `.opencode/opencode.jsonc:1` (Astro docs + plane-kcb), `DEPLOYMENT.md:1` (Coolify table, env vars, health, workflow), `src/lib/env.ts:1` (import.meta.env only). Verified via `node dist/server/entry.mjs` + `curl localhost:4321/api/health` → {"status":"ok"}.
+- **Gates:** check 0 errors (16 files), build ok (1.76s server+prerender, dist/server/entry.mjs 225k), test 6 pass, health reachable, no secrets in client bundle, no static adapter.
+- **Review:** Adversarial PASS with nit (env.ts comment) fixed in `8f3d012`. Review-type sort: **agentic — Done**. Comment posted to Plane.
+- **Close-out:** Plane `kcb/KCBLABS-4` → Done, `plans/README.md` → Done, commits `8155d4a, 8f3d012` on `master`. Next actionable: `PBI-005` (collections, needs PBI-001+004 Done) — now ready. Foundation phase (PBI-001..004) complete.
 
 ## PBI Log
 
@@ -75,4 +79,5 @@
 | 2026-08-27 | PBI-002 | kcb/KCBLABS-2 | Active→Done | check 0 err, build ok, test 6 pass | agentic | 85e75a3, 9bdd336 | Tokens + globals + light/dark + motion |
 | 2026-08-27 | PBI-003 | kcb/KCBLABS-3 | Proposed→Active | — | — | — | Layouts started |
 | 2026-08-27 | PBI-003 | kcb/KCBLABS-3 | Active→Done | check 0 err/hint, build ok, test 6 pass | agentic | b45e61f, 304295b | BaseLayout + Header/Footer + layouts + mobile nav |
-| 2026-08-27 | PBI-004 | kcb/KCBLABS-4 | Proposed→Active | — | — | — | Docker + health; started |
+| 2026-08-27 | PBI-004 | kcb/KCBLABS-4 | Proposed→Active | — | — | — | Docker + health started |
+| 2026-08-27 | PBI-004 | kcb/KCBLABS-4 | Active→Done | check 0 err, build ok, health ok | agentic | 8155d4a, 8f3d012 | Docker + health + MCP + DEPLOYMENT |
