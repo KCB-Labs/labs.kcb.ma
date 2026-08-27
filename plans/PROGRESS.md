@@ -26,13 +26,28 @@
 
 ---
 
-## 2026-08-27 — PBI-001 Active (asdlc-execute)
+## 2026-08-27 — PBI-001 Done (asdlc-execute)
 
-- **Selected:** `PBI-001` (first Proposed with no dependencies). Plane `kcb/KCBLABS-1` → `In Progress` (state `e93969fd...`). `plans/README.md` set to Active. Astro docs MCP added to `~/.config/opencode/opencode.jsonc`.
+- **Selected:** `PBI-001` (first Proposed with no dependencies). Plane `kcb/KCBLABS-1` → `In Progress` (e93969fd...). `plans/README.md` set to Active.
+- **Pre-flight:** Codegraph fallback (no index) → Read/Grep. Targets: astro.config, keystatic.config, package.json, tsconfig, src/pages/index.astro. MCP Astro docs added to `~/.config/opencode/opencode.jsonc`.
+- **Implementation:** Installed `astro@7.2.9`, `@astrojs/react@6.0.4`, `@astrojs/markdoc@2.0.8`, `@astrojs/node@11.1.4`, `react@19.2.8`, `react-dom@19.2.8`, `@keystatic/astro@6.0.0`, `@keystatic/core@0.6.9` (408 packages), verified via keystatic docs + Astro MCP. Created `astro.config.ts:1` (output server + node standalone + integrations react/markdoc/keystatic + site https://labs.kcb.ma), `keystatic.config.ts:1` skeleton local, `src/pages/index.astro:1` prerender true, updated `package.json:10` scripts to astro check/build, `tsconfig.json:2` extends astro/tsconfigs/strict with react-jsx.
+- **Gates iteration 1:** `astro check` required `@astrojs/check` — installed via `--legacy-peer-deps` (TS 7 incompatibility) → check failed due to TS 7 API missing → downgraded `typescript` 7.0.2 → 6.x → check 0 errors, build ok (server+prerender), test 6 pass, lint baseline. Fixed in same iteration.
+- **Gates iteration 2 (hygiene):** Adversarial review PASS with 3 fixes: rename `astro.config.mjs`→`.ts`, remove `src/lib/placeholder.ts`, tsconfig include fix → re-ran check 0 errors (3 files), build ok (2.15s), test 6 pass. Micro-committed `7ca18e0`.
+- **Review:** Adversarial Task PASS (spec contracts ok, anti-patterns ok, architecture ok). Review-type sort: **agentic — Done** (deterministic gates + adversarial review, no human judgment). Resolution comment posted to Plane with PBI/Branch/Commits/Review evidence.
+- **Close-out:** Plane `kcb/KCBLABS-1` → Done (d8ce3689...), `plans/README.md` → Done, commits `f863b5f, 7ca18e0` on `master` (merged, no PR needed as default branch). Next actionable: `PBI-002` and `PBI-004` (both depend only on PBI-001 Done).
+
+---
+
+## 2026-08-27 — PBI-002 Active (asdlc-execute)
+
+- **Selected:** `PBI-002` (Design Tokens & Global Styles) — first Proposed with dependencies Done (PBI-001 Done). Plane `kcb/KCBLABS-2` → `In Progress`.
+- **Pre-flight:** Targets: src/styles/tokens.css, globals.css, theme.css, src/pages/index.astro proof. No literal values outside tokens.
 
 ## PBI Log
 
 | Date | PBI | Plane | Transition | Gates | Review | Commits | Notes |
 |---|---|---|---|---|---|---|---|
-| 2026-08-27 | PBI-001 | kcb/KCBLABS-1 | Proposed→Active | — | — | — | Scaffold Astro + TS + React + Keystatic + Node; started execution |
-| — | PBI-002..023 | kcb/KCBLABS-2..23 | Proposed | — | — | — | Awaiting dependencies; specs human-reviewed good |
+| 2026-08-27 | PBI-001 | kcb/KCBLABS-1 | Proposed→Active | — | — | — | Scaffold started |
+| 2026-08-27 | PBI-001 | kcb/KCBLABS-1 | Active→Done | check 0 err, build ok, test 6 pass | agentic | f863b5f, 7ca18e0 | Astro server scaffold + Keystatic + React + Node standalone; hygiene fixes done |
+| 2026-08-27 | PBI-002 | kcb/KCBLABS-2 | Proposed→Active | — | — | — | Tokens + globals; started |
+| — | PBI-003..023 | kcb/KCBLABS-3..23 | Proposed | — | — | — | Awaiting dependencies |

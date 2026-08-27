@@ -63,8 +63,8 @@ Each spec's **Goal / Scope / Contracts / Anti-patterns / Decisions** are the gua
 
 | # | PBI | Feature | Plane | Status | Depends on | Branch | Review |
 |---|---|---|---|---|---|---|---|
-| 1 | PBI-001 | Foundation — Astro+React+Keystatic+Node scaffold | kcb/KCBLABS-1 | Active | none | master | — |
-| 2 | PBI-002 | Foundation — Design tokens & global styles | kcb/KCBLABS-2 | Proposed | PBI-001 | — | — |
+| 1 | PBI-001 | Foundation — Astro+React+Keystatic+Node scaffold | kcb/KCBLABS-1 | Done | none | master | agentic |
+| 2 | PBI-002 | Foundation — Design tokens & global styles | kcb/KCBLABS-2 | Active | PBI-001 | master | — |
 | 3 | PBI-003 | Foundation — Core layouts & navigation (BaseLayout/Header/Footer) | kcb/KCBLABS-3 | Proposed | PBI-001, PBI-002 | — | — |
 | 4 | PBI-004 | Foundation — Docker + health endpoint + MCP config | kcb/KCBLABS-4 | Proposed | PBI-001 | — | — |
 | 5 | PBI-005 | Content Model — Collections Labs/Research/Experiments/Projects | kcb/KCBLABS-5 | Proposed | PBI-001, PBI-004 | — | — |
