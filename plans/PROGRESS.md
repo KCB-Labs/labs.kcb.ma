@@ -17,8 +17,22 @@
 
 ---
 
+## 2026-08-27 — asdlc-plan
+
+- **Decomposed:** upstream spec (79 sections) → 6 Specs (`specs/foundation`, `specs/content-model`, `specs/core-pages`, `specs/institutional-pages`, `specs/interactive-features`, `specs/production-hardening`) + 23 PBIs `tasks/PBI-001..023` with dependency graph. Candidate tooling discovered: `astrolicious/agent-skills@astro` 13.7K, `antfu/skills@vitest` 33.5K, `microsoft/playwright-cli` 133.5K via `skills find`. All approved and installed.
+- **Plane push-create:** `asdlc-plane` → 23 Todo issues `KCBLABS-1..23` in `kcb/KCBLABS`; each PBI Context now `Plane: kcb/KCBLABS-N`; `plans/README.md` Plane Sync + Execution Order updated.
+- **Adopted skills:** `astro`, `vitest`, `playwright-cli` (global copies) + npm devDeps `vitest@4.1.11`, `@playwright/test@1.62.1`.
+- **In Review state added:** user added `In Review` state `538259fa-ac8b-4bfb-b3dc-b350f1a42cc8` to KCBLABS; gate plan notes updated for review-type sort.
+
+---
+
+## 2026-08-27 — PBI-001 Active (asdlc-execute)
+
+- **Selected:** `PBI-001` (first Proposed with no dependencies). Plane `kcb/KCBLABS-1` → `In Progress` (state `e93969fd...`). `plans/README.md` set to Active. Astro docs MCP added to `~/.config/opencode/opencode.jsonc`.
+
 ## PBI Log
 
 | Date | PBI | Plane | Transition | Gates | Review | Commits | Notes |
 |---|---|---|---|---|---|---|---|
-| — | — | — | — | — | — | — | No PBIs yet — awaiting `asdlc-plan` after onboarding confirmation. |
+| 2026-08-27 | PBI-001 | kcb/KCBLABS-1 | Proposed→Active | — | — | — | Scaffold Astro + TS + React + Keystatic + Node; started execution |
+| — | PBI-002..023 | kcb/KCBLABS-2..23 | Proposed | — | — | — | Awaiting dependencies; specs human-reviewed good |

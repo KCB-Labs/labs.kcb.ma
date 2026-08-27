@@ -8,12 +8,12 @@
     "node": ">=20"
   },
   "scripts": {
-    "check": "tsc --noEmit",
+    "check": "astro check && tsc --noEmit",
     "lint": "echo \"lint: not configured yet — baseline passes\"",
     "test": "node --test tests/smoke.test.mjs",
     "test:e2e": "echo \"e2e: not configured yet — baseline passes\"",
-    "build": "echo \"build: Astro not scaffolded yet — baseline passes (Phase 1 will add astro build)\"",
-    "dev": "echo \"dev: Astro not scaffolded yet — run after Phase 1: astro dev\""
+    "build": "astro build",
+    "dev": "astro dev"
   },
   "keywords": [
     "astro",
@@ -23,6 +23,19 @@
   ],
   "license": "UNLICENSED",
   "devDependencies": {
-    "typescript": "^7.0.2"
+    "@astrojs/check": "^0.9.10",
+    "@playwright/test": "^1.62.1",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.11"
+  },
+  "dependencies": {
+    "@astrojs/markdoc": "^2.0.8",
+    "@astrojs/node": "^11.1.4",
+    "@astrojs/react": "^6.0.4",
+    "@keystatic/astro": "^6.0.0",
+    "@keystatic/core": "^0.6.9",
+    "astro": "^7.2.9",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
   }
 }

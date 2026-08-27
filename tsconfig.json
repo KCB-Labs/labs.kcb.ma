@@ -1,4 +1,5 @@
 {
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
@@ -8,8 +9,10 @@
     "noEmit": true,
     "allowJs": true,
     "checkJs": false,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "astro.config.mjs", "keystatic.config.ts"],
   "exclude": ["dist", "node_modules"]
 }
