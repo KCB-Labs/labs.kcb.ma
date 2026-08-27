@@ -1,0 +1,28 @@
+{
+  "name": "labs.kcb.ma",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "KCB Labs website — labs.kcb.ma (Astro + Keystatic + React + TypeScript)",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "lint": "echo \"lint: not configured yet — baseline passes\"",
+    "test": "node --test tests/smoke.test.mjs",
+    "test:e2e": "echo \"e2e: not configured yet — baseline passes\"",
+    "build": "echo \"build: Astro not scaffolded yet — baseline passes (Phase 1 will add astro build)\"",
+    "dev": "echo \"dev: Astro not scaffolded yet — run after Phase 1: astro dev\""
+  },
+  "keywords": [
+    "astro",
+    "keystatic",
+    "kcb",
+    "labs"
+  ],
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}

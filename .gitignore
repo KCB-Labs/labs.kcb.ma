@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Build
+dist/
+.astro/
+.output/
+
+# Env / secrets — never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Keystatic / content cache
+.keystatic/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+
+# Coolify / Docker overrides
+.dockerignore.local
+
+# Codegraph (optional index)
+.codegraph/
