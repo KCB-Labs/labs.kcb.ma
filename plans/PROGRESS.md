@@ -58,6 +58,13 @@
 - **Review:** Adversarial PASS with 5 fixes addressed: (1) schema slot via is:inline JSON-LD, (2) layouts now forward canonical/ogImage/noindex/schema, (3) <main id="main-content"> added, (4) mobile nav via <details> (visible <768px), (5) literals 3.5rem/12rem/768px justified as layout-specific with comments. All token-driven.
 - **Close-out:** Plane `kcb/KCBLABS-3` → Done, `plans/README.md` → Done, commits `b45e61f, 304295b` on `master`. Next actionable: `PBI-004` (Docker+health, depends PBI-001) — now ready.
 
+---
+
+## 2026-08-27 — PBI-004 Active (asdlc-execute)
+
+- **Selected:** `PBI-004` (Docker + Health Endpoint + MCP Config) — dependency PBI-001 Done satisfied (parallel with PBI-002/003, now picked). Plane `kcb/KCBLABS-4` → `In Progress`, `plans/README.md` → Active.
+- **Pre-flight:** Targets: src/pages/api/health.ts, Dockerfile, .dockerignore, .opencode/opencode.jsonc, DEPLOYMENT.md, src/lib/env.ts.
+
 ## PBI Log
 
 | Date | PBI | Plane | Transition | Gates | Review | Commits | Notes |
@@ -68,3 +75,4 @@
 | 2026-08-27 | PBI-002 | kcb/KCBLABS-2 | Active→Done | check 0 err, build ok, test 6 pass | agentic | 85e75a3, 9bdd336 | Tokens + globals + light/dark + motion |
 | 2026-08-27 | PBI-003 | kcb/KCBLABS-3 | Proposed→Active | — | — | — | Layouts started |
 | 2026-08-27 | PBI-003 | kcb/KCBLABS-3 | Active→Done | check 0 err/hint, build ok, test 6 pass | agentic | b45e61f, 304295b | BaseLayout + Header/Footer + layouts + mobile nav |
+| 2026-08-27 | PBI-004 | kcb/KCBLABS-4 | Proposed→Active | — | — | — | Docker + health; started |

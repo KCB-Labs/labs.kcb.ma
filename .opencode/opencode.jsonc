@@ -1,0 +1,17 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "Astro docs": {
+      "type": "remote",
+      "url": "https://mcp.docs.astro.build/mcp"
+    },
+    "plane-kcb": {
+      "type": "remote",
+      "url": "https://plane-mcp.kcb.ma/http/api-key/mcp",
+      "headers": {
+        "Authorization": "Bearer {env:PLANE_API_KEY}",
+        "X-Workspace-slug": "kcb"
+      }
+    }
+  }
+}
