@@ -69,6 +69,13 @@
 - **Review:** Adversarial PASS with nit (env.ts comment) fixed in `8f3d012`. Review-type sort: **agentic — Done**. Comment posted to Plane.
 - **Close-out:** Plane `kcb/KCBLABS-4` → Done, `plans/README.md` → Done, commits `8155d4a, 8f3d012` on `master`. Next actionable: `PBI-005` (collections, needs PBI-001+004 Done) — now ready. Foundation phase (PBI-001..004) complete.
 
+---
+
+## 2026-08-27 — PBI-005 Active (asdlc-execute)
+
+- **Selected:** `PBI-005` (Keystatic Collections — Labs, Research, Experiments, Projects) — dependencies PBI-001 Done + PBI-004 Done satisfied. Plane `kcb/KCBLABS-5` → `In Progress`, `plans/README.md` → Active.
+- **Pre-flight:** Targets: keystatic.config.ts (4 collections), src/content/{labs,research,experiments,projects} with fixtures, CONTENT-MODEL.md partial. Codegraph fallback → Read/Grep.
+
 ## PBI Log
 
 | Date | PBI | Plane | Transition | Gates | Review | Commits | Notes |
@@ -81,3 +88,4 @@
 | 2026-08-27 | PBI-003 | kcb/KCBLABS-3 | Active→Done | check 0 err/hint, build ok, test 6 pass | agentic | b45e61f, 304295b | BaseLayout + Header/Footer + layouts + mobile nav |
 | 2026-08-27 | PBI-004 | kcb/KCBLABS-4 | Proposed→Active | — | — | — | Docker + health started |
 | 2026-08-27 | PBI-004 | kcb/KCBLABS-4 | Active→Done | check 0 err, build ok, health ok | agentic | 8155d4a, 8f3d012 | Docker + health + MCP + DEPLOYMENT |
+| 2026-08-27 | PBI-005 | kcb/KCBLABS-5 | Proposed→Active | — | — | — | Collections 1; started |
