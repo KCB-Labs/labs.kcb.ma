@@ -13,6 +13,6 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react"
   },
-  "include": ["src/**/*", "astro.config.mjs", "keystatic.config.ts"],
+  "include": ["src/**/*", "astro.config.ts", "keystatic.config.ts"],
   "exclude": ["dist", "node_modules"]
 }
