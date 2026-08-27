@@ -49,10 +49,14 @@
 
 ---
 
-## 2026-08-27 — PBI-003 Active (asdlc-execute)
+## 2026-08-27 — PBI-003 Done (asdlc-execute)
 
 - **Selected:** `PBI-003` (Core Layouts & Navigation) — dependencies PBI-001 Done + PBI-002 Done satisfied. Plane `kcb/KCBLABS-3` → `In Progress`, `plans/README.md` → Active.
 - **Pre-flight:** Targets: src/layouts/BaseLayout.astro, Lab/Project/Article shells, src/components/astro/* (SiteHeader, SiteFooter, Container, Section, Breadcrumbs, PageHeader, Prose). All Astro, no React islands, tokens only.
+- **Implementation:** Created `src/layouts/BaseLayout.astro:1` (head SEO: title/description/canonical via Astro.site, OG/Twitter, schema slot with is:inline JSON-LD, <main> landmark, globals import), `LabLayout.astro:1`/`ProjectLayout.astro:1`/`ArticleLayout.astro:1` (forward canonical/ogImage/noindex/schema + crumbs), `SiteHeader.astro:1` (compact IA Explore/Journal/About/Participate/Search with correct hrefs, dropdowns, mobile <details> fallback), `SiteFooter.astro:1`, `Container.astro:1`, `Section.astro:1`, `Breadcrumbs.astro:1`, `PageHeader.astro:1`, `Prose.astro:1` (editorial), updated `src/pages/index.astro:1` to use BaseLayout+Header/Footer+Container/Section.
+- **Gates:** check 0 errors, 0 hints (14 files, after is:inline fix), build ok (1.65s server+prerender), test 6 pass, view-source shows header/footer server-rendered without client:*, header IA correct per spec §3.
+- **Review:** Adversarial PASS with 5 fixes addressed: (1) schema slot via is:inline JSON-LD, (2) layouts now forward canonical/ogImage/noindex/schema, (3) <main id="main-content"> added, (4) mobile nav via <details> (visible <768px), (5) literals 3.5rem/12rem/768px justified as layout-specific with comments. All token-driven.
+- **Close-out:** Plane `kcb/KCBLABS-3` → Done, `plans/README.md` → Done, commits `b45e61f, 304295b` on `master`. Next actionable: `PBI-004` (Docker+health, depends PBI-001) — now ready.
 
 ## PBI Log
 
@@ -62,4 +66,5 @@
 | 2026-08-27 | PBI-001 | kcb/KCBLABS-1 | Active→Done | check 0 err, build ok, test 6 pass | agentic | f863b5f, 7ca18e0 | Astro server scaffold + Keystatic + React + Node standalone |
 | 2026-08-27 | PBI-002 | kcb/KCBLABS-2 | Proposed→Active | — | — | — | Tokens started |
 | 2026-08-27 | PBI-002 | kcb/KCBLABS-2 | Active→Done | check 0 err, build ok, test 6 pass | agentic | 85e75a3, 9bdd336 | Tokens + globals + light/dark + motion |
-| 2026-08-27 | PBI-003 | kcb/KCBLABS-3 | Proposed→Active | — | — | — | Layouts + nav; started |
+| 2026-08-27 | PBI-003 | kcb/KCBLABS-3 | Proposed→Active | — | — | — | Layouts started |
+| 2026-08-27 | PBI-003 | kcb/KCBLABS-3 | Active→Done | check 0 err/hint, build ok, test 6 pass | agentic | b45e61f, 304295b | BaseLayout + Header/Footer + layouts + mobile nav |
