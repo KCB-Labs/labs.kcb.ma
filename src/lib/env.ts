@@ -1,7 +1,6 @@
 /**
  * Env helper — reads Keystatic / site vars without committing secrets.
- * Uses Astro's import.meta.env (client/server) and process.env (Node) where available.
- * Never log or bundle secret values to client.
+ * Uses Astro's import.meta.env only (Astro + Vite). Never log or bundle secret values to client.
  */
 
 export function getEnv(key: string, fallback?: string): string | undefined {
