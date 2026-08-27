@@ -8,6 +8,7 @@ interface Props {
   ogImage?: string;
   ogType?: string;
   noindex?: boolean;
+  schema?: Record<string, unknown>;
 }
 
 const {
@@ -17,6 +18,7 @@ const {
   ogImage,
   ogType = "website",
   noindex = false,
+  schema,
 } = Astro.props;
 
 const site = Astro.site?.toString() ?? "https://labs.kcb.ma";
@@ -44,10 +46,13 @@ const ogImageURL = ogImage ? new URL(ogImage, site).toString() : undefined;
     <meta name="twitter:description" content={description} />
     {ogImageURL && <meta name="twitter:image" content={ogImageURL} />}
     <meta name="generator" content={Astro.generator} />
+    {schema && <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />}
     <slot name="head" />
   </head>
   <body>
-    <slot />
+    <main id="main-content">
+      <slot />
+    </main>
   </body>
 </html>
 
