@@ -80,6 +80,13 @@
 - **Review:** Adversarial PASS with advisories (slug short-form allowed per §38, alt-required deferred to PBI-008). Review-type sort: **agentic — Done**. Comment posted to Plane.
 - **Close-out:** Plane `kcb/KCBLABS-5` → Done, `plans/README.md` → Done, commit `57e421b` on `master`. Next actionable: `PBI-006` (needs PBI-005 Done) — now ready.
 
+---
+
+## 2026-08-27 — PBI-006 Active (asdlc-execute)
+
+- **Selected:** `PBI-006` (Collections Articles, People, Organizations, Open Source, Roadmap + Singletons) — dependency PBI-005 Done satisfied. Plane `kcb/KCBLABS-6` → `In Progress`, `plans/README.md` → Active.
+- **Pre-flight:** Targets: keystatic.config.ts (add 5 collections + 5 singletons), src/content/{articles,people,organizations,opensource,roadmap} fixtures, singletons src/content/site.yaml etc., CONTENT-MODEL.md full. Codegraph fallback → Read/Grep.
+
 ## PBI Log
 
 | Date | PBI | Plane | Transition | Gates | Review | Commits | Notes |
@@ -94,3 +101,4 @@
 | 2026-08-27 | PBI-004 | kcb/KCBLABS-4 | Active→Done | check 0 err, build ok, health ok | agentic | 8155d4a, 8f3d012 | Docker + health + MCP + DEPLOYMENT |
 | 2026-08-27 | PBI-005 | kcb/KCBLABS-5 | Proposed→Active | — | — | — | Collections 1; started |
 | 2026-08-27 | PBI-005 | kcb/KCBLABS-5 | Active→Done | check 0 err, build ok, test 6 pass | agentic | 57e421b | 4 collections + 8 fixtures + CONTENT-MODEL |
+| 2026-08-27 | PBI-006 | kcb/KCBLABS-6 | Proposed→Active | — | — | — | Collections 2 + singletons; started |
