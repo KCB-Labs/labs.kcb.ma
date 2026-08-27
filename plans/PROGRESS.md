@@ -38,16 +38,22 @@
 
 ---
 
-## 2026-08-27 — PBI-002 Active (asdlc-execute)
+## 2026-08-27 — PBI-002 Done (asdlc-execute)
 
-- **Selected:** `PBI-002` (Design Tokens & Global Styles) — first Proposed with dependencies Done (PBI-001 Done). Plane `kcb/KCBLABS-2` → `In Progress`.
-- **Pre-flight:** Targets: src/styles/tokens.css, globals.css, theme.css, src/pages/index.astro proof. No literal values outside tokens.
+- **Selected:** `PBI-002` (Design Tokens & Global Styles) — first Proposed with dependencies Done (PBI-001 Done). Plane `kcb/KCBLABS-2` → `In Progress` (301d...), `plans/README.md` → Active.
+- **Pre-flight:** Targets: src/styles/tokens.css, globals.css, src/pages/index.astro proof. No literals outside tokens.
+- **Implementation:** Created `src/styles/tokens.css:1` (156 lines, :root vars for colors/bg/surface/text/muted/accent/border, typography Display/H1/H2/H3/Body/Small/Metadata/Code, spacing 1-10, radius sm/md/lg/full, shadows sm/md/lg, motion ease/durations, containers, breakpoints, z-index + [data-theme=dark] + @media prefers-color-scheme fallback) and `src/styles/globals.css:1` (@import tokens, reset, typography hierarchy, focus-visible token-driven, prefers-reduced-motion, containers). Wired into `src/pages/index.astro:2` via `import "../styles/globals.css"`.
+- **Gates:** check 0 errors (3 files), build ok (1.42s, server+prerender), test 6 pass. Token grep confirms required vars present and 0 hex literals outside src/styles; dark/light both via [data-theme] + media query (shadow fallback fixed).
+- **Review:** Adversarial Task PASS with advisory (dark shadow duplication) fixed in `9bdd336`. Review-type sort: **agentic — Done** (deterministic, no UX judgment beyond restrained palette). Comment posted to Plane.
+- **Close-out:** Plane `kcb/KCBLABS-2` → Done, `plans/README.md` → Done, commits `85e75a3, 9bdd336` on `master`. Next actionable: `PBI-003` (needs PBI-002 Done) and `PBI-004` (needs PBI-001 Done, still Proposed) — both ready; execution order picks PBI-003 next.
 
 ## PBI Log
 
 | Date | PBI | Plane | Transition | Gates | Review | Commits | Notes |
 |---|---|---|---|---|---|---|---|
 | 2026-08-27 | PBI-001 | kcb/KCBLABS-1 | Proposed→Active | — | — | — | Scaffold started |
-| 2026-08-27 | PBI-001 | kcb/KCBLABS-1 | Active→Done | check 0 err, build ok, test 6 pass | agentic | f863b5f, 7ca18e0 | Astro server scaffold + Keystatic + React + Node standalone; hygiene fixes done |
-| 2026-08-27 | PBI-002 | kcb/KCBLABS-2 | Proposed→Active | — | — | — | Tokens + globals; started |
-| — | PBI-003..023 | kcb/KCBLABS-3..23 | Proposed | — | — | — | Awaiting dependencies |
+| 2026-08-27 | PBI-001 | kcb/KCBLABS-1 | Active→Done | check 0 err, build ok, test 6 pass | agentic | f863b5f, 7ca18e0 | Astro server scaffold + Keystatic + React + Node standalone |
+| 2026-08-27 | PBI-002 | kcb/KCBLABS-2 | Proposed→Active | — | — | — | Tokens started |
+| 2026-08-27 | PBI-002 | kcb/KCBLABS-2 | Active→Done | check 0 err, build ok, test 6 pass | agentic | 85e75a3, 9bdd336 | Tokens + globals + light/dark + motion |
+| — | PBI-003 | kcb/KCBLABS-3 | Proposed | — | — | — | Next: Core layouts (depends PBI-001,002) |
+| — | PBI-004 | kcb/KCBLABS-4 | Proposed | — | — | — | Also ready (depends PBI-001) |
