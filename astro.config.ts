@@ -3,6 +3,7 @@ import react from '@astrojs/react';
 import markdoc from '@astrojs/markdoc';
 import node from '@astrojs/node';
 import keystatic from '@keystatic/astro';
+import sitemap from '@astrojs/sitemap';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { validate } from './src/lib/content/validate.ts';
@@ -38,6 +39,16 @@ export default defineConfig({
   adapter: node({
     mode: 'standalone',
   }),
-  integrations: [react(), markdoc(), keystatic(), validateIntegration, searchIndexIntegration],
+  integrations: [
+    react(),
+    markdoc(),
+    keystatic(),
+    validateIntegration,
+    searchIndexIntegration,
+    sitemap({
+      filter: (page: string) =>
+        !page.includes('/keystatic/') && !page.includes('/api/'),
+    }),
+  ],
   site: 'https://labs.kcb.ma',
 });

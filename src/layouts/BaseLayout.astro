@@ -46,6 +46,7 @@ const ogImageURL = ogImage ? new URL(ogImage, site).toString() : undefined;
     <meta name="twitter:description" content={description} />
     {ogImageURL && <meta name="twitter:image" content={ogImageURL} />}
     <meta name="generator" content={Astro.generator} />
+    <link rel="alternate" type="application/rss+xml" title="KCB Labs Journal" href={new URL("rss.xml", site)} />
     {schema && <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />}
     <slot name="head" />
   </head>
