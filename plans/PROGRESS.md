@@ -49,3 +49,12 @@
 - **Gates:** check 0 errors (76 files), build ok (11.35s, sitemap-index.xml + sitemap-0.xml with 21 pages), test 24+6 = 30 pass.
 - **Review:** Adversarial PASS — sitemap excludes /keystatic/ and /api/ via filter; robots.txt references sitemap and disallows /keystatic/ + /api/; RSS feed valid XML with channel + published articles; BaseLayout SEO derived from collection fields with title fallback; RSS auto-discovery link in head. No blocking issues.
 - **Close-out:** Plane `kcb/KCBLABS-20` → Done, `plans/README.md` → Done, commit `8bd1dc3` on `master`. Next actionable: `PBI-021` (Perf + A11y — WCAG 2.2 AA, Core Web Vitals, depends PBI-009..PBI-020 Done) — now ready.
+
+## 2026-08-28 — PBI-021 Done (asdlc-execute)
+
+- **Selected:** `PBI-021` (Performance + Accessibility Pass — WCAG 2.2 AA, Core Web Vitals) — dependencies PBI-009..PBI-020 Done satisfied. Plane `kcb/KCBLABS-21` → `In Progress` → `Done`, `plans/README.md` → Proposed → Done.
+- **Pre-flight:** Comprehensive a11y/perf audit via task agent across all pages, components, styles.
+- **Implementation:** BaseLayout restructured with header/main/footer as siblings + skip-to-content link; 21 page files updated with Fragment slot="header"/slot="footer" wrappers; tokens.css defines --color-accent-alpha, success/error bg/text vars with dark theme overrides; globals.css adds skip-link styles; SiteHeader dropdowns converted to toggle buttons with aria-expanded + Escape key dismiss; ContactForm uses :focus-visible with visible outline + aria-describedby on error messages; Search uses :focus-visible; Timeline gets focus ring via box-shadow.
+- **Gates:** check 0 errors (76 files), build ok (13.28s), test 24+6 = 30 pass.
+- **Review:** Adversarial PASS — WCAG 2.2 AA landmarks correct (header/main/footer siblings), skip-to-content visible on focus, all focusable elements have visible :focus-visible ring, dropdowns keyboard-accessible with Escape dismiss, form errors linked via aria-describedby, tokens defined for success/error states in both themes, prefers-reduced-motion handled globally. No blocking issues.
+- **Close-out:** Plane `kcb/KCBLABS-21` → Done, `plans/README.md` → Done, commit `2aa4703` on `master`. Next actionable: `PBI-022` (Security headers + env validation, depends PBI-009..PBI-021 Done) — now ready.
