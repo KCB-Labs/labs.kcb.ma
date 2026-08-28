@@ -46,6 +46,9 @@ const ogImageURL = ogImage ? new URL(ogImage, site).toString() : undefined;
     <meta name="twitter:description" content={description} />
     {ogImageURL && <meta name="twitter:image" content={ogImageURL} />}
     <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=B612+Mono:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="alternate" type="application/rss+xml" title="KCB Labs Journal" href={new URL("rss.xml", site)} />
     {schema && <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />}
     <slot name="head" />
