@@ -1,0 +1,50 @@
+---
+import StatusBadge from "../ui/StatusBadge.astro";
+interface Props {
+  slug: string;
+  title: string;
+  description: string;
+  status: string;
+  license: string;
+  originLab?: string;
+}
+const { slug, title, description, status, license, originLab } = Astro.props;
+---
+<a href={`/open-source/${slug}`} class="card card--opensource">
+  <div class="card__meta">
+    <StatusBadge status={status} />
+    <span class="badge badge--license">{license}</span>
+  </div>
+  <h3>{title}</h3>
+  <p class="text-small">{description}</p>
+  {originLab && <p class="text-metadata">Origin: {originLab}</p>}
+</a>
+
+<style>
+  .card--opensource {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-5);
+    background: var(--color-surface);
+    border: var(--border-subtle);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: box-shadow var(--motion-duration) var(--motion-ease);
+  }
+  .card--opensource:hover {
+    box-shadow: var(--shadow-md);
+  }
+  .card__meta {
+    display: flex;
+    gap: var(--space-2);
+  }
+  .badge--license {
+    font-family: var(--font-mono);
+    font-size: var(--text-metadata);
+    letter-spacing: 0.04em;
+    padding: 0.2em 0.6em;
+    border-radius: var(--radius-full);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+  }
+</style>

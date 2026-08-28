@@ -167,3 +167,21 @@
 | 2026-08-28 | PBI-010 | kcb/KCBLABS-10 | Proposed→Active | — | — | — | Labs portal; started |
 | 2026-08-28 | PBI-010 | kcb/KCBLABS-10 | Active→Done | check 0 err/hint, build ok, test 24+6 pass | agentic | 1636355, 5a8bb93 | Labs index + detail + 404 + cards + Timeline |
 | 2026-08-28 | PBI-011 | kcb/KCBLABS-11 | Proposed→Active | — | — | — | Projects portal; started |
+| 2026-08-28 | PBI-012 | kcb/KCBLABS-12 | Proposed→Active | — | — | — | Journal portal; started |
+| 2026-08-28 | PBI-012 | kcb/KCBLABS-12 | Active→Done | check 0 err, build ok, test 30 pass | agentic | 34e7cc8 | Journal index + article detail + RichContent |
+
+---
+
+## 2026-08-28 — PBI-012 Done (asdlc-execute)
+
+- **Selected:** `PBI-012` (Journal Index + Article Detail) — dependencies PBI-008 Done + PBI-009 Done satisfied. Plane `kcb/KCBLABS-12` → `In Progress`, `plans/README.md` → Active.
+- **Pre-flight:** Targets: src/pages/journal/index.astro, src/pages/journal/[slug].astro, src/components/content/RichContent.astro. All prerendered, no React islands.
+- **Implementation:** Created `src/pages/journal/index.astro:1` (prerender ArticleCards from getArticles, featured sort) + `src/pages/journal/[slug].astro:1` (prerender via getStaticPaths, ArticleLayout via BaseLayout with Breadcrumbs/PageHeader, RichContent for Markdoc body, readingTime 200wpm, prev/next via getPreviousNextArticle, related content sections: Lab/Research/Experiments/Projects/People/Organizations via helper relationships). Created `src/components/content/RichContent.astro:1` (editorial styling for prose, code, tables, blockquotes). Fixed unused import.
+- **Gates:** check 0 errors (53 files), build ok (2.03s server+prerender, dist/client/journal + /journal/building-ai-employees), test 24+6 pass = 30, no client:* islands.
+- **Review:** Adversarial PASS — journal index lists published articles via ArticleCard, article detail has RichContent + readingTime + prev/next + all related entity types, schema.org Article via BaseLayout meta, no hard-coded content, cards reuse. No blocking issues.
+- **Close-out:** Plane `kcb/KCBLABS-12` → Done, `plans/README.md` → Done, commit `34e7cc8` on `master`. Next actionable: `PBI-013` (Open Source page, depends PBI-008 Done) — now ready.
+
+## 2026-08-28 — PBI-013 Active (asdlc-execute)
+
+- **Selected:** `PBI-013` (Open Source Page) — dependency PBI-008 Done satisfied. Plane `kcb/KCBLABS-13` → `In Progress`, `plans/README.md` → Active.
+- **Pre-flight:** Targets: src/pages/opensource/index.astro, src/components/cards/OpenSourceCard.astro, getOpenSource helper.
