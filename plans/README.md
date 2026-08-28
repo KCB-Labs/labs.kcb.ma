@@ -43,7 +43,7 @@ Each spec's **Goal / Scope / Contracts / Anti-patterns / Decisions** are the gua
 | KCBLABS-14 | PBI-014 | Done | About + Vision Pages (Singletons, Editorial Layout) |
 | KCBLABS-15 | PBI-015 | Done | People, Ecosystem, Roadmap Pages |
 | KCBLABS-16 | PBI-016 | Done | Participate Cluster — Sponsorship, Collaboration, Contact Form |
-| KCBLABS-17 | PBI-017 | In Progress | Build-time Search Index + Search Island |
+| KCBLABS-17 | PBI-017 | Done | Build-time Search Index + Search Island |
 | KCBLABS-18 | PBI-018 | Todo | Explore Filtering — Labs Status + Projects Type/Stage |
 | KCBLABS-19 | PBI-019 | Todo | Related Discovery + Interactive Timeline (Knowledge Graph Hook) |
 | KCBLABS-20 | PBI-020 | Todo | SEO Package — Canonical, OG/Twitter, Schema.org, Sitemap, Robots, RSS |
@@ -79,7 +79,7 @@ Each spec's **Goal / Scope / Contracts / Anti-patterns / Decisions** are the gua
 | 14 | PBI-014 | Institutional — About + Vision | kcb/KCBLABS-14 | Done | PBI-003, PBI-008 | master | agentic |
 | 15 | PBI-015 | Institutional — People, Ecosystem, Roadmap | kcb/KCBLABS-15 | Done | PBI-008, PBI-014 | master | agentic |
 | 16 | PBI-016 | Institutional — Sponsorship, Collaboration, Contact form | kcb/KCBLABS-16 | Done | PBI-008, PBI-014 | master | agentic |
-| 17 | PBI-017 | Interactive — Search index + Search island | kcb/KCBLABS-17 | Active | PBI-008, PBI-009, PBI-010, PBI-011, PBI-012, PBI-013 | master | — |
+| 17 | PBI-017 | Interactive — Search index + Search island | kcb/KCBLABS-17 | Done | PBI-008, PBI-009, PBI-010, PBI-011, PBI-012, PBI-013 | master | agentic |
 | 18 | PBI-018 | Interactive — Explore filtering (Labs/Project) | kcb/KCBLABS-18 | Proposed | PBI-010, PBI-011, PBI-017 | — | — |
 | 19 | PBI-019 | Interactive — Related discovery + Timeline + graph hook | kcb/KCBLABS-19 | Proposed | PBI-010, PBI-011, PBI-012, PBI-013, PBI-015 | — | — |
 | 20 | PBI-020 | Hardening — SEO (canonical/OG/Schema, sitemap, robots, RSS) | kcb/KCBLABS-20 | Proposed | PBI-009, PBI-010, PBI-011, PBI-012, PBI-013, PBI-015 | — | — |

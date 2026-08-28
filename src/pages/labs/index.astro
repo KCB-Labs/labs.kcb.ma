@@ -6,6 +6,7 @@ import Container from "../../components/astro/Container.astro";
 import Section from "../../components/astro/Section.astro";
 import PageHeader from "../../components/astro/PageHeader.astro";
 import LabCard from "../../components/cards/LabCard.astro";
+import { LabsFilters } from "../../components/react/Filters";
 import { getLabs } from "../../lib/content/labs.js";
 
 export const prerender = true;
@@ -18,9 +19,12 @@ const labs = getLabs();
   <Container>
     <PageHeader label="Explore" title="Labs" description="Persistent areas of exploration — each lab asks what we are continuously investigating." />
     <Section>
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+      <LabsFilters client:visible />
+      <div id="labs-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
         {labs.map((lab) => (
-          <LabCard slug={lab.slug} title={lab.data.title as string} description={lab.data.description as string} status={lab.data.status as string} />
+          <div class="lab-card-wrapper" data-status={lab.data.status as string}>
+            <LabCard slug={lab.slug} title={lab.data.title as string} description={lab.data.description as string} status={lab.data.status as string} />
+          </div>
         ))}
       </div>
       {labs.length === 0 && <p class="text-small" style="color: var(--color-muted);">No labs yet.</p>}
@@ -28,3 +32,20 @@ const labs = getLabs();
   </Container>
   <SiteFooter />
 </BaseLayout>
+
+<script>
+  function applyLabFilters() {
+    const params = new URLSearchParams(window.location.search);
+    const status = params.get("status");
+    const cards = document.querySelectorAll(".lab-card-wrapper");
+    cards.forEach((card) => {
+      const el = card as HTMLElement;
+      const cardStatus = el.dataset.status;
+      const visible = !status || cardStatus === status;
+      el.style.display = visible ? "" : "none";
+    });
+  }
+
+  window.addEventListener("filters-changed", applyLabFilters);
+  document.addEventListener("DOMContentLoaded", applyLabFilters);
+</script>

@@ -6,6 +6,7 @@ import Container from "../../components/astro/Container.astro";
 import Section from "../../components/astro/Section.astro";
 import PageHeader from "../../components/astro/PageHeader.astro";
 import ProjectCard from "../../components/cards/ProjectCard.astro";
+import { ProjectsFilters } from "../../components/react/Filters";
 import { getProjects } from "../../lib/content/projects.js";
 
 export const prerender = true;
@@ -18,9 +19,12 @@ const projects = getProjects();
   <Container>
     <PageHeader label="Explore" title="Projects" description="Something KCB has decided is worth implementing beyond pure exploration." />
     <Section>
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+      <ProjectsFilters client:visible />
+      <div id="projects-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
         {projects.map((project) => (
-          <ProjectCard slug={project.slug} title={project.data.title as string} description={project.data.description as string} type={project.data.type as string} stage={project.data.stage as string} originLab={project.data.originLab as string | undefined} />
+          <div class="project-card-wrapper" data-type={project.data.type as string} data-stage={project.data.stage as string}>
+            <ProjectCard slug={project.slug} title={project.data.title as string} description={project.data.description as string} type={project.data.type as string} stage={project.data.stage as string} originLab={project.data.originLab as string | undefined} />
+          </div>
         ))}
       </div>
       {projects.length === 0 && <p class="text-small" style="color: var(--color-muted);">No projects yet.</p>}
@@ -28,3 +32,23 @@ const projects = getProjects();
   </Container>
   <SiteFooter />
 </BaseLayout>
+
+<script>
+  function applyProjectFilters() {
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get("type");
+    const stage = params.get("stage");
+    const cards = document.querySelectorAll(".project-card-wrapper");
+    cards.forEach((card) => {
+      const el = card as HTMLElement;
+      const cardType = el.dataset.type;
+      const cardStage = el.dataset.stage;
+      const visibleType = !type || cardType === type;
+      const visibleStage = !stage || cardStage === stage;
+      el.style.display = visibleType && visibleStage ? "" : "none";
+    });
+  }
+
+  window.addEventListener("filters-changed", applyProjectFilters);
+  document.addEventListener("DOMContentLoaded", applyProjectFilters);
+</script>
