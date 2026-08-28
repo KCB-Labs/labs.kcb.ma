@@ -1,5 +1,6 @@
 ---
 import Container from "./Container.astro";
+import { Search } from "../react/Search.tsx";
 ---
 <header class="site-header">
   <Container>
@@ -32,7 +33,9 @@ import Container from "./Container.astro";
             <a href="/contact">Contact</a>
           </div>
         </div>
-        <a href="/search" aria-label="Search">Search</a>
+        <div class="search-wrapper">
+          <Search client:visible />
+        </div>
       </div>
       <details class="mobile-menu">
         <summary aria-label="Open navigation">Menu</summary>
@@ -48,7 +51,6 @@ import Container from "./Container.astro";
           <a href="/participate/sponsorship">Sponsorship</a>
           <a href="/participate/collaboration">Collaboration</a>
           <a href="/contact">Contact</a>
-          <a href="/search">Search</a>
         </nav>
       </details>
     </nav>
