@@ -37,7 +37,7 @@ Each spec's **Goal / Scope / Contracts / Anti-patterns / Decisions** are the gua
 | KCBLABS-8 | PBI-008 | Todo | Relationship Validation + Publishing Filters + Slug Stability + Seed Fixtures |
 | KCBLABS-9 | PBI-009 | Todo | Homepage — Hero + Current Work + Featured Sections + Numbers |
 | KCBLABS-10 | PBI-010 | Todo | Labs Index + Lab Detail (Research Portal) |
-| KCBLABS-11 | PBI-011 | Todo | Projects Index + Project Detail (Origin, Architecture, Outcomes) |
+| KCBLABS-11 | PBI-011 | Done | Projects Index + Project Detail (Origin, Architecture, Outcomes) |
 | KCBLABS-12 | PBI-012 | Todo | Journal Index + Article Detail (Editorial Quality) |
 | KCBLABS-13 | PBI-013 | Done | Open Source Index + Detail + Shared Card System Finalization |
 | KCBLABS-14 | PBI-014 | Done | About + Vision Pages (Singletons, Editorial Layout) |
@@ -73,7 +73,7 @@ Each spec's **Goal / Scope / Contracts / Anti-patterns / Decisions** are the gua
 | 8 | PBI-008 | Content Model — Validation + publishing filter + slug stability + seed graph | kcb/KCBLABS-8 | Done | PBI-007 | master | agentic |
 | 9 | PBI-009 | Core Pages — Homepage (hero, labs, numbers, etc.) | kcb/KCBLABS-9 | Done | PBI-003, PBI-008 | master | agentic |
 | 10 | PBI-010 | Core Pages — Labs index + Lab detail (research portal) | kcb/KCBLABS-10 | Done | PBI-008, PBI-009 | master | agentic |
-| 11 | PBI-011 | Core Pages — Projects index + Project detail | kcb/KCBLABS-11 | Active | PBI-008, PBI-009 | master | — |
+| 11 | PBI-011 | Core Pages — Projects index + Project detail | kcb/KCBLABS-11 | Done | PBI-008, PBI-009 | master | agentic |
 | 12 | PBI-012 | Core Pages — Journal index + Article detail | kcb/KCBLABS-12 | Done | PBI-008, PBI-009 | master | agentic |
 | 13 | PBI-013 | Core Pages — Open Source index/detail + card system final | kcb/KCBLABS-13 | Done | PBI-008, PBI-009, PBI-010, PBI-011, PBI-012 | master | agentic |
 | 14 | PBI-014 | Institutional — About + Vision | kcb/KCBLABS-14 | Done | PBI-003, PBI-008 | master | agentic |
