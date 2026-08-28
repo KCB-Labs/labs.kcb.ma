@@ -2,6 +2,7 @@
  * Spec: specs/avionics-design-system/spec.md
  * Source: https://asdlc.io/resources/design-system/
  * International Safety palette + Archivo/B612 Mono typography
+ * Light mode only
  */
 
 :root {
@@ -136,61 +137,4 @@
   --z-header: 30;
   --z-overlay: 40;
   --z-modal: 50;
-}
-
-/* Dark theme — warm dark Avionics palette */
-[data-theme="dark"] {
-  --color-bg: #111111;
-  --color-surface: #1a1a1a;
-  --color-surface-raised: #222222;
-  --color-text: #e8e8e3;
-  --color-text-strong: #f4f4f0;
-  --color-muted: #999994;
-  --color-muted-strong: #b0b0a8;
-  --color-accent: #f04e30;
-  --color-accent-hover: #ff6a4d;
-  --color-accent-contrast: #111111;
-  --color-border: #333330;
-  --color-border-strong: #444440;
-  --color-success-bg: #0a2e1a;
-  --color-success-text: #4ade80;
-  --color-warning-bg: #422006;
-  --color-warning-text: #fde047;
-  --color-error-bg: #450a0a;
-  --color-error-text: #fca5a5;
-  --color-info-bg: #0c2d3a;
-  --color-info-text: #67d4ef;
-  --color-accent-alpha: rgba(240, 78, 48, 0.2);
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.45);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --color-bg: #111111;
-    --color-surface: #1a1a1a;
-    --color-surface-raised: #222222;
-    --color-text: #e8e8e3;
-    --color-text-strong: #f4f4f0;
-    --color-muted: #999994;
-    --color-muted-strong: #b0b0a8;
-    --color-accent: #f04e30;
-    --color-accent-hover: #ff6a4d;
-    --color-accent-contrast: #111111;
-    --color-border: #333330;
-    --color-border-strong: #444440;
-    --color-success-bg: #0a2e1a;
-    --color-success-text: #4ade80;
-    --color-warning-bg: #422006;
-    --color-warning-text: #fde047;
-    --color-error-bg: #450a0a;
-    --color-error-text: #fca5a5;
-    --color-info-bg: #0c2d3a;
-    --color-info-text: #67d4ef;
-    --color-accent-alpha: rgba(240, 78, 48, 0.2);
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.45);
-  }
 }
