@@ -115,10 +115,14 @@
 
 ---
 
-## 2026-08-28 — PBI-009 Active (asdlc-execute)
+## 2026-08-28 — PBI-009 Done (asdlc-execute)
 
 - **Selected:** `PBI-009` (Homepage — Hero + Current Work + Featured Sections + Numbers) — dependencies PBI-003 Done + PBI-008 Done satisfied. Plane `kcb/KCBLABS-9` → `In Progress`, `plans/README.md` → Active.
 - **Pre-flight:** Targets: src/pages/index.astro, src/components/sections/*, src/components/cards/*, src/components/ui/*, numbers derived via helpers.
+- **Implementation:** Implemented `src/pages/index.astro:1` with 8 sections (hero headline "We explore ideas that could become technology, products and companies." + supporting sentence + CTAs /labs, /projects, /participate/sponsorship; Current Labs LabCards from getLabs; Current Work EXPLORING/BUILDING/SHARING; Projects ProjectCards; Research & Experiments highlight; Journal ArticleCards; Numbers 01/01/00/01 derived via getLabs/getExperiments/getProjects filtered Validated/getOpenSource; Ecosystem Built with an ecosystem; final CTA Research is stronger...). Created `src/components/cards/LabCard.astro:1`, `ProjectCard.astro:1`, `ArticleCard.astro:1` + `ui/StatusBadge,TypeBadge,StageBadge` token-driven + `sections/Hero.astro:1`. Numbers via helpers, no hard-coded.
+- **Gates:** check 0 errors (40 files), build ok (1.79s server+prerender dist/client/index.html), test 24+6 pass, view-source confirms hero + 8 sections, numbers 01/01/00/01, no client:* islands, cards reuse.
+- **Review:** Adversarial PASS with 3 low observations — L1 validated count strict (only Validated, not Implementation) with comment, L2 fallback literals fixed to "No research yet" etc., L3 ResearchCard stubs deferred to PBI-010/011. Fix commit `691bd09`. Review-type sort: **agentic — Done**. Comment posted to Plane.
+- **Close-out:** Plane `kcb/KCBLABS-9` → Done, `plans/README.md` → Done, commits `41e0b48, 691bd09` on `master`. Next actionable: `PBI-010` (needs PBI-008,009) — now ready.
 
 ## PBI Log
 
@@ -141,3 +145,4 @@
 | 2026-08-28 | PBI-008 | kcb/KCBLABS-8 | Proposed→Active | — | — | — | Validation + seed; started |
 | 2026-08-28 | PBI-008 | kcb/KCBLABS-8 | Active→Done | check 0 err, build ok/fail, test 24+6 pass | agentic | 3114686, 12fbc89 | Validation + slug + seed graph, build wiring |
 | 2026-08-28 | PBI-009 | kcb/KCBLABS-9 | Proposed→Active | — | — | — | Homepage; started |
+| 2026-08-28 | PBI-009 | kcb/KCBLABS-9 | Active→Done | check 0 err, build ok, test 24+6 pass | agentic | 41e0b48, 691bd09 | Homepage + cards + numbers derived |

@@ -71,7 +71,7 @@ Each spec's **Goal / Scope / Contracts / Anti-patterns / Decisions** are the gua
 | 6 | PBI-006 | Content Model — Collections Articles/People/Orgs/OS/Roadmap + Singletons | kcb/KCBLABS-6 | Done | PBI-005 | master | agentic |
 | 7 | PBI-007 | Content Model — Data access layer src/lib/content | kcb/KCBLABS-7 | Done | PBI-005, PBI-006 | master | agentic |
 | 8 | PBI-008 | Content Model — Validation + publishing filter + slug stability + seed graph | kcb/KCBLABS-8 | Done | PBI-007 | master | agentic |
-| 9 | PBI-009 | Core Pages — Homepage (hero, labs, numbers, etc.) | kcb/KCBLABS-9 | Active | PBI-003, PBI-008 | master | — |
+| 9 | PBI-009 | Core Pages — Homepage (hero, labs, numbers, etc.) | kcb/KCBLABS-9 | Done | PBI-003, PBI-008 | master | agentic |
 | 10 | PBI-010 | Core Pages — Labs index + Lab detail (research portal) | kcb/KCBLABS-10 | Proposed | PBI-008, PBI-009 | — | — |
 | 11 | PBI-011 | Core Pages — Projects index + Project detail | kcb/KCBLABS-11 | Proposed | PBI-008, PBI-009 | — | — |
 | 12 | PBI-012 | Core Pages — Journal index + Article detail | kcb/KCBLABS-12 | Proposed | PBI-008, PBI-009 | — | — |
