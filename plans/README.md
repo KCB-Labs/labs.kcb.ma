@@ -18,6 +18,7 @@
 | Institutional Pages | `specs/institutional-pages/spec.md` | §3.4–§3.5, §4, §13, §61–§62 | Proposed |
 | Interactive Features | `specs/interactive-features/spec.md` | §23–§24, §31, §35, §74 | Proposed |
 | Production Hardening | `specs/production-hardening/spec.md` | §37, §39–§40, §59–§60, §63–§67 | Proposed |
+| Avionics Design System | `specs/avionics-design-system/spec.md` | Avionics design system application | Proposed — pending human review |
 
 Each spec's **Goal / Scope / Contracts / Anti-patterns / Decisions** are the guardrails; PBIs point at them and must not become stale copies.
 
@@ -50,6 +51,11 @@ Each spec's **Goal / Scope / Contracts / Anti-patterns / Decisions** are the gua
 | KCBLABS-21 | PBI-021 | Done | Performance + Accessibility Pass (WCAG 2.2 AA, Core Web Vitals) |
 | KCBLABS-22 | PBI-022 | Done | Security Headers, Analytics Abstraction, Error Pages |
 | KCBLABS-23 | PBI-023 | Done | CI/CD, Documentation & Coolify Deployment Verification |
+| KCBLABS-24 | PBI-024 | Todo | Avionics Tokens — Color Palette & Typography Tokens |
+| KCBLABS-25 | PBI-025 | Todo | Avionics Globals — Typography, Grid Layout, Prose |
+| KCBLABS-26 | PBI-026 | Todo | KCB Logo & Favicon — Branding Integration |
+| KCBLABS-27 | PBI-027 | Todo | Avionics Components — Cards, Badges, Footer, Breadcrumbs |
+| KCBLABS-28 | PBI-028 | Todo | Avionics Dark Theme & Final Verification |
 
 - Last sync: 2026-08-27 — push-create via `asdlc-plane` MCP `plane-kcb`. Created 23 Todo issues (KCBLABS-1..23) from `tasks/PBI-*.md`; each PBI Context now contains `Plane: kcb/KCBLABS-N`. No duplicates (Checked `Plane:` link before create). Spec authoritative.
 - Next sync: `asdlc-execute` will push status on every PBI transition: `Proposed→Active` → Plane `In Progress`, `Active→In Review` → comment + (if configured) `In Review` (see note), `In Review→Done` sorted by review-type (agentic may close directly, manual stays In Review until human validates). **Note:** project `KCBLABS` currently has no `In Review` state (states: Backlog, Todo, In Progress, Done, Cancelled) — until `In Review` is added, `In Review` PBIs will remain `In Progress` with a `Review: manual — In Review` comment.
@@ -86,6 +92,11 @@ Each spec's **Goal / Scope / Contracts / Anti-patterns / Decisions** are the gua
 | 21 | PBI-021 | Hardening — Perf + A11y (WCAG 2.2 AA, Core Web Vitals) | kcb/KCBLABS-21 | Done | PBI-009..PBI-020 | master | agentic |
 | 22 | PBI-022 | Hardening — Security headers + analytics + error pages | kcb/KCBLABS-22 | Done | PBI-004, PBI-009, PBI-016, PBI-017 | master | agentic |
 | 23 | PBI-023 | Hardening — CI/CD + docs + Coolify deployment verification | kcb/KCBLABS-23 | Done | PBI-001, PBI-004, PBI-008, PBI-020, PBI-021, PBI-022 | master | agentic |
+| 24 | PBI-024 | Avionics — Tokens (color palette + typography) | kcb/KCBLABS-24 | Todo | none | master | agentic |
+| 25 | PBI-025 | Avionics — Globals (typography, grid layout, prose) | kcb/KCBLABS-25 | Todo | PBI-024 | master | agentic |
+| 26 | PBI-026 | Avionics — Logo & favicon branding | kcb/KCBLABS-26 | Todo | PBI-024 | master | agentic |
+| 27 | PBI-027 | Avionics — Components (cards, badges, footer, breadcrumbs) | kcb/KCBLABS-27 | Todo | PBI-024, PBI-025 | master | agentic |
+| 28 | PBI-028 | Avionics — Dark theme + final verification | kcb/KCBLABS-28 | Todo | PBI-024, PBI-025, PBI-026, PBI-027 | master | agentic |
 
 **Recommended start:** `PBI-001` (Foundation scaffold). After `PBI-001`, parallel opportunities:
 - `PBI-002` and `PBI-004` can proceed in parallel (disjoint files: `src/styles/*` vs `Dockerfile`/`api/health`)
