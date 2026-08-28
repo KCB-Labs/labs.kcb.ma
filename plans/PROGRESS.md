@@ -185,3 +185,17 @@
 
 - **Selected:** `PBI-013` (Open Source Page) — dependency PBI-008 Done satisfied. Plane `kcb/KCBLABS-13` → `In Progress`, `plans/README.md` → Active.
 - **Pre-flight:** Targets: src/pages/opensource/index.astro, src/components/cards/OpenSourceCard.astro, getOpenSource helper.
+
+| 2026-08-28 | PBI-013 | kcb/KCBLABS-13 | Proposed→Active | — | — | — | Open Source portal; started |
+| 2026-08-28 | PBI-013 | kcb/KCBLABS-13 | Active→Done | check 0 err, build ok, test 30 pass | agentic | 4d37562 | Open Source index + detail + OpenSourceCard |
+
+---
+
+## 2026-08-28 — PBI-013 Done (asdlc-execute)
+
+- **Selected:** `PBI-013` (Open Source Index + Detail + Shared Card System Finalization) — dependencies PBI-008, PBI-009, PBI-010, PBI-011, PBI-012 Done satisfied. Plane `kcb/KCBLABS-13` → `In Progress` → `In Review` → `Done`, `plans/README.md` → Active → Done.
+- **Pre-flight:** Targets: src/pages/open-source/index.astro, src/pages/open-source/[slug].astro, src/components/cards/OpenSourceCard.astro. All prerendered, no React islands.
+- **Implementation:** Created `src/pages/open-source/index.astro:1` (prerender OpenSourceCards from getOpenSource, featured sort) + `src/pages/open-source/[slug].astro:1` (prerender via getStaticPaths, BaseLayout with Breadcrumbs/PageHeader, RichContent for Markdoc body, StatusBadge + License badge, originLab link to Lab, relatedProject link to Project, repository/docs links, technologies list). Created `src/components/cards/OpenSourceCard.astro:1` (reusable card with status/license badges, originLab metadata).
+- **Gates:** check 0 errors (56 files), build ok (2.39s server+prerender, dist/client/open-source + /open-source/httpa-agent-protocol), test 24+6 pass = 30, no client:* islands.
+- **Review:** Adversarial PASS — open source index lists published items via OpenSourceCard with featured sort, detail has RichContent + status/license/originLab/relatedProject + repository/docs/technologies, schema.org via BaseLayout meta, no hard-coded content, cards reuse. No blocking issues.
+- **Close-out:** Plane `kcb/KCBLABS-13` → Done, `plans/README.md` → Done, commit `4d37562` on `master`. Next actionable: `PBI-014` (About + Vision pages, depends PBI-003, PBI-008 Done) — now ready.
