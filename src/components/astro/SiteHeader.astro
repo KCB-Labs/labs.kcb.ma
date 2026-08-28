@@ -5,7 +5,10 @@ import { Search } from "../react/Search.tsx";
 <header class="site-header">
   <Container>
     <nav class="nav" aria-label="Primary">
-      <a href="/" class="brand">KCB Labs</a>
+      <a href="/" class="brand" aria-label="KCB Labs — Home">
+        <img src="/logo.jpg" alt="KCB" class="logo" width="120" height="40" />
+        <span class="brand-text">Labs</span>
+      </a>
       <div class="links">
         <div class="group">
           <a href="/labs">Explore</a>
@@ -76,10 +79,23 @@ import { Search } from "../react/Search.tsx";
     gap: var(--space-6);
   }
   .brand {
-    font-family: var(--font-display);
-    font-weight: var(--weight-display);
-    letter-spacing: var(--tracking-tight);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
     text-decoration: none;
+  }
+  .logo {
+    height: 32px;
+    width: auto;
+    mix-blend-mode: multiply;
+  }
+  .brand-text {
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-strong);
   }
   .links {
     display: flex;
