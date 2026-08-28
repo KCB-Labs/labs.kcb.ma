@@ -126,10 +126,14 @@
 
 ---
 
-## 2026-08-28 — PBI-010 Active (asdlc-execute)
+## 2026-08-28 — PBI-010 Done (asdlc-execute)
 
 - **Selected:** `PBI-010` (Labs Index + Lab Detail) — dependencies PBI-008 Done + PBI-009 Done satisfied. Plane `kcb/KCBLABS-10` → `In Progress`, `plans/README.md` → Active.
 - **Pre-flight:** Targets: src/pages/labs/index.astro, src/pages/labs/[slug].astro, LabLayout, research/experiments/projects/people/orgs/timeline/related journal.
+- **Implementation:** Created `src/pages/labs/index.astro:1` (prerender LabCards from getLabs, featured sort) + `src/pages/labs/[slug].astro:1` (prerender via getStaticPaths, LabLayout via BaseLayout with Breadcrumbs/PageHeader, sections Research/Experiments/Projects/People/Collaborators/Technologies/Journal/Timeline using ResearchCard/ExperimentCard/ProjectCard/PersonCard/OrganizationCard/ArticleCard/Timeline). Fixed 404 via src/pages/404.astro branded + Astro.redirect 404, card reuse (no inline divs), Timeline component, removed double Container.
+- **Gates:** check 0 errors, 0 hints (48 files), build ok (1.82s, prerender /labs + /labs/ai-employees), test 24+6 pass, dist/client/labs/index.html + ai-employees/index.html present, unknown slug → 404 branded.
+- **Review:** Initial adversarial FAIL — 404 was 302 without branded page, Research/Experiment/People/Org used inline divs not cards, Timeline hand-rolled. Fixed: created 404.astro, added ResearchCard/ExperimentCard/PersonCard/OrganizationCard/Timeline, replaced inline markup, removed double Container. Re-review PASS. Review-type sort: **agentic — Done**. Comment posted to Plane.
+- **Close-out:** Plane `kcb/KCBLABS-10` → Done, `plans/README.md` → Done, commits `1636355, 5a8bb93` on `master`. Next actionable: `PBI-011` (needs PBI-008,009) — now ready.
 
 ## PBI Log
 
@@ -154,3 +158,4 @@
 | 2026-08-28 | PBI-009 | kcb/KCBLABS-9 | Proposed→Active | — | — | — | Homepage; started |
 | 2026-08-28 | PBI-009 | kcb/KCBLABS-9 | Active→Done | check 0 err, build ok, test 24+6 pass | agentic | 41e0b48, 691bd09 | Homepage + cards + numbers derived |
 | 2026-08-28 | PBI-010 | kcb/KCBLABS-10 | Proposed→Active | — | — | — | Labs portal; started |
+| 2026-08-28 | PBI-010 | kcb/KCBLABS-10 | Active→Done | check 0 err/hint, build ok, test 24+6 pass | agentic | 1636355, 5a8bb93 | Labs index + detail + 404 + cards + Timeline |
