@@ -93,10 +93,14 @@
 
 ---
 
-## 2026-08-27 — PBI-007 Active (asdlc-execute)
+## 2026-08-28 — PBI-007 Done (asdlc-execute)
 
 - **Selected:** `PBI-007` (Data Access Layer src/lib/content) — dependencies PBI-005 Done + PBI-006 Done satisfied. Plane `kcb/KCBLABS-7` → `In Progress`, `plans/README.md` → Active.
-- **Pre-flight:** Targets: src/lib/content/{labs,research,experiments,projects,articles,people,organizations,opensource,roadmap,relationships}.ts + index.ts, barrel, readingTime, publishing filter. No page direct queries.
+- **Pre-flight:** Targets: src/lib/content/{labs,research,experiments,projects,articles,people,organizations,opensource,roadmap,relationships}.ts + index.ts, barrel, readingTime, publishing filter.
+- **Implementation:** Created `src/lib/content/utils.ts:1` (parseMdoc, readCollection, filterPublished, sortByPriority, calculateReadingTime 200wpm) + 9 collection helpers (labs: getLabs/getLabBySlug/getActiveLabs; research: getResearch/getResearchBySlug/getResearchByLab; experiments: getExperiments/getExperimentBySlug/getExperimentsByLab/getExperimentsByResearch; projects: getProjects/getProjectBySlug/getProjectsByLab; articles: getArticles/getArticleBySlug/getArticlesByLab/getArticlesByProject/getPreviousNextArticle/getReadingTime pure; people: getPeople/getPersonBySlug/getPeopleByLab/Project; organizations: getOrganizations etc.; opensource: getOpenSource etc.; roadmap: getRoadmaps) + `relationships.ts:1` (getRelated* + getKnowledgeGraphData) + `index.ts` barrel. Added `labs.test.ts:1` (17 vitest tests) + `@types/node` for fs/path, updated `package.json:13` test to `vitest run src/lib/content && node --test`.
+- **Gates:** check 0 errors (29 files, after @types/node + implicit any fixes), build ok (1.77s server+prerender, 29 files), test 17 pass (vitest) + 6 pass (smoke) = 23 via `npm test`, lint baseline. Verified only published by default, includeDrafts, traversal, empty [] handling, readingTime.
+- **Review:** Initial adversarial CONDITIONAL PASS — missing proofs for getProjects/getResearch etc. draft exclusion, getReadingTime signature, package.json test script. Fixed in `e8bfaee`: added 8 tests (now 17), fixed package.json, fixed getReadingTime pure, re-ran vitest 17 pass. Re-review PASS. Review-type sort: **agentic — Done**. Comment posted to Plane.
+- **Close-out:** Plane `kcb/KCBLABS-7` → Done, `plans/README.md` → Done, commits `a6b4e70, e8bfaee` on `master`. Next actionable: `PBI-008` (needs PBI-007 Done) — now ready.
 
 ## PBI Log
 
@@ -115,3 +119,4 @@
 | 2026-08-27 | PBI-006 | kcb/KCBLABS-6 | Proposed→Active | — | — | — | Collections 2 + singletons; started |
 | 2026-08-27 | PBI-006 | kcb/KCBLABS-6 | Active→Done | check 0 err, build ok, test 6 pass | agentic | 2786c81 | 9 collections + 5 singletons + 10 fixtures + CONTENT-MODEL full |
 | 2026-08-27 | PBI-007 | kcb/KCBLABS-7 | Proposed→Active | — | — | — | DAL; started |
+| 2026-08-28 | PBI-007 | kcb/KCBLABS-7 | Active→Done | check 0 err, build ok, test 17+6 pass | agentic | a6b4e70, e8bfaee | DAL + relationships + readingTime |
