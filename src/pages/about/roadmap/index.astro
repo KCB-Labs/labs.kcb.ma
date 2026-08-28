@@ -6,7 +6,7 @@ import Container from "../../../components/astro/Container.astro";
 import Section from "../../../components/astro/Section.astro";
 import PageHeader from "../../../components/astro/PageHeader.astro";
 import Breadcrumbs from "../../../components/astro/Breadcrumbs.astro";
-import Timeline from "../../../components/content/Timeline.astro";
+import { Timeline as ReactTimeline } from "../../../components/react/Timeline";
 import { getRoadmaps } from "../../../lib/content/roadmap.js";
 
 export const prerender = true;
@@ -23,10 +23,10 @@ const roadmaps = getRoadmaps();
     <Section>
       {roadmaps.length > 0 ? (
         <>
-          <Timeline events={roadmaps.map((r) => ({
+          <ReactTimeline events={roadmaps.map((r) => ({
             label: r.data.period as string ?? r.slug,
             title: (r.data.theme as string ?? r.data.description as string) + (r.data.objective ? ` — ${r.data.objective as string}` : "") + (r.data.status ? ` [${(r.data.status as string).charAt(0).toUpperCase() + (r.data.status as string).slice(1)}]` : "")
-          }))} />
+          }))} client:visible />
         </>
       ) : (
         <p class="text-small" style="color: var(--color-muted);">No roadmap entries published yet.</p>

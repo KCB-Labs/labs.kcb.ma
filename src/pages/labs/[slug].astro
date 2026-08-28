@@ -12,7 +12,7 @@ import ProjectCard from "../../components/cards/ProjectCard.astro";
 import ArticleCard from "../../components/cards/ArticleCard.astro";
 import PersonCard from "../../components/cards/PersonCard.astro";
 import OrganizationCard from "../../components/cards/OrganizationCard.astro";
-import Timeline from "../../components/content/Timeline.astro";
+import { Timeline as ReactTimeline } from "../../components/react/Timeline";
 import { getLabs, getLabBySlug } from "../../lib/content/labs.js";
 import { getResearchByLab } from "../../lib/content/research.js";
 import { getExperimentsByLab } from "../../lib/content/experiments.js";
@@ -142,7 +142,7 @@ const timelineEvents = [
       <h2>Timeline</h2>
       <p class="text-small" style="color: var(--color-muted);">Lab timeline — research → experiments → projects.</p>
       <div style="margin-top: var(--space-4);">
-        {timelineEvents.length > 0 ? <Timeline events={timelineEvents} /> : <p class="text-small" style="color: var(--color-muted);">No timeline events yet.</p>}
+        {timelineEvents.length > 0 ? <ReactTimeline events={timelineEvents} client:visible /> : <p class="text-small" style="color: var(--color-muted);">No timeline events yet.</p>}
       </div>
     </Section>
   </Container>
