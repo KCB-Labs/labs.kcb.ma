@@ -74,7 +74,7 @@ Each spec's **Goal / Scope / Contracts / Anti-patterns / Decisions** are the gua
 | 9 | PBI-009 | Core Pages — Homepage (hero, labs, numbers, etc.) | kcb/KCBLABS-9 | Done | PBI-003, PBI-008 | master | agentic |
 | 10 | PBI-010 | Core Pages — Labs index + Lab detail (research portal) | kcb/KCBLABS-10 | Done | PBI-008, PBI-009 | master | agentic |
 | 11 | PBI-011 | Core Pages — Projects index + Project detail | kcb/KCBLABS-11 | Active | PBI-008, PBI-009 | master | — |
-| 12 | PBI-012 | Core Pages — Journal index + Article detail | kcb/KCBLABS-12 | Proposed | PBI-008, PBI-009 | — | — |
+| 12 | PBI-012 | Core Pages — Journal index + Article detail | kcb/KCBLABS-12 | Active | PBI-008, PBI-009 | master | — |
 | 13 | PBI-013 | Core Pages — Open Source index/detail + card system final | kcb/KCBLABS-13 | Proposed | PBI-008, PBI-009, PBI-010, PBI-011, PBI-012 | — | — |
 | 14 | PBI-014 | Institutional — About + Vision | kcb/KCBLABS-14 | Proposed | PBI-003, PBI-008 | — | — |
 | 15 | PBI-015 | Institutional — People, Ecosystem, Roadmap | kcb/KCBLABS-15 | Proposed | PBI-008, PBI-014 | — | — |
