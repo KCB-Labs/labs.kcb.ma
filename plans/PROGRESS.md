@@ -102,6 +102,13 @@
 - **Review:** Initial adversarial CONDITIONAL PASS — missing proofs for getProjects/getResearch etc. draft exclusion, getReadingTime signature, package.json test script. Fixed in `e8bfaee`: added 8 tests (now 17), fixed package.json, fixed getReadingTime pure, re-ran vitest 17 pass. Re-review PASS. Review-type sort: **agentic — Done**. Comment posted to Plane.
 - **Close-out:** Plane `kcb/KCBLABS-7` → Done, `plans/README.md` → Done, commits `a6b4e70, e8bfaee` on `master`. Next actionable: `PBI-008` (needs PBI-007 Done) — now ready.
 
+---
+
+## 2026-08-28 — PBI-008 Active (asdlc-execute)
+
+- **Selected:** `PBI-008` (Validation + Publishing Filters + Slug Stability + Seed Fixtures) — dependency PBI-007 Done satisfied. Plane `kcb/KCBLABS-8` → `In Progress`, `plans/README.md` → Active.
+- **Pre-flight:** Targets: src/lib/content/validate.ts, slugs.ts, seed graph fixtures, tests for validation/slug/publishing, build-time validation wiring.
+
 ## PBI Log
 
 | Date | PBI | Plane | Transition | Gates | Review | Commits | Notes |
@@ -120,3 +127,4 @@
 | 2026-08-27 | PBI-006 | kcb/KCBLABS-6 | Active→Done | check 0 err, build ok, test 6 pass | agentic | 2786c81 | 9 collections + 5 singletons + 10 fixtures + CONTENT-MODEL full |
 | 2026-08-27 | PBI-007 | kcb/KCBLABS-7 | Proposed→Active | — | — | — | DAL; started |
 | 2026-08-28 | PBI-007 | kcb/KCBLABS-7 | Active→Done | check 0 err, build ok, test 17+6 pass | agentic | a6b4e70, e8bfaee | DAL + relationships + readingTime |
+| 2026-08-28 | PBI-008 | kcb/KCBLABS-8 | Proposed→Active | — | — | — | Validation + seed; started |

@@ -66,38 +66,53 @@ describe("content helpers", () => {
   });
 
   it("getProjects excludes drafts by default", () => {
-    expect(getProjects().length).toBe(1);
-    expect(getProjects({ includeDrafts: true }).length).toBe(2);
+    const pub = getProjects();
+    const all = getProjects({ includeDrafts: true });
+    expect(pub.every((p) => p.data.published === true)).toBe(true);
+    expect(all.length).toBeGreaterThan(pub.length);
+    expect(all.length - pub.length).toBe(1);
   });
 
   it("getResearch excludes drafts", () => {
-    expect(getResearch().length).toBe(1);
-    expect(getResearch({ includeDrafts: true }).length).toBe(2);
+    const pub = getResearch();
+    const all = getResearch({ includeDrafts: true });
+    expect(pub.every((r) => r.data.published === true)).toBe(true);
+    expect(all.length - pub.length).toBe(1);
   });
 
   it("getExperiments excludes drafts", () => {
-    expect(getExperiments().length).toBe(1);
-    expect(getExperiments({ includeDrafts: true }).length).toBe(2);
+    const pub = getExperiments();
+    const all = getExperiments({ includeDrafts: true });
+    expect(pub.every((e) => e.data.published === true)).toBe(true);
+    expect(all.length - pub.length).toBe(1);
   });
 
   it("getArticles excludes drafts", () => {
-    expect(getArticles().length).toBe(1);
-    expect(getArticles({ includeDrafts: true }).length).toBe(2);
+    const pub = getArticles();
+    const all = getArticles({ includeDrafts: true });
+    expect(pub.every((a) => a.data.published === true)).toBe(true);
+    expect(all.length - pub.length).toBe(1);
   });
 
   it("getPeople excludes drafts", () => {
-    expect(getPeople().length).toBe(1);
-    expect(getPeople({ includeDrafts: true }).length).toBe(2);
+    const pub = getPeople();
+    const all = getPeople({ includeDrafts: true });
+    expect(pub.every((p) => p.data.published === true)).toBe(true);
+    expect(all.length - pub.length).toBe(1);
   });
 
   it("getOrganizations excludes drafts", () => {
-    expect(getOrganizations().length).toBe(1);
-    expect(getOrganizations({ includeDrafts: true }).length).toBe(2);
+    const pub = getOrganizations();
+    const all = getOrganizations({ includeDrafts: true });
+    expect(pub.every((o) => o.data.published === true)).toBe(true);
+    expect(all.length - pub.length).toBe(1);
   });
 
   it("getOpenSource excludes drafts", () => {
-    expect(getOpenSource().length).toBe(1);
-    expect(getOpenSource({ includeDrafts: true }).length).toBe(2);
+    const pub = getOpenSource();
+    const all = getOpenSource({ includeDrafts: true });
+    expect(pub.every((o) => o.data.published === true)).toBe(true);
+    expect(all.length - pub.length).toBe(1);
   });
 
   it("calculateReadingTime word-count", () => {
