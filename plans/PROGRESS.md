@@ -40,3 +40,12 @@
 - **Gates:** check 0 errors (74 files), build ok (1.90s server+prerender), test 24+6 = 30 pass, client:visible hydration only.
 - **Review:** Adversarial PASS — Timeline keyboard navigable, prefers-reduced-motion respected, chronological sort, no continuous motion/parallax; related sections published-only via relationships.ts; getKnowledgeGraphData() typed for future visualization. No blocking issues.
 - **Close-out:** Plane `kcb/KCBLABS-19` → Done, `plans/README.md` → Done, commit `5a4b0b9` on `master`. Next actionable: `PBI-020` (SEO — canonical/OG/Schema, sitemap, robots, RSS, depends PBI-009, PBI-010, PBI-011, PBI-012, PBI-013, PBI-015 Done) — now ready.
+
+## 2026-08-28 — PBI-020 Done (asdlc-execute)
+
+- **Selected:** `PBI-020` (SEO Package — Canonical, OG/Twitter, Schema.org, Sitemap, Robots, RSS) — dependencies PBI-009, PBI-010, PBI-011, PBI-012, PBI-013, PBI-015 Done satisfied. Plane `kcb/KCBLABS-20` → `In Progress` → `Done`, `plans/README.md` → Proposed → Done.
+- **Pre-flight:** Targets: astro.config.ts (sitemap integration), src/pages/robots.txt.ts, src/pages/rss.xml.ts, src/layouts/BaseLayout.astro (RSS auto-discovery).
+- **Implementation:** Installed @astrojs/sitemap + @astrojs/rss; added sitemap integration to astro.config.ts with filter excluding /keystatic/ and /api/; created src/pages/robots.txt.ts (dynamic robots.txt with Sitemap reference and Disallow rules); created src/pages/rss.xml.ts (Journal RSS feed from getArticles() sorted descending publishedAt with title, description, link, guid, pubDate, category); updated BaseLayout.astro with RSS auto-discovery link in head; BaseLayout already had canonical, OG, Twitter, Schema.org JSON-LD support.
+- **Gates:** check 0 errors (76 files), build ok (11.35s, sitemap-index.xml + sitemap-0.xml with 21 pages), test 24+6 = 30 pass.
+- **Review:** Adversarial PASS — sitemap excludes /keystatic/ and /api/ via filter; robots.txt references sitemap and disallows /keystatic/ + /api/; RSS feed valid XML with channel + published articles; BaseLayout SEO derived from collection fields with title fallback; RSS auto-discovery link in head. No blocking issues.
+- **Close-out:** Plane `kcb/KCBLABS-20` → Done, `plans/README.md` → Done, commit `8bd1dc3` on `master`. Next actionable: `PBI-021` (Perf + A11y — WCAG 2.2 AA, Core Web Vitals, depends PBI-009..PBI-020 Done) — now ready.

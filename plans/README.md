@@ -46,7 +46,7 @@ Each spec's **Goal / Scope / Contracts / Anti-patterns / Decisions** are the gua
 | KCBLABS-17 | PBI-017 | Done | Build-time Search Index + Search Island |
 | KCBLABS-18 | PBI-018 | Done | Explore Filtering — Labs Status + Projects Type/Stage |
 | KCBLABS-19 | PBI-019 | Done | Related Discovery + Interactive Timeline (Knowledge Graph Hook) |
-| KCBLABS-20 | PBI-020 | Todo | SEO Package — Canonical, OG/Twitter, Schema.org, Sitemap, Robots, RSS |
+| KCBLABS-20 | PBI-020 | Done | SEO Package — Canonical, OG/Twitter, Schema.org, Sitemap, Robots, RSS |
 | KCBLABS-21 | PBI-021 | Todo | Performance + Accessibility Pass (WCAG 2.2 AA, Core Web Vitals) |
 | KCBLABS-22 | PBI-022 | Todo | Security Headers, Analytics Abstraction, Error Pages |
 | KCBLABS-23 | PBI-023 | Todo | CI/CD, Documentation & Coolify Deployment Verification |
@@ -82,7 +82,7 @@ Each spec's **Goal / Scope / Contracts / Anti-patterns / Decisions** are the gua
 | 17 | PBI-017 | Interactive — Search index + Search island | kcb/KCBLABS-17 | Done | PBI-008, PBI-009, PBI-010, PBI-011, PBI-012, PBI-013 | master | agentic |
 | 18 | PBI-018 | Interactive — Explore filtering (Labs/Project) | kcb/KCBLABS-18 | Done | PBI-010, PBI-011, PBI-017 | master | agentic |
 | 19 | PBI-019 | Interactive — Related discovery + Timeline + graph hook | kcb/KCBLABS-19 | Done | PBI-010, PBI-011, PBI-012, PBI-013, PBI-015 | master | agentic |
-| 20 | PBI-020 | Hardening — SEO (canonical/OG/Schema, sitemap, robots, RSS) | kcb/KCBLABS-20 | Proposed | PBI-009, PBI-010, PBI-011, PBI-012, PBI-013, PBI-015 | — | — |
+| 20 | PBI-020 | Hardening — SEO (canonical/OG/Schema, sitemap, robots, RSS) | kcb/KCBLABS-20 | Done | PBI-009, PBI-010, PBI-011, PBI-012, PBI-013, PBI-015 | master | agentic |
 | 21 | PBI-021 | Hardening — Perf + A11y (WCAG 2.2 AA, Core Web Vitals) | kcb/KCBLABS-21 | Proposed | PBI-009..PBI-020 | — | — |
 | 22 | PBI-022 | Hardening — Security headers + analytics + error pages | kcb/KCBLABS-22 | Proposed | PBI-004, PBI-009, PBI-016, PBI-017 | — | — |
 | 23 | PBI-023 | Hardening — CI/CD + docs + Coolify deployment verification | kcb/KCBLABS-23 | Proposed | PBI-001, PBI-004, PBI-008, PBI-020, PBI-021, PBI-022 | — | — |
