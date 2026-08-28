@@ -1,0 +1,28 @@
+---
+interface Props {
+  slug: string;
+  name: string;
+  type?: string;
+}
+const { slug, name, type } = Astro.props;
+---
+<a href={`/about/ecosystem/${slug}`} class="card card--org">
+  <p style="font-weight: var(--weight-medium);">{name}</p>
+  {type && <p class="text-small">{type}</p>}
+</a>
+
+<style>
+  .card--org {
+    display: grid;
+    gap: var(--space-1);
+    padding: var(--space-4);
+    background: var(--color-surface);
+    border: var(--border-subtle);
+    border-radius: var(--radius-md);
+    text-align: center;
+    text-decoration: none;
+  }
+  .card--org:hover {
+    box-shadow: var(--shadow-md);
+  }
+</style>

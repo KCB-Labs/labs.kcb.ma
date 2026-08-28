@@ -1,0 +1,27 @@
+---
+interface Event {
+  label: string;
+  title: string;
+}
+interface Props {
+  events: Event[];
+}
+const { events } = Astro.props;
+---
+<div class="timeline">
+  {events.map((e) => (
+    <div class="timeline__item">
+      <p class="text-metadata">{e.label}</p>
+      <p>{e.title}</p>
+    </div>
+  ))}
+</div>
+
+<style>
+  .timeline {
+    border-left: 2px solid var(--color-border);
+    padding-left: var(--space-4);
+    display: grid;
+    gap: var(--space-3);
+  }
+</style>

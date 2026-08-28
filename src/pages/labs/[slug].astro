@@ -1,12 +1,18 @@
 ---
-import LabLayout from "../../layouts/LabLayout.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/astro/SiteHeader.astro";
 import SiteFooter from "../../components/astro/SiteFooter.astro";
 import Container from "../../components/astro/Container.astro";
 import Section from "../../components/astro/Section.astro";
 import PageHeader from "../../components/astro/PageHeader.astro";
+import Breadcrumbs from "../../components/astro/Breadcrumbs.astro";
+import ResearchCard from "../../components/cards/ResearchCard.astro";
+import ExperimentCard from "../../components/cards/ExperimentCard.astro";
 import ProjectCard from "../../components/cards/ProjectCard.astro";
 import ArticleCard from "../../components/cards/ArticleCard.astro";
+import PersonCard from "../../components/cards/PersonCard.astro";
+import OrganizationCard from "../../components/cards/OrganizationCard.astro";
+import Timeline from "../../components/content/Timeline.astro";
 import { getLabs, getLabBySlug } from "../../lib/content/labs.js";
 import { getResearchByLab } from "../../lib/content/research.js";
 import { getExperimentsByLab } from "../../lib/content/experiments.js";
@@ -25,7 +31,7 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 const lab = getLabBySlug(slug!);
 if (!lab) {
-  return Astro.redirect("/404");
+  return Astro.redirect("/404", 404);
 }
 const research = getResearchByLab(slug!);
 const experiments = getExperimentsByLab(slug!);
@@ -34,11 +40,18 @@ const articles = getArticlesByLab(slug!);
 const people = getPeopleByLab(slug!);
 const organizations = getOrganizationsByLab(slug!);
 const technologies = (lab.data.technologies as string[] | undefined) ?? [];
+
+const timelineEvents = [
+  ...research.map((r) => ({ label: "Research", title: r.data.title as string })),
+  ...experiments.map((e) => ({ label: `Experiment · ${e.data.outcome as string}`, title: e.data.title as string })),
+  ...projects.map((p) => ({ label: "Project", title: p.data.title as string })),
+];
 ---
 
-<LabLayout title={`${lab.data.title as string} — KCB Labs`} description={lab.data.description as string} crumbs={[{ label: "Labs", href: "/labs" }, { label: lab.data.title as string }]}>
+<BaseLayout title={`${lab.data.title as string} — KCB Labs`} description={lab.data.description as string}>
   <SiteHeader />
   <Container>
+    <Breadcrumbs crumbs={[{ label: "Labs", href: "/labs" }, { label: lab.data.title as string }]} />
     <PageHeader label="Lab" title={lab.data.title as string} description={lab.data.description as string} status={lab.data.status as string} />
 
     <Section>
@@ -53,11 +66,7 @@ const technologies = (lab.data.technologies as string[] | undefined) ?? [];
       {research.length > 0 ? (
         <div style="display:grid; gap: var(--space-3);">
           {research.map((r) => (
-            <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md);">
-              <p class="text-metadata">Research</p>
-              <a href={`/research/${r.slug}`}><h3>{r.data.title as string}</h3></a>
-              <p class="text-small">{r.data.description as string}</p>
-            </div>
+            <ResearchCard slug={r.slug} title={r.data.title as string} description={r.data.description as string} />
           ))}
         </div>
       ) : <p class="text-small" style="color: var(--color-muted);">No research yet.</p>}
@@ -68,11 +77,7 @@ const technologies = (lab.data.technologies as string[] | undefined) ?? [];
       {experiments.length > 0 ? (
         <div style="display:grid; gap: var(--space-3);">
           {experiments.map((e) => (
-            <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md);">
-              <p class="text-metadata">Experiment · {e.data.outcome as string}</p>
-              <h3>{e.data.title as string}</h3>
-              <p class="text-small">{e.data.description as string}</p>
-            </div>
+            <ExperimentCard slug={e.slug} title={e.data.title as string} description={e.data.description as string} outcome={e.data.outcome as string | undefined} />
           ))}
         </div>
       ) : <p class="text-small" style="color: var(--color-muted);">No experiments yet.</p>}
@@ -94,10 +99,7 @@ const technologies = (lab.data.technologies as string[] | undefined) ?? [];
       {people.length > 0 ? (
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
           {people.map((person) => (
-            <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); text-align:center;">
-              <p style="font-weight: var(--weight-medium);">{person.data.title as string}</p>
-              <p class="text-small">{person.data.role as string}</p>
-            </div>
+            <PersonCard slug={person.slug} name={person.data.title as string} role={person.data.role as string | undefined} />
           ))}
         </div>
       ) : <p class="text-small" style="color: var(--color-muted);">No people linked yet.</p>}
@@ -108,10 +110,7 @@ const technologies = (lab.data.technologies as string[] | undefined) ?? [];
       {organizations.length > 0 ? (
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
           {organizations.map((org) => (
-            <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); text-align:center;">
-              <p style="font-weight: var(--weight-medium);">{org.data.title as string}</p>
-              <p class="text-small">{org.data.type as string}</p>
-            </div>
+            <OrganizationCard slug={org.slug} name={org.data.title as string} type={org.data.type as string | undefined} />
           ))}
         </div>
       ) : <p class="text-small" style="color: var(--color-muted);">No collaborators yet.</p>}
@@ -142,12 +141,10 @@ const technologies = (lab.data.technologies as string[] | undefined) ?? [];
     <Section>
       <h2>Timeline</h2>
       <p class="text-small" style="color: var(--color-muted);">Lab timeline — research → experiments → projects.</p>
-      <div style="margin-top: var(--space-4); border-left: 2px solid var(--color-border); padding-left: var(--space-4); display:grid; gap: var(--space-3);">
-        {research.map((r) => <div><p class="text-metadata">Research</p><p>{r.data.title as string}</p></div>)}
-        {experiments.map((e) => <div><p class="text-metadata">Experiment · {e.data.outcome as string}</p><p>{e.data.title as string}</p></div>)}
-        {projects.map((p) => <div><p class="text-metadata">Project</p><p>{p.data.title as string}</p></div>)}
+      <div style="margin-top: var(--space-4);">
+        {timelineEvents.length > 0 ? <Timeline events={timelineEvents} /> : <p class="text-small" style="color: var(--color-muted);">No timeline events yet.</p>}
       </div>
     </Section>
   </Container>
   <SiteFooter />
-</LabLayout>
+</BaseLayout>

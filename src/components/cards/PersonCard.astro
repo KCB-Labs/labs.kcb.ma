@@ -1,0 +1,28 @@
+---
+interface Props {
+  slug: string;
+  name: string;
+  role?: string;
+}
+const { slug, name, role } = Astro.props;
+---
+<a href={`/about/people/${slug}`} class="card card--person">
+  <p style="font-weight: var(--weight-medium);">{name}</p>
+  {role && <p class="text-small">{role}</p>}
+</a>
+
+<style>
+  .card--person {
+    display: grid;
+    gap: var(--space-1);
+    padding: var(--space-4);
+    background: var(--color-surface);
+    border: var(--border-subtle);
+    border-radius: var(--radius-md);
+    text-align: center;
+    text-decoration: none;
+  }
+  .card--person:hover {
+    box-shadow: var(--shadow-md);
+  }
+</style>

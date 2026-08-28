@@ -1,0 +1,29 @@
+---
+interface Props {
+  slug: string;
+  title: string;
+  description: string;
+  outcome?: string;
+}
+const { slug, title, description, outcome } = Astro.props;
+---
+<a href={`/experiments/${slug}`} class="card card--experiment">
+  <p class="text-metadata">Experiment {outcome && `· ${outcome}`}</p>
+  <h3>{title}</h3>
+  <p class="text-small">{description}</p>
+</a>
+
+<style>
+  .card--experiment {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    background: var(--color-surface);
+    border: var(--border-subtle);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+  }
+  .card--experiment:hover {
+    box-shadow: var(--shadow-md);
+  }
+</style>

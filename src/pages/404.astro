@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/astro/SiteHeader.astro";
+import SiteFooter from "../components/astro/SiteFooter.astro";
+import Container from "../components/astro/Container.astro";
+import Section from "../components/astro/Section.astro";
+---
+<BaseLayout title="Not found — KCB Labs" description="This path hasn't become a project yet." noindex>
+  <SiteHeader />
+  <Container>
+    <Section>
+      <h1>This path hasn't become a project yet.</h1>
+      <p class="text-body" style="color: var(--color-muted); margin-top: var(--space-3);">The page you’re looking for doesn’t exist or hasn’t been published. Try exploring labs and projects.</p>
+      <div style="display:flex; gap: var(--space-3); margin-top: var(--space-5);">
+        <a href="/labs" style="padding: var(--space-2) var(--space-4); background: var(--color-accent); color: var(--color-accent-contrast); border-radius: var(--radius-md); text-decoration:none;">Explore Labs</a>
+        <a href="/projects" style="padding: var(--space-2) var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); text-decoration:none;">Explore Projects</a>
+        <a href="/" style="padding: var(--space-2) var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); text-decoration:none;">Home</a>
+      </div>
+    </Section>
+  </Container>
+  <SiteFooter />
+</BaseLayout>

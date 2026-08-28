@@ -1,0 +1,28 @@
+---
+interface Props {
+  slug: string;
+  title: string;
+  description: string;
+}
+const { slug, title, description } = Astro.props;
+---
+<a href={`/research/${slug}`} class="card card--research">
+  <p class="text-metadata">Research</p>
+  <h3>{title}</h3>
+  <p class="text-small">{description}</p>
+</a>
+
+<style>
+  .card--research {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    background: var(--color-surface);
+    border: var(--border-subtle);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+  }
+  .card--research:hover {
+    box-shadow: var(--shadow-md);
+  }
+</style>
