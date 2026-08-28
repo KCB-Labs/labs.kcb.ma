@@ -15,7 +15,7 @@ const sponsorship = getSponsorshipPage();
 ---
 
 <BaseLayout title={sponsorship?.data?.title as string ?? "Support the Labs"} description={sponsorship?.data?.description as string ?? "Support independent technology research and experimentation."}>
-  <SiteHeader />
+  <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "Participate", href: "/participate" }, { label: "Sponsorship", href: "/participate/sponsorship" }]} />
     <PageHeader label="Participate / Sponsorship" title={sponsorship?.data?.title as string ?? "Support the Labs"} description={sponsorship?.data?.description as string ?? "Support independent technology research and experimentation."} />
@@ -74,5 +74,5 @@ const sponsorship = getSponsorshipPage();
       </a>
     </Section>
   </Container>
-  <SiteFooter />
+  <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

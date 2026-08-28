@@ -91,6 +91,7 @@ export function Timeline({ events }: TimelineProps) {
             border: activeIndex === i ? "var(--border-strong)" : "1px solid transparent",
             transition: "background var(--motion-duration) var(--motion-ease), border-color var(--motion-duration) var(--motion-ease)",
             outline: "none",
+            boxShadow: activeIndex === i ? "0 0 0 2px var(--color-accent)" : "none",
           }}
         >
           <p style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-metadata)", color: "var(--color-muted)", margin: 0 }}>

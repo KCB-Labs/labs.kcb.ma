@@ -47,7 +47,7 @@ const openSource = getOpenSourceByProject(slug!);
 ---
 
 <BaseLayout title={`${project.data.title as string} — KCB Labs`} description={project.data.description as string}>
-  <SiteHeader />
+  <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "Projects", href: "/projects" }, { label: project.data.title as string }]} />
     <PageHeader label="Project" title={project.data.title as string} description={project.data.description as string} status={`${project.data.type as string} · ${project.data.stage as string}${originLab ? ` · Origin: ${originLab}` : ""}`} />
@@ -161,5 +161,5 @@ const openSource = getOpenSourceByProject(slug!);
       <p class="text-small" style="color: var(--color-muted);">Project links would appear here.</p>
     </Section>
   </Container>
-  <SiteFooter />
+  <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

@@ -27,7 +27,7 @@ const sortedTypes = [...grouped.keys()].sort((a, b) => typeOrder.indexOf(a) - ty
 ---
 
 <BaseLayout title="Ecosystem — KCB Labs" description="Partners, clients, sponsors, and organizations in the KCB Labs ecosystem.">
-  <SiteHeader />
+  <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "About", href: "/about" }, { label: "Ecosystem", href: "/about/ecosystem" }]} />
     <PageHeader label="About / Ecosystem" title="Ecosystem" description="Partners, clients, sponsors, and organizations in the KCB Labs ecosystem. Built with an ecosystem." />
@@ -52,5 +52,5 @@ const sortedTypes = [...grouped.keys()].sort((a, b) => typeOrder.indexOf(a) - ty
       </Section>
     )}
   </Container>
-  <SiteFooter />
+  <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

@@ -15,7 +15,7 @@ const vision = getVisionPage();
 ---
 
 <BaseLayout title={vision?.data?.title as string ?? "Vision"} description={vision?.data?.description as string ?? "Where KCB Labs is headed."}>
-  <SiteHeader />
+  <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "About", href: "/about" }, { label: "Vision", href: "/about/vision" }]} />
     <PageHeader label="About / Vision" title={vision?.data?.title as string ?? "Vision"} description={vision?.data?.description as string ?? "Where KCB Labs is headed."} />
@@ -26,5 +26,5 @@ const vision = getVisionPage();
       </Prose>
     </Section>
   </Container>
-  <SiteFooter />
+  <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

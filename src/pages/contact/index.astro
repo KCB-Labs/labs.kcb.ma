@@ -12,7 +12,7 @@ export const prerender = true;
 ---
 
 <BaseLayout title="Contact — KCB Labs" description="Get in touch with the KCB Labs team.">
-  <SiteHeader />
+  <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "Contact", href: "/contact" }]} />
     <PageHeader label="Contact" title="Contact" description="Get in touch with the KCB Labs team." />
@@ -43,5 +43,5 @@ export const prerender = true;
       </ul>
     </Section>
   </Container>
-  <SiteFooter />
+  <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

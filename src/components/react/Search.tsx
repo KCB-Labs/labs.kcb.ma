@@ -271,10 +271,10 @@ export function Search({ initialIndex = [] }: SearchProps) {
           white-space: nowrap;
           border: 0;
         }
-        .search-container input:focus {
-          outline: none;
+        .search-container input:focus-visible {
+          outline: 2px solid var(--color-accent);
+          outline-offset: 2px;
           border-color: var(--color-accent);
-          box-shadow: 0 0 0 2px var(--color-accent-alpha);
         }
       `}</style>
     </div>

@@ -6,7 +6,7 @@ import Container from "../components/astro/Container.astro";
 import Section from "../components/astro/Section.astro";
 ---
 <BaseLayout title="Not found — KCB Labs" description="This path hasn't become a project yet." noindex>
-  <SiteHeader />
+  <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Section>
       <h1>This path hasn't become a project yet.</h1>
@@ -18,5 +18,5 @@ import Section from "../components/astro/Section.astro";
       </div>
     </Section>
   </Container>
-  <SiteFooter />
+  <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

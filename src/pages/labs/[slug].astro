@@ -49,7 +49,7 @@ const timelineEvents = [
 ---
 
 <BaseLayout title={`${lab.data.title as string} — KCB Labs`} description={lab.data.description as string}>
-  <SiteHeader />
+  <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "Labs", href: "/labs" }, { label: lab.data.title as string }]} />
     <PageHeader label="Lab" title={lab.data.title as string} description={lab.data.description as string} status={lab.data.status as string} />
@@ -146,5 +146,5 @@ const timelineEvents = [
       </div>
     </Section>
   </Container>
-  <SiteFooter />
+  <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

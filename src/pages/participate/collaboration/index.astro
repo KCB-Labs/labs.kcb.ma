@@ -12,7 +12,7 @@ export const prerender = true;
 ---
 
 <BaseLayout title="Collaboration — KCB Labs" description="Research, technology, project, or startup partnerships with KCB Labs.">
-  <SiteHeader />
+  <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "Participate", href: "/participate" }, { label: "Collaboration", href: "/participate/collaboration" }]} />
     <PageHeader label="Participate / Collaboration" title="Collaboration" description="Research, technology, project, or startup partnerships with KCB Labs." />
@@ -46,5 +46,5 @@ export const prerender = true;
       />
     </Section>
   </Container>
-  <SiteFooter />
+  <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

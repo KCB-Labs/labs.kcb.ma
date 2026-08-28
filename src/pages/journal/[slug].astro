@@ -52,7 +52,7 @@ const { previous, next } = getPreviousNextArticle(slug!, { includeDrafts: true }
 ---
 
 <BaseLayout title={`${article.data.title as string} — KCB Labs`} description={article.data.description as string} ogImage={article.data.socialImage as string | undefined} ogType="article">
-  <SiteHeader />
+  <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "Journal", href: "/journal" }, { label: article.data.title as string }]} />
     <PageHeader label="Article" title={article.data.title as string} description={article.data.description as string} status={`${article.data.category as string} · ${article.readingTime} min read`} />
@@ -148,5 +148,5 @@ const { previous, next } = getPreviousNextArticle(slug!, { includeDrafts: true }
       </div>
     </Section>
   </Container>
-  <SiteFooter />
+  <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

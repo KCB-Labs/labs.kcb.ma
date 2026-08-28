@@ -15,7 +15,7 @@ const labs = getLabs();
 ---
 
 <BaseLayout title="Labs — KCB Labs" description="Persistent areas of exploration at KCB Labs.">
-  <SiteHeader />
+  <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <PageHeader label="Explore" title="Labs" description="Persistent areas of exploration — each lab asks what we are continuously investigating." />
     <Section>
@@ -30,7 +30,7 @@ const labs = getLabs();
       {labs.length === 0 && <p class="text-small" style="color: var(--color-muted);">No labs yet.</p>}
     </Section>
   </Container>
-  <SiteFooter />
+  <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>
 
 <script>

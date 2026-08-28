@@ -15,7 +15,7 @@ const roadmaps = getRoadmaps();
 ---
 
 <BaseLayout title="Roadmap — KCB Labs" description="Upcoming exploration areas and themes for KCB Labs.">
-  <SiteHeader />
+  <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "About", href: "/about" }, { label: "Roadmap", href: "/about/roadmap" }]} />
     <PageHeader label="About / Roadmap" title="Roadmap" description="Upcoming exploration areas and themes for KCB Labs. Directional timeline, not task-level project management." />
@@ -58,5 +58,5 @@ const roadmaps = getRoadmaps();
       )}
     </Section>
   </Container>
-  <SiteFooter />
+  <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

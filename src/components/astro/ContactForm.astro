@@ -83,12 +83,12 @@ const {
     color: var(--color-text);
     transition: border-color var(--motion-duration) var(--motion-ease), box-shadow var(--motion-duration) var(--motion-ease);
   }
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    outline: none;
+  .form-group input:focus-visible,
+  .form-group select:focus-visible,
+  .form-group textarea:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
     border-color: var(--color-accent);
-    box-shadow: 0 0 0 2px var(--color-accent-alpha);
   }
   .form-group input[aria-invalid="true"],
   .form-group select[aria-invalid="true"],
@@ -156,7 +156,13 @@ const {
 
         // Clear previous field errors
         form.querySelectorAll('.field-error').forEach(el => el.remove());
-        form.querySelectorAll('[aria-invalid="true"]').forEach(el => el.removeAttribute('aria-invalid'));
+        form.querySelectorAll('[aria-invalid="true"]').forEach(el => {
+          el.removeAttribute('aria-invalid');
+          const describedBy = el.getAttribute('aria-describedby');
+          if (describedBy) {
+            el.setAttribute('aria-describedby', describedBy.replace(/error-\w+/g, '').trim());
+          }
+        });
 
         const formData = new FormData(form);
 
@@ -182,13 +188,17 @@ const {
                 const input = form.querySelector<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(`[name="${field}"]`);
                 if (input) {
                   input.setAttribute('aria-invalid', 'true');
+                  const errorId = `error-${field}`;
                   const errorEl = document.createElement('p');
+                  errorEl.id = errorId;
                   errorEl.className = 'field-error';
                   errorEl.style.color = 'var(--color-error)';
                   errorEl.style.fontSize = 'var(--text-small)';
                   errorEl.style.marginTop = 'var(--space-1)';
                   errorEl.textContent = Array.isArray(msg) ? msg.join(', ') : String(msg);
                   input.parentNode?.appendChild(errorEl);
+                  const describedBy = input.getAttribute('aria-describedby');
+                  input.setAttribute('aria-describedby', describedBy ? `${describedBy} ${errorId}` : errorId);
                 }
               });
             }
@@ -208,6 +218,10 @@ const {
           input.removeAttribute('aria-invalid');
           const errorEl = input.parentNode?.querySelector('.field-error');
           errorEl?.remove();
+          const describedBy = input.getAttribute('aria-describedby');
+          if (describedBy) {
+            input.setAttribute('aria-describedby', describedBy.replace(/error-\w+/g, '').trim());
+          }
         });
       });
     });

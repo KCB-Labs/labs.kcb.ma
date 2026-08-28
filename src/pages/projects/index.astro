@@ -15,7 +15,7 @@ const projects = getProjects();
 ---
 
 <BaseLayout title="Projects — KCB Labs" description="Projects born in KCB Labs — from idea to implementation.">
-  <SiteHeader />
+  <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <PageHeader label="Explore" title="Projects" description="Something KCB has decided is worth implementing beyond pure exploration." />
     <Section>
@@ -30,7 +30,7 @@ const projects = getProjects();
       {projects.length === 0 && <p class="text-small" style="color: var(--color-muted);">No projects yet.</p>}
     </Section>
   </Container>
-  <SiteFooter />
+  <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>
 
 <script>

@@ -51,9 +51,12 @@ const ogImageURL = ogImage ? new URL(ogImage, site).toString() : undefined;
     <slot name="head" />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    <slot name="header" />
     <main id="main-content">
       <slot />
     </main>
+    <slot name="footer" />
   </body>
 </html>
 

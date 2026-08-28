@@ -15,7 +15,7 @@ const people = getPeople();
 ---
 
 <BaseLayout title="People — KCB Labs" description="The team and collaborators at KCB Labs.">
-  <SiteHeader />
+  <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "About", href: "/about" }, { label: "People", href: "/about/people" }]} />
     <PageHeader label="About / People" title="People" description="The team and collaborators at KCB Labs." />
@@ -32,5 +32,5 @@ const people = getPeople();
       )}
     </Section>
   </Container>
-  <SiteFooter />
+  <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

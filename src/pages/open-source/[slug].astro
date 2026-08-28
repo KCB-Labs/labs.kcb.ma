@@ -35,7 +35,7 @@ const relatedProject = relatedProjectSlug ? getProjects().find((p) => p.slug ===
 ---
 
 <BaseLayout title={`${openSource.data.title as string} — KCB Labs Open Source`} description={openSource.data.description as string} ogImage={openSource.data.socialImage as string | undefined}>
-  <SiteHeader />
+  <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "Open Source", href: "/open-source" }, { label: openSource.data.title as string }]} />
     <PageHeader label="Open Source" title={openSource.data.title as string} description={openSource.data.description as string} status={`${openSource.data.license as string} · ${openSource.data.status as string}`} />
@@ -126,5 +126,5 @@ const relatedProject = relatedProjectSlug ? getProjects().find((p) => p.slug ===
       }
     </style>
   </Container>
-  <SiteFooter />
+  <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

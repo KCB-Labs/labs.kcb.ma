@@ -14,7 +14,7 @@ const articles = getArticles();
 ---
 
 <BaseLayout title="Journal — KCB Labs" description="The editorial layer of KCB Labs — what we think, discover, build, learn and observe.">
-  <SiteHeader />
+  <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <PageHeader label="Journal" title="Journal" description="Articles, Lab Notes, Field Notes, Perspectives and Announcements from KCB Labs." />
     <Section>
@@ -26,5 +26,5 @@ const articles = getArticles();
       {articles.length === 0 && <p class="text-small" style="color: var(--color-muted);">No articles yet.</p>}
     </Section>
   </Container>
-  <SiteFooter />
+  <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

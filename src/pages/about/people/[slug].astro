@@ -34,7 +34,7 @@ const relatedProjects = getProjects().filter((p: { slug: string }) => relatedPro
 ---
 
 <BaseLayout title={`${person.data.title as string} — KCB Labs People`} description={person.data.description as string} ogImage={person.data.socialImage as string | undefined}>
-  <SiteHeader />
+  <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "About", href: "/about" }, { label: "People", href: "/about/people" }, { label: person.data.title as string }]} />
     <PageHeader label="About / People" title={person.data.title as string} description={person.data.description as string} status={person.data.role as string | undefined} />
@@ -79,5 +79,5 @@ const relatedProjects = getProjects().filter((p: { slug: string }) => relatedPro
       </Section>
     )}
   </Container>
-  <SiteFooter />
+  <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

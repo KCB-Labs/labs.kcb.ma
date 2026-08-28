@@ -15,7 +15,7 @@ const participate = getParticipatePage();
 ---
 
 <BaseLayout title={participate?.data?.title as string ?? "Participate"} description={participate?.data?.description as string ?? "Support, collaborate, or connect with KCB Labs."}>
-  <SiteHeader />
+  <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "Participate", href: "/participate" }]} />
     <PageHeader label="Participate" title={participate?.data?.title as string ?? "Participate"} description={participate?.data?.description as string ?? "Support, collaborate, or connect with KCB Labs."} />
@@ -41,5 +41,5 @@ const participate = getParticipatePage();
       </ul>
     </Section>
   </Container>
-  <SiteFooter />
+  <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

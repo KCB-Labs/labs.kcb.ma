@@ -17,7 +17,7 @@ const others = openSourceItems.filter((o) => o.data.featured !== true);
 ---
 
 <BaseLayout title="Open Source — KCB Labs" description="Open source projects and protocols distributed by KCB Labs.">
-  <SiteHeader />
+  <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "Open Source", href: "/open-source" }]} />
     <PageHeader label="Open Source" title="Open Source" description="Open source projects and protocols distributed by KCB Labs. Distribution layer, not a separate R&D stage." />
@@ -50,5 +50,5 @@ const others = openSourceItems.filter((o) => o.data.featured !== true);
       )}
     </Section>
   </Container>
-  <SiteFooter />
+  <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

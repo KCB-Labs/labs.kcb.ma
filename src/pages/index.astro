@@ -46,7 +46,7 @@ const displayEcosystem = ecosystemOrgs.length ? ecosystemOrgs : organizations.sl
 ---
 
 <BaseLayout title="KCB Labs — We explore ideas that become technology" description="KCB Labs is a public R&D and innovation platform turning ideas into experiments, validated projects and real-world outcomes.">
-  <SiteHeader />
+  <Fragment slot="header"><SiteHeader /></Fragment>
   <Hero />
 
   <Container>
@@ -145,5 +145,5 @@ const displayEcosystem = ecosystemOrgs.length ? ecosystemOrgs : organizations.sl
     </Section>
   </Container>
 
-  <SiteFooter />
+  <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>
