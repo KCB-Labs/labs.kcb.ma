@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import SiteHeader from "../../../components/astro/SiteHeader.astro";
+import SiteFooter from "../../../components/astro/SiteFooter.astro";
+import Container from "../../../components/astro/Container.astro";
+import Section from "../../../components/astro/Section.astro";
+import PageHeader from "../../../components/astro/PageHeader.astro";
+import Breadcrumbs from "../../../components/astro/Breadcrumbs.astro";
+import Prose from "../../../components/astro/Prose.astro";
+import { getVisionPage } from "../../../lib/content/pages.js";
+
+export const prerender = true;
+
+const vision = getVisionPage();
+---
+
+<BaseLayout title={vision?.data?.title as string ?? "Vision"} description={vision?.data?.description as string ?? "Where KCB Labs is headed."}>
+  <SiteHeader />
+  <Container>
+    <Breadcrumbs crumbs={[{ label: "About", href: "/about" }, { label: "Vision", href: "/about/vision" }]} />
+    <PageHeader label="About / Vision" title={vision?.data?.title as string ?? "Vision"} description={vision?.data?.description as string ?? "Where KCB Labs is headed."} />
+
+    <Section>
+      <Prose>
+        <div set:html={vision?.content ?? ""} />
+      </Prose>
+    </Section>
+  </Container>
+  <SiteFooter />
+</BaseLayout>

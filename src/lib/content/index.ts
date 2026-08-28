@@ -7,5 +7,6 @@ export * from "./people.js";
 export * from "./organizations.js";
 export * from "./opensource.js";
 export * from "./roadmap.js";
+export * from "./pages.js";
 export * from "./relationships.js";
 export * from "./utils.js";
