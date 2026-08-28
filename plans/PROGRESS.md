@@ -104,10 +104,14 @@
 
 ---
 
-## 2026-08-28 — PBI-008 Active (asdlc-execute)
+## 2026-08-28 — PBI-008 Done (asdlc-execute)
 
 - **Selected:** `PBI-008` (Validation + Publishing Filters + Slug Stability + Seed Fixtures) — dependency PBI-007 Done satisfied. Plane `kcb/KCBLABS-8` → `In Progress`, `plans/README.md` → Active.
 - **Pre-flight:** Targets: src/lib/content/validate.ts, slugs.ts, seed graph fixtures, tests for validation/slug/publishing, build-time validation wiring.
+- **Implementation:** Created `src/lib/content/validate.ts:1` (walks 9 collections via get*({includeDrafts:true}), throws `Project "X" references nonexistent Lab "Y"` on missing target) + `slugs.ts:1` (slugify, assertSlugStable, generateSlug) + updated `labs/ai-employees.mdoc:8` and `research/local-ai-research.mdoc:8` to close graph (labs now references research/experiments/projects). Added `validate.test.ts:1` (3 tests: passes with valid fixtures, fails on broken relationship via temp invalid-test.mdoc, seed graph traversal + derived numbers) + `slugs.test.ts:1` (4 tests: slugify, stability, generateSlug, lowercase no IDs) — total 24 vitest tests. Wired `validate()` into `astro.config.ts:1` via `validateIntegration` hook `astro:build:start` so `npm run build` fails on broken refs (verified: invalid-test-build.mdoc → build ERROR `[validate-relationships] Project "invalid-test-build" references nonexistent Lab "nonexistent-lab-xyz"`).
+- **Gates:** check 0 errors (33 files, after vitest + implicit any fixes), build ok (1.56s server+prerender) and correctly fails with invalid fixture, test 24 passed + 6 smoke = 30 via `npm test`, lint baseline.
+- **Review:** Initial adversarial FAIL — validate not wired to build (build succeeded with broken fixture). Fixed by adding `validateIntegration` in `astro.config.ts:11`. Re-verified: invalid file → build fails with descriptive error, valid → build passes. Second adversarial PASS. Review-type sort: **agentic — Done**. Comment posted to Plane.
+- **Close-out:** Plane `kcb/KCBLABS-8` → Done, `plans/README.md` → Done, commits `3114686, 12fbc89` on `master`. Next actionable: `PBI-009` (needs PBI-003,008) — now ready. Content Model phase (PBI-005→008) complete.
 
 ## PBI Log
 
@@ -128,3 +132,4 @@
 | 2026-08-27 | PBI-007 | kcb/KCBLABS-7 | Proposed→Active | — | — | — | DAL; started |
 | 2026-08-28 | PBI-007 | kcb/KCBLABS-7 | Active→Done | check 0 err, build ok, test 17+6 pass | agentic | a6b4e70, e8bfaee | DAL + relationships + readingTime |
 | 2026-08-28 | PBI-008 | kcb/KCBLABS-8 | Proposed→Active | — | — | — | Validation + seed; started |
+| 2026-08-28 | PBI-008 | kcb/KCBLABS-8 | Active→Done | check 0 err, build ok/fail, test 24+6 pass | agentic | 3114686, 12fbc89 | Validation + slug + seed graph, build wiring |
