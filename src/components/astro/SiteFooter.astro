@@ -39,7 +39,7 @@ const year = new Date().getFullYear();
 <style>
   .site-footer {
     margin-top: var(--space-8);
-    border-top: var(--border-subtle);
+    border-top: 1px solid var(--color-border);
     padding-block: var(--space-8);
     background: var(--color-surface);
   }
@@ -49,8 +49,10 @@ const year = new Date().getFullYear();
     grid-template-columns: 1.5fr 1fr 1fr 1fr;
   }
   .brand {
-    font-family: var(--font-display);
-    font-weight: var(--weight-display);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
     margin-bottom: var(--space-2);
   }
   .site-footer ul {
@@ -66,7 +68,7 @@ const year = new Date().getFullYear();
     font-size: var(--text-small);
   }
   .site-footer a:hover {
-    color: var(--color-text);
+    color: var(--color-accent);
   }
   @media (max-width: 768px) {
     .grid {

@@ -24,16 +24,16 @@ const { slug, title, description, type, stage, originLab } = Astro.props;
 <style>
   .card--project {
     display: grid;
-    gap: var(--space-2);
-    padding: var(--space-5);
-    background: var(--color-surface);
-    border: var(--border-subtle);
-    border-radius: var(--radius-md);
+    gap: var(--space-3);
+    padding: var(--s-gap);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
     text-decoration: none;
-    transition: box-shadow var(--motion-duration) var(--motion-ease);
+    color: inherit;
+    transition: border-color var(--motion-duration) var(--motion-ease);
   }
   .card--project:hover {
-    box-shadow: var(--shadow-md);
+    border-color: var(--color-accent);
   }
   .card__meta {
     display: flex;

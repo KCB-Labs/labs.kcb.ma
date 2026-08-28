@@ -16,14 +16,15 @@ const { slug, title, description, outcome } = Astro.props;
 <style>
   .card--experiment {
     display: grid;
-    gap: var(--space-2);
-    padding: var(--space-4);
-    background: var(--color-surface);
-    border: var(--border-subtle);
-    border-radius: var(--radius-md);
+    gap: var(--space-3);
+    padding: var(--s-gap);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
     text-decoration: none;
+    color: inherit;
+    transition: border-color var(--motion-duration) var(--motion-ease);
   }
   .card--experiment:hover {
-    box-shadow: var(--shadow-md);
+    border-color: var(--color-accent);
   }
 </style>
