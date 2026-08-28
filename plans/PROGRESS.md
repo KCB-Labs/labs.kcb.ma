@@ -175,6 +175,8 @@
 | 2026-08-28 | PBI-014 | kcb/KCBLABS-14 | Active→Done | check 0 err, build ok, test 30 pass | agentic | 4d6fb1c | About + Vision pages + pages singleton helper |
 | 2026-08-28 | PBI-015 | kcb/KCBLABS-15 | Proposed→Active | — | — | — | People, Ecosystem, Roadmap; started |
 | 2026-08-28 | PBI-015 | kcb/KCBLABS-15 | Active→Done | check 0 err, build ok, test 30 pass | agentic | ca2fa55 | People + Ecosystem + Roadmap pages |
+| 2026-08-28 | PBI-016 | kcb/KCBLABS-16 | Proposed→Active | — | — | — | Participate cluster; started |
+| 2026-08-28 | PBI-016 | kcb/KCBLABS-16 | Active→Done | check 0 err, build ok, test 30 pass | agentic | f9f62ec | Participate hub + sponsorship + collaboration + contact + API |
 
 ---
 
@@ -223,3 +225,12 @@
 - **Gates:** check 0 errors (64 files), build ok (13.70s server+prerender, dist/client/about/people + /about/ecosystem + /about/roadmap all routes), test 24+6 pass = 30, no client:* islands.
 - **Review:** Adversarial PASS — People index/detail with correct sorting and related content, Ecosystem grouped by type avoiding logo-wall pattern, Roadmap with Timeline + detail cards, all use BaseLayout SEO, no hard-coded content, cards reuse. No blocking issues.
 - **Close-out:** Plane `kcb/KCBLABS-15` → Done, `plans/README.md` → Done, commit `ca2fa55` on `master`. Next actionable: `PBI-016` (Participate Cluster — Sponsorship, Collaboration, Contact form, depends PBI-008, PBI-014 Done) — now ready.
+
+## 2026-08-28 — PBI-016 Done (asdlc-execute)
+
+- **Selected:** `PBI-016` (Participate Cluster — Sponsorship, Collaboration, Contact Form) — dependencies PBI-008, PBI-014 Done satisfied. Plane `kcb/KCBLABS-16` → `In Progress` → `Done`, `plans/README.md` → Active → Done.
+- **Pre-flight:** Targets: src/pages/participate/* (index, sponsorship, collaboration), src/pages/contact/*, src/components/astro/ContactForm.astro, src/pages/api/contact.ts. All prerendered except API route, no React islands (progressive enhancement only).
+- **Implementation:** Created Participate hub (index.astro) linking to sponsorship/collaboration/contact; Sponsorship page from singleton with positioning + 5 tiers + what support enables; Collaboration + Contact pages using shared ContactForm component with honeypot, required fields, progressive enhancement (works with JS disabled); API route /api/contact.ts with server-side validation (name, email, interest, message), honeypot spam protection, structured logging; Added participate.yaml singleton and getParticipatePage helper; Added tsconfig.json path aliases for cleaner imports.
+- **Gates:** check 0 errors (70 files), build ok (21.42s server+prerender, dist/client/participate/* + dist/client/contact), test 24+6 pass = 30, no client:* islands.
+- **Review:** Adversarial PASS — Participate hub + 3 subpages all prerendered, Sponsorship from singleton with spec-defined tiers, forms share component with progressive enhancement, API validates + honeypot + logs, no secrets in client bundle. No blocking issues.
+- **Close-out:** Plane `kcb/KCBLABS-16` → Done, `plans/README.md` → Done, commit `f9f62ec` on `master`. Next actionable: `PBI-017` (Search index + Search island, depends PBI-008, PBI-009, PBI-010, PBI-011, PBI-012, PBI-013 Done) — now ready.
