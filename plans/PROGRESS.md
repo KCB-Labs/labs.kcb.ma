@@ -31,3 +31,12 @@
 - **Gates:** check 0 errors (73 files), build ok (10.77s server+prerender), test 24+6 = 30 pass, client:visible hydration only.
 - **Review:** Adversarial PASS — filter predicates match Keystatic enums exactly; URL param sync (status/type/stage); progressive enhancement (server-rendered full list is baseline, JS adds filtering); inline script listens for filters-changed custom event; no React on layout/header/footer; all prerendered pages. No blocking issues.
 - **Close-out:** Plane `kcb/KCBLABS-18` → Done, `plans/README.md` → Done, commit `5ba0a88` on `master`. Next actionable: `PBI-019` (Related discovery + Timeline + graph hook, depends PBI-010, PBI-011, PBI-012, PBI-013, PBI-015 Done) — now ready.
+
+## 2026-08-28 — PBI-019 Done (asdlc-execute)
+
+- **Selected:** `PBI-019` (Related Discovery + Interactive Timeline + Knowledge Graph Hook) — dependencies PBI-010, PBI-011, PBI-012, PBI-013, PBI-015 Done satisfied. Plane `kcb/KCBLABS-19` → `In Progress` → `Done`, `plans/README.md` → Proposed → Done.
+- **Pre-flight:** Targets: src/components/react/Timeline.tsx, src/pages/labs/[slug].astro, src/pages/projects/[slug].astro, src/pages/about/roadmap/index.astro. Related sections + getKnowledgeGraphData() already existed.
+- **Implementation:** Created src/components/react/Timeline.tsx (client:visible island with keyboard nav ArrowUp/Down/Left/Right/Home/End, chronological sort, prefers-reduced-motion support via scrollIntoView conditional, accessible role=list + aria-label + focus management); updated src/pages/labs/[slug].astro (ReactTimeline client:visible replacing Astro Timeline); updated src/pages/about/roadmap/index.astro (ReactTimeline client:visible); removed unused Astro Timeline imports; related sections already used relationships.ts helpers; getKnowledgeGraphData() already returned nodes+edges shape.
+- **Gates:** check 0 errors (74 files), build ok (1.90s server+prerender), test 24+6 = 30 pass, client:visible hydration only.
+- **Review:** Adversarial PASS — Timeline keyboard navigable, prefers-reduced-motion respected, chronological sort, no continuous motion/parallax; related sections published-only via relationships.ts; getKnowledgeGraphData() typed for future visualization. No blocking issues.
+- **Close-out:** Plane `kcb/KCBLABS-19` → Done, `plans/README.md` → Done, commit `5a4b0b9` on `master`. Next actionable: `PBI-020` (SEO — canonical/OG/Schema, sitemap, robots, RSS, depends PBI-009, PBI-010, PBI-011, PBI-012, PBI-013, PBI-015 Done) — now ready.
