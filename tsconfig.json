@@ -11,7 +11,15 @@
     "checkJs": false,
     "skipLibCheck": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "jsxImportSource": "react",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@lib/*": ["src/lib/*"],
+      "@pages/*": ["src/pages/*"]
+    }
   },
   "include": ["src/**/*", "astro.config.ts", "keystatic.config.ts"],
   "exclude": ["dist", "node_modules"]

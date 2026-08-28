@@ -40,6 +40,10 @@ export function getSponsorshipPage(): PageSingleton | undefined {
   return readSingleton("src/content/pages", "sponsorship");
 }
 
+export function getParticipatePage(): PageSingleton | undefined {
+  return readSingleton("src/content/pages", "participate");
+}
+
 export function getSiteSingleton(): { data: Frontmatter } | undefined {
   const abs = path.join(process.cwd(), "src/content/site.yaml");
   if (!fs.existsSync(abs)) return undefined;

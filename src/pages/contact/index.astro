@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/astro/SiteHeader.astro";
+import SiteFooter from "../../components/astro/SiteFooter.astro";
+import Container from "../../components/astro/Container.astro";
+import Section from "../../components/astro/Section.astro";
+import PageHeader from "../../components/astro/PageHeader.astro";
+import Breadcrumbs from "../../components/astro/Breadcrumbs.astro";
+import ContactForm from "../../components/astro/ContactForm.astro";
+
+export const prerender = true;
+---
+
+<BaseLayout title="Contact — KCB Labs" description="Get in touch with the KCB Labs team.">
+  <SiteHeader />
+  <Container>
+    <Breadcrumbs crumbs={[{ label: "Contact", href: "/contact" }]} />
+    <PageHeader label="Contact" title="Contact" description="Get in touch with the KCB Labs team." />
+
+    <Section>
+      <p style="font-size: var(--text-h3); color: var(--color-text-strong); margin-bottom: var(--space-4);">
+        We'd love to hear from you.
+      </p>
+      <p>Whether you have a question, want to share feedback, or just want to say hello — use the form below.</p>
+    </Section>
+
+    <Section>
+      <ContactForm
+        endpoint="/api/contact"
+        title="Contact"
+        interestOptions={["General inquiry", "Press", "Careers", "Other"]}
+        defaultInterest="General inquiry"
+        submitLabel="Send Message"
+      />
+    </Section>
+
+    <Section>
+      <h2>Other Ways to Reach Us</h2>
+      <ul style="list-style:none; padding:0; display:grid; gap: var(--space-2);">
+        <li><a href="mailto:hello@labs.kcb.ma" style="text-decoration:none;">hello@labs.kcb.ma</a></li>
+        <li><a href="https://github.com/kcb" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">GitHub</a></li>
+        <li><a href="https://x.com/kcb_labs" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">X (Twitter)</a></li>
+      </ul>
+    </Section>
+  </Container>
+  <SiteFooter />
+</BaseLayout>

@@ -1,0 +1,215 @@
+---
+interface Props {
+  endpoint: string;
+  title: string;
+  interestOptions?: string[];
+  defaultInterest?: string;
+  submitLabel?: string;
+}
+const {
+  endpoint,
+  title,
+  interestOptions = ["Research", "Technology", "Project", "Startup", "Open-source contribution", "Sponsorship"],
+  defaultInterest = "Research",
+  submitLabel = "Send",
+} = Astro.props;
+---
+<form action={endpoint} method="POST" class="contact-form">
+  <input type="hidden" name="form_type" value={title} />
+  <input type="hidden" name="honeypot" value="" tabindex="-1" autocomplete="off" style="display:none;" aria-hidden="true" />
+
+  <div class="form-group">
+    <label for="name">Name <span class="required" aria-hidden="true">*</span></label>
+    <input type="text" id="name" name="name" required aria-required="true" />
+  </div>
+
+  <div class="form-group">
+    <label for="organization">Organization</label>
+    <input type="text" id="organization" name="organization" />
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email <span class="required" aria-hidden="true">*</span></label>
+    <input type="email" id="email" name="email" required aria-required="true" />
+  </div>
+
+  <div class="form-group">
+    <label for="interest">Interest <span class="required" aria-hidden="true">*</span></label>
+    <select id="interest" name="interest" required aria-required="true">
+      <option value="" disabled>Select an option</option>
+      {interestOptions.map((opt) => (
+        <option value={opt} selected={opt === defaultInterest}>{opt}</option>
+      ))}
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="message">Message <span class="required" aria-hidden="true">*</span></label>
+    <textarea id="message" name="message" rows="6" required aria-required="true"></textarea>
+  </div>
+
+  <button type="submit" class="btn btn--primary">{submitLabel}</button>
+
+  <p class="form-status" aria-live="polite" style="display:none;"></p>
+</form>
+
+<style>
+  .contact-form {
+    display: grid;
+    gap: var(--space-4);
+    max-width: 600px;
+  }
+  .form-group {
+    display: grid;
+    gap: var(--space-1);
+  }
+  .form-group label {
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-strong);
+  }
+  .required {
+    color: var(--color-accent);
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-family: inherit;
+    font-size: var(--text-body);
+    padding: var(--space-2) var(--space-3);
+    border: var(--border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg);
+    color: var(--color-text);
+    transition: border-color var(--motion-duration) var(--motion-ease), box-shadow var(--motion-duration) var(--motion-ease);
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px var(--color-accent-alpha);
+  }
+  .form-group input[aria-invalid="true"],
+  .form-group select[aria-invalid="true"],
+  .form-group textarea[aria-invalid="true"] {
+    border-color: var(--color-error);
+  }
+  .btn--primary {
+    font-family: inherit;
+    font-size: var(--text-body);
+    font-weight: var(--weight-medium);
+    padding: var(--space-3) var(--space-5);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color var(--motion-duration) var(--motion-ease), transform var(--motion-duration) var(--motion-ease);
+  }
+  .btn--primary:hover {
+    background: var(--color-accent-hover);
+  }
+  .btn--primary:active {
+    transform: scale(0.98);
+  }
+  .btn--primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  .form-status {
+    font-size: var(--text-small);
+    padding: var(--space-2);
+    border-radius: var(--radius-sm);
+  }
+  .form-status.success {
+    display: block !important;
+    background: var(--color-success-bg);
+    color: var(--color-success-text);
+    border: var(--border-subtle);
+  }
+  .form-status.error {
+    display: block !important;
+    background: var(--color-error-bg);
+    color: var(--color-error-text);
+    border: var(--border-subtle);
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const forms = document.querySelectorAll<HTMLFormElement>('.contact-form');
+    forms.forEach(form => {
+      const statusEl = form.querySelector<HTMLParagraphElement>('.form-status');
+      const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      if (!statusEl || !submitBtn) return;
+
+      const originalLabel = submitBtn.textContent;
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        statusEl.style.display = 'none';
+        statusEl.className = 'form-status';
+
+        // Clear previous field errors
+        form.querySelectorAll('.field-error').forEach(el => el.remove());
+        form.querySelectorAll('[aria-invalid="true"]').forEach(el => el.removeAttribute('aria-invalid'));
+
+        const formData = new FormData(form);
+
+        try {
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          const data = await res.json();
+
+          if (res.ok && data.success) {
+            statusEl.textContent = data.message || "Thank you! Your message has been sent.";
+            statusEl.classList.add('success');
+            form.reset();
+          } else {
+            statusEl.textContent = data.message || "Something went wrong. Please try again.";
+            statusEl.classList.add('error');
+
+            if (data.errors) {
+              Object.entries(data.errors).forEach(([field, msg]) => {
+                const input = form.querySelector<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(`[name="${field}"]`);
+                if (input) {
+                  input.setAttribute('aria-invalid', 'true');
+                  const errorEl = document.createElement('p');
+                  errorEl.className = 'field-error';
+                  errorEl.style.color = 'var(--color-error)';
+                  errorEl.style.fontSize = 'var(--text-small)';
+                  errorEl.style.marginTop = 'var(--space-1)';
+                  errorEl.textContent = Array.isArray(msg) ? msg.join(', ') : String(msg);
+                  input.parentNode?.appendChild(errorEl);
+                }
+              });
+            }
+          }
+        } catch {
+          statusEl.textContent = "Network error. Please try again.";
+          statusEl.classList.add('error');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalLabel || "Send";
+          statusEl.style.display = 'block';
+        }
+      });
+
+      form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input, select, textarea').forEach(input => {
+        input.addEventListener('input', () => {
+          input.removeAttribute('aria-invalid');
+          const errorEl = input.parentNode?.querySelector('.field-error');
+          errorEl?.remove();
+        });
+      });
+    });
+  });
+  </script>
