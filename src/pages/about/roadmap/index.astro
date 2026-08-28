@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import SiteHeader from "../../../components/astro/SiteHeader.astro";
+import SiteFooter from "../../../components/astro/SiteFooter.astro";
+import Container from "../../../components/astro/Container.astro";
+import Section from "../../../components/astro/Section.astro";
+import PageHeader from "../../../components/astro/PageHeader.astro";
+import Breadcrumbs from "../../../components/astro/Breadcrumbs.astro";
+import Timeline from "../../../components/content/Timeline.astro";
+import { getRoadmaps } from "../../../lib/content/roadmap.js";
+
+export const prerender = true;
+
+const roadmaps = getRoadmaps();
+---
+
+<BaseLayout title="Roadmap — KCB Labs" description="Upcoming exploration areas and themes for KCB Labs.">
+  <SiteHeader />
+  <Container>
+    <Breadcrumbs crumbs={[{ label: "About", href: "/about" }, { label: "Roadmap", href: "/about/roadmap" }]} />
+    <PageHeader label="About / Roadmap" title="Roadmap" description="Upcoming exploration areas and themes for KCB Labs. Directional timeline, not task-level project management." />
+
+    <Section>
+      {roadmaps.length > 0 ? (
+        <>
+          <Timeline events={roadmaps.map((r) => ({
+            label: r.data.period as string ?? r.slug,
+            title: (r.data.theme as string ?? r.data.description as string) + (r.data.objective ? ` — ${r.data.objective as string}` : "") + (r.data.status ? ` [${(r.data.status as string).charAt(0).toUpperCase() + (r.data.status as string).slice(1)}]` : "")
+          }))} />
+        </>
+      ) : (
+        <p class="text-small" style="color: var(--color-muted);">No roadmap entries published yet.</p>
+      )}
+    </Section>
+
+    <Section>
+      <h2>Details</h2>
+      {roadmaps.length > 0 ? (
+        <div style="display:grid; gap: var(--space-4);">
+          {roadmaps.map((r) => (
+            <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); background: var(--color-surface);">
+              <div style="display:flex; gap: var(--space-3); flex-wrap:wrap; align-items:center; margin-bottom: var(--space-2);">
+                <span class="badge badge--period" style="font-family: var(--font-mono); font-size: var(--text-metadata); padding: 0.2em 0.6em; border-radius: var(--radius-full); background: var(--color-accent); color: var(--color-accent-contrast);">{r.data.period as string ?? r.slug}</span>
+                <span class="badge badge--status" style="font-family: var(--font-mono); font-size: var(--text-metadata); padding: 0.2em 0.6em; border-radius: var(--radius-full); background: var(--color-surface); border: var(--border-subtle); color: var(--color-muted-strong); text-transform: capitalize;">{(r.data.status as string) ?? "planned"}</span>
+              </div>
+              <h3 style="font-size: var(--text-h3); margin-bottom: var(--space-2);">{r.data.theme as string ?? r.data.description as string}</h3>
+              {r.data.objective && <p class="text-small" style="color: var(--color-muted); margin-bottom: var(--space-2);">{r.data.objective as string}</p>}
+              {r.data.areas && Array.isArray(r.data.areas) && r.data.areas.length > 0 && (
+                <ul style="list-style:none; padding:0; display:flex; flex-wrap:wrap; gap: var(--space-2);">
+                  {r.data.areas.map((a: string) => <li><span class="badge badge--area" style="font-family: var(--font-mono); font-size: var(--text-metadata); padding: 0.2em 0.6em; border-radius: var(--radius-full); background: var(--color-surface); border: var(--border-subtle); color: var(--color-muted-strong);">{a}</span></li>)}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p class="text-small" style="color: var(--color-muted);">No roadmap entries published yet.</p>
+      )}
+    </Section>
+  </Container>
+  <SiteFooter />
+</BaseLayout>

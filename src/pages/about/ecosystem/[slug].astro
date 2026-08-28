@@ -1,0 +1,88 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import SiteHeader from "../../../components/astro/SiteHeader.astro";
+import SiteFooter from "../../../components/astro/SiteFooter.astro";
+import Container from "../../../components/astro/Container.astro";
+import Section from "../../../components/astro/Section.astro";
+import PageHeader from "../../../components/astro/PageHeader.astro";
+import Breadcrumbs from "../../../components/astro/Breadcrumbs.astro";
+import Prose from "../../../components/astro/Prose.astro";
+import LabCard from "../../../components/cards/LabCard.astro";
+import ProjectCard from "../../../components/cards/ProjectCard.astro";
+import { getOrganizations, getOrganizationBySlug } from "../../../lib/content/organizations.js";
+import { getLabs } from "../../../lib/content/labs.js";
+import { getProjects } from "../../../lib/content/projects.js";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const orgs = getOrganizations();
+  return orgs.map((o: { slug: string }) => ({ params: { slug: o.slug } }));
+}
+
+const { slug } = Astro.params;
+const org = getOrganizationBySlug(slug!, { includeDrafts: true });
+if (!org) {
+  return Astro.redirect("/404", 404);
+}
+
+const relatedLabSlugs = (org.data.relatedLabs as string[] | undefined) ?? [];
+const relatedProjectSlugs = (org.data.relatedProjects as string[] | undefined) ?? [];
+
+const relatedLabs = getLabs().filter((l: { slug: string }) => relatedLabSlugs.includes(l.slug));
+const relatedProjects = getProjects().filter((p: { slug: string }) => relatedProjectSlugs.includes(p.slug));
+---
+
+<BaseLayout title={`${org.data.title as string} — KCB Labs Ecosystem`} description={org.data.description as string} ogImage={org.data.socialImage as string | undefined}>
+  <SiteHeader />
+  <Container>
+    <Breadcrumbs crumbs={[{ label: "About", href: "/about" }, { label: "Ecosystem", href: "/about/ecosystem" }, { label: org.data.title as string }]} />
+    <PageHeader label="About / Ecosystem" title={org.data.title as string} description={org.data.description as string} status={org.data.type as string | undefined} />
+
+    <Section>
+      <div style="display:flex; gap: var(--space-3); flex-wrap:wrap; align-items:center; margin-bottom: var(--space-4);">
+        {org.data.website && <a href={org.data.website as string} target="_blank" rel="noopener noreferrer" class="text-metadata">Website</a>}
+      </div>
+      <p class="text-small" style="color: var(--color-muted);">
+        Type: {org.data.type as string} · Status: {org.data.status as string}
+      </p>
+      {org.data.relationship && (
+        <Prose>
+          <div set:html={org.data.relationship as string} />
+        </Prose>
+      )}
+      <Prose>
+        <div set:html={org.content} />
+      </Prose>
+    </Section>
+
+    {relatedLabs.length > 0 && (
+      <Section>
+        <h2>Related Labs</h2>
+        <div style="display:grid; gap: var(--space-3);">
+          {relatedLabs.map((l) => (
+            <LabCard slug={l.slug} title={l.data.title as string} description={l.data.description as string} status={l.data.status as string} />
+          ))}
+        </div>
+      </Section>
+    )}
+
+    {relatedProjects.length > 0 && (
+      <Section>
+        <h2>Related Projects</h2>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+          {relatedProjects.map((p) => (
+            <ProjectCard slug={p.slug} title={p.data.title as string} description={p.data.description as string} type={p.data.type as string} stage={p.data.stage as string} originLab={p.data.originLab as string | undefined} />
+          ))}
+        </div>
+      </Section>
+    )}
+
+    {relatedLabs.length === 0 && relatedProjects.length === 0 && (
+      <Section>
+        <p class="text-small" style="color: var(--color-muted);">No related labs or projects.</p>
+      </Section>
+    )}
+  </Container>
+  <SiteFooter />
+</BaseLayout>

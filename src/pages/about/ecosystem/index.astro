@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import SiteHeader from "../../../components/astro/SiteHeader.astro";
+import SiteFooter from "../../../components/astro/SiteFooter.astro";
+import Container from "../../../components/astro/Container.astro";
+import Section from "../../../components/astro/Section.astro";
+import PageHeader from "../../../components/astro/PageHeader.astro";
+import Breadcrumbs from "../../../components/astro/Breadcrumbs.astro";
+import OrganizationCard from "../../../components/cards/OrganizationCard.astro";
+import { getOrganizations } from "../../../lib/content/organizations.js";
+
+export const prerender = true;
+
+const organizations = getOrganizations();
+
+// Group by type
+const typeOrder = ["Partner", "Client", "Sponsor", "Startup", "University", "Research Organization", "Technology Partner", "Community", "Open Source Community"];
+const grouped = new Map<string, typeof organizations>();
+
+for (const org of organizations) {
+  const type = (org.data.type as string) ?? "Partner";
+  if (!grouped.has(type)) grouped.set(type, []);
+  grouped.get(type)!.push(org);
+}
+
+const sortedTypes = [...grouped.keys()].sort((a, b) => typeOrder.indexOf(a) - typeOrder.indexOf(b));
+---
+
+<BaseLayout title="Ecosystem — KCB Labs" description="Partners, clients, sponsors, and organizations in the KCB Labs ecosystem.">
+  <SiteHeader />
+  <Container>
+    <Breadcrumbs crumbs={[{ label: "About", href: "/about" }, { label: "Ecosystem", href: "/about/ecosystem" }]} />
+    <PageHeader label="About / Ecosystem" title="Ecosystem" description="Partners, clients, sponsors, and organizations in the KCB Labs ecosystem. Built with an ecosystem." />
+
+    {sortedTypes.map((type) => {
+      const orgs = grouped.get(type)!;
+      return (
+        <Section>
+          <h2>{type}</h2>
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
+            {orgs.map((o) => (
+              <OrganizationCard slug={o.slug} name={o.data.title as string} type={o.data.type as string | undefined} />
+            ))}
+          </div>
+        </Section>
+      );
+    })}
+
+    {organizations.length === 0 && (
+      <Section>
+        <p class="text-small" style="color: var(--color-muted);">No organizations published yet.</p>
+      </Section>
+    )}
+  </Container>
+  <SiteFooter />
+</BaseLayout>

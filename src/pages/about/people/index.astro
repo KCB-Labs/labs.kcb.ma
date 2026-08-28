@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import SiteHeader from "../../../components/astro/SiteHeader.astro";
+import SiteFooter from "../../../components/astro/SiteFooter.astro";
+import Container from "../../../components/astro/Container.astro";
+import Section from "../../../components/astro/Section.astro";
+import PageHeader from "../../../components/astro/PageHeader.astro";
+import Breadcrumbs from "../../../components/astro/Breadcrumbs.astro";
+import PersonCard from "../../../components/cards/PersonCard.astro";
+import { getPeople } from "../../../lib/content/people.js";
+
+export const prerender = true;
+
+const people = getPeople();
+---
+
+<BaseLayout title="People — KCB Labs" description="The team and collaborators at KCB Labs.">
+  <SiteHeader />
+  <Container>
+    <Breadcrumbs crumbs={[{ label: "About", href: "/about" }, { label: "People", href: "/about/people" }]} />
+    <PageHeader label="About / People" title="People" description="The team and collaborators at KCB Labs." />
+
+    <Section>
+      {people.length > 0 ? (
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
+          {people.map((p) => (
+            <PersonCard slug={p.slug} name={p.data.title as string} role={p.data.role as string | undefined} />
+          ))}
+        </div>
+      ) : (
+        <p class="text-small" style="color: var(--color-muted);">No people published yet.</p>
+      )}
+    </Section>
+  </Container>
+  <SiteFooter />
+</BaseLayout>

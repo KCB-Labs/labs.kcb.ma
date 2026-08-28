@@ -1,0 +1,83 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import SiteHeader from "../../../components/astro/SiteHeader.astro";
+import SiteFooter from "../../../components/astro/SiteFooter.astro";
+import Container from "../../../components/astro/Container.astro";
+import Section from "../../../components/astro/Section.astro";
+import PageHeader from "../../../components/astro/PageHeader.astro";
+import Breadcrumbs from "../../../components/astro/Breadcrumbs.astro";
+import Prose from "../../../components/astro/Prose.astro";
+import LabCard from "../../../components/cards/LabCard.astro";
+import ProjectCard from "../../../components/cards/ProjectCard.astro";
+import { getPeople, getPersonBySlug } from "../../../lib/content/people.js";
+import { getLabs } from "../../../lib/content/labs.js";
+import { getProjects } from "../../../lib/content/projects.js";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const people = getPeople();
+  return people.map((p: { slug: string }) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const person = getPersonBySlug(slug!, { includeDrafts: true });
+if (!person) {
+  return Astro.redirect("/404", 404);
+}
+
+const relatedLabSlugs = (person.data.relatedLabs as string[] | undefined) ?? [];
+const relatedProjectSlugs = (person.data.relatedProjects as string[] | undefined) ?? [];
+
+const relatedLabs = getLabs().filter((l: { slug: string }) => relatedLabSlugs.includes(l.slug));
+const relatedProjects = getProjects().filter((p: { slug: string }) => relatedProjectSlugs.includes(p.slug));
+---
+
+<BaseLayout title={`${person.data.title as string} — KCB Labs People`} description={person.data.description as string} ogImage={person.data.socialImage as string | undefined}>
+  <SiteHeader />
+  <Container>
+    <Breadcrumbs crumbs={[{ label: "About", href: "/about" }, { label: "People", href: "/about/people" }, { label: person.data.title as string }]} />
+    <PageHeader label="About / People" title={person.data.title as string} description={person.data.description as string} status={person.data.role as string | undefined} />
+
+    <Section>
+      <div style="display:flex; gap: var(--space-4); flex-wrap:wrap; align-items:center; margin-bottom: var(--space-4);">
+        {person.data.website && <a href={person.data.website as string} target="_blank" rel="noopener noreferrer" class="text-metadata">Website</a>}
+        {person.data.linkedin && <a href={person.data.linkedin as string} target="_blank" rel="noopener noreferrer" class="text-metadata">LinkedIn</a>}
+        {person.data.github && <a href={person.data.github as string} target="_blank" rel="noopener noreferrer" class="text-metadata">GitHub</a>}
+        {person.data.x && <a href={person.data.x as string} target="_blank" rel="noopener noreferrer" class="text-metadata">X</a>}
+      </div>
+      <Prose>
+        <div set:html={person.content} />
+      </Prose>
+    </Section>
+
+    {relatedLabs.length > 0 && (
+      <Section>
+        <h2>Related Labs</h2>
+        <div style="display:grid; gap: var(--space-3);">
+          {relatedLabs.map((l) => (
+            <LabCard slug={l.slug} title={l.data.title as string} description={l.data.description as string} status={l.data.status as string} />
+          ))}
+        </div>
+      </Section>
+    )}
+
+    {relatedProjects.length > 0 && (
+      <Section>
+        <h2>Related Projects</h2>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+          {relatedProjects.map((p) => (
+            <ProjectCard slug={p.slug} title={p.data.title as string} description={p.data.description as string} type={p.data.type as string} stage={p.data.stage as string} originLab={p.data.originLab as string | undefined} />
+          ))}
+        </div>
+      </Section>
+    )}
+
+    {relatedLabs.length === 0 && relatedProjects.length === 0 && (
+      <Section>
+        <p class="text-small" style="color: var(--color-muted);">No related labs or projects.</p>
+      </Section>
+    )}
+  </Container>
+  <SiteFooter />
+</BaseLayout>
