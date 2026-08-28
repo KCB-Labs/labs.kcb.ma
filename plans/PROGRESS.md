@@ -23,11 +23,11 @@
 - **Review:** Adversarial PASS — index covers all 7 content types from published content only; island has debounced query + keyboard nav + type badges + accessible combobox + aria-live; SiteHeader integrates Search; index written at build done. No blocking issues.
 - **Close-out:** Plane `kcb/KCBLABS-17` → Done, `plans/README.md` → Done, commit `b715825` on `master`. Next actionable: `PBI-018` (Explore Filtering — Labs Status + Projects Type/Stage, depends PBI-010, PBI-011, PBI-017 Done) — now ready.
 
----
+## 2026-08-28 — PBI-018 Done (asdlc-execute)
 
-## 2026-08-28 — PBI-018 Active (asdlc-execute)
-
-- **Selected:** `PBI-018` (Explore Filtering — Labs Status + Projects Type/Stage) — dependencies PBI-010, PBI-011, PBI-017 Done satisfied. Plane `kcb/KCBLABS-18` → `In Progress`, `plans/README.md` → Active.
-- **Pre-flight:** Targets: src/components/react/Filters.tsx, src/pages/labs/index.astro, src/pages/projects/index.astro integration. Filters island uses client:visible.
-
-(End of file - total 236 lines)
+- **Selected:** `PBI-018` (Explore Filtering — Labs Status + Projects Type/Stage) — dependencies PBI-010, PBI-011, PBI-017 Done satisfied. Plane `kcb/KCBLABS-18` → `In Progress` → `Done`, `plans/README.md` → Proposed → Done.
+- **Pre-flight:** Targets: src/components/react/Filters.tsx, src/pages/labs/index.astro, src/pages/projects/index.astro integration. Filter islands use client:visible.
+- **Implementation:** Created src/components/react/Filters.tsx (LabsFilters + ProjectsFilters with FilterGroup/FilterButton components, URL param sync via history.replaceState, custom filters-changed event dispatch); Labs status options: active/exploring/paused/archived (matching Keystatic enums); Projects type options: Internal/Client/Startup/Collaboration/Open Source/Research; Projects stage options: Idea/Validating/Validated/Implementation/Live/Completed/Spun Out/Archived; updated src/pages/labs/index.astro (LabsFilters client:visible, data-status attributes on card wrappers, inline script for filter visibility); updated src/pages/projects/index.astro (ProjectsFilters client:visible, data-type/data-stage attributes, inline script for multi-criteria filtering).
+- **Gates:** check 0 errors (73 files), build ok (10.77s server+prerender), test 24+6 = 30 pass, client:visible hydration only.
+- **Review:** Adversarial PASS — filter predicates match Keystatic enums exactly; URL param sync (status/type/stage); progressive enhancement (server-rendered full list is baseline, JS adds filtering); inline script listens for filters-changed custom event; no React on layout/header/footer; all prerendered pages. No blocking issues.
+- **Close-out:** Plane `kcb/KCBLABS-18` → Done, `plans/README.md` → Done, commit `5ba0a88` on `master`. Next actionable: `PBI-019` (Related discovery + Timeline + graph hook, depends PBI-010, PBI-011, PBI-012, PBI-013, PBI-015 Done) — now ready.
