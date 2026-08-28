@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/astro/SiteHeader.astro";
+import SiteFooter from "../../components/astro/SiteFooter.astro";
+import Container from "../../components/astro/Container.astro";
+import Section from "../../components/astro/Section.astro";
+import PageHeader from "../../components/astro/PageHeader.astro";
+import ProjectCard from "../../components/cards/ProjectCard.astro";
+import { getProjects } from "../../lib/content/projects.js";
+
+export const prerender = true;
+
+const projects = getProjects();
+---
+
+<BaseLayout title="Projects — KCB Labs" description="Projects born in KCB Labs — from idea to implementation.">
+  <SiteHeader />
+  <Container>
+    <PageHeader label="Explore" title="Projects" description="Something KCB has decided is worth implementing beyond pure exploration." />
+    <Section>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+        {projects.map((project) => (
+          <ProjectCard slug={project.slug} title={project.data.title as string} description={project.data.description as string} type={project.data.type as string} stage={project.data.stage as string} originLab={project.data.originLab as string | undefined} />
+        ))}
+      </div>
+      {projects.length === 0 && <p class="text-small" style="color: var(--color-muted);">No projects yet.</p>}
+    </Section>
+  </Container>
+  <SiteFooter />
+</BaseLayout>

@@ -1,0 +1,165 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/astro/SiteHeader.astro";
+import SiteFooter from "../../components/astro/SiteFooter.astro";
+import Container from "../../components/astro/Container.astro";
+import Section from "../../components/astro/Section.astro";
+import PageHeader from "../../components/astro/PageHeader.astro";
+import Breadcrumbs from "../../components/astro/Breadcrumbs.astro";
+import ResearchCard from "../../components/cards/ResearchCard.astro";
+import ExperimentCard from "../../components/cards/ExperimentCard.astro";
+import ArticleCard from "../../components/cards/ArticleCard.astro";
+import PersonCard from "../../components/cards/PersonCard.astro";
+import OrganizationCard from "../../components/cards/OrganizationCard.astro";
+import { getProjects, getProjectBySlug } from "../../lib/content/projects.js";
+import { getResearch } from "../../lib/content/research.js";
+import { getExperiments } from "../../lib/content/experiments.js";
+import { getArticles } from "../../lib/content/articles.js";
+import { getPeopleByProject } from "../../lib/content/people.js";
+import { getOrganizationsByProject } from "../../lib/content/organizations.js";
+import { getOpenSourceByProject } from "../../lib/content/opensource.js";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const projects = getProjects();
+  return projects.map((project) => ({ params: { slug: project.slug } }));
+}
+
+const { slug } = Astro.params;
+const project = getProjectBySlug(slug!);
+if (!project) {
+  return Astro.redirect("/404", 404);
+}
+
+const originLab = project.data.originLab as string | undefined;
+const relatedResearchSlugs = (project.data.research as string[] | undefined) ?? [];
+const relatedExperimentSlugs = (project.data.experiments as string[] | undefined) ?? [];
+const relatedResearch = getResearch().filter((r) => relatedResearchSlugs.includes(r.slug));
+const relatedExperiments = getExperiments().filter((e) => relatedExperimentSlugs.includes(e.slug));
+const relatedArticles = getArticles().filter((a) => {
+  const arr = (a.data.projects as string[] | undefined) ?? [];
+  return arr.includes(slug!);
+});
+const people = getPeopleByProject(slug!);
+const organizations = getOrganizationsByProject(slug!);
+const openSource = getOpenSourceByProject(slug!);
+---
+
+<BaseLayout title={`${project.data.title as string} — KCB Labs`} description={project.data.description as string}>
+  <SiteHeader />
+  <Container>
+    <Breadcrumbs crumbs={[{ label: "Projects", href: "/projects" }, { label: project.data.title as string }]} />
+    <PageHeader label="Project" title={project.data.title as string} description={project.data.description as string} status={`${project.data.type as string} · ${project.data.stage as string}${originLab ? ` · Origin: ${originLab}` : ""}`} />
+
+    {originLab && (
+      <Section>
+        <div style="padding: var(--space-4); background: var(--color-surface); border: var(--border-subtle); border-radius: var(--radius-md);">
+          <p class="text-metadata">Born in KCB Labs</p>
+          <p>Origin: <a href={`/labs/${originLab}`}>{originLab}</a></p>
+        </div>
+      </Section>
+    )}
+
+    <Section>
+      <h2>Overview</h2>
+      <p class="text-body">{project.content.slice(0, 500)}</p>
+    </Section>
+
+    <Section>
+      <h2>Problem</h2>
+      <p class="text-body">What problem does {project.data.title as string} solve? Context from research.</p>
+    </Section>
+
+    <Section>
+      <h2>Solution</h2>
+      <p class="text-body">Solution approach for {project.data.title as string}.</p>
+    </Section>
+
+    <Section>
+      <h2>Architecture</h2>
+      <p class="text-small" style="color: var(--color-muted);">Architecture diagram would go here.</p>
+    </Section>
+
+    <Section>
+      <h2>Current State</h2>
+      <p class="text-body">Stage: {project.data.stage as string} · Type: {project.data.type as string}</p>
+    </Section>
+
+    <Section>
+      <h2>Research behind it</h2>
+      {relatedResearch.length > 0 ? (
+        <div style="display:grid; gap: var(--space-3);">
+          {relatedResearch.map((r) => (
+            <ResearchCard slug={r.slug} title={r.data.title as string} description={r.data.description as string} />
+          ))}
+        </div>
+      ) : <p class="text-small" style="color: var(--color-muted);">No related research.</p>}
+    </Section>
+
+    <Section>
+      <h2>Experiments</h2>
+      {relatedExperiments.length > 0 ? (
+        <div style="display:grid; gap: var(--space-3);">
+          {relatedExperiments.map((e) => (
+            <ExperimentCard slug={e.slug} title={e.data.title as string} description={e.data.description as string} outcome={e.data.outcome as string | undefined} />
+          ))}
+        </div>
+      ) : <p class="text-small" style="color: var(--color-muted);">No experiments yet.</p>}
+    </Section>
+
+    <Section>
+      <h2>Related Journal</h2>
+      {relatedArticles.length > 0 ? (
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+          {relatedArticles.map((a) => (
+            <ArticleCard slug={a.slug} title={a.data.title as string} description={a.data.description as string} category={a.data.category as string} publishedAt={a.data.publishedAt as string | undefined} readingTime={a.readingTime} />
+          ))}
+        </div>
+      ) : <p class="text-small" style="color: var(--color-muted);">No related articles.</p>}
+    </Section>
+
+    <Section>
+      <h2>People</h2>
+      {people.length > 0 ? (
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
+          {people.map((p) => (
+            <PersonCard slug={p.slug} name={p.data.title as string} role={p.data.role as string | undefined} />
+          ))}
+        </div>
+      ) : <p class="text-small" style="color: var(--color-muted);">No people linked.</p>}
+    </Section>
+
+    <Section>
+      <h2>Organizations</h2>
+      {organizations.length > 0 ? (
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
+          {organizations.map((o) => (
+            <OrganizationCard slug={o.slug} name={o.data.title as string} type={o.data.type as string | undefined} />
+          ))}
+        </div>
+      ) : <p class="text-small" style="color: var(--color-muted);">No organizations linked.</p>}
+    </Section>
+
+    <Section>
+      <h2>Open Source</h2>
+      {openSource.length > 0 ? (
+        <div style="display:grid; gap: var(--space-3);">
+          {openSource.map((os) => (
+            <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md);">
+              <p class="text-metadata">Open Source</p>
+              <a href={os.data.repository as string}><h3>{os.data.title as string}</h3></a>
+              <p class="text-small">{os.data.description as string}</p>
+            </div>
+          ))}
+        </div>
+      ) : <p class="text-small" style="color: var(--color-muted);">No open source linked.</p>}
+    </Section>
+
+    <Section>
+      <h2>Links</h2>
+      <p class="text-small" style="color: var(--color-muted);">Project links would appear here.</p>
+    </Section>
+  </Container>
+  <SiteFooter />
+</BaseLayout>

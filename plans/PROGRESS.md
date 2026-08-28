@@ -135,6 +135,13 @@
 - **Review:** Initial adversarial FAIL — 404 was 302 without branded page, Research/Experiment/People/Org used inline divs not cards, Timeline hand-rolled. Fixed: created 404.astro, added ResearchCard/ExperimentCard/PersonCard/OrganizationCard/Timeline, replaced inline markup, removed double Container. Re-review PASS. Review-type sort: **agentic — Done**. Comment posted to Plane.
 - **Close-out:** Plane `kcb/KCBLABS-10` → Done, `plans/README.md` → Done, commits `1636355, 5a8bb93` on `master`. Next actionable: `PBI-011` (needs PBI-008,009) — now ready.
 
+---
+
+## 2026-08-28 — PBI-011 Active (asdlc-execute)
+
+- **Selected:** `PBI-011` (Projects Index + Project Detail) — dependencies PBI-008 Done + PBI-009 Done satisfied. Plane `kcb/KCBLABS-11` → `In Progress`, `plans/README.md` → Active.
+- **Pre-flight:** Targets: src/pages/projects/index.astro, src/pages/projects/[slug].astro, ProjectLayout, research/experiments/journal/people/orgs/os.
+
 ## PBI Log
 
 | Date | PBI | Plane | Transition | Gates | Review | Commits | Notes |
@@ -159,3 +166,4 @@
 | 2026-08-28 | PBI-009 | kcb/KCBLABS-9 | Active→Done | check 0 err, build ok, test 24+6 pass | agentic | 41e0b48, 691bd09 | Homepage + cards + numbers derived |
 | 2026-08-28 | PBI-010 | kcb/KCBLABS-10 | Proposed→Active | — | — | — | Labs portal; started |
 | 2026-08-28 | PBI-010 | kcb/KCBLABS-10 | Active→Done | check 0 err/hint, build ok, test 24+6 pass | agentic | 1636355, 5a8bb93 | Labs index + detail + 404 + cards + Timeline |
+| 2026-08-28 | PBI-011 | kcb/KCBLABS-11 | Proposed→Active | — | — | — | Projects portal; started |
