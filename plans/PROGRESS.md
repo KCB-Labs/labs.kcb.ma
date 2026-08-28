@@ -173,6 +173,8 @@
 | 2026-08-28 | PBI-013 | kcb/KCBLABS-13 | Active→Done | check 0 err, build ok, test 30 pass | agentic | 4d37562 | Open Source index + detail + OpenSourceCard |
 | 2026-08-28 | PBI-014 | kcb/KCBLABS-14 | Proposed→Active | — | — | — | About + Vision; started |
 | 2026-08-28 | PBI-014 | kcb/KCBLABS-14 | Active→Done | check 0 err, build ok, test 30 pass | agentic | 4d6fb1c | About + Vision pages + pages singleton helper |
+| 2026-08-28 | PBI-015 | kcb/KCBLABS-15 | Proposed→Active | — | — | — | People, Ecosystem, Roadmap; started |
+| 2026-08-28 | PBI-015 | kcb/KCBLABS-15 | Active→Done | check 0 err, build ok, test 30 pass | agentic | ca2fa55 | People + Ecosystem + Roadmap pages |
 
 ---
 
@@ -212,3 +214,12 @@
 - **Gates:** check 0 errors (59 files), build ok (1.85s server+prerender, dist/client/about + /about/vision), test 24+6 pass = 30, no client:* islands.
 - **Review:** Adversarial PASS — About page aggregates entry points with Prose content from singleton, Vision page renders singleton content, both use BaseLayout SEO props, no hard-coded content, no direct collection queries in pages.
 - **Close-out:** Plane `kcb/KCBLABS-14` → Done, `plans/README.md` → Done, commit `4d6fb1c` on `master`. Next actionable: `PBI-015` (People, Ecosystem, Roadmap pages, depends PBI-008, PBI-014 Done) — now ready.
+
+## 2026-08-28 — PBI-015 Done (asdlc-execute)
+
+- **Selected:** `PBI-015` (People, Ecosystem, Roadmap Pages) — dependencies PBI-008, PBI-014 Done satisfied. Plane `kcb/KCBLABS-15` → `In Progress` → `Done`, `plans/README.md` → Active → Done.
+- **Pre-flight:** Targets: src/pages/about/people/index.astro + [slug].astro, src/pages/about/ecosystem/index.astro + [slug].astro, src/pages/about/roadmap/index.astro. All prerendered, no React islands.
+- **Implementation:** Created People index (PersonCards with order/featured sort) + detail (Prose bio + social links + related Labs/Projects as LabCard/ProjectCard); Ecosystem index (OrganizationCards grouped by type: Partner/Client/Sponsor/Startup/University/Research Organization/Technology Partner/Community/Open Source Community) + detail (Prose relationship + related Labs/Projects); Roadmap index (Timeline from roadmap collection sorted by period + detail cards with theme/objective/areas/status). Reuses PersonCard, OrganizationCard, Timeline, LabCard, ProjectCard components.
+- **Gates:** check 0 errors (64 files), build ok (13.70s server+prerender, dist/client/about/people + /about/ecosystem + /about/roadmap all routes), test 24+6 pass = 30, no client:* islands.
+- **Review:** Adversarial PASS — People index/detail with correct sorting and related content, Ecosystem grouped by type avoiding logo-wall pattern, Roadmap with Timeline + detail cards, all use BaseLayout SEO, no hard-coded content, cards reuse. No blocking issues.
+- **Close-out:** Plane `kcb/KCBLABS-15` → Done, `plans/README.md` → Done, commit `ca2fa55` on `master`. Next actionable: `PBI-016` (Participate Cluster — Sponsorship, Collaboration, Contact form, depends PBI-008, PBI-014 Done) — now ready.
