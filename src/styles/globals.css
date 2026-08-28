@@ -1,10 +1,11 @@
-/* KCB Labs — Globals
- * Resets, typography hierarchy, focus, reduced-motion
- * Consumes tokens.css only — no literal colors/spacing outside tokens
+/* KCB Labs — Avionics Globals
+ * Spec: specs/avionics-design-system/spec.md
+ * Typography: uppercase headings, Archivo/B612 Mono, expanded width
+ * Layout: 6-column CSS Grid with named zones (full, breakout, content)
  */
 @import "./tokens.css";
 
-/* Reset — minimal, editorial */
+/* Reset — minimal */
 *,
 *::before,
 *::after {
@@ -21,8 +22,8 @@
   background: var(--color-bg);
   color: var(--color-text);
   border: 2px solid var(--color-accent);
-  border-radius: var(--radius-md);
-  font-weight: 600;
+  font-family: var(--font-mono);
+  font-weight: 700;
   text-decoration: none;
   transition: top 0.2s ease;
 }
@@ -50,7 +51,7 @@ body {
   background: var(--color-bg);
 }
 
-/* Typography hierarchy — Display / H1 / H2 / H3 / Body / Small / Metadata / Code */
+/* Typography hierarchy — Avionics: uppercase, expanded width, industrial */
 h1,
 .text-h1 {
   font-family: var(--font-display);
@@ -58,6 +59,8 @@ h1,
   line-height: var(--leading-h1);
   font-weight: var(--weight-h1);
   letter-spacing: var(--tracking-h1);
+  text-transform: uppercase;
+  font-variation-settings: "wdth" var(--heading-width);
   color: var(--color-text-strong);
 }
 
@@ -68,11 +71,14 @@ h2,
   line-height: var(--leading-h2);
   font-weight: var(--weight-h2);
   letter-spacing: var(--tracking-h2);
+  text-transform: uppercase;
+  font-variation-settings: "wdth" var(--heading-width);
   color: var(--color-text-strong);
 }
 
 h3,
 .text-h3 {
+  font-family: var(--font-mono);
   font-size: var(--text-h3);
   line-height: var(--leading-h3);
   font-weight: var(--weight-h3);
@@ -85,6 +91,8 @@ h3,
   line-height: var(--leading-display);
   font-weight: var(--weight-display);
   letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
+  font-variation-settings: "wdth" var(--heading-width);
 }
 
 .text-body {
@@ -113,7 +121,7 @@ pre,
   font-size: var(--text-code);
 }
 
-/* Links — restrained */
+/* Links — brand accent */
 a {
   color: inherit;
   text-decoration-thickness: 1px;
@@ -121,7 +129,7 @@ a {
 }
 
 a:hover {
-  color: var(--color-text-strong);
+  color: var(--color-accent);
 }
 
 /* Focus — visible, token-driven */
@@ -172,6 +180,139 @@ select {
   }
 }
 
+/* ============================
+   Avionics Grid Layout System
+   ============================ */
+
+.grid-layout {
+  display: grid;
+  grid-template-columns:
+    [full-start]     minmax(var(--s-gutter-min), 1fr)
+    [breakout-start] minmax(var(--s-gutter-min), var(--s-gutter-max))
+    [content-start]  min(100% - 4 * var(--s-grid-unit), var(--s-content-max))
+    [content-end]
+                     minmax(var(--s-gutter-min), var(--s-gutter-max)) [breakout-end]
+                     minmax(var(--s-gutter-min), 1fr)                 [full-end];
+}
+
+/* Default placement: content column */
+.grid-layout > * {
+  grid-column: content;
+}
+
+/* Opt-in wider zones */
+.grid-layout > .breakout {
+  grid-column: breakout;
+}
+
+.grid-layout > .full {
+  grid-column: full;
+  width: 100%;
+}
+
+/* ============================
+   Prose Styles
+   ============================ */
+
+.prose {
+  display: contents;
+}
+
+.prose > * {
+  grid-column: content;
+}
+
+.prose > table {
+  grid-column: breakout !important;
+}
+
+.prose > figure {
+  grid-column: breakout !important;
+}
+
+.content-prose > * {
+  grid-column: content;
+}
+
+.content-prose > h2 {
+  margin-top: var(--space-7);
+  margin-bottom: var(--space-4);
+}
+
+.content-prose > h3 {
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+}
+
+.content-prose > p {
+  margin-bottom: var(--space-4);
+}
+
+.content-prose > ul,
+.content-prose > ol {
+  margin-bottom: var(--space-4);
+  padding-left: var(--space-5);
+}
+
+.content-prose > li {
+  margin-bottom: var(--space-2);
+}
+
+.content-prose > blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding-left: var(--space-4);
+  margin: var(--space-5) 0;
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+/* ============================
+   Utility Classes
+   ============================ */
+
+.border-box {
+  border: 1px solid var(--color-border);
+  padding: var(--s-gap);
+}
+
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--s-gap);
+}
+
+.spec-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.spec-list li {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.spec-list li a {
+  display: block;
+  padding: var(--s-gap) 0;
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--motion-duration) var(--motion-ease);
+}
+
+.spec-list li a:hover {
+  color: var(--color-accent);
+}
+
+.banner-warning {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  padding: var(--s-gap);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
 /* Container helpers — editorial */
 .container {
   width: min(100% - var(--space-6), var(--container-xl));
@@ -188,7 +329,7 @@ select {
   margin-inline: auto;
 }
 
-/* Section spacing — editorial whitespace */
+/* Section spacing */
 .section {
   padding-block: var(--space-8);
 }
