@@ -29,7 +29,8 @@ const organizations = getOrganizations();
 // Numbers — derived, never hard-coded
 const labsCount = labs.length;
 const experimentsCount = experiments.length;
-const validatedProjectsCount = projects.filter((p) => p.data.stage === "Validated" || p.data.stage === "Implementation").length;
+// Validated Projects per spec §17.6: stage === "Validated" (strict). Implementation counted separately in PBI-013 card.
+const validatedProjectsCount = projects.filter((p) => p.data.stage === "Validated").length;
 const openSourceCount = opensource.length;
 
 // Curated selections
@@ -64,15 +65,15 @@ const displayEcosystem = ecosystemOrgs.length ? ecosystemOrgs : organizations.sl
       <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin-top: var(--space-4);">
         <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md);">
           <p class="text-metadata">Exploring</p>
-          <p style="margin-top: var(--space-2);">{latestResearch ? (latestResearch.data.title as string) : "Local AI on constrained hardware"}</p>
+          <p style="margin-top: var(--space-2);">{latestResearch ? (latestResearch.data.title as string) : "No research yet"}</p>
         </div>
         <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); background: var(--color-surface);">
           <p class="text-metadata">Building</p>
-          <p style="margin-top: var(--space-2);">{displayProjects[0] ? (displayProjects[0].data.title as string) : "OPERANT — AI Employee Framework"}</p>
+          <p style="margin-top: var(--space-2);">{displayProjects[0] ? (displayProjects[0].data.title as string) : "No projects yet"}</p>
         </div>
         <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md);">
           <p class="text-metadata">Sharing</p>
-          <p style="margin-top: var(--space-2);">{opensource[0] ? (opensource[0].data.title as string) : "HTTPA Agent Protocol"}</p>
+          <p style="margin-top: var(--space-2);">{opensource[0] ? (opensource[0].data.title as string) : "No open source yet"}</p>
         </div>
       </div>
     </Section>
@@ -91,11 +92,11 @@ const displayEcosystem = ecosystemOrgs.length ? ecosystemOrgs : organizations.sl
       <div style="display:grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-top: var(--space-4);">
         <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md);">
           <p class="text-metadata">Research</p>
-          <p style="margin-top: var(--space-2);">{latestResearch ? (latestResearch.data.description as string) : "Can useful document intelligence run within a 4GB memory budget?"}</p>
+          <p style="margin-top: var(--space-2);">{latestResearch ? (latestResearch.data.description as string) : "No research yet"}</p>
         </div>
         <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md);">
           <p class="text-metadata">Experiment</p>
-          <p style="margin-top: var(--space-2);">{latestExperiment ? (latestExperiment.data.description as string) : "Benchmarking local language models under constrained hardware."}</p>
+          <p style="margin-top: var(--space-2);">{latestExperiment ? (latestExperiment.data.description as string) : "No experiments yet"}</p>
           {latestExperiment && <p class="text-metadata" style="margin-top: var(--space-2);">Outcome: {latestExperiment.data.outcome as string}</p>}
         </div>
       </div>
