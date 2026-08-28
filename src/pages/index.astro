@@ -4,16 +4,145 @@ import SiteHeader from "../components/astro/SiteHeader.astro";
 import SiteFooter from "../components/astro/SiteFooter.astro";
 import Container from "../components/astro/Container.astro";
 import Section from "../components/astro/Section.astro";
+import Hero from "../components/sections/Hero.astro";
+import LabCard from "../components/cards/LabCard.astro";
+import ProjectCard from "../components/cards/ProjectCard.astro";
+import ArticleCard from "../components/cards/ArticleCard.astro";
+import { getLabs } from "../lib/content/labs.js";
+import { getProjects } from "../lib/content/projects.js";
+import { getResearch } from "../lib/content/research.js";
+import { getExperiments } from "../lib/content/experiments.js";
+import { getArticles } from "../lib/content/articles.js";
+import { getOpenSource } from "../lib/content/opensource.js";
+import { getOrganizations } from "../lib/content/organizations.js";
+
 export const prerender = true;
+
+const labs = getLabs();
+const projects = getProjects();
+const research = getResearch();
+const experiments = getExperiments();
+const articles = getArticles();
+const opensource = getOpenSource();
+const organizations = getOrganizations();
+
+// Numbers — derived, never hard-coded
+const labsCount = labs.length;
+const experimentsCount = experiments.length;
+const validatedProjectsCount = projects.filter((p) => p.data.stage === "Validated" || p.data.stage === "Implementation").length;
+const openSourceCount = opensource.length;
+
+// Curated selections
+const featuredLabs = labs.filter((l) => l.data.featured).slice(0, 3);
+const displayLabs = featuredLabs.length ? featuredLabs : labs.slice(0, 3);
+const featuredProjects = projects.filter((p) => p.data.featured).slice(0, 3);
+const displayProjects = featuredProjects.length ? featuredProjects : projects.slice(0, 3);
+const latestResearch = research[0];
+const latestExperiment = experiments[0];
+const latestArticles = articles.slice(0, 3);
+const ecosystemOrgs = organizations.filter((o) => o.data.featured).slice(0, 4);
+const displayEcosystem = ecosystemOrgs.length ? ecosystemOrgs : organizations.slice(0, 4);
 ---
 
-<BaseLayout title="KCB Labs — Foundation" description="KCB Labs explores ideas that could become technology, products and companies.">
+<BaseLayout title="KCB Labs — We explore ideas that become technology" description="KCB Labs is a public R&D and innovation platform turning ideas into experiments, validated projects and real-world outcomes.">
   <SiteHeader />
+  <Hero />
+
   <Container>
     <Section>
-      <h1>KCB Labs — Foundation Ready</h1>
-      <p class="text-body" style="max-width: var(--container-content); color: var(--color-muted);">PBI-001 scaffold: Astro server + React + Keystatic + Node standalone. PBI-002 tokens + PBI-003 layouts.</p>
+      <h2>Current Labs</h2>
+      <p class="text-small" style="color: var(--color-muted);">Persistent areas of exploration.</p>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-4); margin-top: var(--space-5);">
+        {displayLabs.map((lab) => (
+          <LabCard slug={lab.slug} title={lab.data.title as string} description={lab.data.description as string} status={lab.data.status as string} />
+        ))}
+      </div>
+    </Section>
+
+    <Section>
+      <h2>What we're working on</h2>
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin-top: var(--space-4);">
+        <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md);">
+          <p class="text-metadata">Exploring</p>
+          <p style="margin-top: var(--space-2);">{latestResearch ? (latestResearch.data.title as string) : "Local AI on constrained hardware"}</p>
+        </div>
+        <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); background: var(--color-surface);">
+          <p class="text-metadata">Building</p>
+          <p style="margin-top: var(--space-2);">{displayProjects[0] ? (displayProjects[0].data.title as string) : "OPERANT — AI Employee Framework"}</p>
+        </div>
+        <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md);">
+          <p class="text-metadata">Sharing</p>
+          <p style="margin-top: var(--space-2);">{opensource[0] ? (opensource[0].data.title as string) : "HTTPA Agent Protocol"}</p>
+        </div>
+      </div>
+    </Section>
+
+    <Section>
+      <h2>Projects</h2>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4); margin-top: var(--space-4);">
+        {displayProjects.map((project) => (
+          <ProjectCard slug={project.slug} title={project.data.title as string} description={project.data.description as string} type={project.data.type as string} stage={project.data.stage as string} originLab={project.data.originLab as string | undefined} />
+        ))}
+      </div>
+    </Section>
+
+    <Section>
+      <h2>Research &amp; Experiments</h2>
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-top: var(--space-4);">
+        <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md);">
+          <p class="text-metadata">Research</p>
+          <p style="margin-top: var(--space-2);">{latestResearch ? (latestResearch.data.description as string) : "Can useful document intelligence run within a 4GB memory budget?"}</p>
+        </div>
+        <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md);">
+          <p class="text-metadata">Experiment</p>
+          <p style="margin-top: var(--space-2);">{latestExperiment ? (latestExperiment.data.description as string) : "Benchmarking local language models under constrained hardware."}</p>
+          {latestExperiment && <p class="text-metadata" style="margin-top: var(--space-2);">Outcome: {latestExperiment.data.outcome as string}</p>}
+        </div>
+      </div>
+    </Section>
+
+    <Section>
+      <h2>Journal</h2>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4); margin-top: var(--space-4);">
+        {latestArticles.map((article) => (
+          <ArticleCard slug={article.slug} title={article.data.title as string} description={article.data.description as string} category={article.data.category as string} publishedAt={article.data.publishedAt as string | undefined} readingTime={article.readingTime} relatedLab={(article.data.labs as string[] | undefined)?.[0]} />
+        ))}
+      </div>
+    </Section>
+
+    <Section>
+      <h2>Numbers</h2>
+      <p class="text-small" style="color: var(--color-muted);">Generated from actual content, never hard-coded.</p>
+      <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); margin-top: var(--space-4); text-align:center;">
+        <div><p style="font-size: var(--text-display); line-height: 1;">{String(labsCount).padStart(2, "0")}</p><p class="text-metadata">Labs</p></div>
+        <div><p style="font-size: var(--text-display); line-height: 1;">{String(experimentsCount).padStart(2, "0")}</p><p class="text-metadata">Experiments</p></div>
+        <div><p style="font-size: var(--text-display); line-height: 1;">{String(validatedProjectsCount).padStart(2, "0")}</p><p class="text-metadata">Validated Projects</p></div>
+        <div><p style="font-size: var(--text-display); line-height: 1;">{String(openSourceCount).padStart(2, "0")}</p><p class="text-metadata">Open Source</p></div>
+      </div>
+    </Section>
+
+    <Section>
+      <h2>Built with an ecosystem</h2>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4); margin-top: var(--space-4);">
+        {displayEcosystem.map((org) => (
+          <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); text-align:center;">
+            <p style="font-weight: var(--weight-medium);">{org.data.title as string}</p>
+            <p class="text-small">{org.data.type as string}</p>
+          </div>
+        ))}
+      </div>
+    </Section>
+
+    <Section>
+      <div style="text-align:center; padding: var(--space-7); border: var(--border-subtle); border-radius: var(--radius-lg); background: var(--color-surface);">
+        <h2>Research is stronger when more people participate.</h2>
+        <div style="display:flex; gap: var(--space-3); justify-content:center; margin-top: var(--space-4);">
+          <a href="/participate/collaboration" style="padding: var(--space-2) var(--space-4); background: var(--color-accent); color: var(--color-accent-contrast); border-radius: var(--radius-md); text-decoration:none;">Collaborate</a>
+          <a href="/participate/sponsorship" style="padding: var(--space-2) var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); text-decoration:none;">Support the Labs</a>
+        </div>
+      </div>
     </Section>
   </Container>
+
   <SiteFooter />
 </BaseLayout>

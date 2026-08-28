@@ -113,6 +113,13 @@
 - **Review:** Initial adversarial FAIL — validate not wired to build (build succeeded with broken fixture). Fixed by adding `validateIntegration` in `astro.config.ts:11`. Re-verified: invalid file → build fails with descriptive error, valid → build passes. Second adversarial PASS. Review-type sort: **agentic — Done**. Comment posted to Plane.
 - **Close-out:** Plane `kcb/KCBLABS-8` → Done, `plans/README.md` → Done, commits `3114686, 12fbc89` on `master`. Next actionable: `PBI-009` (needs PBI-003,008) — now ready. Content Model phase (PBI-005→008) complete.
 
+---
+
+## 2026-08-28 — PBI-009 Active (asdlc-execute)
+
+- **Selected:** `PBI-009` (Homepage — Hero + Current Work + Featured Sections + Numbers) — dependencies PBI-003 Done + PBI-008 Done satisfied. Plane `kcb/KCBLABS-9` → `In Progress`, `plans/README.md` → Active.
+- **Pre-flight:** Targets: src/pages/index.astro, src/components/sections/*, src/components/cards/*, src/components/ui/*, numbers derived via helpers.
+
 ## PBI Log
 
 | Date | PBI | Plane | Transition | Gates | Review | Commits | Notes |
@@ -133,3 +140,4 @@
 | 2026-08-28 | PBI-007 | kcb/KCBLABS-7 | Active→Done | check 0 err, build ok, test 17+6 pass | agentic | a6b4e70, e8bfaee | DAL + relationships + readingTime |
 | 2026-08-28 | PBI-008 | kcb/KCBLABS-8 | Proposed→Active | — | — | — | Validation + seed; started |
 | 2026-08-28 | PBI-008 | kcb/KCBLABS-8 | Active→Done | check 0 err, build ok/fail, test 24+6 pass | agentic | 3114686, 12fbc89 | Validation + slug + seed graph, build wiring |
+| 2026-08-28 | PBI-009 | kcb/KCBLABS-9 | Proposed→Active | — | — | — | Homepage; started |

@@ -1,0 +1,42 @@
+---
+import TypeBadge from "../ui/TypeBadge.astro";
+import StageBadge from "../ui/StageBadge.astro";
+interface Props {
+  slug: string;
+  title: string;
+  description: string;
+  type: string;
+  stage: string;
+  originLab?: string;
+}
+const { slug, title, description, type, stage, originLab } = Astro.props;
+---
+<a href={`/projects/${slug}`} class="card card--project">
+  <div class="card__meta">
+    <TypeBadge type={type} />
+    <StageBadge stage={stage} />
+  </div>
+  <h3>{title}</h3>
+  <p class="text-small">{description}</p>
+  {originLab && <p class="text-metadata">Origin: {originLab}</p>}
+</a>
+
+<style>
+  .card--project {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-5);
+    background: var(--color-surface);
+    border: var(--border-subtle);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: box-shadow var(--motion-duration) var(--motion-ease);
+  }
+  .card--project:hover {
+    box-shadow: var(--shadow-md);
+  }
+  .card__meta {
+    display: flex;
+    gap: var(--space-2);
+  }
+</style>

@@ -1,0 +1,40 @@
+---
+import Container from "../astro/Container.astro";
+---
+<section class="hero">
+  <Container>
+    <h1 class="text-display">We explore ideas that could become technology, products and companies.</h1>
+    <p class="text-body" style="max-width: var(--container-content); color: var(--color-muted); margin-top: var(--space-4);">KCB Labs is a public R&amp;D platform turning questions into research, experiments and validated projects.</p>
+    <div class="cta" style="display:flex; gap: var(--space-3); margin-top: var(--space-5);">
+      <a href="/labs" class="btn btn--primary">Explore Labs</a>
+      <a href="/projects" class="btn btn--secondary">Explore Projects</a>
+      <a href="/participate/sponsorship" class="btn btn--ghost">Support the Labs</a>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .hero {
+    padding-block: var(--space-9);
+    border-bottom: var(--border-subtle);
+  }
+  .btn {
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
+  }
+  .btn--primary {
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+  }
+  .btn--secondary {
+    background: var(--color-surface);
+    border: var(--border-subtle);
+    color: var(--color-text);
+  }
+  .btn--ghost {
+    color: var(--color-muted);
+  }
+</style>

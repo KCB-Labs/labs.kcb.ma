@@ -1,0 +1,22 @@
+---
+interface Props {
+  status: string;
+}
+const { status } = Astro.props;
+const label = status.charAt(0).toUpperCase() + status.slice(1);
+---
+<span class="badge badge--status">{label}</span>
+
+<style>
+  .badge--status {
+    font-family: var(--font-mono);
+    font-size: var(--text-metadata);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.2em 0.6em;
+    border-radius: var(--radius-full);
+    background: var(--color-surface);
+    border: var(--border-subtle);
+    color: var(--color-muted-strong);
+  }
+</style>

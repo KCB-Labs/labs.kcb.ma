@@ -1,0 +1,20 @@
+---
+interface Props {
+  stage: string;
+}
+const { stage } = Astro.props;
+---
+<span class="badge badge--stage">{stage}</span>
+
+<style>
+  .badge--stage {
+    font-family: var(--font-mono);
+    font-size: var(--text-metadata);
+    letter-spacing: 0.04em;
+    padding: 0.2em 0.6em;
+    border-radius: var(--radius-sm);
+    background: var(--color-bg);
+    border: var(--border-subtle);
+    color: var(--color-muted);
+  }
+</style>

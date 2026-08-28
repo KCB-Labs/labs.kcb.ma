@@ -1,0 +1,37 @@
+---
+import StatusBadge from "../ui/StatusBadge.astro";
+interface Props {
+  slug: string;
+  title: string;
+  description: string;
+  status: string;
+}
+const { slug, title, description, status } = Astro.props;
+---
+<a href={`/labs/${slug}`} class="card card--lab">
+  <div class="card__head">
+    <StatusBadge status={status} />
+  </div>
+  <h3>{title}</h3>
+  <p class="text-small">{description}</p>
+</a>
+
+<style>
+  .card--lab {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-5);
+    background: var(--color-surface);
+    border: var(--border-subtle);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: box-shadow var(--motion-duration) var(--motion-ease);
+  }
+  .card--lab:hover {
+    box-shadow: var(--shadow-md);
+  }
+  .card--lab h3 {
+    font-size: var(--text-h3);
+    line-height: var(--leading-h3);
+  }
+</style>
