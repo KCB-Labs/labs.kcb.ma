@@ -18,7 +18,7 @@ const sponsorship = getSponsorshipPage();
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "Participate", href: "/participate" }, { label: "Sponsorship", href: "/participate/sponsorship" }]} />
-    <PageHeader label="Participate / Sponsorship" title={sponsorship?.data?.title as string ?? "Support the Labs"} description={sponsorship?.data?.description as string ?? "Support independent technology research and experimentation."} />
+    <PageHeader title={sponsorship?.data?.title as string ?? "Support the Labs"} description={sponsorship?.data?.description as string ?? "Support independent technology research and experimentation."} />
 
     <Section>
       <p style="font-size: var(--text-h3); color: var(--color-text-strong); margin-bottom: var(--space-4);">

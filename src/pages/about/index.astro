@@ -18,7 +18,7 @@ const about = getAboutPage();
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "About", href: "/about" }]} />
-    <PageHeader label="About" title={about?.data?.title as string ?? "About KCB Labs"} description={about?.data?.description as string ?? "Who we are and how we work."} />
+    <PageHeader title={about?.data?.title as string ?? "About KCB Labs"} description={about?.data?.description as string ?? "Who we are and how we work."} />
 
     <Section>
       <Prose>

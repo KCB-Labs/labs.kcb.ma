@@ -37,7 +37,7 @@ const relatedProjects = getProjects().filter((p: { slug: string }) => relatedPro
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "About", href: "/about" }, { label: "Ecosystem", href: "/about/ecosystem" }, { label: org.data.title as string }]} />
-    <PageHeader label="About / Ecosystem" title={org.data.title as string} description={org.data.description as string} status={org.data.type as string | undefined} />
+    <PageHeader title={org.data.title as string} description={org.data.description as string} status={org.data.type as string | undefined} />
 
     <Section>
       <div style="display:flex; gap: var(--space-3); flex-wrap:wrap; align-items:center; margin-bottom: var(--space-4);">

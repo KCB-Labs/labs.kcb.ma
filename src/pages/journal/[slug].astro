@@ -55,7 +55,7 @@ const { previous, next } = getPreviousNextArticle(slug!, { includeDrafts: true }
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "Journal", href: "/journal" }, { label: article.data.title as string }]} />
-    <PageHeader label="Article" title={article.data.title as string} description={article.data.description as string} status={`${article.data.category as string} · ${article.readingTime} min read`} />
+    <PageHeader title={article.data.title as string} description={article.data.description as string} status={`${article.data.category as string} · ${article.readingTime} min read`} />
 
     <Section>
       <p class="text-small" style="color: var(--color-muted);">

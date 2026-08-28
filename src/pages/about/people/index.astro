@@ -18,7 +18,7 @@ const people = getPeople();
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "About", href: "/about" }, { label: "People", href: "/about/people" }]} />
-    <PageHeader label="About / People" title="People" description="The team and collaborators at KCB Labs." />
+    <PageHeader title="People" description="The team and collaborators at KCB Labs." />
 
     <Section>
       {people.length > 0 ? (

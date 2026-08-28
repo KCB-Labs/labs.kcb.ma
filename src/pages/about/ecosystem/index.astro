@@ -30,7 +30,7 @@ const sortedTypes = [...grouped.keys()].sort((a, b) => typeOrder.indexOf(a) - ty
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "About", href: "/about" }, { label: "Ecosystem", href: "/about/ecosystem" }]} />
-    <PageHeader label="About / Ecosystem" title="Ecosystem" description="Partners, clients, sponsors, and organizations in the KCB Labs ecosystem. Built with an ecosystem." />
+    <PageHeader title="Ecosystem" description="Partners, clients, sponsors, and organizations in the KCB Labs ecosystem. Built with an ecosystem." />
 
     {sortedTypes.map((type) => {
       const orgs = grouped.get(type)!;

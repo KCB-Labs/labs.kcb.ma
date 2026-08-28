@@ -38,7 +38,7 @@ const relatedProject = relatedProjectSlug ? getProjects().find((p) => p.slug ===
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "Open Source", href: "/open-source" }, { label: openSource.data.title as string }]} />
-    <PageHeader label="Open Source" title={openSource.data.title as string} description={openSource.data.description as string} status={`${openSource.data.license as string} · ${openSource.data.status as string}`} />
+    <PageHeader title={openSource.data.title as string} description={openSource.data.description as string} status={`${openSource.data.license as string} · ${openSource.data.status as string}`} />
 
     <Section>
       <div style="display:flex; gap: var(--space-3); flex-wrap:wrap; align-items:center; margin-bottom: var(--space-4);">

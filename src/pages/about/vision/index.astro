@@ -18,7 +18,7 @@ const vision = getVisionPage();
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <Breadcrumbs crumbs={[{ label: "About", href: "/about" }, { label: "Vision", href: "/about/vision" }]} />
-    <PageHeader label="About / Vision" title={vision?.data?.title as string ?? "Vision"} description={vision?.data?.description as string ?? "Where KCB Labs is headed."} />
+    <PageHeader title={vision?.data?.title as string ?? "Vision"} description={vision?.data?.description as string ?? "Where KCB Labs is headed."} />
 
     <Section>
       <Prose>

@@ -12,8 +12,8 @@ const { crumbs } = Astro.props;
   <ol>
     {crumbs.map((crumb, i) => (
       <li>
+        {i > 1 && <span class="sep" aria-hidden="true">/</span>}
         {crumb.href ? <a href={crumb.href}>{crumb.label}</a> : <span aria-current="page">{crumb.label}</span>}
-        {i < crumbs.length - 1 && <span aria-hidden="true"> / </span>}
       </li>
     ))}
   </ol>
@@ -22,22 +22,38 @@ const { crumbs } = Astro.props;
 <style>
   .breadcrumbs {
     font-family: var(--font-mono);
-    font-size: var(--text-metadata);
+    font-size: var(--text-small);
     color: var(--color-muted);
+    margin-bottom: var(--space-3);
   }
   .breadcrumbs ol {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-1);
+    align-items: center;
+    gap: 0;
     list-style: none;
     padding: 0;
+    margin: 0;
+  }
+  .breadcrumbs li {
+    display: flex;
+    align-items: center;
+  }
+  .breadcrumbs .sep {
+    margin: 0 var(--space-1);
+    opacity: 0.5;
   }
   .breadcrumbs a {
     color: var(--color-muted);
     text-decoration: none;
+    transition: color 150ms ease;
   }
   .breadcrumbs a:hover {
     color: var(--color-text);
     text-decoration: underline;
+  }
+  .breadcrumbs span[aria-current="page"] {
+    color: var(--color-text);
+    font-weight: var(--weight-medium);
   }
 </style>
