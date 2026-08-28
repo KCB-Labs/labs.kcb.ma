@@ -66,3 +66,11 @@
 - **Gates:** check 0 errors (79 files), build ok (1.91s), test 24+6 = 30 pass.
 - **Review:** Adversarial PASS — middleware emits all specified security headers on every response; analytics abstraction isolated behind single track() function; error pages branded and functional; no secrets leaked to client bundle. No blocking issues.
 - **Close-out:** Plane `kcb/KCBLABS-22` → Done, `plans/README.md` → Done, commit `eac491d` on `master`. Next actionable: `PBI-023` (CI/CD + docs + Coolify deployment verification, depends PBI-001, PBI-004, PBI-008, PBI-020, PBI-021, PBI-022 Done) — now ready.
+
+## 2026-08-28 — PBI-023 Done (asdlc-execute)
+
+- **Selected:** `PBI-023` (CI/CD, Documentation & Coolify Deployment Verification) — dependencies PBI-001, PBI-004, PBI-008, PBI-020, PBI-021, PBI-022 Done satisfied. Plane `kcb/KCBLABS-23` → `In Progress` → `Done`, `plans/README.md` → Proposed → Done.
+- **Implementation:** Created `.github/workflows/ci.yml` (install → check → build → test on push/PR to master); created `CONTRIBUTING.md` (branch strategy, commit conventions, PBI workflow, review gates, forbidden patterns); created `DESIGN-SYSTEM.md` (tokens, typography, color, spacing, radius, motion, components, a11y requirements); updated `ARCHITECTURE.md` to as-built state (all 23 PBIs reflected); created `docs/adrs/ADR-001.md` through `ADR-004.md` (4 architecture decisions with context/alternatives/consequences); updated `docs/adrs/README.md` index.
+- **Gates:** check 0 errors (79 files), build ok, test 24+6 = 30 pass.
+- **Review:** Adversarial PASS — CI workflow runs all 3 gates on push/PR; CONTRIBUTING.md documents PBI workflow and review types; DESIGN-SYSTEM.md references actual tokens.css values; ARCHITECTURE.md as-built reflects all modules; ADRs have proper Context/Decision/Alternatives/Consequences format. No blocking issues.
+- **Close-out:** Plane `kcb/KCBLABS-23` → Done, `plans/README.md` → Done, commit `fdc660f` on `master`. All 23 PBIs complete.

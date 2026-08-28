@@ -49,7 +49,7 @@ Each spec's **Goal / Scope / Contracts / Anti-patterns / Decisions** are the gua
 | KCBLABS-20 | PBI-020 | Done | SEO Package — Canonical, OG/Twitter, Schema.org, Sitemap, Robots, RSS |
 | KCBLABS-21 | PBI-021 | Done | Performance + Accessibility Pass (WCAG 2.2 AA, Core Web Vitals) |
 | KCBLABS-22 | PBI-022 | Done | Security Headers, Analytics Abstraction, Error Pages |
-| KCBLABS-23 | PBI-023 | Todo | CI/CD, Documentation & Coolify Deployment Verification |
+| KCBLABS-23 | PBI-023 | Done | CI/CD, Documentation & Coolify Deployment Verification |
 
 - Last sync: 2026-08-27 — push-create via `asdlc-plane` MCP `plane-kcb`. Created 23 Todo issues (KCBLABS-1..23) from `tasks/PBI-*.md`; each PBI Context now contains `Plane: kcb/KCBLABS-N`. No duplicates (Checked `Plane:` link before create). Spec authoritative.
 - Next sync: `asdlc-execute` will push status on every PBI transition: `Proposed→Active` → Plane `In Progress`, `Active→In Review` → comment + (if configured) `In Review` (see note), `In Review→Done` sorted by review-type (agentic may close directly, manual stays In Review until human validates). **Note:** project `KCBLABS` currently has no `In Review` state (states: Backlog, Todo, In Progress, Done, Cancelled) — until `In Review` is added, `In Review` PBIs will remain `In Progress` with a `Review: manual — In Review` comment.
@@ -85,7 +85,7 @@ Each spec's **Goal / Scope / Contracts / Anti-patterns / Decisions** are the gua
 | 20 | PBI-020 | Hardening — SEO (canonical/OG/Schema, sitemap, robots, RSS) | kcb/KCBLABS-20 | Done | PBI-009, PBI-010, PBI-011, PBI-012, PBI-013, PBI-015 | master | agentic |
 | 21 | PBI-021 | Hardening — Perf + A11y (WCAG 2.2 AA, Core Web Vitals) | kcb/KCBLABS-21 | Done | PBI-009..PBI-020 | master | agentic |
 | 22 | PBI-022 | Hardening — Security headers + analytics + error pages | kcb/KCBLABS-22 | Done | PBI-004, PBI-009, PBI-016, PBI-017 | master | agentic |
-| 23 | PBI-023 | Hardening — CI/CD + docs + Coolify deployment verification | kcb/KCBLABS-23 | Proposed | PBI-001, PBI-004, PBI-008, PBI-020, PBI-021, PBI-022 | — | — |
+| 23 | PBI-023 | Hardening — CI/CD + docs + Coolify deployment verification | kcb/KCBLABS-23 | Done | PBI-001, PBI-004, PBI-008, PBI-020, PBI-021, PBI-022 | master | agentic |
 
 **Recommended start:** `PBI-001` (Foundation scaffold). After `PBI-001`, parallel opportunities:
 - `PBI-002` and `PBI-004` can proceed in parallel (disjoint files: `src/styles/*` vs `Dockerfile`/`api/health`)
