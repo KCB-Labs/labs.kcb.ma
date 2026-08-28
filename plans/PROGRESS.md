@@ -169,6 +169,10 @@
 | 2026-08-28 | PBI-011 | kcb/KCBLABS-11 | Proposed→Active | — | — | — | Projects portal; started |
 | 2026-08-28 | PBI-012 | kcb/KCBLABS-12 | Proposed→Active | — | — | — | Journal portal; started |
 | 2026-08-28 | PBI-012 | kcb/KCBLABS-12 | Active→Done | check 0 err, build ok, test 30 pass | agentic | 34e7cc8 | Journal index + article detail + RichContent |
+| 2026-08-28 | PBI-013 | kcb/KCBLABS-13 | Proposed→Active | — | — | — | Open Source portal; started |
+| 2026-08-28 | PBI-013 | kcb/KCBLABS-13 | Active→Done | check 0 err, build ok, test 30 pass | agentic | 4d37562 | Open Source index + detail + OpenSourceCard |
+| 2026-08-28 | PBI-014 | kcb/KCBLABS-14 | Proposed→Active | — | — | — | About + Vision; started |
+| 2026-08-28 | PBI-014 | kcb/KCBLABS-14 | Active→Done | check 0 err, build ok, test 30 pass | agentic | 4d6fb1c | About + Vision pages + pages singleton helper |
 
 ---
 
@@ -199,3 +203,12 @@
 - **Gates:** check 0 errors (56 files), build ok (2.39s server+prerender, dist/client/open-source + /open-source/httpa-agent-protocol), test 24+6 pass = 30, no client:* islands.
 - **Review:** Adversarial PASS — open source index lists published items via OpenSourceCard with featured sort, detail has RichContent + status/license/originLab/relatedProject + repository/docs/technologies, schema.org via BaseLayout meta, no hard-coded content, cards reuse. No blocking issues.
 - **Close-out:** Plane `kcb/KCBLABS-13` → Done, `plans/README.md` → Done, commit `4d37562` on `master`. Next actionable: `PBI-014` (About + Vision pages, depends PBI-003, PBI-008 Done) — now ready.
+
+## 2026-08-28 — PBI-014 Done (asdlc-execute)
+
+- **Selected:** `PBI-014` (About + Vision Pages) — dependencies PBI-003, PBI-008 Done satisfied. Plane `kcb/KCBLABS-14` → `In Progress` → `Done`, `plans/README.md` → Active → Done.
+- **Pre-flight:** Targets: src/pages/about/index.astro, src/pages/about/vision/index.astro, src/lib/content/pages.ts (singleton helper). All prerendered, no React islands.
+- **Implementation:** Created `src/lib/content/pages.ts:1` (singleton helpers for about, vision, sponsorship, site) + `src/pages/about/index.astro:1` (aggregates Vision/People/Ecosystem/Roadmap/Participate entry points with Prose rendering from about singleton) + `src/pages/about/vision/index.astro:1` (Vision page from vision singleton with Prose rendering). Used existing `Prose` component with slot pattern for editorial content rendering.
+- **Gates:** check 0 errors (59 files), build ok (1.85s server+prerender, dist/client/about + /about/vision), test 24+6 pass = 30, no client:* islands.
+- **Review:** Adversarial PASS — About page aggregates entry points with Prose content from singleton, Vision page renders singleton content, both use BaseLayout SEO props, no hard-coded content, no direct collection queries in pages.
+- **Close-out:** Plane `kcb/KCBLABS-14` → Done, `plans/README.md` → Done, commit `4d6fb1c` on `master`. Next actionable: `PBI-015` (People, Ecosystem, Roadmap pages, depends PBI-008, PBI-014 Done) — now ready.
