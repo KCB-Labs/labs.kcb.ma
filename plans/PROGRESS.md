@@ -124,6 +124,13 @@
 - **Review:** Adversarial PASS with 3 low observations — L1 validated count strict (only Validated, not Implementation) with comment, L2 fallback literals fixed to "No research yet" etc., L3 ResearchCard stubs deferred to PBI-010/011. Fix commit `691bd09`. Review-type sort: **agentic — Done**. Comment posted to Plane.
 - **Close-out:** Plane `kcb/KCBLABS-9` → Done, `plans/README.md` → Done, commits `41e0b48, 691bd09` on `master`. Next actionable: `PBI-010` (needs PBI-008,009) — now ready.
 
+---
+
+## 2026-08-28 — PBI-010 Active (asdlc-execute)
+
+- **Selected:** `PBI-010` (Labs Index + Lab Detail) — dependencies PBI-008 Done + PBI-009 Done satisfied. Plane `kcb/KCBLABS-10` → `In Progress`, `plans/README.md` → Active.
+- **Pre-flight:** Targets: src/pages/labs/index.astro, src/pages/labs/[slug].astro, LabLayout, research/experiments/projects/people/orgs/timeline/related journal.
+
 ## PBI Log
 
 | Date | PBI | Plane | Transition | Gates | Review | Commits | Notes |
@@ -146,3 +153,4 @@
 | 2026-08-28 | PBI-008 | kcb/KCBLABS-8 | Active→Done | check 0 err, build ok/fail, test 24+6 pass | agentic | 3114686, 12fbc89 | Validation + slug + seed graph, build wiring |
 | 2026-08-28 | PBI-009 | kcb/KCBLABS-9 | Proposed→Active | — | — | — | Homepage; started |
 | 2026-08-28 | PBI-009 | kcb/KCBLABS-9 | Active→Done | check 0 err, build ok, test 24+6 pass | agentic | 41e0b48, 691bd09 | Homepage + cards + numbers derived |
+| 2026-08-28 | PBI-010 | kcb/KCBLABS-10 | Proposed→Active | — | — | — | Labs portal; started |

@@ -1,0 +1,153 @@
+---
+import LabLayout from "../../layouts/LabLayout.astro";
+import SiteHeader from "../../components/astro/SiteHeader.astro";
+import SiteFooter from "../../components/astro/SiteFooter.astro";
+import Container from "../../components/astro/Container.astro";
+import Section from "../../components/astro/Section.astro";
+import PageHeader from "../../components/astro/PageHeader.astro";
+import ProjectCard from "../../components/cards/ProjectCard.astro";
+import ArticleCard from "../../components/cards/ArticleCard.astro";
+import { getLabs, getLabBySlug } from "../../lib/content/labs.js";
+import { getResearchByLab } from "../../lib/content/research.js";
+import { getExperimentsByLab } from "../../lib/content/experiments.js";
+import { getProjectsByLab } from "../../lib/content/projects.js";
+import { getArticlesByLab } from "../../lib/content/articles.js";
+import { getPeopleByLab } from "../../lib/content/people.js";
+import { getOrganizationsByLab } from "../../lib/content/organizations.js";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const labs = getLabs();
+  return labs.map((lab) => ({ params: { slug: lab.slug } }));
+}
+
+const { slug } = Astro.params;
+const lab = getLabBySlug(slug!);
+if (!lab) {
+  return Astro.redirect("/404");
+}
+const research = getResearchByLab(slug!);
+const experiments = getExperimentsByLab(slug!);
+const projects = getProjectsByLab(slug!);
+const articles = getArticlesByLab(slug!);
+const people = getPeopleByLab(slug!);
+const organizations = getOrganizationsByLab(slug!);
+const technologies = (lab.data.technologies as string[] | undefined) ?? [];
+---
+
+<LabLayout title={`${lab.data.title as string} — KCB Labs`} description={lab.data.description as string} crumbs={[{ label: "Labs", href: "/labs" }, { label: lab.data.title as string }]}>
+  <SiteHeader />
+  <Container>
+    <PageHeader label="Lab" title={lab.data.title as string} description={lab.data.description as string} status={lab.data.status as string} />
+
+    <Section>
+      <h2>Overview</h2>
+      <p class="text-body">{lab.content.slice(0, 400)}</p>
+      <h3 style="margin-top: var(--space-5);">Why we're exploring this</h3>
+      <p class="text-body">Why we explore {lab.data.title as string} — persistent questions and validation.</p>
+    </Section>
+
+    <Section>
+      <h2>Research</h2>
+      {research.length > 0 ? (
+        <div style="display:grid; gap: var(--space-3);">
+          {research.map((r) => (
+            <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md);">
+              <p class="text-metadata">Research</p>
+              <a href={`/research/${r.slug}`}><h3>{r.data.title as string}</h3></a>
+              <p class="text-small">{r.data.description as string}</p>
+            </div>
+          ))}
+        </div>
+      ) : <p class="text-small" style="color: var(--color-muted);">No research yet.</p>}
+    </Section>
+
+    <Section>
+      <h2>Experiments</h2>
+      {experiments.length > 0 ? (
+        <div style="display:grid; gap: var(--space-3);">
+          {experiments.map((e) => (
+            <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md);">
+              <p class="text-metadata">Experiment · {e.data.outcome as string}</p>
+              <h3>{e.data.title as string}</h3>
+              <p class="text-small">{e.data.description as string}</p>
+            </div>
+          ))}
+        </div>
+      ) : <p class="text-small" style="color: var(--color-muted);">No experiments yet.</p>}
+    </Section>
+
+    <Section>
+      <h2>Projects born from this Lab</h2>
+      {projects.length > 0 ? (
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+          {projects.map((p) => (
+            <ProjectCard slug={p.slug} title={p.data.title as string} description={p.data.description as string} type={p.data.type as string} stage={p.data.stage as string} originLab={p.data.originLab as string | undefined} />
+          ))}
+        </div>
+      ) : <p class="text-small" style="color: var(--color-muted);">No projects yet.</p>}
+    </Section>
+
+    <Section>
+      <h2>People</h2>
+      {people.length > 0 ? (
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
+          {people.map((person) => (
+            <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); text-align:center;">
+              <p style="font-weight: var(--weight-medium);">{person.data.title as string}</p>
+              <p class="text-small">{person.data.role as string}</p>
+            </div>
+          ))}
+        </div>
+      ) : <p class="text-small" style="color: var(--color-muted);">No people linked yet.</p>}
+    </Section>
+
+    <Section>
+      <h2>Collaborators</h2>
+      {organizations.length > 0 ? (
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
+          {organizations.map((org) => (
+            <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); text-align:center;">
+              <p style="font-weight: var(--weight-medium);">{org.data.title as string}</p>
+              <p class="text-small">{org.data.type as string}</p>
+            </div>
+          ))}
+        </div>
+      ) : <p class="text-small" style="color: var(--color-muted);">No collaborators yet.</p>}
+    </Section>
+
+    <Section>
+      <h2>Technologies</h2>
+      {technologies.length > 0 ? (
+        <div style="display:flex; flex-wrap:wrap; gap: var(--space-2);">
+          {technologies.map((tech) => (
+            <span style="padding: var(--space-1) var(--space-2); background: var(--color-surface); border: var(--border-subtle); border-radius: var(--radius-sm); font-size: var(--text-small);">{tech}</span>
+          ))}
+        </div>
+      ) : <p class="text-small" style="color: var(--color-muted);">No technologies listed.</p>}
+    </Section>
+
+    <Section>
+      <h2>Related Journal</h2>
+      {articles.length > 0 ? (
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+          {articles.map((article) => (
+            <ArticleCard slug={article.slug} title={article.data.title as string} description={article.data.description as string} category={article.data.category as string} publishedAt={article.data.publishedAt as string | undefined} readingTime={article.readingTime} />
+          ))}
+        </div>
+      ) : <p class="text-small" style="color: var(--color-muted);">No related articles yet.</p>}
+    </Section>
+
+    <Section>
+      <h2>Timeline</h2>
+      <p class="text-small" style="color: var(--color-muted);">Lab timeline — research → experiments → projects.</p>
+      <div style="margin-top: var(--space-4); border-left: 2px solid var(--color-border); padding-left: var(--space-4); display:grid; gap: var(--space-3);">
+        {research.map((r) => <div><p class="text-metadata">Research</p><p>{r.data.title as string}</p></div>)}
+        {experiments.map((e) => <div><p class="text-metadata">Experiment · {e.data.outcome as string}</p><p>{e.data.title as string}</p></div>)}
+        {projects.map((p) => <div><p class="text-metadata">Project</p><p>{p.data.title as string}</p></div>)}
+      </div>
+    </Section>
+  </Container>
+  <SiteFooter />
+</LabLayout>
