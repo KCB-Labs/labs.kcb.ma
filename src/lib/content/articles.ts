@@ -49,7 +49,11 @@ export function getPreviousNextArticle(slug: string, opts?: { includeDrafts?: bo
   return { previous: sortedAsc[idx - 1], next: sortedAsc[idx + 1] };
 }
 
-export function getReadingTime(slug: string): number | undefined {
+export function getReadingTime(markdown: string): number {
+  return calculateReadingTime(markdown);
+}
+
+export function getReadingTimeForArticle(slug: string): number | undefined {
   const a = getArticleBySlug(slug, { includeDrafts: true });
   return a ? calculateReadingTime(a.content) : undefined;
 }

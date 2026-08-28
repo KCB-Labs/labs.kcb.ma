@@ -10,7 +10,7 @@
   "scripts": {
     "check": "astro check && tsc --noEmit",
     "lint": "echo \"lint: not configured yet — baseline passes\"",
-    "test": "node --test tests/smoke.test.mjs",
+    "test": "vitest run src/lib/content && node --test tests/smoke.test.mjs",
     "test:e2e": "echo \"e2e: not configured yet — baseline passes\"",
     "build": "astro build",
     "dev": "astro dev"

@@ -1,9 +1,13 @@
 import { describe, it, expect } from "vitest";
 import { getLabs, getLabBySlug, getActiveLabs } from "./labs.js";
-import { getResearchByLab } from "./research.js";
-import { getExperimentsByResearch } from "./experiments.js";
-import { getProjectsByLab } from "./projects.js";
-import { getArticlesByLab } from "./articles.js";
+import { getResearch, getResearchByLab } from "./research.js";
+import { getExperiments, getExperimentsByResearch } from "./experiments.js";
+import { getProjects, getProjectsByLab } from "./projects.js";
+import { getArticles, getArticlesByLab } from "./articles.js";
+import { getPeople } from "./people.js";
+import { getOrganizations } from "./organizations.js";
+import { getOpenSource } from "./opensource.js";
+import { calculateReadingTime } from "./utils.js";
 
 describe("content helpers", () => {
   it("getLabs returns only published by default", () => {
@@ -57,5 +61,48 @@ describe("content helpers", () => {
   it("empty relations return [] not throw", () => {
     const empty = getResearchByLab("empty-lab");
     expect(empty).toEqual([]);
+    expect(getProjectsByLab("empty-lab")).toEqual([]);
+    expect(getArticlesByLab("empty-lab")).toEqual([]);
+  });
+
+  it("getProjects excludes drafts by default", () => {
+    expect(getProjects().length).toBe(1);
+    expect(getProjects({ includeDrafts: true }).length).toBe(2);
+  });
+
+  it("getResearch excludes drafts", () => {
+    expect(getResearch().length).toBe(1);
+    expect(getResearch({ includeDrafts: true }).length).toBe(2);
+  });
+
+  it("getExperiments excludes drafts", () => {
+    expect(getExperiments().length).toBe(1);
+    expect(getExperiments({ includeDrafts: true }).length).toBe(2);
+  });
+
+  it("getArticles excludes drafts", () => {
+    expect(getArticles().length).toBe(1);
+    expect(getArticles({ includeDrafts: true }).length).toBe(2);
+  });
+
+  it("getPeople excludes drafts", () => {
+    expect(getPeople().length).toBe(1);
+    expect(getPeople({ includeDrafts: true }).length).toBe(2);
+  });
+
+  it("getOrganizations excludes drafts", () => {
+    expect(getOrganizations().length).toBe(1);
+    expect(getOrganizations({ includeDrafts: true }).length).toBe(2);
+  });
+
+  it("getOpenSource excludes drafts", () => {
+    expect(getOpenSource().length).toBe(1);
+    expect(getOpenSource({ includeDrafts: true }).length).toBe(2);
+  });
+
+  it("calculateReadingTime word-count", () => {
+    expect(calculateReadingTime("a ".repeat(400))).toBe(2);
+    expect(calculateReadingTime("hello world")).toBe(1);
+    expect(calculateReadingTime("")).toBe(1);
   });
 });
