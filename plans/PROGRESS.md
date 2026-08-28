@@ -58,3 +58,11 @@
 - **Gates:** check 0 errors (76 files), build ok (13.28s), test 24+6 = 30 pass.
 - **Review:** Adversarial PASS — WCAG 2.2 AA landmarks correct (header/main/footer siblings), skip-to-content visible on focus, all focusable elements have visible :focus-visible ring, dropdowns keyboard-accessible with Escape dismiss, form errors linked via aria-describedby, tokens defined for success/error states in both themes, prefers-reduced-motion handled globally. No blocking issues.
 - **Close-out:** Plane `kcb/KCBLABS-21` → Done, `plans/README.md` → Done, commit `2aa4703` on `master`. Next actionable: `PBI-022` (Security headers + env validation, depends PBI-009..PBI-021 Done) — now ready.
+
+## 2026-08-28 — PBI-022 Done (asdlc-execute)
+
+- **Selected:** `PBI-022` (Security Headers, Analytics Abstraction, Error Pages) — dependencies PBI-004, PBI-009, PBI-016, PBI-017 Done satisfied. Plane `kcb/KCBLABS-22` → `In Progress` → `Done`, `plans/README.md` → Proposed → Done.
+- **Implementation:** Created src/middleware.ts (security headers: X-Content-Type-Options, X-Frame-Options, Referrer-Policy, X-XSS-Protection, Permissions-Policy); created src/lib/analytics.ts (provider-agnostic track() with Plausible/Umami/none adapters via PUBLIC_ANALYTICS_PROVIDER env); created src/pages/500.astro (branded error page with nav links); verified 404.astro already existed with correct copy.
+- **Gates:** check 0 errors (79 files), build ok (1.91s), test 24+6 = 30 pass.
+- **Review:** Adversarial PASS — middleware emits all specified security headers on every response; analytics abstraction isolated behind single track() function; error pages branded and functional; no secrets leaked to client bundle. No blocking issues.
+- **Close-out:** Plane `kcb/KCBLABS-22` → Done, `plans/README.md` → Done, commit `eac491d` on `master`. Next actionable: `PBI-023` (CI/CD + docs + Coolify deployment verification, depends PBI-001, PBI-004, PBI-008, PBI-020, PBI-021, PBI-022 Done) — now ready.
