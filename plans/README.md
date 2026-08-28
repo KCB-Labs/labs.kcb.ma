@@ -69,7 +69,7 @@ Each spec's **Goal / Scope / Contracts / Anti-patterns / Decisions** are the gua
 | 4 | PBI-004 | Foundation — Docker + health endpoint + MCP config | kcb/KCBLABS-4 | Done | PBI-001 | master | agentic |
 | 5 | PBI-005 | Content Model — Collections Labs/Research/Experiments/Projects | kcb/KCBLABS-5 | Done | PBI-001, PBI-004 | master | agentic |
 | 6 | PBI-006 | Content Model — Collections Articles/People/Orgs/OS/Roadmap + Singletons | kcb/KCBLABS-6 | Done | PBI-005 | master | agentic |
-| 7 | PBI-007 | Content Model — Data access layer src/lib/content | kcb/KCBLABS-7 | Proposed | PBI-005, PBI-006 | — | — |
+| 7 | PBI-007 | Content Model — Data access layer src/lib/content | kcb/KCBLABS-7 | Active | PBI-005, PBI-006 | master | — |
 | 8 | PBI-008 | Content Model — Validation + publishing filter + slug stability + seed graph | kcb/KCBLABS-8 | Proposed | PBI-007 | — | — |
 | 9 | PBI-009 | Core Pages — Homepage (hero, labs, numbers, etc.) | kcb/KCBLABS-9 | Proposed | PBI-003, PBI-008 | — | — |
 | 10 | PBI-010 | Core Pages — Labs index + Lab detail (research portal) | kcb/KCBLABS-10 | Proposed | PBI-008, PBI-009 | — | — |

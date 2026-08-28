@@ -91,6 +91,13 @@
 - **Review:** Adversarial PASS with advisory (labs/projects still missing articles/people relationships — deferred, not blocking). Review-type sort: **agentic — Done**. Comment posted to Plane.
 - **Close-out:** Plane `kcb/KCBLABS-6` → Done, `plans/README.md` → Done, commit `2786c81` on `master`. Next actionable: `PBI-007` (needs PBI-005+006 Done) — now ready.
 
+---
+
+## 2026-08-27 — PBI-007 Active (asdlc-execute)
+
+- **Selected:** `PBI-007` (Data Access Layer src/lib/content) — dependencies PBI-005 Done + PBI-006 Done satisfied. Plane `kcb/KCBLABS-7` → `In Progress`, `plans/README.md` → Active.
+- **Pre-flight:** Targets: src/lib/content/{labs,research,experiments,projects,articles,people,organizations,opensource,roadmap,relationships}.ts + index.ts, barrel, readingTime, publishing filter. No page direct queries.
+
 ## PBI Log
 
 | Date | PBI | Plane | Transition | Gates | Review | Commits | Notes |
@@ -107,3 +114,4 @@
 | 2026-08-27 | PBI-005 | kcb/KCBLABS-5 | Active→Done | check 0 err, build ok, test 6 pass | agentic | 57e421b | 4 collections + 8 fixtures + CONTENT-MODEL |
 | 2026-08-27 | PBI-006 | kcb/KCBLABS-6 | Proposed→Active | — | — | — | Collections 2 + singletons; started |
 | 2026-08-27 | PBI-006 | kcb/KCBLABS-6 | Active→Done | check 0 err, build ok, test 6 pass | agentic | 2786c81 | 9 collections + 5 singletons + 10 fixtures + CONTENT-MODEL full |
+| 2026-08-27 | PBI-007 | kcb/KCBLABS-7 | Proposed→Active | — | — | — | DAL; started |
