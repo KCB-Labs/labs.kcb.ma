@@ -29,7 +29,7 @@ const labs = getLabs();
         <div id="labs-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
           {labs.map((lab) => (
             <div class="lab-card-wrapper" data-status={lab.data.status as string}>
-              <LabCard slug={lab.slug} title={lab.data.title as string} description={lab.data.description as string} status={lab.data.status as string} />
+              <LabCard slug={lab.slug} title={lab.data.title as string} description={lab.data.description as string} status={lab.data.status as string} ratingKnowledge={lab.data.ratingKnowledge as number ?? 1} ratingCreativity={lab.data.ratingCreativity as number ?? 1} ratingBusiness={lab.data.ratingBusiness as number ?? 1} />
             </div>
           ))}
         </div>

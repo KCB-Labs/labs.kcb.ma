@@ -5,6 +5,7 @@ import SiteFooter from "../../../components/astro/SiteFooter.astro";
 import Container from "../../../components/astro/Container.astro";
 import SectionLayout from "../../../components/astro/SectionLayout.astro";
 import Section from "../../../components/astro/Section.astro";
+import RatingDots from "../../../components/ui/RatingDots.astro";
 import ResearchCard from "../../../components/cards/ResearchCard.astro";
 import ExperimentCard from "../../../components/cards/ExperimentCard.astro";
 import ArticleCard from "../../../components/cards/ArticleCard.astro";
@@ -56,6 +57,7 @@ const openSource = getOpenSourceByProject(slug!);
       section="explore"
       currentSlug="projects"
     >
+      <RatingDots slot="rating" knowledge={project.data.ratingKnowledge as number ?? 1} creativity={project.data.ratingCreativity as number ?? 1} business={project.data.ratingBusiness as number ?? 1} />
       {originLab && (
         <Section>
           <div style="padding: var(--space-4); background: var(--color-surface); border: var(--border-subtle); border-radius: var(--radius-md);">

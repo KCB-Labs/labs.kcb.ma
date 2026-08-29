@@ -5,6 +5,7 @@ import SiteFooter from "../../../components/astro/SiteFooter.astro";
 import Container from "../../../components/astro/Container.astro";
 import SectionLayout from "../../../components/astro/SectionLayout.astro";
 import Section from "../../../components/astro/Section.astro";
+import RatingDots from "../../../components/ui/RatingDots.astro";
 import ResearchCard from "../../../components/cards/ResearchCard.astro";
 import ExperimentCard from "../../../components/cards/ExperimentCard.astro";
 import ProjectCard from "../../../components/cards/ProjectCard.astro";
@@ -58,6 +59,7 @@ const timelineEvents = [
       section="explore"
       currentSlug="labs"
     >
+      <RatingDots slot="rating" knowledge={lab.data.ratingKnowledge as number ?? 1} creativity={lab.data.ratingCreativity as number ?? 1} business={lab.data.ratingBusiness as number ?? 1} />
       <Section>
         <h2>Overview</h2>
         <p class="text-body">{lab.content.slice(0, 400)}</p>

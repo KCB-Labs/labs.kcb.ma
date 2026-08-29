@@ -29,7 +29,7 @@ const projects = getProjects();
         <div id="projects-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
           {projects.map((project) => (
             <div class="project-card-wrapper" data-type={project.data.type as string} data-stage={project.data.stage as string}>
-              <ProjectCard slug={project.slug} title={project.data.title as string} description={project.data.description as string} type={project.data.type as string} stage={project.data.stage as string} originLab={project.data.originLab as string | undefined} />
+              <ProjectCard slug={project.slug} title={project.data.title as string} description={project.data.description as string} type={project.data.type as string} stage={project.data.stage as string} originLab={project.data.originLab as string | undefined} ratingKnowledge={project.data.ratingKnowledge as number ?? 1} ratingCreativity={project.data.ratingCreativity as number ?? 1} ratingBusiness={project.data.ratingBusiness as number ?? 1} />
             </div>
           ))}
         </div>

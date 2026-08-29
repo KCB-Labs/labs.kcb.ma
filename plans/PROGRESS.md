@@ -74,3 +74,21 @@
 - **Gates:** check 0 errors (79 files), build ok, test 24+6 = 30 pass.
 - **Review:** Adversarial PASS — CI workflow runs all 3 gates on push/PR; CONTRIBUTING.md documents PBI workflow and review types; DESIGN-SYSTEM.md references actual tokens.css values; ARCHITECTURE.md as-built reflects all modules; ADRs have proper Context/Decision/Alternatives/Consequences format. No blocking issues.
 - **Close-out:** Plane `kcb/KCBLABS-23` → Done, `plans/README.md` → Done, commit `fdc660f` on `master`. All 23 PBIs complete.
+
+## 2026-08-28 — PBI-024→028 Done (asdlc-execute)
+
+- **Selected:** `PBI-024` through `PBI-028` (Avionics Design System — tokens, globals, branding, components, dark theme removal)
+- **Implementation:** Replaced design tokens with Avionics "Timeless Industrial" palette (Safety Orange `#f04e30`, steel/charcoal backgrounds, B612 Mono + Archivo fonts); updated globals.css with Avionics typography hierarchy and grid layout; added KCB logo to SiteHeader and favicon; updated all card/badge/footer/breadcrumb components with Avionics styling; removed dark mode entirely (light-only); created SectionLayout + SectionSidebar for 2nd-level page navigation; created ChildPageCard for root page child listings; redesigned 4 root pages (Explore, About, Participate, Journal) with child page card grids.
+- **Gates:** check 0 errors, build ok, test 30 pass.
+- **Close-out:** Plane `kcb/KCBLABS-24`→`28` → Done. Commits `ff987d6`→`03f662f`.
+
+## 2026-08-28 — PBI-029→033 Done (asdlc-execute)
+
+- **Selected:** `PBI-029` through `PBI-033` (Header redesign + Entity rating system)
+- **PBI-029:** Rewrote SiteHeader.astro — desktop nav with hover/click dropdowns + Escape to close, mobile `<details>/<summary>` hierarchy (Explore→Labs/Projects/Open Source, About→Vision/People/Ecosystem/Roadmap, Participate→Sponsorship/Collaboration/Contact). Active page: `border-bottom: 2px solid var(--color-accent)` (desktop), accent text + left border (mobile). Responsive at 768px.
+- **PBI-030:** Created RatingDots.astro (3 criteria: Knowledge/Creativity/Business, 1–3 filled/empty dots, mono typography, aria-label). Added rating fields to Keystatic config for 5 collections (labs, research, experiments, projects, opensource).
+- **PBI-031:** Added rating fields to Frontmatter type in `src/lib/content/utils.ts` (covers all collections automatically).
+- **PBI-032:** Updated all 5 card components (LabCard, ResearchCard, ExperimentCard, ProjectCard, OpenSourceCard) with RatingDots in title row (`display: flex; align-items: baseline`).
+- **PBI-033:** Added `rating` named slot to SectionLayout.astro (title-row flex layout). Updated labs/[slug], projects/[slug], open-source/[slug] detail pages with RatingDots in header. Updated 3 index pages (labs, projects, open-source) to pass rating props to cards.
+- **Gates:** check 0 errors, build ok, test 30 pass.
+- **Close-out:** Commits `1472247`, `2751c79`. PBI-029→033 not yet synced to Plane. All rating PBIs complete.

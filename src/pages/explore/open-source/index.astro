@@ -31,7 +31,7 @@ const others = openSourceItems.filter((o) => o.data.featured !== true);
             <h2>Featured</h2>
             <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
               {featured.map((o) => (
-                <OpenSourceCard slug={o.slug} title={o.data.title as string} description={o.data.description as string} status={o.data.status as string} license={o.data.license as string} originLab={o.data.originLab as string | undefined} />
+                <OpenSourceCard slug={o.slug} title={o.data.title as string} description={o.data.description as string} status={o.data.status as string} license={o.data.license as string} originLab={o.data.originLab as string | undefined} ratingKnowledge={o.data.ratingKnowledge as number ?? 1} ratingCreativity={o.data.ratingCreativity as number ?? 1} ratingBusiness={o.data.ratingBusiness as number ?? 1} />
               ))}
             </div>
           </>
@@ -42,7 +42,7 @@ const others = openSourceItems.filter((o) => o.data.featured !== true);
             <h2>All Projects</h2>
             <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
               {others.map((o) => (
-                <OpenSourceCard slug={o.slug} title={o.data.title as string} description={o.data.description as string} status={o.data.status as string} license={o.data.license as string} originLab={o.data.originLab as string | undefined} />
+                <OpenSourceCard slug={o.slug} title={o.data.title as string} description={o.data.description as string} status={o.data.status as string} license={o.data.license as string} originLab={o.data.originLab as string | undefined} ratingKnowledge={o.data.ratingKnowledge as number ?? 1} ratingCreativity={o.data.ratingCreativity as number ?? 1} ratingBusiness={o.data.ratingBusiness as number ?? 1} />
               ))}
             </div>
           </>
