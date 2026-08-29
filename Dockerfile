@@ -1,9 +1,9 @@
 # KCB Labs — labs.kcb.ma
-# Multi-stage Docker: install → build → runtime (node:20, port 4321, entry ./dist/server/entry.mjs)
+# Multi-stage Docker: install → build → runtime (node:22, port 4321, entry ./dist/server/entry.mjs)
 # Verified against @astrojs/node standalone docs (mcp.docs.astro.build/mcp)
 
 # Stage 1 — install + build
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 WORKDIR /app
 
 # Install deps (leverage cache)
@@ -15,7 +15,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2 — slim runtime
-FROM node:20-alpine AS runtime
+FROM node:22-alpine AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
