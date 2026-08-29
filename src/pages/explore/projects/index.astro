@@ -1,13 +1,13 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import SiteHeader from "../../components/astro/SiteHeader.astro";
-import SiteFooter from "../../components/astro/SiteFooter.astro";
-import Container from "../../components/astro/Container.astro";
-import PageLayout from "../../components/astro/PageLayout.astro";
-import Section from "../../components/astro/Section.astro";
-import ProjectCard from "../../components/cards/ProjectCard.astro";
-import { ProjectsFilters } from "../../components/react/Filters";
-import { getProjects } from "../../lib/content/projects.js";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import SiteHeader from "../../../components/astro/SiteHeader.astro";
+import SiteFooter from "../../../components/astro/SiteFooter.astro";
+import Container from "../../../components/astro/Container.astro";
+import PageLayout from "../../../components/astro/PageLayout.astro";
+import Section from "../../../components/astro/Section.astro";
+import ProjectCard from "../../../components/cards/ProjectCard.astro";
+import { ProjectsFilters } from "../../../components/react/Filters";
+import { getProjects } from "../../../lib/content/projects.js";
 
 export const prerender = true;
 
@@ -18,7 +18,7 @@ const projects = getProjects();
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <PageLayout
-      crumbs={[{ label: "Projects" }]}
+      crumbs={[{ label: "Explore", href: "/explore" }, { label: "Projects" }]}
       title="Projects"
       description="Something KCB has decided is worth implementing beyond pure exploration."
     >

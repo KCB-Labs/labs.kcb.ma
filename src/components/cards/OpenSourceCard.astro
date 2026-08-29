@@ -10,7 +10,7 @@ interface Props {
 }
 const { slug, title, description, status, license, originLab } = Astro.props;
 ---
-<a href={`/open-source/${slug}`} class="card card--opensource">
+<a href={`/explore/open-source/${slug}`} class="card card--opensource">
   <div class="card__meta">
     <StatusBadge status={status} />
     <span class="badge badge--license">{license}</span>

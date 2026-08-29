@@ -1,24 +1,24 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import SiteHeader from "../../components/astro/SiteHeader.astro";
-import SiteFooter from "../../components/astro/SiteFooter.astro";
-import Container from "../../components/astro/Container.astro";
-import PageLayout from "../../components/astro/PageLayout.astro";
-import Section from "../../components/astro/Section.astro";
-import ResearchCard from "../../components/cards/ResearchCard.astro";
-import ExperimentCard from "../../components/cards/ExperimentCard.astro";
-import ProjectCard from "../../components/cards/ProjectCard.astro";
-import ArticleCard from "../../components/cards/ArticleCard.astro";
-import PersonCard from "../../components/cards/PersonCard.astro";
-import OrganizationCard from "../../components/cards/OrganizationCard.astro";
-import { Timeline as ReactTimeline } from "../../components/react/Timeline";
-import { getLabs, getLabBySlug } from "../../lib/content/labs.js";
-import { getResearchByLab } from "../../lib/content/research.js";
-import { getExperimentsByLab } from "../../lib/content/experiments.js";
-import { getProjectsByLab } from "../../lib/content/projects.js";
-import { getArticlesByLab } from "../../lib/content/articles.js";
-import { getPeopleByLab } from "../../lib/content/people.js";
-import { getOrganizationsByLab } from "../../lib/content/organizations.js";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import SiteHeader from "../../../components/astro/SiteHeader.astro";
+import SiteFooter from "../../../components/astro/SiteFooter.astro";
+import Container from "../../../components/astro/Container.astro";
+import PageLayout from "../../../components/astro/PageLayout.astro";
+import Section from "../../../components/astro/Section.astro";
+import ResearchCard from "../../../components/cards/ResearchCard.astro";
+import ExperimentCard from "../../../components/cards/ExperimentCard.astro";
+import ProjectCard from "../../../components/cards/ProjectCard.astro";
+import ArticleCard from "../../../components/cards/ArticleCard.astro";
+import PersonCard from "../../../components/cards/PersonCard.astro";
+import OrganizationCard from "../../../components/cards/OrganizationCard.astro";
+import { Timeline as ReactTimeline } from "../../../components/react/Timeline";
+import { getLabs, getLabBySlug } from "../../../lib/content/labs.js";
+import { getResearchByLab } from "../../../lib/content/research.js";
+import { getExperimentsByLab } from "../../../lib/content/experiments.js";
+import { getProjectsByLab } from "../../../lib/content/projects.js";
+import { getArticlesByLab } from "../../../lib/content/articles.js";
+import { getPeopleByLab } from "../../../lib/content/people.js";
+import { getOrganizationsByLab } from "../../../lib/content/organizations.js";
 
 export const prerender = true;
 
@@ -51,7 +51,7 @@ const timelineEvents = [
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <PageLayout
-      crumbs={[{ label: "Labs", href: "/labs" }, { label: lab.data.title as string }]}
+      crumbs={[{ label: "Explore", href: "/explore" }, { label: "Labs", href: "/explore/labs" }, { label: lab.data.title as string }]}
       title={lab.data.title as string}
       description={lab.data.description as string}
       status={lab.data.status as string}
@@ -59,7 +59,7 @@ const timelineEvents = [
       <Section>
         <h2>Overview</h2>
         <p class="text-body">{lab.content.slice(0, 400)}</p>
-        <h3 style="margin-top: var(--space-5);">Why we're exploring this</h3>
+        <h3 style="margin-top: var(--space-5);">Why we are exploring this</h3>
         <p class="text-body">Why we explore {lab.data.title as string} — persistent questions and validation.</p>
       </Section>
 

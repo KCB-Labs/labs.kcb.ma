@@ -1,22 +1,22 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import SiteHeader from "../../components/astro/SiteHeader.astro";
-import SiteFooter from "../../components/astro/SiteFooter.astro";
-import Container from "../../components/astro/Container.astro";
-import PageLayout from "../../components/astro/PageLayout.astro";
-import Section from "../../components/astro/Section.astro";
-import ResearchCard from "../../components/cards/ResearchCard.astro";
-import ExperimentCard from "../../components/cards/ExperimentCard.astro";
-import ArticleCard from "../../components/cards/ArticleCard.astro";
-import PersonCard from "../../components/cards/PersonCard.astro";
-import OrganizationCard from "../../components/cards/OrganizationCard.astro";
-import { getProjects, getProjectBySlug } from "../../lib/content/projects.js";
-import { getResearch } from "../../lib/content/research.js";
-import { getExperiments } from "../../lib/content/experiments.js";
-import { getArticles } from "../../lib/content/articles.js";
-import { getPeopleByProject } from "../../lib/content/people.js";
-import { getOrganizationsByProject } from "../../lib/content/organizations.js";
-import { getOpenSourceByProject } from "../../lib/content/opensource.js";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import SiteHeader from "../../../components/astro/SiteHeader.astro";
+import SiteFooter from "../../../components/astro/SiteFooter.astro";
+import Container from "../../../components/astro/Container.astro";
+import PageLayout from "../../../components/astro/PageLayout.astro";
+import Section from "../../../components/astro/Section.astro";
+import ResearchCard from "../../../components/cards/ResearchCard.astro";
+import ExperimentCard from "../../../components/cards/ExperimentCard.astro";
+import ArticleCard from "../../../components/cards/ArticleCard.astro";
+import PersonCard from "../../../components/cards/PersonCard.astro";
+import OrganizationCard from "../../../components/cards/OrganizationCard.astro";
+import { getProjects, getProjectBySlug } from "../../../lib/content/projects.js";
+import { getResearch } from "../../../lib/content/research.js";
+import { getExperiments } from "../../../lib/content/experiments.js";
+import { getArticles } from "../../../lib/content/articles.js";
+import { getPeopleByProject } from "../../../lib/content/people.js";
+import { getOrganizationsByProject } from "../../../lib/content/organizations.js";
+import { getOpenSourceByProject } from "../../../lib/content/opensource.js";
 
 export const prerender = true;
 
@@ -49,7 +49,7 @@ const openSource = getOpenSourceByProject(slug!);
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <PageLayout
-      crumbs={[{ label: "Projects", href: "/projects" }, { label: project.data.title as string }]}
+      crumbs={[{ label: "Explore", href: "/explore" }, { label: "Projects", href: "/explore/projects" }, { label: project.data.title as string }]}
       title={project.data.title as string}
       description={project.data.description as string}
       status={`${project.data.type as string} · ${project.data.stage as string}${originLab ? ` · Origin: ${originLab}` : ""}`}
@@ -58,7 +58,7 @@ const openSource = getOpenSourceByProject(slug!);
         <Section>
           <div style="padding: var(--space-4); background: var(--color-surface); border: var(--border-subtle); border-radius: var(--radius-md);">
             <p class="text-metadata">Born in KCB Labs</p>
-            <p>Origin: <a href={`/labs/${originLab}`}>{originLab}</a></p>
+            <p>Origin: <a href={`/explore/labs/${originLab}`}>{originLab}</a></p>
           </div>
         </Section>
       )}

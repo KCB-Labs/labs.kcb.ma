@@ -28,7 +28,7 @@ export function buildSearchIndex(): SearchIndexEntry[] {
       title: lab.data.title as string,
       slug: lab.slug,
       description: lab.data.description as string,
-      href: `/labs/${lab.slug}`,
+      href: `/explore/labs/${lab.slug}`,
       tags: lab.data.tags as string[] | undefined,
     });
   }
@@ -40,7 +40,7 @@ export function buildSearchIndex(): SearchIndexEntry[] {
       title: project.data.title as string,
       slug: project.slug,
       description: project.data.description as string,
-      href: `/projects/${project.slug}`,
+      href: `/explore/projects/${project.slug}`,
       tags: project.data.tags as string[] | undefined,
       lab: project.data.originLab as string | undefined,
     });
@@ -103,7 +103,7 @@ export function buildSearchIndex(): SearchIndexEntry[] {
       title: os.data.title as string,
       slug: os.slug,
       description: os.data.description as string,
-      href: `/open-source/${os.slug}`,
+      href: `/explore/open-source/${os.slug}`,
       tags: os.data.tags as string[] | undefined,
       lab: os.data.originLab as string | undefined,
     });

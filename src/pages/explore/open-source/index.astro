@@ -1,12 +1,12 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import SiteHeader from "../../components/astro/SiteHeader.astro";
-import SiteFooter from "../../components/astro/SiteFooter.astro";
-import Container from "../../components/astro/Container.astro";
-import PageLayout from "../../components/astro/PageLayout.astro";
-import Section from "../../components/astro/Section.astro";
-import OpenSourceCard from "../../components/cards/OpenSourceCard.astro";
-import { getOpenSource } from "../../lib/content/opensource.js";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import SiteHeader from "../../../components/astro/SiteHeader.astro";
+import SiteFooter from "../../../components/astro/SiteFooter.astro";
+import Container from "../../../components/astro/Container.astro";
+import PageLayout from "../../../components/astro/PageLayout.astro";
+import Section from "../../../components/astro/Section.astro";
+import OpenSourceCard from "../../../components/cards/OpenSourceCard.astro";
+import { getOpenSource } from "../../../lib/content/opensource.js";
 
 export const prerender = true;
 
@@ -19,7 +19,7 @@ const others = openSourceItems.filter((o) => o.data.featured !== true);
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <PageLayout
-      crumbs={[{ label: "Open Source" }]}
+      crumbs={[{ label: "Explore", href: "/explore" }, { label: "Open Source" }]}
       title="Open Source"
       description="Open source projects and protocols distributed by KCB Labs. Distribution layer, not a separate R&D stage."
     >

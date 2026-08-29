@@ -11,7 +11,7 @@ interface Props {
 }
 const { slug, title, description, type, stage, originLab } = Astro.props;
 ---
-<a href={`/projects/${slug}`} class="card card--project">
+<a href={`/explore/projects/${slug}`} class="card card--project">
   <div class="card__meta">
     <TypeBadge type={type} />
     <StageBadge stage={stage} />

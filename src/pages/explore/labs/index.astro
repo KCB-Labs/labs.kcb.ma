@@ -1,13 +1,13 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import SiteHeader from "../../components/astro/SiteHeader.astro";
-import SiteFooter from "../../components/astro/SiteFooter.astro";
-import Container from "../../components/astro/Container.astro";
-import PageLayout from "../../components/astro/PageLayout.astro";
-import Section from "../../components/astro/Section.astro";
-import LabCard from "../../components/cards/LabCard.astro";
-import { LabsFilters } from "../../components/react/Filters";
-import { getLabs } from "../../lib/content/labs.js";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import SiteHeader from "../../../components/astro/SiteHeader.astro";
+import SiteFooter from "../../../components/astro/SiteFooter.astro";
+import Container from "../../../components/astro/Container.astro";
+import PageLayout from "../../../components/astro/PageLayout.astro";
+import Section from "../../../components/astro/Section.astro";
+import LabCard from "../../../components/cards/LabCard.astro";
+import { LabsFilters } from "../../../components/react/Filters";
+import { getLabs } from "../../../lib/content/labs.js";
 
 export const prerender = true;
 
@@ -18,7 +18,7 @@ const labs = getLabs();
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
     <PageLayout
-      crumbs={[{ label: "Labs" }]}
+      crumbs={[{ label: "Explore", href: "/explore" }, { label: "Labs" }]}
       title="Labs"
       description="Persistent areas of exploration — each lab asks what we are continuously investigating."
     >

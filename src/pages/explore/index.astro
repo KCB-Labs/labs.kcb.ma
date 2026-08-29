@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/astro/SiteHeader.astro";
+import SiteFooter from "../../components/astro/SiteFooter.astro";
+import Container from "../../components/astro/Container.astro";
+import PageLayout from "../../components/astro/PageLayout.astro";
+import Section from "../../components/astro/Section.astro";
+import LabCard from "../../components/cards/LabCard.astro";
+import ProjectCard from "../../components/cards/ProjectCard.astro";
+import OpenSourceCard from "../../components/cards/OpenSourceCard.astro";
+import { getLabs } from "../../lib/content/labs.js";
+import { getProjects } from "../../lib/content/projects.js";
+import { getOpenSource } from "../../lib/content/opensource.js";
+
+export const prerender = true;
+
+const labs = getLabs();
+const projects = getProjects();
+const openSource = getOpenSource();
+
+const featuredLabs = labs.filter((l) => l.data.featured).slice(0, 3);
+const displayLabs = featuredLabs.length ? featuredLabs : labs.slice(0, 3);
+const featuredProjects = projects.filter((p) => p.data.featured).slice(0, 3);
+const displayProjects = featuredProjects.length ? featuredProjects : projects.slice(0, 3);
+const featuredOS = openSource.filter((o) => o.data.featured).slice(0, 3);
+const displayOS = featuredOS.length ? featuredOS : openSource.slice(0, 3);
+---
+
+<BaseLayout title="Explore — KCB Labs" description="Labs, projects, and open source from KCB Labs.">
+  <Fragment slot="header"><SiteHeader /></Fragment>
+  <Container>
+    <PageLayout
+      crumbs={[{ label: "Explore" }]}
+      title="Explore"
+      description="Persistent areas of exploration, validated projects, and open source work from KCB Labs."
+    >
+      <Section>
+        <h2>Labs</h2>
+        <p class="text-small" style="color: var(--color-muted); margin-bottom: var(--space-4);">Persistent areas of exploration — each lab asks what we are continuously investigating.</p>
+        {displayLabs.length > 0 ? (
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+            {displayLabs.map((lab) => (
+              <LabCard slug={lab.slug} title={lab.data.title as string} description={lab.data.description as string} status={lab.data.status as string} />
+            ))}
+          </div>
+        ) : <p class="text-small" style="color: var(--color-muted);">No labs yet.</p>}
+        <p style="margin-top: var(--space-3);"><a href="/explore/labs" style="text-decoration:none; font-size: var(--text-small);">View all labs &rarr;</a></p>
+      </Section>
+
+      <Section>
+        <h2>Projects</h2>
+        <p class="text-small" style="color: var(--color-muted); margin-bottom: var(--space-4);">Something KCB has decided is worth implementing beyond pure exploration.</p>
+        {displayProjects.length > 0 ? (
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+            {displayProjects.map((project) => (
+              <ProjectCard slug={project.slug} title={project.data.title as string} description={project.data.description as string} type={project.data.type as string} stage={project.data.stage as string} originLab={project.data.originLab as string | undefined} />
+            ))}
+          </div>
+        ) : <p class="text-small" style="color: var(--color-muted);">No projects yet.</p>}
+        <p style="margin-top: var(--space-3);"><a href="/explore/projects" style="text-decoration:none; font-size: var(--text-small);">View all projects &rarr;</a></p>
+      </Section>
+
+      <Section>
+        <h2>Open Source</h2>
+        <p class="text-small" style="color: var(--color-muted); margin-bottom: var(--space-4);">Open source projects and protocols distributed by KCB Labs.</p>
+        {displayOS.length > 0 ? (
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+            {displayOS.map((os) => (
+              <OpenSourceCard slug={os.slug} title={os.data.title as string} description={os.data.description as string} status={os.data.status as string} license={os.data.license as string} originLab={os.data.originLab as string | undefined} />
+            ))}
+          </div>
+        ) : <p class="text-small" style="color: var(--color-muted);">No open source projects yet.</p>}
+        <p style="margin-top: var(--space-3);"><a href="/explore/open-source" style="text-decoration:none; font-size: var(--text-small);">View all open source &rarr;</a></p>
+      </Section>
+    </PageLayout>
+  </Container>
+  <Fragment slot="footer"><SiteFooter /></Fragment>
+</BaseLayout>

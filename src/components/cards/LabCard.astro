@@ -8,7 +8,7 @@ interface Props {
 }
 const { slug, title, description, status } = Astro.props;
 ---
-<a href={`/labs/${slug}`} class="card card--lab">
+<a href={`/explore/labs/${slug}`} class="card card--lab">
   <div class="card__head">
     <StatusBadge status={status} />
   </div>
