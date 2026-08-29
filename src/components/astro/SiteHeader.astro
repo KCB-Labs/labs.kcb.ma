@@ -64,10 +64,21 @@ const participateLinks = [
       </div>
 
       <details class="mobile-menu">
-        <summary aria-label="Open navigation">Menu</summary>
+        <summary aria-label="Open navigation" class="mobile-menu-toggle">
+          <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </summary>
         <nav class="mobile-links" aria-label="Mobile">
           <details class="mobile-group">
-            <summary class:list={["mobile-parent", { "mobile-parent--active": isActive("/explore") }]}>Explore</summary>
+            <summary class:list={["mobile-parent", { "mobile-parent--active": isActive("/explore") }]}>
+              Explore
+              <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
             <div class="mobile-children">
               {exploreLinks.map((link) => (
                 <a href={link.href} class:list={["mobile-child", { "mobile-child--active": isActive(link.href) }]}>{link.label}</a>
@@ -76,7 +87,12 @@ const participateLinks = [
           </details>
           <a href="/journal" class:list={["mobile-parent", { "mobile-parent--active": isActive("/journal") }]}>Journal</a>
           <details class="mobile-group">
-            <summary class:list={["mobile-parent", { "mobile-parent--active": isActive("/about") }]}>About</summary>
+            <summary class:list={["mobile-parent", { "mobile-parent--active": isActive("/about") }]}>
+              About
+              <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
             <div class="mobile-children">
               {aboutLinks.map((link) => (
                 <a href={link.href} class:list={["mobile-child", { "mobile-child--active": isActive(link.href) }]}>{link.label}</a>
@@ -84,7 +100,12 @@ const participateLinks = [
             </div>
           </details>
           <details class="mobile-group">
-            <summary class:list={["mobile-parent", { "mobile-parent--active": isActive("/participate") }]}>Participate</summary>
+            <summary class:list={["mobile-parent", { "mobile-parent--active": isActive("/participate") }]}>
+              Participate
+              <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
             <div class="mobile-children">
               {participateLinks.map((link) => (
                 <a href={link.href} class:list={["mobile-child", { "mobile-child--active": isActive(link.href) }]}>{link.label}</a>
@@ -211,17 +232,24 @@ const participateLinks = [
   }
 
   /* Mobile menu */
-  .mobile-menu {
-    display: none;
-  }
-  .mobile-menu summary {
+  .mobile-menu-toggle {
     list-style: none;
     cursor: pointer;
     padding: var(--space-2) var(--space-3);
     border: var(--border-subtle);
     border-radius: var(--radius-sm);
-    font-size: var(--text-small);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
   }
+  .mobile-menu-toggle::-webkit-details-marker {
+    display: none;
+  }
+  .hamburger-icon {
+    color: var(--color-text);
+  }
+
   .mobile-menu[open] .mobile-links {
     display: flex;
     flex-direction: column;
@@ -249,7 +277,9 @@ const participateLinks = [
     border-bottom: none;
   }
   .mobile-parent {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: var(--space-2) var(--space-2);
     font-family: var(--font-body);
     font-size: 0.9rem;
@@ -259,6 +289,10 @@ const participateLinks = [
     color: var(--color-text);
     cursor: pointer;
     list-style: none;
+    background: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
   }
   .mobile-parent::-webkit-details-marker {
     display: none;
@@ -269,23 +303,39 @@ const participateLinks = [
   .mobile-parent--active {
     color: var(--color-accent);
   }
+  .dropdown-icon {
+    flex-shrink: 0;
+    margin-left: var(--space-2);
+    color: var(--color-muted);
+    transition: transform var(--motion-duration-fast) var(--motion-ease);
+  }
+  .mobile-group[open] .dropdown-icon {
+    transform: rotate(180deg);
+  }
   .mobile-children {
     display: flex;
     flex-direction: column;
-    padding-left: var(--space-3);
-    padding-bottom: var(--space-1);
+    padding: var(--space-1) var(--space-2);
+    background: var(--color-bg);
+    border-top: var(--border-subtle);
+    margin-top: var(--space-1);
   }
   .mobile-child {
     display: block;
     padding: var(--space-1) var(--space-2);
-    font-size: var(--text-small);
-    color: var(--color-muted);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: var(--weight-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text);
     text-decoration: none;
-    border-left: 2px solid var(--color-border);
+    border-left: 2px solid transparent;
+    transition: color var(--motion-duration-fast) var(--motion-ease), border-color var(--motion-duration-fast) var(--motion-ease);
   }
   .mobile-child:hover {
-    color: var(--color-text);
-    background: var(--color-bg);
+    color: var(--color-accent);
+    background: transparent;
   }
   .mobile-child--active {
     color: var(--color-accent);
