@@ -85,7 +85,7 @@ const participateLinks = [
               ))}
             </div>
           </details>
-          <a href="/journal" class:list={["mobile-parent", { "mobile-parent--active": isActive("/journal") }]}>Journal</a>
+          <a href="/journal" class:list={["mobile-link", { "mobile-link--active": isActive("/journal") }]}>Journal</a>
           <details class="mobile-group">
             <summary class:list={["mobile-parent", { "mobile-parent--active": isActive("/about") }]}>
               About
@@ -112,7 +112,7 @@ const participateLinks = [
               ))}
             </div>
           </details>
-          <a href="/contact" class:list={["mobile-parent", { "mobile-parent--active": isActive("/contact") }]}>Contact</a>
+          <a href="/contact" class:list={["mobile-link", { "mobile-link--active": isActive("/contact") }]}>Contact</a>
         </nav>
       </details>
     </nav>
@@ -269,14 +269,12 @@ const participateLinks = [
     display: none;
   }
 
-  /* Mobile hierarchy */
+  /* Mobile hierarchy - unified style for all first-level items */
   .mobile-group {
-    border-bottom: var(--border-subtle);
+    /* no divider */
   }
-  .mobile-group:last-child {
-    border-bottom: none;
-  }
-  .mobile-parent {
+  .mobile-parent,
+  .mobile-link {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -293,14 +291,18 @@ const participateLinks = [
     border: none;
     width: 100%;
     text-align: left;
+    text-decoration: none;
   }
-  .mobile-parent::-webkit-details-marker {
+  .mobile-parent::-webkit-details-marker,
+  .mobile-link::-webkit-details-marker {
     display: none;
   }
-  .mobile-parent::marker {
+  .mobile-parent::marker,
+  .mobile-link::marker {
     content: "";
   }
-  .mobile-parent--active {
+  .mobile-parent--active,
+  .mobile-link--active {
     color: var(--color-accent);
   }
   .dropdown-icon {
@@ -315,10 +317,10 @@ const participateLinks = [
   .mobile-children {
     display: flex;
     flex-direction: column;
-    padding: var(--space-1) var(--space-2);
-    background: var(--color-bg);
-    border-top: var(--border-subtle);
-    margin-top: var(--space-1);
+    padding: var(--space-1) 0 0;
+    margin: 0;
+    background: transparent;
+    border: none;
   }
   .mobile-child {
     display: block;
@@ -330,16 +332,14 @@ const participateLinks = [
     letter-spacing: 0.05em;
     color: var(--color-text);
     text-decoration: none;
-    border-left: 2px solid transparent;
-    transition: color var(--motion-duration-fast) var(--motion-ease), border-color var(--motion-duration-fast) var(--motion-ease);
+    border: none;
+    transition: color var(--motion-duration-fast) var(--motion-ease);
   }
   .mobile-child:hover {
     color: var(--color-accent);
-    background: transparent;
   }
   .mobile-child--active {
     color: var(--color-accent);
-    border-left-color: var(--color-accent);
   }
 
   @media (max-width: 768px) {
