@@ -9,18 +9,26 @@ function isActive(path: string): boolean {
   return pathname.startsWith(path);
 }
 
-const exploreLinks = [
+const navLinks = [
+  { href: "/explore/labs", label: "Labs" },
+  { href: "/explore/projects", label: "Projects" },
+  { href: "/journal", label: "Journal" },
+  { href: "/about", label: "About" },
+  { href: "/participate", label: "Participate" },
+];
+
+const mobileLinks = [
+  { href: "/explore", label: "Explore" },
   { href: "/explore/labs", label: "Labs" },
   { href: "/explore/projects", label: "Projects" },
   { href: "/explore/open-source", label: "Open Source" },
-];
-const aboutLinks = [
+  { href: "/journal", label: "Journal" },
+  { href: "/about", label: "About" },
   { href: "/about/vision", label: "Vision" },
   { href: "/about/people", label: "People" },
   { href: "/about/ecosystem", label: "Ecosystem" },
   { href: "/about/roadmap", label: "Roadmap" },
-];
-const participateLinks = [
+  { href: "/participate", label: "Participate" },
   { href: "/participate/sponsorship", label: "Sponsorship" },
   { href: "/participate/collaboration", label: "Collaboration" },
   { href: "/contact", label: "Contact" },
@@ -28,77 +36,29 @@ const participateLinks = [
 ---
 <header class="site-header">
   <Container>
-    <nav class="nav" aria-label="Primary">
-      <a href="/" class="brand" aria-label="KCB Labs — Home">
-        <img src="/logo.jpg" alt="KCB" class="logo" width="120" height="40" />
-        <span class="brand-text">Labs</span>
-      </a>
+    <a href="/" class="site-logo" aria-label="KCB Labs — Home">
+      <span class="logo-icon">🔬</span>
+      <span class="logo-text">KCB<span class="logo-suffix">.labs</span></span>
+    </a>
 
-      <div class="links">
-        <div class="group">
-          <a href="/explore" class:list={["nav-link", { "nav-link--active": isActive("/explore") }]}>Explore</a>
-          <button class="dropdown-toggle" aria-expanded="false" aria-controls="dropdown-explore" aria-label="Explore submenu">▾</button>
-          <div class="dropdown" id="dropdown-explore" role="group" aria-label="Explore submenu">
-            {exploreLinks.map((link) => (
-              <a href={link.href} class:list={["dropdown-link", { "dropdown-link--active": isActive(link.href) }]}>{link.label}</a>
-            ))}
-          </div>
-        </div>
-        <a href="/journal" class:list={["nav-link", { "nav-link--active": isActive("/journal") }]}>Journal</a>
-        <div class="group">
-          <a href="/about" class:list={["nav-link", { "nav-link--active": isActive("/about") && !aboutLinks.some((l) => isActive(l.href)) }]}>About</a>
-          <button class="dropdown-toggle" aria-expanded="false" aria-controls="dropdown-about" aria-label="About submenu">▾</button>
-          <div class="dropdown" id="dropdown-about" role="group" aria-label="About submenu">
-            {aboutLinks.map((link) => (
-              <a href={link.href} class:list={["dropdown-link", { "dropdown-link--active": isActive(link.href) }]}>{link.label}</a>
-            ))}
-          </div>
-        </div>
-        <div class="group">
-          <a href="/participate" class:list={["nav-link", { "nav-link--active": isActive("/participate") && !participateLinks.some((l) => isActive(l.href)) }]}>Participate</a>
-          <button class="dropdown-toggle" aria-expanded="false" aria-controls="dropdown-participate" aria-label="Participate submenu">▾</button>
-          <div class="dropdown" id="dropdown-participate" role="group" aria-label="Participate submenu">
-            {participateLinks.map((link) => (
-              <a href={link.href} class:list={["dropdown-link", { "dropdown-link--active": isActive(link.href) }]}>{link.label}</a>
-            ))}
-          </div>
-        </div>
-        <div class="search-wrapper">
-          <Search client:visible />
-        </div>
-      </div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation" hidden />
+    <label for="nav-toggle" class="hamburger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
 
-      <details class="mobile-menu">
-        <summary aria-label="Open navigation">Menu</summary>
-        <nav class="mobile-links" aria-label="Mobile">
-          <details class="mobile-group">
-            <summary class:list={["mobile-parent", { "mobile-parent--active": isActive("/explore") }]}>Explore</summary>
-            <div class="mobile-children">
-              {exploreLinks.map((link) => (
-                <a href={link.href} class:list={["mobile-child", { "mobile-child--active": isActive(link.href) }]}>{link.label}</a>
-              ))}
-            </div>
-          </details>
-          <a href="/journal" class:list={["mobile-parent", { "mobile-parent--active": isActive("/journal") }]}>Journal</a>
-          <details class="mobile-group">
-            <summary class:list={["mobile-parent", { "mobile-parent--active": isActive("/about") }]}>About</summary>
-            <div class="mobile-children">
-              {aboutLinks.map((link) => (
-                <a href={link.href} class:list={["mobile-child", { "mobile-child--active": isActive(link.href) }]}>{link.label}</a>
-              ))}
-            </div>
-          </details>
-          <details class="mobile-group">
-            <summary class:list={["mobile-parent", { "mobile-parent--active": isActive("/participate") }]}>Participate</summary>
-            <div class="mobile-children">
-              {participateLinks.map((link) => (
-                <a href={link.href} class:list={["mobile-child", { "mobile-child--active": isActive(link.href) }]}>{link.label}</a>
-              ))}
-            </div>
-          </details>
-          <a href="/contact" class:list={["mobile-parent", { "mobile-parent--active": isActive("/contact") }]}>Contact</a>
-        </nav>
-      </details>
+    <nav class="nav-links" aria-label="Primary">
+      {navLinks.map((link) => (
+        <a href={link.href} class:list={["nav-link", { "nav-link--active": isActive(link.href) }]}>{link.label}</a>
+      ))}
+      <Search client:visible />
+    </nav>
+
+    <nav class="mobile-links" aria-label="Mobile">
+      {mobileLinks.map((link) => (
+        <a href={link.href} class:list={["mobile-link", { "mobile-link--active": isActive(link.href) }]}>{link.label}</a>
+      ))}
     </nav>
   </Container>
 </header>
@@ -108,222 +68,145 @@ const participateLinks = [
     position: sticky;
     top: 0;
     z-index: var(--z-header);
-    background: var(--color-surface);
+    background: var(--color-bg);
     border-bottom: var(--border-subtle);
   }
-  .nav {
+  .site-header :global(.container) {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    height: 3.5rem;
+    height: 3rem;
     gap: var(--space-6);
   }
-  .brand {
+
+  /* Logo — matches asdlc.io brand-mark style */
+  .site-logo {
     display: flex;
     align-items: center;
     gap: var(--space-2);
     text-decoration: none;
+    flex-shrink: 0;
   }
-  .logo {
-    height: 32px;
-    width: auto;
-    mix-blend-mode: multiply;
+  .logo-icon {
+    font-size: 1.25rem;
+    line-height: 1;
   }
-  .brand-text {
+  .logo-text {
     font-family: var(--font-mono);
-    font-size: var(--text-small);
+    font-size: var(--text-body);
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
     color: var(--color-text-strong);
+    letter-spacing: -0.02em;
+  }
+  .logo-suffix {
+    color: var(--color-muted);
   }
 
-  /* Desktop links */
-  .links {
+  /* Hamburger — same checkbox hack as asdlc.io */
+  .nav-toggle {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    margin-left: auto;
+  }
+  .hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--color-text);
+    transition: transform var(--motion-duration-fast) var(--motion-ease);
+  }
+  .nav-toggle:checked ~ .hamburger span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  .nav-toggle:checked ~ .hamburger span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle:checked ~ .hamburger span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* Desktop nav — flat links, no dropdowns */
+  .nav-links {
     display: flex;
     align-items: center;
     gap: var(--space-5);
-    font-size: var(--text-small);
-  }
-  .links a {
-    text-decoration: none;
-    color: var(--color-muted-strong);
-  }
-  .links a:hover {
-    color: var(--color-text);
+    margin-left: auto;
   }
   .nav-link {
-    padding-bottom: 2px solid transparent;
+    font-family: var(--font-body);
+    font-size: var(--text-small);
+    color: var(--color-muted);
+    text-decoration: none;
     transition: color var(--motion-duration-fast) var(--motion-ease);
+    white-space: nowrap;
+  }
+  .nav-link:hover {
+    color: var(--color-text);
   }
   .nav-link--active {
-    color: var(--color-text);
-    border-bottom: 2px solid var(--color-accent);
-  }
-
-  /* Desktop dropdown */
-  .group {
-    position: relative;
-  }
-  .dropdown {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 12rem;
-    background: var(--color-surface);
-    border: var(--border-subtle);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
-    padding: var(--space-2);
-    flex-direction: column;
-    gap: var(--space-1);
-  }
-  .group:hover .dropdown,
-  .group:focus-within .dropdown,
-  .group.open .dropdown {
-    display: flex;
-  }
-  .dropdown-toggle {
-    display: inline-flex;
-    align-items: center;
-    background: none;
-    border: none;
-    color: var(--color-muted-strong);
-    cursor: pointer;
-    font-size: var(--text-small);
-    padding: 0;
-    line-height: 1;
-    transition: color var(--motion-duration) var(--motion-ease);
-  }
-  .dropdown-toggle:hover {
-    color: var(--color-text);
-  }
-  .dropdown-toggle:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 2px;
-    border-radius: var(--radius-sm);
-  }
-  .dropdown-link {
-    padding: var(--space-1) var(--space-2);
-    border-radius: var(--radius-sm);
-  }
-  .dropdown-link:hover {
-    background: var(--color-bg);
-  }
-  .dropdown-link--active {
     color: var(--color-text);
     font-weight: var(--weight-medium);
   }
 
-  /* Mobile menu */
-  .mobile-menu {
-    display: none;
-  }
-  .mobile-menu summary {
-    list-style: none;
-    cursor: pointer;
-    padding: var(--space-2) var(--space-3);
-    border: var(--border-subtle);
-    border-radius: var(--radius-sm);
-    font-size: var(--text-small);
-  }
-  .mobile-menu[open] .mobile-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    padding: var(--space-2);
-    position: absolute;
-    top: 100%;
-    right: var(--space-4);
-    background: var(--color-surface);
-    border: var(--border-subtle);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
-    min-width: 14rem;
-    z-index: var(--z-overlay);
-  }
+  /* Mobile nav */
   .mobile-links {
     display: none;
   }
 
-  /* Mobile hierarchy */
-  .mobile-group {
-    border-bottom: var(--border-subtle);
-  }
-  .mobile-group:last-child {
-    border-bottom: none;
-  }
-  .mobile-parent {
-    display: block;
-    padding: var(--space-2) var(--space-2);
-    font-size: var(--text-small);
-    font-weight: var(--weight-medium);
-    color: var(--color-text);
-    cursor: pointer;
-    list-style: none;
-  }
-  .mobile-parent::-webkit-details-marker {
-    display: none;
-  }
-  .mobile-parent::marker {
-    content: "";
-  }
-  .mobile-parent--active {
-    color: var(--color-accent);
-  }
-  .mobile-children {
-    display: flex;
-    flex-direction: column;
-    padding-left: var(--space-3);
-    padding-bottom: var(--space-1);
-  }
-  .mobile-child {
-    display: block;
-    padding: var(--space-1) var(--space-2);
-    font-size: var(--text-small);
-    color: var(--color-muted);
-    text-decoration: none;
-    border-left: 2px solid var(--color-border);
-  }
-  .mobile-child:hover {
-    color: var(--color-text);
-    background: var(--color-bg);
-  }
-  .mobile-child--active {
-    color: var(--color-accent);
-    border-left-color: var(--color-accent);
-  }
-
   @media (max-width: 768px) {
-    .links {
+    .nav-links {
       display: none;
     }
-    .mobile-menu {
+    .hamburger {
+      display: flex;
+    }
+    .nav-toggle:checked ~ .mobile-links {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--color-bg);
+      border-bottom: var(--border-subtle);
+      padding: var(--space-3) var(--space-4);
+      gap: 0;
+      z-index: var(--z-overlay);
+    }
+    .mobile-link {
       display: block;
+      padding: var(--space-2) 0;
+      font-size: var(--text-small);
+      color: var(--color-muted);
+      text-decoration: none;
+      border-bottom: var(--border-subtle);
+    }
+    .mobile-link:last-child {
+      border-bottom: none;
+    }
+    .mobile-link:hover {
+      color: var(--color-text);
+    }
+    .mobile-link--active {
+      color: var(--color-accent);
+      font-weight: var(--weight-medium);
     }
   }
   @media (min-width: 769px) {
-    .mobile-menu {
+    .hamburger {
+      display: none !important;
+    }
+    .mobile-links {
       display: none !important;
     }
   }
 </style>
-
-<script>
-  document.querySelectorAll('.dropdown-toggle').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const expanded = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!expanded));
-      btn.closest('.group')?.classList.toggle('open', !expanded);
-    });
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      document.querySelectorAll('.dropdown-toggle[aria-expanded="true"]').forEach((btn) => {
-        btn.setAttribute('aria-expanded', 'false');
-        btn.closest('.group')?.classList.remove('open');
-      });
-    }
-  });
-</script>
