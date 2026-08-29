@@ -1,15 +1,22 @@
 ---
+import RatingDots from "../ui/RatingDots.astro";
 interface Props {
   slug: string;
   title: string;
   description: string;
   outcome?: string;
+  ratingKnowledge?: number;
+  ratingCreativity?: number;
+  ratingBusiness?: number;
 }
-const { slug, title, description, outcome } = Astro.props;
+const { slug, title, description, outcome, ratingKnowledge = 1, ratingCreativity = 1, ratingBusiness = 1 } = Astro.props;
 ---
-<a href={`/experiments/${slug}`} class="card card--experiment">
+<a href={`/explore/experiments/${slug}`} class="card card--experiment">
   <p class="text-metadata">Experiment {outcome && `· ${outcome}`}</p>
-  <h3>{title}</h3>
+  <div class="card__title-row">
+    <h3>{title}</h3>
+    <RatingDots knowledge={ratingKnowledge} creativity={ratingCreativity} business={ratingBusiness} />
+  </div>
   <p class="text-small">{description}</p>
 </a>
 
@@ -26,5 +33,14 @@ const { slug, title, description, outcome } = Astro.props;
   }
   .card--experiment:hover {
     border-color: var(--color-accent);
+  }
+  .card__title-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+  .card__title-row h3 {
+    margin: 0;
   }
 </style>

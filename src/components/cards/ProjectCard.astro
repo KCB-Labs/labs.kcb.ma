@@ -1,6 +1,7 @@
 ---
 import TypeBadge from "../ui/TypeBadge.astro";
 import StageBadge from "../ui/StageBadge.astro";
+import RatingDots from "../ui/RatingDots.astro";
 interface Props {
   slug: string;
   title: string;
@@ -8,15 +9,21 @@ interface Props {
   type: string;
   stage: string;
   originLab?: string;
+  ratingKnowledge?: number;
+  ratingCreativity?: number;
+  ratingBusiness?: number;
 }
-const { slug, title, description, type, stage, originLab } = Astro.props;
+const { slug, title, description, type, stage, originLab, ratingKnowledge = 1, ratingCreativity = 1, ratingBusiness = 1 } = Astro.props;
 ---
 <a href={`/explore/projects/${slug}`} class="card card--project">
   <div class="card__meta">
     <TypeBadge type={type} />
     <StageBadge stage={stage} />
   </div>
-  <h3>{title}</h3>
+  <div class="card__title-row">
+    <h3>{title}</h3>
+    <RatingDots knowledge={ratingKnowledge} creativity={ratingCreativity} business={ratingBusiness} />
+  </div>
   <p class="text-small">{description}</p>
   {originLab && <p class="text-metadata">Origin: {originLab}</p>}
 </a>
@@ -38,5 +45,14 @@ const { slug, title, description, type, stage, originLab } = Astro.props;
   .card__meta {
     display: flex;
     gap: var(--space-2);
+  }
+  .card__title-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+  .card__title-row h3 {
+    margin: 0;
   }
 </style>

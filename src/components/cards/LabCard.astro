@@ -1,18 +1,25 @@
 ---
 import StatusBadge from "../ui/StatusBadge.astro";
+import RatingDots from "../ui/RatingDots.astro";
 interface Props {
   slug: string;
   title: string;
   description: string;
   status: string;
+  ratingKnowledge?: number;
+  ratingCreativity?: number;
+  ratingBusiness?: number;
 }
-const { slug, title, description, status } = Astro.props;
+const { slug, title, description, status, ratingKnowledge = 1, ratingCreativity = 1, ratingBusiness = 1 } = Astro.props;
 ---
 <a href={`/explore/labs/${slug}`} class="card card--lab">
   <div class="card__head">
     <StatusBadge status={status} />
   </div>
-  <h3>{title}</h3>
+  <div class="card__title-row">
+    <h3>{title}</h3>
+    <RatingDots knowledge={ratingKnowledge} creativity={ratingCreativity} business={ratingBusiness} />
+  </div>
   <p class="text-small">{description}</p>
 </a>
 
@@ -30,9 +37,16 @@ const { slug, title, description, status } = Astro.props;
   .card--lab:hover {
     border-color: var(--color-accent);
   }
-  .card--lab h3 {
+  .card__title-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+  .card__title-row h3 {
     font-family: var(--font-mono);
     font-size: var(--text-h3);
     line-height: var(--leading-h3);
+    margin: 0;
   }
 </style>

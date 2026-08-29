@@ -9,6 +9,9 @@ export type Frontmatter = Record<string, unknown> & {
   publishedAt?: string;
   updatedAt?: string;
   content?: string;
+  ratingKnowledge?: number;
+  ratingCreativity?: number;
+  ratingBusiness?: number;
 };
 
 /**
