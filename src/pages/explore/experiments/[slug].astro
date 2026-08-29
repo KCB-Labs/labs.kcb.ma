@@ -1,0 +1,122 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import SiteHeader from "../../../components/astro/SiteHeader.astro";
+import SiteFooter from "../../../components/astro/SiteFooter.astro";
+import Container from "../../../components/astro/Container.astro";
+import SectionLayout from "../../../components/astro/SectionLayout.astro";
+import Section from "../../../components/astro/Section.astro";
+import StatusBadge from "../../../components/ui/StatusBadge.astro";
+import RatingDots from "../../../components/ui/RatingDots.astro";
+import ResearchCard from "../../../components/cards/ResearchCard.astro";
+import ProjectCard from "../../../components/cards/ProjectCard.astro";
+import ArticleCard from "../../../components/cards/ArticleCard.astro";
+import LabCard from "../../../components/cards/LabCard.astro";
+import { getExperiments, getExperimentBySlug } from "../../../lib/content/experiments.js";
+import { getResearch } from "../../../lib/content/research.js";
+import { getProjectsByExperiment } from "../../../lib/content/relationships.js";
+import { getArticlesByExperiment } from "../../../lib/content/relationships.js";
+import { getLabs } from "../../../lib/content/labs.js";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const experiments = getExperiments();
+  return experiments.map((e) => ({ params: { slug: e.slug } }));
+}
+
+const { slug } = Astro.params;
+const item = getExperimentBySlug(slug!);
+if (!item) {
+  return Astro.redirect("/404", 404);
+}
+
+const outcome = item.data.outcome as string | undefined;
+const labSlug = item.data.lab as string | undefined;
+const lab = labSlug ? getLabs().find((l) => l.slug === labSlug) : undefined;
+const researchSlugs = (item.data.research as string[] | undefined) ?? [];
+const relatedResearch = researchSlugs.length > 0
+  ? getResearch().filter((r) => researchSlugs.includes(r.slug))
+  : [];
+const projects = getProjectsByExperiment(slug!);
+const articles = getArticlesByExperiment(slug!);
+const objective = item.data.objective as string | undefined;
+---
+
+<BaseLayout title={`${item.data.title as string} — KCB Labs Experiment`} description={item.data.description as string}>
+  <Fragment slot="header"><SiteHeader /></Fragment>
+  <Container>
+    <SectionLayout
+      crumbs={[{ label: "Explore", href: "/explore" }, { label: "Experiments", href: "/explore/experiments" }, { label: item.data.title as string }]}
+      title={item.data.title as string}
+      description={item.data.description as string}
+      status={item.data.status as string}
+      section="explore"
+      currentSlug="experiments"
+    >
+      <RatingDots slot="rating" knowledge={item.data.ratingKnowledge as number ?? 1} creativity={item.data.ratingCreativity as number ?? 1} business={item.data.ratingBusiness as number ?? 1} />
+
+      <Section>
+        <h2>Overview</h2>
+        <p class="text-body">{item.content.slice(0, 600)}</p>
+      </Section>
+
+      {outcome && (
+        <Section>
+          <h2>Outcome</h2>
+          <div style="display: flex; align-items: center; gap: var(--space-2);">
+            <StatusBadge status={outcome.toLowerCase()} />
+            <span class="text-body">{outcome}</span>
+          </div>
+        </Section>
+      )}
+
+      {objective && (
+        <Section>
+          <h2>Objective</h2>
+          <p class="text-body">{objective}</p>
+        </Section>
+      )}
+
+      {lab && (
+        <Section>
+          <h2>Lab</h2>
+          <LabCard slug={lab.slug} title={lab.data.title as string} description={lab.data.description as string} status={lab.data.status as string} />
+        </Section>
+      )}
+
+      {relatedResearch.length > 0 && (
+        <Section>
+          <h2>Research</h2>
+          <div style="display:grid; gap: var(--space-3);">
+            {relatedResearch.map((r) => (
+              <ResearchCard slug={r.slug} title={r.data.title as string} description={r.data.description as string} />
+            ))}
+          </div>
+        </Section>
+      )}
+
+      <Section>
+        <h2>Projects</h2>
+        {projects.length > 0 ? (
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+            {projects.map((p) => (
+              <ProjectCard slug={p.slug} title={p.data.title as string} description={p.data.description as string} type={p.data.type as string} stage={p.data.stage as string} originLab={p.data.originLab as string | undefined} />
+            ))}
+          </div>
+        ) : <p class="text-small" style="color: var(--color-muted);">No projects yet.</p>}
+      </Section>
+
+      <Section>
+        <h2>Related Journal</h2>
+        {articles.length > 0 ? (
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+            {articles.map((a) => (
+              <ArticleCard slug={a.slug} title={a.data.title as string} description={a.data.description as string} category={a.data.category as string} publishedAt={a.data.publishedAt as string | undefined} readingTime={a.readingTime} />
+            ))}
+          </div>
+        ) : <p class="text-small" style="color: var(--color-muted);">No related articles yet.</p>}
+      </Section>
+    </SectionLayout>
+  </Container>
+  <Fragment slot="footer"><SiteFooter /></Fragment>
+</BaseLayout>

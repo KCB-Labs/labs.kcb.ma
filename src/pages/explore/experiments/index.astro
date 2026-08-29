@@ -1,0 +1,61 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import SiteHeader from "../../../components/astro/SiteHeader.astro";
+import SiteFooter from "../../../components/astro/SiteFooter.astro";
+import Container from "../../../components/astro/Container.astro";
+import SectionLayout from "../../../components/astro/SectionLayout.astro";
+import Section from "../../../components/astro/Section.astro";
+import ExperimentCard from "../../../components/cards/ExperimentCard.astro";
+import { ExperimentsFilters } from "../../../components/react/Filters";
+import { getExperiments } from "../../../lib/content/experiments.js";
+
+export const prerender = true;
+
+const experiments = getExperiments();
+---
+
+<BaseLayout title="Experiments — KCB Labs" description="Experiments and validation at KCB Labs.">
+  <Fragment slot="header"><SiteHeader /></Fragment>
+  <Container>
+    <SectionLayout
+      crumbs={[{ label: "Explore", href: "/explore" }, { label: "Experiments" }]}
+      title="Experiments"
+      description="Structured experiments that test hypotheses — each documents an outcome: validated, inconclusive, failed, or partial."
+      section="explore"
+      currentSlug="experiments"
+    >
+      <Section>
+        <ExperimentsFilters client:visible />
+        <div id="experiments-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+          {experiments.map((e) => (
+            <div class="experiment-card-wrapper" data-status={e.data.status as string} data-outcome={e.data.outcome as string ?? ""}>
+              <ExperimentCard slug={e.slug} title={e.data.title as string} description={e.data.description as string} outcome={e.data.outcome as string | undefined} ratingKnowledge={e.data.ratingKnowledge as number ?? 1} ratingCreativity={e.data.ratingCreativity as number ?? 1} ratingBusiness={e.data.ratingBusiness as number ?? 1} />
+            </div>
+          ))}
+        </div>
+        {experiments.length === 0 && <p class="text-small" style="color: var(--color-muted);">No experiments yet.</p>}
+      </Section>
+    </SectionLayout>
+  </Container>
+  <Fragment slot="footer"><SiteFooter /></Fragment>
+</BaseLayout>
+
+<script>
+  function applyExperimentFilters() {
+    const params = new URLSearchParams(window.location.search);
+    const status = params.get("status");
+    const outcome = params.get("outcome");
+    const cards = document.querySelectorAll(".experiment-card-wrapper");
+    cards.forEach((card) => {
+      const el = card as HTMLElement;
+      const cardStatus = el.dataset.status;
+      const cardOutcome = el.dataset.outcome;
+      const statusMatch = !status || cardStatus === status;
+      const outcomeMatch = !outcome || cardOutcome === outcome;
+      el.style.display = statusMatch && outcomeMatch ? "" : "none";
+    });
+  }
+
+  window.addEventListener("filters-changed", applyExperimentFilters);
+  document.addEventListener("DOMContentLoaded", applyExperimentFilters);
+</script>

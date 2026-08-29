@@ -14,6 +14,8 @@ const { section, currentSlug } = Astro.props;
 const sections: Record<string, SidebarItem[]> = {
   explore: [
     { slug: "labs", label: "Labs", href: "/explore/labs", description: "Persistent areas of exploration" },
+    { slug: "research", label: "Research", href: "/explore/research", description: "Questions and hypotheses" },
+    { slug: "experiments", label: "Experiments", href: "/explore/experiments", description: "Validation and benchmarking" },
     { slug: "projects", label: "Projects", href: "/explore/projects", description: "Validated implementations" },
     { slug: "open-source", label: "Open Source", href: "/explore/open-source", description: "Openly distributed work" },
   ],

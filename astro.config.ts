@@ -42,7 +42,7 @@ export default defineConfig({
   integrations: [
     react(),
     markdoc(),
-    keystatic(),
+    ...(!process.env.SKIP_KEYSTATIC ? [keystatic()] : []),
     validateIntegration,
     searchIndexIntegration,
     sitemap({

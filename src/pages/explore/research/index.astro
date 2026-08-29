@@ -1,0 +1,58 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import SiteHeader from "../../../components/astro/SiteHeader.astro";
+import SiteFooter from "../../../components/astro/SiteFooter.astro";
+import Container from "../../../components/astro/Container.astro";
+import SectionLayout from "../../../components/astro/SectionLayout.astro";
+import Section from "../../../components/astro/Section.astro";
+import ResearchCard from "../../../components/cards/ResearchCard.astro";
+import { ResearchFilters } from "../../../components/react/Filters";
+import { getResearch } from "../../../lib/content/research.js";
+
+export const prerender = true;
+
+const research = getResearch();
+---
+
+<BaseLayout title="Research — KCB Labs" description="Research questions and hypotheses at KCB Labs.">
+  <Fragment slot="header"><SiteHeader /></Fragment>
+  <Container>
+    <SectionLayout
+      crumbs={[{ label: "Explore", href: "/explore" }, { label: "Research" }]}
+      title="Research"
+      description="Questions we are investigating — each research item documents a hypothesis and the path to validation."
+      section="explore"
+      currentSlug="research"
+    >
+      <Section>
+        <ResearchFilters client:visible />
+        <div id="research-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+          {research.map((r) => (
+            <div class="research-card-wrapper" data-status={r.data.status as string}>
+              <ResearchCard slug={r.slug} title={r.data.title as string} description={r.data.description as string} ratingKnowledge={r.data.ratingKnowledge as number ?? 1} ratingCreativity={r.data.ratingCreativity as number ?? 1} ratingBusiness={r.data.ratingBusiness as number ?? 1} />
+            </div>
+          ))}
+        </div>
+        {research.length === 0 && <p class="text-small" style="color: var(--color-muted);">No research yet.</p>}
+      </Section>
+    </SectionLayout>
+  </Container>
+  <Fragment slot="footer"><SiteFooter /></Fragment>
+</BaseLayout>
+
+<script>
+  function applyResearchFilters() {
+    const params = new URLSearchParams(window.location.search);
+    const status = params.get("status");
+    const cards = document.querySelectorAll(".research-card-wrapper");
+    cards.forEach((card) => {
+      const el = card as HTMLElement;
+      const cardStatus = el.dataset.status;
+      const visible = !status || cardStatus === status;
+      el.style.display = visible ? "" : "none";
+    });
+  }
+
+  window.addEventListener("filters-changed", applyResearchFilters);
+  document.addEventListener("DOMContentLoaded", applyResearchFilters);
+</script>

@@ -10,6 +10,34 @@ import { getOpenSource } from "./opensource.js";
 // Re-export helpers for convenience
 export { getLabs, getResearchByLab, getExperimentsByLab, getExperimentsByResearch, getProjectsByLab, getArticlesByLab, getArticlesByProject };
 
+export function getProjectsByResearch(researchSlug: string, opts?: { includeDrafts?: boolean }) {
+  return getProjects(opts).filter((p) => {
+    const arr = (p.data.research as string[] | undefined) ?? [];
+    return Array.isArray(arr) && arr.includes(researchSlug);
+  });
+}
+
+export function getArticlesByResearch(researchSlug: string, opts?: { includeDrafts?: boolean }) {
+  return getArticles(opts).filter((a) => {
+    const arr = (a.data.research as string[] | undefined) ?? [];
+    return Array.isArray(arr) && arr.includes(researchSlug);
+  });
+}
+
+export function getProjectsByExperiment(experimentSlug: string, opts?: { includeDrafts?: boolean }) {
+  return getProjects(opts).filter((p) => {
+    const arr = (p.data.experiments as string[] | undefined) ?? [];
+    return Array.isArray(arr) && arr.includes(experimentSlug);
+  });
+}
+
+export function getArticlesByExperiment(experimentSlug: string, opts?: { includeDrafts?: boolean }) {
+  return getArticles(opts).filter((a) => {
+    const arr = (a.data.experiments as string[] | undefined) ?? [];
+    return Array.isArray(arr) && arr.includes(experimentSlug);
+  });
+}
+
 export function getRelatedLabs(slug: string, opts?: { includeDrafts?: boolean }) {
   // For lab slug, return related labs? Here just example: return all labs except self
   return getLabs(opts).filter((l) => l.slug !== slug);

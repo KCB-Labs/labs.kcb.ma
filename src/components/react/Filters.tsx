@@ -3,6 +3,15 @@ import { useState, useEffect, useCallback } from "react";
 const LAB_STATUSES = ["active", "exploring", "paused", "archived"] as const;
 type LabStatus = (typeof LAB_STATUSES)[number];
 
+const RESEARCH_STATUSES = ["active", "completed", "paused"] as const;
+type ResearchStatus = (typeof RESEARCH_STATUSES)[number];
+
+const EXPERIMENT_STATUSES = ["active", "completed", "paused"] as const;
+type ExperimentStatus = (typeof EXPERIMENT_STATUSES)[number];
+
+const EXPERIMENT_OUTCOMES = ["VALIDATED", "INCONCLUSIVE", "FAILED", "PARTIAL"] as const;
+type ExperimentOutcome = (typeof EXPERIMENT_OUTCOMES)[number];
+
 const PROJECT_TYPES = ["Internal", "Client", "Startup", "Collaboration", "Open Source", "Research"] as const;
 type ProjectType = (typeof PROJECT_TYPES)[number];
 
@@ -111,6 +120,90 @@ export function LabsFilters() {
         selected={status ? status.charAt(0).toUpperCase() + status.slice(1) : null}
         paramKey="status"
         onSelect={(val) => handleStatusChange(val ? val.toLowerCase() : null)}
+      />
+    </nav>
+  );
+}
+
+export function ResearchFilters() {
+  const [status, setStatus] = useState<ResearchStatus | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const saved = readParam("status");
+    if (saved && RESEARCH_STATUSES.includes(saved as ResearchStatus)) {
+      setStatus(saved as ResearchStatus);
+    }
+    setMounted(true);
+  }, []);
+
+  const handleStatusChange = useCallback((value: string | null) => {
+    setStatus(value as ResearchStatus | null);
+    setParam("status", value);
+    dispatchFilterChange();
+  }, []);
+
+  if (!mounted) return null;
+
+  return (
+    <nav aria-label="Filter research" style={{ marginBottom: "var(--space-4)" }}>
+      <FilterGroup
+        label="Status"
+        options={RESEARCH_STATUSES.map((s) => s.charAt(0).toUpperCase() + s.slice(1))}
+        selected={status ? status.charAt(0).toUpperCase() + status.slice(1) : null}
+        paramKey="status"
+        onSelect={(val) => handleStatusChange(val ? val.toLowerCase() : null)}
+      />
+    </nav>
+  );
+}
+
+export function ExperimentsFilters() {
+  const [status, setStatus] = useState<ExperimentStatus | null>(null);
+  const [outcome, setOutcome] = useState<ExperimentOutcome | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const savedStatus = readParam("status");
+    const savedOutcome = readParam("outcome");
+    if (savedStatus && EXPERIMENT_STATUSES.includes(savedStatus as ExperimentStatus)) {
+      setStatus(savedStatus as ExperimentStatus);
+    }
+    if (savedOutcome && EXPERIMENT_OUTCOMES.includes(savedOutcome as ExperimentOutcome)) {
+      setOutcome(savedOutcome as ExperimentOutcome);
+    }
+    setMounted(true);
+  }, []);
+
+  const handleStatusChange = useCallback((value: string | null) => {
+    setStatus(value as ExperimentStatus | null);
+    setParam("status", value);
+    dispatchFilterChange();
+  }, []);
+
+  const handleOutcomeChange = useCallback((value: string | null) => {
+    setOutcome(value as ExperimentOutcome | null);
+    setParam("outcome", value);
+    dispatchFilterChange();
+  }, []);
+
+  if (!mounted) return null;
+
+  return (
+    <nav aria-label="Filter experiments" style={{ marginBottom: "var(--space-4)", display: "flex", flexDirection: "column", gap: "var(--space-3)" }}>
+      <FilterGroup
+        label="Status"
+        options={EXPERIMENT_STATUSES.map((s) => s.charAt(0).toUpperCase() + s.slice(1))}
+        selected={status ? status.charAt(0).toUpperCase() + status.slice(1) : null}
+        paramKey="status"
+        onSelect={(val) => handleStatusChange(val ? val.toLowerCase() : null)}
+      />
+      <FilterGroup
+        label="Outcome"
+        options={EXPERIMENT_OUTCOMES}
+        selected={outcome}
+        paramKey="outcome"
+        onSelect={handleOutcomeChange}
       />
     </nav>
   );
