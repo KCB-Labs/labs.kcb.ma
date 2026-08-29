@@ -3,8 +3,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/astro/SiteHeader.astro";
 import SiteFooter from "../../components/astro/SiteFooter.astro";
 import Container from "../../components/astro/Container.astro";
+import PageLayout from "../../components/astro/PageLayout.astro";
 import Section from "../../components/astro/Section.astro";
-import PageHeader from "../../components/astro/PageHeader.astro";
 import ArticleCard from "../../components/cards/ArticleCard.astro";
 import { getArticles } from "../../lib/content/articles.js";
 
@@ -16,15 +16,20 @@ const articles = getArticles();
 <BaseLayout title="Journal — KCB Labs" description="The editorial layer of KCB Labs — what we think, discover, build, learn and observe.">
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
-    <PageHeader label="Journal" title="Journal" description="Articles, Lab Notes, Field Notes, Perspectives and Announcements from KCB Labs." />
-    <Section>
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: var(--space-4);">
-        {articles.map((article) => (
-          <ArticleCard slug={article.slug} title={article.data.title as string} description={article.data.description as string} category={article.data.category as string} publishedAt={article.data.publishedAt as string | undefined} readingTime={article.readingTime} relatedLab={(article.data.labs as string[] | undefined)?.[0]} />
-        ))}
-      </div>
-      {articles.length === 0 && <p class="text-small" style="color: var(--color-muted);">No articles yet.</p>}
-    </Section>
+    <PageLayout
+      crumbs={[{ label: "Journal" }]}
+      title="Journal"
+      description="Articles, Lab Notes, Field Notes, Perspectives and Announcements from KCB Labs."
+    >
+      <Section>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: var(--space-4);">
+          {articles.map((article) => (
+            <ArticleCard slug={article.slug} title={article.data.title as string} description={article.data.description as string} category={article.data.category as string} publishedAt={article.data.publishedAt as string | undefined} readingTime={article.readingTime} relatedLab={(article.data.labs as string[] | undefined)?.[0]} />
+          ))}
+        </div>
+        {articles.length === 0 && <p class="text-small" style="color: var(--color-muted);">No articles yet.</p>}
+      </Section>
+    </PageLayout>
   </Container>
   <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

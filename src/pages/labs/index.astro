@@ -3,8 +3,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/astro/SiteHeader.astro";
 import SiteFooter from "../../components/astro/SiteFooter.astro";
 import Container from "../../components/astro/Container.astro";
+import PageLayout from "../../components/astro/PageLayout.astro";
 import Section from "../../components/astro/Section.astro";
-import PageHeader from "../../components/astro/PageHeader.astro";
 import LabCard from "../../components/cards/LabCard.astro";
 import { LabsFilters } from "../../components/react/Filters";
 import { getLabs } from "../../lib/content/labs.js";
@@ -17,18 +17,23 @@ const labs = getLabs();
 <BaseLayout title="Labs — KCB Labs" description="Persistent areas of exploration at KCB Labs.">
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
-    <PageHeader label="Explore" title="Labs" description="Persistent areas of exploration — each lab asks what we are continuously investigating." />
-    <Section>
-      <LabsFilters client:visible />
-      <div id="labs-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
-        {labs.map((lab) => (
-          <div class="lab-card-wrapper" data-status={lab.data.status as string}>
-            <LabCard slug={lab.slug} title={lab.data.title as string} description={lab.data.description as string} status={lab.data.status as string} />
-          </div>
-        ))}
-      </div>
-      {labs.length === 0 && <p class="text-small" style="color: var(--color-muted);">No labs yet.</p>}
-    </Section>
+    <PageLayout
+      crumbs={[{ label: "Labs" }]}
+      title="Labs"
+      description="Persistent areas of exploration — each lab asks what we are continuously investigating."
+    >
+      <Section>
+        <LabsFilters client:visible />
+        <div id="labs-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+          {labs.map((lab) => (
+            <div class="lab-card-wrapper" data-status={lab.data.status as string}>
+              <LabCard slug={lab.slug} title={lab.data.title as string} description={lab.data.description as string} status={lab.data.status as string} />
+            </div>
+          ))}
+        </div>
+        {labs.length === 0 && <p class="text-small" style="color: var(--color-muted);">No labs yet.</p>}
+      </Section>
+    </PageLayout>
   </Container>
   <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

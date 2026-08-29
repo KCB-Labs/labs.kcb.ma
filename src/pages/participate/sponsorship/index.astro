@@ -3,76 +3,78 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import SiteHeader from "../../../components/astro/SiteHeader.astro";
 import SiteFooter from "../../../components/astro/SiteFooter.astro";
 import Container from "../../../components/astro/Container.astro";
+import PageLayout from "../../../components/astro/PageLayout.astro";
 import Section from "../../../components/astro/Section.astro";
-import PageHeader from "../../../components/astro/PageHeader.astro";
-import Breadcrumbs from "../../../components/astro/Breadcrumbs.astro";
-import Prose from "../../../components/astro/Prose.astro";
 import { getSponsorshipPage } from "../../../lib/content/pages.js";
 
 export const prerender = true;
 
 const sponsorship = getSponsorshipPage();
+const sTitle = sponsorship?.data?.title ?? "Support the Labs";
+const sDesc = sponsorship?.data?.description ?? "Support independent technology research and experimentation.";
+const sContent = sponsorship?.content ?? "";
 ---
 
-<BaseLayout title={sponsorship?.data?.title as string ?? "Support the Labs"} description={sponsorship?.data?.description as string ?? "Support independent technology research and experimentation."}>
+<BaseLayout title={sTitle} description={sDesc}>
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
-    <Breadcrumbs crumbs={[{ label: "Participate", href: "/participate" }, { label: "Sponsorship", href: "/participate/sponsorship" }]} />
-    <PageHeader title={sponsorship?.data?.title as string ?? "Support the Labs"} description={sponsorship?.data?.description as string ?? "Support independent technology research and experimentation."} />
+    <PageLayout
+      crumbs={[{ label: "Participate", href: "/participate" }, { label: "Sponsorship" }]}
+      title={sTitle}
+      description={sDesc}
+    >
+      <Section>
+        <p style="font-size: var(--text-h3); color: var(--color-text-strong); margin-bottom: var(--space-4);">
+          Support independent technology research and experimentation.
+        </p>
+        <p>{sContent || "Sponsorship content."}</p>
+      </Section>
 
-    <Section>
-      <p style="font-size: var(--text-h3); color: var(--color-text-strong); margin-bottom: var(--space-4);">
-        Support independent technology research and experimentation.
-      </p>
-      <Prose>
-        <div set:html={sponsorship?.content ?? ""} />
-      </Prose>
-    </Section>
+      <Section>
+        <h2>Sponsorship Tiers</h2>
+        <ul style="list-style:none; padding:0; display:grid; gap: var(--space-4);">
+          <li style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); background: var(--color-surface);">
+            <strong>Research Supporter</strong>
+            <p class="text-small" style="margin-top: var(--space-2);">Monthly contribution supporting ongoing research activities.</p>
+          </li>
+          <li style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); background: var(--color-surface);">
+            <strong>Lab Sponsor</strong>
+            <p class="text-small" style="margin-top: var(--space-2);">Sponsor a specific Lab research direction and experiments.</p>
+          </li>
+          <li style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); background: var(--color-surface);">
+            <strong>Project Sponsor</strong>
+            <p class="text-small" style="margin-top: var(--space-2);">Fund a specific Project from validation through implementation.</p>
+          </li>
+          <li style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); background: var(--color-surface);">
+            <strong>Technology Partner</strong>
+            <p class="text-small" style="margin-top: var(--space-2);">Provide technology, infrastructure, or platform access to Labs.</p>
+          </li>
+          <li style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); background: var(--color-surface);">
+            <strong>Strategic Partner</strong>
+            <p class="text-small" style="margin-top: var(--space-2);">Deep, multi-year partnership aligning research with strategic goals.</p>
+          </li>
+        </ul>
+      </Section>
 
-    <Section>
-      <h2>Sponsorship Tiers</h2>
-      <ul style="list-style:none; padding:0; display:grid; gap: var(--space-4);">
-        <li style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); background: var(--color-surface);">
-          <strong>Research Supporter</strong>
-          <p class="text-small" style="margin-top: var(--space-2);">Monthly contribution supporting ongoing research activities.</p>
-        </li>
-        <li style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); background: var(--color-surface);">
-          <strong>Lab Sponsor</strong>
-          <p class="text-small" style="margin-top: var(--space-2);">Sponsor a specific Lab's research direction and experiments.</p>
-        </li>
-        <li style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); background: var(--color-surface);">
-          <strong>Project Sponsor</strong>
-          <p class="text-small" style="margin-top: var(--space-2);">Fund a specific Project from validation through implementation.</p>
-        </li>
-        <li style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); background: var(--color-surface);">
-          <strong>Technology Partner</strong>
-          <p class="text-small" style="margin-top: var(--space-2);">Provide technology, infrastructure, or platform access to Labs.</p>
-        </li>
-        <li style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); background: var(--color-surface);">
-          <strong>Strategic Partner</strong>
-          <p class="text-small" style="margin-top: var(--space-2);">Deep, multi-year partnership aligning research with strategic goals.</p>
-        </li>
-      </ul>
-    </Section>
+      <Section>
+        <h2>What Your Support Enables</h2>
+        <ul style="list-style:none; padding:0; display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-3);">
+          <li style="padding: var(--space-3); border: var(--border-subtle); border-radius: var(--radius-md);">Research</li>
+          <li style="padding: var(--space-3); border: var(--border-subtle); border-radius: var(--radius-md);">Experiments</li>
+          <li style="padding: var(--space-3); border: var(--border-subtle); border-radius: var(--radius-md);">Infrastructure</li>
+          <li style="padding: var(--space-3); border: var(--border-subtle); border-radius: var(--radius-md);">Open Source</li>
+          <li style="padding: var(--space-3); border: var(--border-subtle); border-radius: var(--radius-md);">Prototyping</li>
+          <li style="padding: var(--space-3); border: var(--border-subtle); border-radius: var(--radius-md);">Collaborations</li>
+          <li style="padding: var(--space-3); border: var(--border-subtle); border-radius: var(--radius-md);">Transfer</li>
+        </ul>
+      </Section>
 
-    <Section>
-      <h2>What Your Support Enables</h2>
-      <ul style="list-style:none; padding:0; display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-3);">
-        <li style="padding: var(--space-3); border: var(--border-subtle); border-radius: var(--radius-md);">Research</li>
-        <li style="padding: var(--space-3); border: var(--border-subtle); border-radius: var(--radius-md);">Experiments</li>
-        <li style="padding: var(--space-3); border: var(--border-subtle); border-radius: var(--radius-md);">Infrastructure</li>
-        <li style="padding: var(--space-3); border: var(--border-subtle); border-radius: var(--radius-md);">Open Source</li>
-        <li style="padding: var(--space-3); border: var(--border-subtle); border-radius: var(--radius-md);">Prototyping</li>
-        <li style="padding: var(--space-3); border: var(--border-subtle); border-radius: var(--radius-md);">Collaborations</li>
-        <li style="padding: var(--space-3); border: var(--border-subtle); border-radius: var(--radius-md);">Transfer</li>
-      </ul>
-    </Section>
-
-    <Section>
-      <a href="/participate/collaboration" style="display:inline-block; padding: var(--space-3) var(--space-5); background: var(--color-accent); color: var(--color-accent-contrast); border-radius: var(--radius-md); text-decoration:none; font-weight: var(--weight-medium);">
-        Discuss Sponsorship →
-      </a>
-    </Section>
+      <Section>
+        <a href="/participate/collaboration" style="display:inline-block; padding: var(--space-3) var(--space-5); background: var(--color-accent); color: var(--color-accent-contrast); border-radius: var(--radius-md); text-decoration:none; font-weight: var(--weight-medium);">
+          Discuss Sponsorship
+        </a>
+      </Section>
+    </PageLayout>
   </Container>
   <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

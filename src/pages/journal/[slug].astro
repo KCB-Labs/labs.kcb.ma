@@ -3,9 +3,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/astro/SiteHeader.astro";
 import SiteFooter from "../../components/astro/SiteFooter.astro";
 import Container from "../../components/astro/Container.astro";
+import PageLayout from "../../components/astro/PageLayout.astro";
 import Section from "../../components/astro/Section.astro";
-import PageHeader from "../../components/astro/PageHeader.astro";
-import Breadcrumbs from "../../components/astro/Breadcrumbs.astro";
 import RichContent from "../../components/content/RichContent.astro";
 import LabCard from "../../components/cards/LabCard.astro";
 import ProjectCard from "../../components/cards/ProjectCard.astro";
@@ -54,99 +53,103 @@ const { previous, next } = getPreviousNextArticle(slug!, { includeDrafts: true }
 <BaseLayout title={`${article.data.title as string} — KCB Labs`} description={article.data.description as string} ogImage={article.data.socialImage as string | undefined} ogType="article">
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
-    <Breadcrumbs crumbs={[{ label: "Journal", href: "/journal" }, { label: article.data.title as string }]} />
-    <PageHeader title={article.data.title as string} description={article.data.description as string} status={`${article.data.category as string} · ${article.readingTime} min read`} />
+    <PageLayout
+      crumbs={[{ label: "Journal", href: "/journal" }, { label: article.data.title as string }]}
+      title={article.data.title as string}
+      description={article.data.description as string}
+      status={`${article.data.category as string} · ${article.readingTime} min read`}
+    >
+      <Section>
+        <p class="text-small" style="color: var(--color-muted);">
+          {article.data.publishedAt ? new Date(article.data.publishedAt as string).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : "Unpublished"}
+          {article.data.updatedAt && new Date(article.data.updatedAt as string) > new Date(article.data.publishedAt as string) && ` · Updated ${new Date(article.data.updatedAt as string).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`}
+          · {article.readingTime} min read
+        </p>
+        <RichContent content={article.content} />
+      </Section>
 
-    <Section>
-      <p class="text-small" style="color: var(--color-muted);">
-        {article.data.publishedAt ? new Date(article.data.publishedAt as string).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : "Unpublished"}
-        {article.data.updatedAt && new Date(article.data.updatedAt as string) > new Date(article.data.publishedAt as string) && ` · Updated ${new Date(article.data.updatedAt as string).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`}
-        · {article.readingTime} min read
-      </p>
-      <RichContent content={article.content} />
-    </Section>
+      <Section>
+        <h2>Related Lab</h2>
+        {relatedLabs.length > 0 ? (
+          <div style="display:grid; gap: var(--space-3);">
+            {relatedLabs.map((l) => <LabCard slug={l.slug} title={l.data.title as string} description={l.data.description as string} status={l.data.status as string} />)}
+          </div>
+        ) : <p class="text-small" style="color: var(--color-muted);">No related lab.</p>}
+      </Section>
 
-    <Section>
-      <h2>Related Lab</h2>
-      {relatedLabs.length > 0 ? (
-        <div style="display:grid; gap: var(--space-3);">
-          {relatedLabs.map((l) => <LabCard slug={l.slug} title={l.data.title as string} description={l.data.description as string} status={l.data.status as string} />)}
+      <Section>
+        <h2>Related Research</h2>
+        {relatedResearch.length > 0 ? (
+          <div style="display:grid; gap: var(--space-3);">
+            {relatedResearch.map((r) => (
+              <ResearchCard slug={r.slug} title={r.data.title as string} description={r.data.description as string} />
+            ))}
+          </div>
+        ) : <p class="text-small" style="color: var(--color-muted);">No related research.</p>}
+      </Section>
+
+      <Section>
+        <h2>Related Experiments</h2>
+        {relatedExperiments.length > 0 ? (
+          <div style="display:grid; gap: var(--space-3);">
+            {relatedExperiments.map((e) => (
+              <ExperimentCard slug={e.slug} title={e.data.title as string} description={e.data.description as string} outcome={e.data.outcome as string | undefined} />
+            ))}
+          </div>
+        ) : <p class="text-small" style="color: var(--color-muted);">No related experiments.</p>}
+      </Section>
+
+      <Section>
+        <h2>Related Projects</h2>
+        {relatedProjects.length > 0 ? (
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+            {relatedProjects.map((p) => (
+              <ProjectCard slug={p.slug} title={p.data.title as string} description={p.data.description as string} type={p.data.type as string} stage={p.data.stage as string} originLab={p.data.originLab as string | undefined} />
+            ))}
+          </div>
+        ) : <p class="text-small" style="color: var(--color-muted);">No related projects.</p>}
+      </Section>
+
+      <Section>
+        <h2>People</h2>
+        {relatedPeople.length > 0 ? (
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
+            {relatedPeople.map((p) => (
+              <PersonCard slug={p.slug} name={p.data.title as string} role={p.data.role as string | undefined} />
+            ))}
+          </div>
+        ) : <p class="text-small" style="color: var(--color-muted);">No people linked.</p>}
+      </Section>
+
+      <Section>
+        <h2>Organizations</h2>
+        {relatedOrgs.length > 0 ? (
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
+            {relatedOrgs.map((o) => (
+              <OrganizationCard slug={o.slug} name={o.data.title as string} type={o.data.type as string | undefined} />
+            ))}
+          </div>
+        ) : <p class="text-small" style="color: var(--color-muted);">No organizations linked.</p>}
+      </Section>
+
+      <Section>
+        <h2>Previous / Next Article</h2>
+        <div style="display:flex; gap: var(--space-4); flex-wrap:wrap;">
+          {previous ? (
+            <a href={`/journal/${previous.slug}`} style="flex:1; padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); text-decoration:none;">
+              <p class="text-metadata">← Previous</p>
+              <p>{previous.data.title as string}</p>
+            </a>
+          ) : <div style="flex:1; opacity:0.3;">No previous article</div>}
+          {next ? (
+            <a href={`/journal/${next.slug}`} style="flex:1; padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); text-decoration:none;">
+              <p class="text-metadata">Next →</p>
+              <p>{next.data.title as string}</p>
+            </a>
+          ) : <div style="flex:1; opacity:0.3;">No next article</div>}
         </div>
-      ) : <p class="text-small" style="color: var(--color-muted);">No related lab.</p>}
-    </Section>
-
-    <Section>
-      <h2>Related Research</h2>
-      {relatedResearch.length > 0 ? (
-        <div style="display:grid; gap: var(--space-3);">
-          {relatedResearch.map((r) => (
-            <ResearchCard slug={r.slug} title={r.data.title as string} description={r.data.description as string} />
-          ))}
-        </div>
-      ) : <p class="text-small" style="color: var(--color-muted);">No related research.</p>}
-    </Section>
-
-    <Section>
-      <h2>Related Experiments</h2>
-      {relatedExperiments.length > 0 ? (
-        <div style="display:grid; gap: var(--space-3);">
-          {relatedExperiments.map((e) => (
-            <ExperimentCard slug={e.slug} title={e.data.title as string} description={e.data.description as string} outcome={e.data.outcome as string | undefined} />
-          ))}
-        </div>
-      ) : <p class="text-small" style="color: var(--color-muted);">No related experiments.</p>}
-    </Section>
-
-    <Section>
-      <h2>Related Projects</h2>
-      {relatedProjects.length > 0 ? (
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
-          {relatedProjects.map((p) => (
-            <ProjectCard slug={p.slug} title={p.data.title as string} description={p.data.description as string} type={p.data.type as string} stage={p.data.stage as string} originLab={p.data.originLab as string | undefined} />
-          ))}
-        </div>
-      ) : <p class="text-small" style="color: var(--color-muted);">No related projects.</p>}
-    </Section>
-
-    <Section>
-      <h2>People</h2>
-      {relatedPeople.length > 0 ? (
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
-          {relatedPeople.map((p) => (
-            <PersonCard slug={p.slug} name={p.data.title as string} role={p.data.role as string | undefined} />
-          ))}
-        </div>
-      ) : <p class="text-small" style="color: var(--color-muted);">No people linked.</p>}
-    </Section>
-
-    <Section>
-      <h2>Organizations</h2>
-      {relatedOrgs.length > 0 ? (
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
-          {relatedOrgs.map((o) => (
-            <OrganizationCard slug={o.slug} name={o.data.title as string} type={o.data.type as string | undefined} />
-          ))}
-        </div>
-      ) : <p class="text-small" style="color: var(--color-muted);">No organizations linked.</p>}
-    </Section>
-
-    <Section>
-      <h2>Previous / Next Article</h2>
-      <div style="display:flex; gap: var(--space-4); flex-wrap:wrap;">
-        {previous ? (
-          <a href={`/journal/${previous.slug}`} style="flex:1; padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); text-decoration:none;">
-            <p class="text-metadata">← Previous</p>
-            <p>{previous.data.title as string}</p>
-          </a>
-        ) : <div style="flex:1; opacity:0.3;">No previous article</div>}
-        {next ? (
-          <a href={`/journal/${next.slug}`} style="flex:1; padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); text-decoration:none;">
-            <p class="text-metadata">Next →</p>
-            <p>{next.data.title as string}</p>
-          </a>
-        ) : <div style="flex:1; opacity:0.3;">No next article</div>}
-      </div>
-    </Section>
+      </Section>
+    </PageLayout>
   </Container>
   <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

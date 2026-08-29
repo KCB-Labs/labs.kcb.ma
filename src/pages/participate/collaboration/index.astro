@@ -3,9 +3,8 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import SiteHeader from "@components/astro/SiteHeader.astro";
 import SiteFooter from "@components/astro/SiteFooter.astro";
 import Container from "@components/astro/Container.astro";
+import PageLayout from "@components/astro/PageLayout.astro";
 import Section from "@components/astro/Section.astro";
-import PageHeader from "@components/astro/PageHeader.astro";
-import Breadcrumbs from "@components/astro/Breadcrumbs.astro";
 import ContactForm from "@components/astro/ContactForm.astro";
 
 export const prerender = true;
@@ -14,37 +13,40 @@ export const prerender = true;
 <BaseLayout title="Collaboration — KCB Labs" description="Research, technology, project, or startup partnerships with KCB Labs.">
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
-    <Breadcrumbs crumbs={[{ label: "Participate", href: "/participate" }, { label: "Collaboration", href: "/participate/collaboration" }]} />
-    <PageHeader title="Collaboration" description="Research, technology, project, or startup partnerships with KCB Labs." />
+    <PageLayout
+      crumbs={[{ label: "Participate", href: "/participate" }, { label: "Collaboration" }]}
+      title="Collaboration"
+      description="Research, technology, project, or startup partnerships with KCB Labs."
+    >
+      <Section>
+        <p style="font-size: var(--text-h3); color: var(--color-text-strong); margin-bottom: var(--space-4);">
+          We work with researchers, technologists, founders, and organizations exploring the frontier.
+        </p>
+        <p>Tell us about what you're building or researching. We'll review and get back to you if there's a fit.</p>
+      </Section>
 
-    <Section>
-      <p style="font-size: var(--text-h3); color: var(--color-text-strong); margin-bottom: var(--space-4);">
-        We work with researchers, technologists, founders, and organizations exploring the frontier.
-      </p>
-      <p>Tell us about what you're building or researching. We'll review and get back to you if there's a fit.</p>
-    </Section>
+      <Section>
+        <h2>Collaboration Types</h2>
+        <ul style="list-style:none; padding:0; display:grid; gap: var(--space-2);">
+          <li>Research — Joint research programs and publications</li>
+          <li>Technology — Platform, infrastructure, or tooling partnerships</li>
+          <li>Project — Co-development of validated projects</li>
+          <li>Startup — Incubation and spin-out support</li>
+          <li>Open-source contribution — Community-driven development</li>
+          <li>Sponsorship — Funding research and experimentation</li>
+        </ul>
+      </Section>
 
-    <Section>
-      <h2>Collaboration Types</h2>
-      <ul style="list-style:none; padding:0; display:grid; gap: var(--space-2);">
-        <li>Research — Joint research programs and publications</li>
-        <li>Technology — Platform, infrastructure, or tooling partnerships</li>
-        <li>Project — Co-development of validated projects</li>
-        <li>Startup — Incubation and spin-out support</li>
-        <li>Open-source contribution — Community-driven development</li>
-        <li>Sponsorship — Funding research and experimentation</li>
-      </ul>
-    </Section>
-
-    <Section>
-      <ContactForm
-        endpoint="/api/contact"
-        title="Collaboration"
-        interestOptions={["Research", "Technology", "Project", "Startup", "Open-source contribution", "Sponsorship"]}
-        defaultInterest="Research"
-        submitLabel="Submit Collaboration Inquiry"
-      />
-    </Section>
+      <Section>
+        <ContactForm
+          endpoint="/api/contact"
+          title="Collaboration"
+          interestOptions={["Research", "Technology", "Project", "Startup", "Open-source contribution", "Sponsorship"]}
+          defaultInterest="Research"
+          submitLabel="Submit Collaboration Inquiry"
+        />
+      </Section>
+    </PageLayout>
   </Container>
   <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

@@ -3,9 +3,8 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import SiteHeader from "../../../components/astro/SiteHeader.astro";
 import SiteFooter from "../../../components/astro/SiteFooter.astro";
 import Container from "../../../components/astro/Container.astro";
+import PageLayout from "../../../components/astro/PageLayout.astro";
 import Section from "../../../components/astro/Section.astro";
-import PageHeader from "../../../components/astro/PageHeader.astro";
-import Breadcrumbs from "../../../components/astro/Breadcrumbs.astro";
 import OrganizationCard from "../../../components/cards/OrganizationCard.astro";
 import { getOrganizations } from "../../../lib/content/organizations.js";
 
@@ -29,28 +28,31 @@ const sortedTypes = [...grouped.keys()].sort((a, b) => typeOrder.indexOf(a) - ty
 <BaseLayout title="Ecosystem — KCB Labs" description="Partners, clients, sponsors, and organizations in the KCB Labs ecosystem.">
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
-    <Breadcrumbs crumbs={[{ label: "About", href: "/about" }, { label: "Ecosystem", href: "/about/ecosystem" }]} />
-    <PageHeader title="Ecosystem" description="Partners, clients, sponsors, and organizations in the KCB Labs ecosystem. Built with an ecosystem." />
+    <PageLayout
+      crumbs={[{ label: "About", href: "/about" }, { label: "Ecosystem" }]}
+      title="Ecosystem"
+      description="Partners, clients, sponsors, and organizations in the KCB Labs ecosystem. Built with an ecosystem."
+    >
+      {sortedTypes.map((type) => {
+        const orgs = grouped.get(type)!;
+        return (
+          <Section>
+            <h2>{type}</h2>
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
+              {orgs.map((o) => (
+                <OrganizationCard slug={o.slug} name={o.data.title as string} type={o.data.type as string | undefined} />
+              ))}
+            </div>
+          </Section>
+        );
+      })}
 
-    {sortedTypes.map((type) => {
-      const orgs = grouped.get(type)!;
-      return (
+      {organizations.length === 0 && (
         <Section>
-          <h2>{type}</h2>
-          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
-            {orgs.map((o) => (
-              <OrganizationCard slug={o.slug} name={o.data.title as string} type={o.data.type as string | undefined} />
-            ))}
-          </div>
+          <p class="text-small" style="color: var(--color-muted);">No organizations published yet.</p>
         </Section>
-      );
-    })}
-
-    {organizations.length === 0 && (
-      <Section>
-        <p class="text-small" style="color: var(--color-muted);">No organizations published yet.</p>
-      </Section>
-    )}
+      )}
+    </PageLayout>
   </Container>
   <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

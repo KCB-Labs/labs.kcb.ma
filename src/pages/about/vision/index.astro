@@ -3,28 +3,30 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import SiteHeader from "../../../components/astro/SiteHeader.astro";
 import SiteFooter from "../../../components/astro/SiteFooter.astro";
 import Container from "../../../components/astro/Container.astro";
+import PageLayout from "../../../components/astro/PageLayout.astro";
 import Section from "../../../components/astro/Section.astro";
-import PageHeader from "../../../components/astro/PageHeader.astro";
-import Breadcrumbs from "../../../components/astro/Breadcrumbs.astro";
-import Prose from "../../../components/astro/Prose.astro";
 import { getVisionPage } from "../../../lib/content/pages.js";
 
 export const prerender = true;
 
 const vision = getVisionPage();
+const vTitle = vision?.data?.title ?? "Vision";
+const vDesc = vision?.data?.description ?? "Where KCB Labs is headed.";
+const vContent = vision?.content ?? "";
 ---
 
-<BaseLayout title={vision?.data?.title as string ?? "Vision"} description={vision?.data?.description as string ?? "Where KCB Labs is headed."}>
+<BaseLayout title={vTitle} description={vDesc}>
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
-    <Breadcrumbs crumbs={[{ label: "About", href: "/about" }, { label: "Vision", href: "/about/vision" }]} />
-    <PageHeader title={vision?.data?.title as string ?? "Vision"} description={vision?.data?.description as string ?? "Where KCB Labs is headed."} />
-
-    <Section>
-      <Prose>
-        <div set:html={vision?.content ?? ""} />
-      </Prose>
-    </Section>
+    <PageLayout
+      crumbs={[{ label: "About", href: "/about" }, { label: "Vision" }]}
+      title={vTitle}
+      description={vDesc}
+    >
+      <Section>
+        <p>{vContent || "Vision content placeholder."}</p>
+      </Section>
+    </PageLayout>
   </Container>
   <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

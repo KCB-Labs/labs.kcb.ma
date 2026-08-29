@@ -3,9 +3,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/astro/SiteHeader.astro";
 import SiteFooter from "../../components/astro/SiteFooter.astro";
 import Container from "../../components/astro/Container.astro";
+import PageLayout from "../../components/astro/PageLayout.astro";
 import Section from "../../components/astro/Section.astro";
-import PageHeader from "../../components/astro/PageHeader.astro";
-import Breadcrumbs from "../../components/astro/Breadcrumbs.astro";
 import ResearchCard from "../../components/cards/ResearchCard.astro";
 import ExperimentCard from "../../components/cards/ExperimentCard.astro";
 import ProjectCard from "../../components/cards/ProjectCard.astro";
@@ -51,100 +50,104 @@ const timelineEvents = [
 <BaseLayout title={`${lab.data.title as string} — KCB Labs`} description={lab.data.description as string}>
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
-    <Breadcrumbs crumbs={[{ label: "Labs", href: "/labs" }, { label: lab.data.title as string }]} />
-    <PageHeader title={lab.data.title as string} description={lab.data.description as string} status={lab.data.status as string} />
+    <PageLayout
+      crumbs={[{ label: "Labs", href: "/labs" }, { label: lab.data.title as string }]}
+      title={lab.data.title as string}
+      description={lab.data.description as string}
+      status={lab.data.status as string}
+    >
+      <Section>
+        <h2>Overview</h2>
+        <p class="text-body">{lab.content.slice(0, 400)}</p>
+        <h3 style="margin-top: var(--space-5);">Why we're exploring this</h3>
+        <p class="text-body">Why we explore {lab.data.title as string} — persistent questions and validation.</p>
+      </Section>
 
-    <Section>
-      <h2>Overview</h2>
-      <p class="text-body">{lab.content.slice(0, 400)}</p>
-      <h3 style="margin-top: var(--space-5);">Why we're exploring this</h3>
-      <p class="text-body">Why we explore {lab.data.title as string} — persistent questions and validation.</p>
-    </Section>
+      <Section>
+        <h2>Research</h2>
+        {research.length > 0 ? (
+          <div style="display:grid; gap: var(--space-3);">
+            {research.map((r) => (
+              <ResearchCard slug={r.slug} title={r.data.title as string} description={r.data.description as string} />
+            ))}
+          </div>
+        ) : <p class="text-small" style="color: var(--color-muted);">No research yet.</p>}
+      </Section>
 
-    <Section>
-      <h2>Research</h2>
-      {research.length > 0 ? (
-        <div style="display:grid; gap: var(--space-3);">
-          {research.map((r) => (
-            <ResearchCard slug={r.slug} title={r.data.title as string} description={r.data.description as string} />
-          ))}
+      <Section>
+        <h2>Experiments</h2>
+        {experiments.length > 0 ? (
+          <div style="display:grid; gap: var(--space-3);">
+            {experiments.map((e) => (
+              <ExperimentCard slug={e.slug} title={e.data.title as string} description={e.data.description as string} outcome={e.data.outcome as string | undefined} />
+            ))}
+          </div>
+        ) : <p class="text-small" style="color: var(--color-muted);">No experiments yet.</p>}
+      </Section>
+
+      <Section>
+        <h2>Projects born from this Lab</h2>
+        {projects.length > 0 ? (
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+            {projects.map((p) => (
+              <ProjectCard slug={p.slug} title={p.data.title as string} description={p.data.description as string} type={p.data.type as string} stage={p.data.stage as string} originLab={p.data.originLab as string | undefined} />
+            ))}
+          </div>
+        ) : <p class="text-small" style="color: var(--color-muted);">No projects yet.</p>}
+      </Section>
+
+      <Section>
+        <h2>People</h2>
+        {people.length > 0 ? (
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
+            {people.map((person) => (
+              <PersonCard slug={person.slug} name={person.data.title as string} role={person.data.role as string | undefined} />
+            ))}
+          </div>
+        ) : <p class="text-small" style="color: var(--color-muted);">No people linked yet.</p>}
+      </Section>
+
+      <Section>
+        <h2>Collaborators</h2>
+        {organizations.length > 0 ? (
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
+            {organizations.map((org) => (
+              <OrganizationCard slug={org.slug} name={org.data.title as string} type={org.data.type as string | undefined} />
+            ))}
+          </div>
+        ) : <p class="text-small" style="color: var(--color-muted);">No collaborators yet.</p>}
+      </Section>
+
+      <Section>
+        <h2>Technologies</h2>
+        {technologies.length > 0 ? (
+          <div style="display:flex; flex-wrap:wrap; gap: var(--space-2);">
+            {technologies.map((tech) => (
+              <span style="padding: var(--space-1) var(--space-2); background: var(--color-surface); border: var(--border-subtle); border-radius: var(--radius-sm); font-size: var(--text-small);">{tech}</span>
+            ))}
+          </div>
+        ) : <p class="text-small" style="color: var(--color-muted);">No technologies listed.</p>}
+      </Section>
+
+      <Section>
+        <h2>Related Journal</h2>
+        {articles.length > 0 ? (
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+            {articles.map((article) => (
+              <ArticleCard slug={article.slug} title={article.data.title as string} description={article.data.description as string} category={article.data.category as string} publishedAt={article.data.publishedAt as string | undefined} readingTime={article.readingTime} />
+            ))}
+          </div>
+        ) : <p class="text-small" style="color: var(--color-muted);">No related articles yet.</p>}
+      </Section>
+
+      <Section>
+        <h2>Timeline</h2>
+        <p class="text-small" style="color: var(--color-muted);">Lab timeline — research → experiments → projects.</p>
+        <div style="margin-top: var(--space-4);">
+          {timelineEvents.length > 0 ? <ReactTimeline events={timelineEvents} client:visible /> : <p class="text-small" style="color: var(--color-muted);">No timeline events yet.</p>}
         </div>
-      ) : <p class="text-small" style="color: var(--color-muted);">No research yet.</p>}
-    </Section>
-
-    <Section>
-      <h2>Experiments</h2>
-      {experiments.length > 0 ? (
-        <div style="display:grid; gap: var(--space-3);">
-          {experiments.map((e) => (
-            <ExperimentCard slug={e.slug} title={e.data.title as string} description={e.data.description as string} outcome={e.data.outcome as string | undefined} />
-          ))}
-        </div>
-      ) : <p class="text-small" style="color: var(--color-muted);">No experiments yet.</p>}
-    </Section>
-
-    <Section>
-      <h2>Projects born from this Lab</h2>
-      {projects.length > 0 ? (
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
-          {projects.map((p) => (
-            <ProjectCard slug={p.slug} title={p.data.title as string} description={p.data.description as string} type={p.data.type as string} stage={p.data.stage as string} originLab={p.data.originLab as string | undefined} />
-          ))}
-        </div>
-      ) : <p class="text-small" style="color: var(--color-muted);">No projects yet.</p>}
-    </Section>
-
-    <Section>
-      <h2>People</h2>
-      {people.length > 0 ? (
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
-          {people.map((person) => (
-            <PersonCard slug={person.slug} name={person.data.title as string} role={person.data.role as string | undefined} />
-          ))}
-        </div>
-      ) : <p class="text-small" style="color: var(--color-muted);">No people linked yet.</p>}
-    </Section>
-
-    <Section>
-      <h2>Collaborators</h2>
-      {organizations.length > 0 ? (
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
-          {organizations.map((org) => (
-            <OrganizationCard slug={org.slug} name={org.data.title as string} type={org.data.type as string | undefined} />
-          ))}
-        </div>
-      ) : <p class="text-small" style="color: var(--color-muted);">No collaborators yet.</p>}
-    </Section>
-
-    <Section>
-      <h2>Technologies</h2>
-      {technologies.length > 0 ? (
-        <div style="display:flex; flex-wrap:wrap; gap: var(--space-2);">
-          {technologies.map((tech) => (
-            <span style="padding: var(--space-1) var(--space-2); background: var(--color-surface); border: var(--border-subtle); border-radius: var(--radius-sm); font-size: var(--text-small);">{tech}</span>
-          ))}
-        </div>
-      ) : <p class="text-small" style="color: var(--color-muted);">No technologies listed.</p>}
-    </Section>
-
-    <Section>
-      <h2>Related Journal</h2>
-      {articles.length > 0 ? (
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
-          {articles.map((article) => (
-            <ArticleCard slug={article.slug} title={article.data.title as string} description={article.data.description as string} category={article.data.category as string} publishedAt={article.data.publishedAt as string | undefined} readingTime={article.readingTime} />
-          ))}
-        </div>
-      ) : <p class="text-small" style="color: var(--color-muted);">No related articles yet.</p>}
-    </Section>
-
-    <Section>
-      <h2>Timeline</h2>
-      <p class="text-small" style="color: var(--color-muted);">Lab timeline — research → experiments → projects.</p>
-      <div style="margin-top: var(--space-4);">
-        {timelineEvents.length > 0 ? <ReactTimeline events={timelineEvents} client:visible /> : <p class="text-small" style="color: var(--color-muted);">No timeline events yet.</p>}
-      </div>
-    </Section>
+      </Section>
+    </PageLayout>
   </Container>
   <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

@@ -3,8 +3,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/astro/SiteHeader.astro";
 import SiteFooter from "../../components/astro/SiteFooter.astro";
 import Container from "../../components/astro/Container.astro";
+import PageLayout from "../../components/astro/PageLayout.astro";
 import Section from "../../components/astro/Section.astro";
-import PageHeader from "../../components/astro/PageHeader.astro";
 import ProjectCard from "../../components/cards/ProjectCard.astro";
 import { ProjectsFilters } from "../../components/react/Filters";
 import { getProjects } from "../../lib/content/projects.js";
@@ -17,18 +17,23 @@ const projects = getProjects();
 <BaseLayout title="Projects — KCB Labs" description="Projects born in KCB Labs — from idea to implementation.">
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
-    <PageHeader label="Explore" title="Projects" description="Something KCB has decided is worth implementing beyond pure exploration." />
-    <Section>
-      <ProjectsFilters client:visible />
-      <div id="projects-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
-        {projects.map((project) => (
-          <div class="project-card-wrapper" data-type={project.data.type as string} data-stage={project.data.stage as string}>
-            <ProjectCard slug={project.slug} title={project.data.title as string} description={project.data.description as string} type={project.data.type as string} stage={project.data.stage as string} originLab={project.data.originLab as string | undefined} />
-          </div>
-        ))}
-      </div>
-      {projects.length === 0 && <p class="text-small" style="color: var(--color-muted);">No projects yet.</p>}
-    </Section>
+    <PageLayout
+      crumbs={[{ label: "Projects" }]}
+      title="Projects"
+      description="Something KCB has decided is worth implementing beyond pure exploration."
+    >
+      <Section>
+        <ProjectsFilters client:visible />
+        <div id="projects-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+          {projects.map((project) => (
+            <div class="project-card-wrapper" data-type={project.data.type as string} data-stage={project.data.stage as string}>
+              <ProjectCard slug={project.slug} title={project.data.title as string} description={project.data.description as string} type={project.data.type as string} stage={project.data.stage as string} originLab={project.data.originLab as string | undefined} />
+            </div>
+          ))}
+        </div>
+        {projects.length === 0 && <p class="text-small" style="color: var(--color-muted);">No projects yet.</p>}
+      </Section>
+    </PageLayout>
   </Container>
   <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

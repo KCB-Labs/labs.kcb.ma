@@ -3,9 +3,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/astro/SiteHeader.astro";
 import SiteFooter from "../../components/astro/SiteFooter.astro";
 import Container from "../../components/astro/Container.astro";
+import PageLayout from "../../components/astro/PageLayout.astro";
 import Section from "../../components/astro/Section.astro";
-import PageHeader from "../../components/astro/PageHeader.astro";
-import Breadcrumbs from "../../components/astro/Breadcrumbs.astro";
 import StatusBadge from "../../components/ui/StatusBadge.astro";
 import RichContent from "../../components/content/RichContent.astro";
 import LabCard from "../../components/cards/LabCard.astro";
@@ -37,94 +36,98 @@ const relatedProject = relatedProjectSlug ? getProjects().find((p) => p.slug ===
 <BaseLayout title={`${openSource.data.title as string} — KCB Labs Open Source`} description={openSource.data.description as string} ogImage={openSource.data.socialImage as string | undefined}>
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
-    <Breadcrumbs crumbs={[{ label: "Open Source", href: "/open-source" }, { label: openSource.data.title as string }]} />
-    <PageHeader title={openSource.data.title as string} description={openSource.data.description as string} status={`${openSource.data.license as string} · ${openSource.data.status as string}`} />
-
-    <Section>
-      <div style="display:flex; gap: var(--space-3); flex-wrap:wrap; align-items:center; margin-bottom: var(--space-4);">
-        <StatusBadge status={openSource.data.status as string} />
-        <span class="badge badge--license">{openSource.data.license as string}</span>
-        {relatedLab && <a href={`/labs/${relatedLab.slug}`} class="badge badge--lab">Lab: {relatedLab.data.title as string}</a>}
-        {relatedProject && <a href={`/projects/${relatedProject.slug}`} class="badge badge--project">Project: {relatedProject.data.title as string}</a>}
-      </div>
-      <p class="text-small" style="color: var(--color-muted);">
-        {openSource.data.publishedAt ? new Date(openSource.data.publishedAt as string).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : "Unpublished"}
-        {openSource.data.updatedAt && new Date(openSource.data.updatedAt as string) > new Date(openSource.data.publishedAt as string) && ` · Updated ${new Date(openSource.data.updatedAt as string).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`}
-      </p>
-      <RichContent content={openSource.content} />
-    </Section>
-
-    {relatedLab && (
+    <PageLayout
+      crumbs={[{ label: "Open Source", href: "/open-source" }, { label: openSource.data.title as string }]}
+      title={openSource.data.title as string}
+      description={openSource.data.description as string}
+      status={`${openSource.data.license as string} · ${openSource.data.status as string}`}
+    >
       <Section>
-        <h2>Origin Lab</h2>
-        <div style="display:grid; gap: var(--space-3);">
-          <LabCard slug={relatedLab.slug} title={relatedLab.data.title as string} description={relatedLab.data.description as string} status={relatedLab.data.status as string} />
+        <div style="display:flex; gap: var(--space-3); flex-wrap:wrap; align-items:center; margin-bottom: var(--space-4);">
+          <StatusBadge status={openSource.data.status as string} />
+          <span class="badge badge--license">{openSource.data.license as string}</span>
+          {relatedLab && <a href={`/labs/${relatedLab.slug}`} class="badge badge--lab">Lab: {relatedLab.data.title as string}</a>}
+          {relatedProject && <a href={`/projects/${relatedProject.slug}`} class="badge badge--project">Project: {relatedProject.data.title as string}</a>}
         </div>
+        <p class="text-small" style="color: var(--color-muted);">
+          {openSource.data.publishedAt ? new Date(openSource.data.publishedAt as string).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : "Unpublished"}
+          {openSource.data.updatedAt && new Date(openSource.data.updatedAt as string) > new Date(openSource.data.publishedAt as string) && ` · Updated ${new Date(openSource.data.updatedAt as string).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`}
+        </p>
+        <RichContent content={openSource.content} />
       </Section>
-    )}
 
-    {relatedProject && (
+      {relatedLab && (
+        <Section>
+          <h2>Origin Lab</h2>
+          <div style="display:grid; gap: var(--space-3);">
+            <LabCard slug={relatedLab.slug} title={relatedLab.data.title as string} description={relatedLab.data.description as string} status={relatedLab.data.status as string} />
+          </div>
+        </Section>
+      )}
+
+      {relatedProject && (
+        <Section>
+          <h2>Related Project</h2>
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+            <ProjectCard slug={relatedProject.slug} title={relatedProject.data.title as string} description={relatedProject.data.description as string} type={relatedProject.data.type as string} stage={relatedProject.data.stage as string} originLab={relatedProject.data.originLab as string | undefined} />
+          </div>
+        </Section>
+      )}
+
       <Section>
-        <h2>Related Project</h2>
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
-          <ProjectCard slug={relatedProject.slug} title={relatedProject.data.title as string} description={relatedProject.data.description as string} type={relatedProject.data.type as string} stage={relatedProject.data.stage as string} originLab={relatedProject.data.originLab as string | undefined} />
-        </div>
+        <h2>Repository</h2>
+        {openSource.data.repository && (
+          <p><a href={openSource.data.repository as string} target="_blank" rel="noopener noreferrer">{openSource.data.repository as string}</a></p>
+        )}
+        {openSource.data.docs && (
+          <p><a href={openSource.data.docs as string} target="_blank" rel="noopener noreferrer">Documentation</a></p>
+        )}
       </Section>
-    )}
 
-    <Section>
-      <h2>Repository</h2>
-      {openSource.data.repository && (
-        <p><a href={openSource.data.repository as string} target="_blank" rel="noopener noreferrer">{openSource.data.repository as string}</a></p>
-      )}
-      {openSource.data.docs && (
-        <p><a href={openSource.data.docs as string} target="_blank" rel="noopener noreferrer">Documentation</a></p>
-      )}
-    </Section>
+      <Section>
+        <h2>Technologies</h2>
+        {openSource.data.technologies && Array.isArray(openSource.data.technologies) && openSource.data.technologies.length > 0 ? (
+          <ul style="list-style:none; padding:0; display:flex; flex-wrap:wrap; gap: var(--space-2);">
+            {openSource.data.technologies.map((t: string) => <li><span class="badge badge--tech">{t}</span></li>)}
+          </ul>
+        ) : (
+          <p class="text-small" style="color: var(--color-muted);">No technologies listed.</p>
+        )}
+      </Section>
 
-    <Section>
-      <h2>Technologies</h2>
-      {openSource.data.technologies && Array.isArray(openSource.data.technologies) && openSource.data.technologies.length > 0 ? (
-        <ul style="list-style:none; padding:0; display:flex; flex-wrap:wrap; gap: var(--space-2);">
-          {openSource.data.technologies.map((t: string) => <li><span class="badge badge--tech">{t}</span></li>)}
-        </ul>
-      ) : (
-        <p class="text-small" style="color: var(--color-muted);">No technologies listed.</p>
-      )}
-    </Section>
-
-    <style>
-      .badge--license {
-        font-family: var(--font-mono);
-        font-size: var(--text-metadata);
-        letter-spacing: 0.04em;
-        padding: 0.2em 0.6em;
-        border-radius: var(--radius-full);
-        background: var(--color-accent);
-        color: var(--color-accent-contrast);
-      }
-      .badge--lab, .badge--project {
-        font-family: var(--font-mono);
-        font-size: var(--text-metadata);
-        letter-spacing: 0.04em;
-        padding: 0.2em 0.6em;
-        border-radius: var(--radius-full);
-        background: var(--color-surface);
-        border: var(--border-subtle);
-        color: var(--color-muted-strong);
-        text-decoration: none;
-      }
-      .badge--tech {
-        font-family: var(--font-mono);
-        font-size: var(--text-metadata);
-        letter-spacing: 0.04em;
-        padding: 0.2em 0.6em;
-        border-radius: var(--radius-full);
-        background: var(--color-surface);
-        border: var(--border-subtle);
-        color: var(--color-muted-strong);
-      }
-    </style>
+      <style>
+        .badge--license {
+          font-family: var(--font-mono);
+          font-size: var(--text-metadata);
+          letter-spacing: 0.04em;
+          padding: 0.2em 0.6em;
+          border-radius: var(--radius-full);
+          background: var(--color-accent);
+          color: var(--color-accent-contrast);
+        }
+        .badge--lab, .badge--project {
+          font-family: var(--font-mono);
+          font-size: var(--text-metadata);
+          letter-spacing: 0.04em;
+          padding: 0.2em 0.6em;
+          border-radius: var(--radius-full);
+          background: var(--color-surface);
+          border: var(--border-subtle);
+          color: var(--color-muted-strong);
+          text-decoration: none;
+        }
+        .badge--tech {
+          font-family: var(--font-mono);
+          font-size: var(--text-metadata);
+          letter-spacing: 0.04em;
+          padding: 0.2em 0.6em;
+          border-radius: var(--radius-full);
+          background: var(--color-surface);
+          border: var(--border-subtle);
+          color: var(--color-muted-strong);
+        }
+      </style>
+    </PageLayout>
   </Container>
   <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

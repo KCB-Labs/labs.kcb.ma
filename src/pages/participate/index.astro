@@ -3,43 +3,45 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/astro/SiteHeader.astro";
 import SiteFooter from "../../components/astro/SiteFooter.astro";
 import Container from "../../components/astro/Container.astro";
+import PageLayout from "../../components/astro/PageLayout.astro";
 import Section from "../../components/astro/Section.astro";
-import PageHeader from "../../components/astro/PageHeader.astro";
-import Breadcrumbs from "../../components/astro/Breadcrumbs.astro";
-import Prose from "../../components/astro/Prose.astro";
 import { getParticipatePage } from "../../lib/content/pages.js";
 
 export const prerender = true;
 
 const participate = getParticipatePage();
+const pTitle = participate?.data?.title ?? "Participate";
+const pDesc = participate?.data?.description ?? "Support, collaborate, or connect with KCB Labs.";
+const pContent = participate?.content ?? "";
 ---
 
-<BaseLayout title={participate?.data?.title as string ?? "Participate"} description={participate?.data?.description as string ?? "Support, collaborate, or connect with KCB Labs."}>
+<BaseLayout title={pTitle} description={pDesc}>
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
-    <Breadcrumbs crumbs={[{ label: "Participate", href: "/participate" }]} />
-    <PageHeader title={participate?.data?.title as string ?? "Participate"} description={participate?.data?.description as string ?? "Support, collaborate, or connect with KCB Labs."} />
+    <PageLayout
+      crumbs={[{ label: "Participate" }]}
+      title={pTitle}
+      description={pDesc}
+    >
+      <Section>
+        <p>{pContent || "Participate content."}</p>
+      </Section>
 
-    <Section>
-      <Prose>
-        <div set:html={participate?.content ?? ""} />
-      </Prose>
-    </Section>
-
-    <Section>
-      <h2>Ways to Participate</h2>
-      <ul style="list-style:none; padding:0; display:grid; gap: var(--space-3);">
-        <li><a href="/participate/sponsorship" style="text-decoration:none; padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); display:block; background: var(--color-surface);">
-          <strong>Sponsorship</strong> — Support independent technology research and experimentation
-        </a></li>
-        <li><a href="/participate/collaboration" style="text-decoration:none; padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); display:block; background: var(--color-surface);">
-          <strong>Collaboration</strong> — Research, technology, project, or startup partnerships
-        </a></li>
-        <li><a href="/contact" style="text-decoration:none; padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); display:block; background: var(--color-surface);">
-          <strong>Contact</strong> — Get in touch with the team
-        </a></li>
-      </ul>
-    </Section>
+      <Section>
+        <h2>Ways to Participate</h2>
+        <ul style="list-style:none; padding:0; display:grid; gap: var(--space-3);">
+          <li><a href="/participate/sponsorship" style="text-decoration:none; padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); display:block; background: var(--color-surface);">
+            <strong>Sponsorship</strong> - Support independent technology research and experimentation
+          </a></li>
+          <li><a href="/participate/collaboration" style="text-decoration:none; padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); display:block; background: var(--color-surface);">
+            <strong>Collaboration</strong> - Research, technology, project, or startup partnerships
+          </a></li>
+          <li><a href="/contact" style="text-decoration:none; padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); display:block; background: var(--color-surface);">
+            <strong>Contact</strong> - Get in touch with the team
+          </a></li>
+        </ul>
+      </Section>
+    </PageLayout>
   </Container>
   <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>
