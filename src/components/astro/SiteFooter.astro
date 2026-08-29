@@ -6,25 +6,25 @@ const year = new Date().getFullYear();
   <Container>
     <div class="grid">
       <div>
-        <p class="brand">KCB Labs</p>
-        <p class="text-small">A public R&amp;D and innovation platform documenting how ideas become experiments, projects and outcomes.</p>
+        <p class="brand">KCB LABS</p>
+        <p class="brand-desc">A public R&amp;D and innovation platform documenting how ideas become experiments, projects and outcomes.</p>
       </div>
       <div>
-        <p class="text-metadata">Explore</p>
+        <h4>Explore</h4>
         <ul>
-          <li><a href="/labs">Labs</a></li>
-          <li><a href="/projects">Projects</a></li>
-          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="/explore/labs">Labs</a></li>
+          <li><a href="/explore/projects">Projects</a></li>
+          <li><a href="/explore/open-source">Open Source</a></li>
         </ul>
       </div>
       <div>
-        <p class="text-metadata">Journal</p>
+        <h4>Journal</h4>
         <ul>
           <li><a href="/journal">Articles</a></li>
         </ul>
       </div>
       <div>
-        <p class="text-metadata">Participate</p>
+        <h4>Participate</h4>
         <ul>
           <li><a href="/participate/sponsorship">Sponsorship</a></li>
           <li><a href="/participate/collaboration">Collaboration</a></li>
@@ -32,45 +32,77 @@ const year = new Date().getFullYear();
         </ul>
       </div>
     </div>
-    <p class="text-small" style="margin-top: var(--space-6); color: var(--color-muted);">© {year} KCB Labs — labs.kcb.ma</p>
+    <div class="fine">&copy; {year} KCB Labs &mdash; labs.kcb.ma</div>
   </Container>
 </footer>
 
 <style>
   .site-footer {
-    margin-top: var(--space-8);
-    border-top: 1px solid var(--color-border);
-    padding-block: var(--space-8);
     background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding-block: 56px 30px;
+    margin-top: var(--space-8);
   }
   .grid {
     display: grid;
-    gap: var(--space-6);
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 32px;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
   }
   .brand {
     font-family: var(--font-mono);
-    font-weight: 700;
+    font-weight: 800;
+    font-size: 15px;
+    margin: 0 0 12px;
     text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .brand-desc {
+    font-size: 13.5px;
+    color: var(--color-muted);
+    line-height: 1.5;
+    max-width: 280px;
+    margin: 0;
+  }
+  .site-footer h4 {
+    font-family: var(--font-mono);
+    font-size: 12px;
     letter-spacing: 0.06em;
-    margin-bottom: var(--space-2);
+    color: var(--color-muted);
+    margin: 0 0 14px;
+    text-transform: uppercase;
+    font-weight: 700;
   }
   .site-footer ul {
     list-style: none;
     padding: 0;
-    margin-top: var(--space-2);
-    display: grid;
-    gap: var(--space-1);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
   .site-footer a {
+    font-size: 14px;
     text-decoration: none;
-    color: var(--color-muted);
-    font-size: var(--text-small);
+    color: var(--color-text);
+    transition: color var(--motion-duration-fast) var(--motion-ease);
   }
   .site-footer a:hover {
     color: var(--color-accent);
   }
+  .fine {
+    margin-top: 40px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-muted);
+    border-top: 1px solid var(--color-border);
+    padding-top: 20px;
+  }
   @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 480px) {
     .grid {
       grid-template-columns: 1fr;
     }

@@ -6,23 +6,29 @@ interface Props {
 }
 const { knowledge, creativity, business } = Astro.props;
 
-function dots(score: number): string {
+function dotArray(score: number): boolean[] {
   const filled = Math.max(0, Math.min(3, score));
-  return "●".repeat(filled) + "○".repeat(3 - filled);
+  return [filled >= 1, filled >= 2, filled >= 3];
 }
 ---
 <span class="rating" aria-label={`Knowledge ${knowledge} of 3, Creativity ${creativity} of 3, Business ${business} of 3`}>
   <span class="rating__criterion">
     <span class="rating__label">Knowledge</span>
-    <span class="rating__dots">{dots(knowledge)}</span>
+    <span class="rating__dots">
+      {dotArray(knowledge).map((on) => <span class:list={["dot", { "dot--on": on }]} />)}
+    </span>
   </span>
   <span class="rating__criterion">
     <span class="rating__label">Creativity</span>
-    <span class="rating__dots">{dots(creativity)}</span>
+    <span class="rating__dots">
+      {dotArray(creativity).map((on) => <span class:list={["dot", { "dot--on": on }]} />)}
+    </span>
   </span>
   <span class="rating__criterion">
     <span class="rating__label">Business</span>
-    <span class="rating__dots">{dots(business)}</span>
+    <span class="rating__dots">
+      {dotArray(business).map((on) => <span class:list={["dot", { "dot--on": on }]} />)}
+    </span>
   </span>
 </span>
 
@@ -33,20 +39,31 @@ function dots(score: number): string {
     align-items: center;
     gap: var(--space-3);
     font-family: var(--font-mono);
-    font-size: var(--text-metadata);
+    font-size: 11.5px;
     color: var(--color-muted);
     white-space: nowrap;
   }
   .rating__criterion {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-1);
+    gap: 6px;
   }
   .rating__label {
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
   }
   .rating__dots {
-    letter-spacing: 0.1em;
+    display: flex;
+    gap: 3px;
+    align-items: center;
+  }
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-border);
+  }
+  .dot--on {
+    background: var(--color-accent);
   }
 </style>

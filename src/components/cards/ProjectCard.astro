@@ -20,39 +20,54 @@ const { slug, title, description, type, stage, originLab, ratingKnowledge = 1, r
     <TypeBadge type={type} />
     <StageBadge stage={stage} />
   </div>
-  <div class="card__title-row">
-    <h3>{title}</h3>
+  <h3>{title}</h3>
+  <p class="card__desc">{description}</p>
+  {originLab && <p class="card__origin">{originLab}</p>}
+  <div class="card__metrics">
     <RatingDots knowledge={ratingKnowledge} creativity={ratingCreativity} business={ratingBusiness} />
   </div>
-  <p class="text-small">{description}</p>
-  {originLab && <p class="text-metadata">Origin: {originLab}</p>}
 </a>
 
 <style>
   .card--project {
-    display: grid;
-    gap: var(--space-3);
-    padding: var(--s-gap);
-    background: var(--color-bg);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 26px;
+    background: #fff;
     border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
     text-decoration: none;
     color: inherit;
     transition: border-color var(--motion-duration) var(--motion-ease);
   }
   .card--project:hover {
-    border-color: var(--color-accent);
+    border-color: var(--color-text);
   }
   .card__meta {
     display: flex;
     gap: var(--space-2);
   }
-  .card__title-row {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-3);
-    flex-wrap: wrap;
-  }
-  .card__title-row h3 {
+  .card--project h3 {
+    font-family: var(--font-mono);
+    font-size: 21px;
+    font-weight: 800;
     margin: 0;
+  }
+  .card__desc {
+    margin: 0;
+    font-size: 14.5px;
+    color: var(--color-muted);
+    line-height: 1.5;
+  }
+  .card__origin {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--color-muted);
+    margin: 0;
+  }
+  .card__metrics {
+    margin-top: auto;
   }
 </style>

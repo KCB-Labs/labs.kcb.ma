@@ -6,19 +6,20 @@
  */
 
 :root {
-  /* Colors — International Safety palette */
-  --color-bg: #f4f4f0;
-  --color-surface: #ebebe6;
-  --color-surface-raised: #ebebe6;
-  --color-text: #111111;
-  --color-text-strong: #111111;
-  --color-muted: #585855;
-  --color-muted-strong: #585855;
-  --color-accent: #f04e30;
-  --color-accent-hover: #d13a1e;
+  /* Colors — warm industrial palette */
+  --color-bg: #f3f2ee;
+  --color-surface: #eae8e2;
+  --color-surface-raised: #eae8e2;
+  --color-text: #1c1b19;
+  --color-text-strong: #1c1b19;
+  --color-muted: #6b6a64;
+  --color-muted-strong: #6b6a64;
+  --color-accent: #d9541f;
+  --color-accent-hover: #c44a1a;
   --color-accent-contrast: #ffffff;
-  --color-border: #d1d1c7;
-  --color-border-strong: #d1d1c7;
+  --color-accent-soft: #f0d8cc;
+  --color-border: #d8d6cf;
+  --color-border-strong: #d8d6cf;
   --border-subtle: 1px solid var(--color-border);
   --border-strong: 1px solid var(--color-border-strong);
 

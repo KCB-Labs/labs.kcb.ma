@@ -12,24 +12,53 @@ const { slug, title, description, category, publishedAt, readingTime, relatedLab
 const date = publishedAt ? new Date(publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }) : "";
 ---
 <a href={`/journal/${slug}`} class="card card--article">
-  <p class="text-metadata">{category} {date && `· ${date}`} {readingTime && `· ${readingTime} min`}</p>
+  <p class="card__meta">{category} {date && `· ${date}`} {readingTime && `· ${readingTime} min`}</p>
   <h3>{title}</h3>
-  <p class="text-small">{description}</p>
-  {relatedLab && <p class="text-metadata">Lab: {relatedLab}</p>}
+  <p class="card__desc">{description}</p>
+  {relatedLab && <p class="card__origin">Lab: {relatedLab}</p>}
 </a>
 
 <style>
   .card--article {
-    display: grid;
-    gap: var(--space-3);
-    padding: var(--s-gap);
-    background: var(--color-bg);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 26px;
+    background: #fff;
     border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
     text-decoration: none;
     color: inherit;
     transition: border-color var(--motion-duration) var(--motion-ease);
   }
   .card--article:hover {
-    border-color: var(--color-accent);
+    border-color: var(--color-text);
+  }
+  .card__meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--color-muted);
+    margin: 0;
+    text-transform: uppercase;
+  }
+  .card--article h3 {
+    font-family: var(--font-mono);
+    font-size: 21px;
+    font-weight: 800;
+    margin: 0;
+  }
+  .card__desc {
+    margin: 0;
+    font-size: 14.5px;
+    color: var(--color-muted);
+    line-height: 1.5;
+  }
+  .card__origin {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--color-muted);
+    margin: 0;
   }
 </style>

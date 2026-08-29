@@ -23,12 +23,11 @@ const { crumbs } = Astro.props;
 <style>
   .breadcrumb {
     font-family: var(--font-mono);
-    font-size: var(--text-metadata);
-    letter-spacing: 0.06em;
+    font-size: 12px;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--color-muted);
-    padding-block: var(--space-3) var(--space-4);
-    border-bottom: var(--border-subtle);
+    padding-top: var(--space-5);
   }
   .breadcrumb ol {
     display: flex;
@@ -57,6 +56,6 @@ const { crumbs } = Astro.props;
   }
   .breadcrumb span[aria-current="page"] {
     color: var(--color-text);
-    font-weight: var(--weight-medium);
+    font-weight: 700;
   }
 </style>
