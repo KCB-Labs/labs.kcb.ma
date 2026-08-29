@@ -110,7 +110,7 @@ const participateLinks = [
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--space-4) 0;
+    padding: var(--s-gap);
     gap: var(--space-6);
   }
   .brand {
@@ -119,7 +119,7 @@ const participateLinks = [
     text-decoration: none;
   }
   .logo {
-    height: 40px;
+    height: 28px;
     width: auto;
     mix-blend-mode: multiply;
   }
@@ -129,22 +129,23 @@ const participateLinks = [
     display: flex;
     align-items: center;
     gap: var(--space-5);
-    font-size: var(--text-small);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
   .links a {
     text-decoration: none;
-    color: var(--color-muted-strong);
-  }
-  .links a:hover {
     color: var(--color-text);
   }
+  .links a:hover {
+    color: var(--color-accent);
+  }
   .nav-link {
-    padding-bottom: 2px solid transparent;
     transition: color var(--motion-duration-fast) var(--motion-ease);
   }
   .nav-link--active {
-    color: var(--color-text);
-    border-bottom: 2px solid var(--color-accent);
+    color: var(--color-accent);
   }
 
   /* Desktop dropdown */
@@ -175,15 +176,17 @@ const participateLinks = [
     align-items: center;
     background: none;
     border: none;
-    color: var(--color-muted-strong);
+    color: var(--color-text);
     cursor: pointer;
-    font-size: var(--text-small);
+    font-size: 0.65rem;
     padding: 0;
     line-height: 1;
+    vertical-align: middle;
+    margin-left: -0.25em;
     transition: color var(--motion-duration) var(--motion-ease);
   }
   .dropdown-toggle:hover {
-    color: var(--color-text);
+    color: var(--color-accent);
   }
   .dropdown-toggle:focus-visible {
     outline: 2px solid var(--color-accent);
@@ -193,13 +196,19 @@ const participateLinks = [
   .dropdown-link {
     padding: var(--space-1) var(--space-2);
     border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text);
+    text-decoration: none;
   }
   .dropdown-link:hover {
-    background: var(--color-bg);
+    background: var(--color-surface);
+    color: var(--color-accent);
   }
   .dropdown-link--active {
-    color: var(--color-text);
-    font-weight: var(--weight-medium);
+    color: var(--color-accent);
   }
 
   /* Mobile menu */
@@ -243,8 +252,11 @@ const participateLinks = [
   .mobile-parent {
     display: block;
     padding: var(--space-2) var(--space-2);
-    font-size: var(--text-small);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
     font-weight: var(--weight-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     color: var(--color-text);
     cursor: pointer;
     list-style: none;
