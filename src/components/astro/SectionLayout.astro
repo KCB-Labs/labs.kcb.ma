@@ -1,5 +1,5 @@
 ---
-import PageLayout from "./PageLayout.astro";
+import Breadcrumb from "./Breadcrumb.astro";
 import SectionSidebar from "./SectionSidebar.astro";
 
 interface Crumb {
@@ -18,29 +18,71 @@ const { crumbs, title, description, status, section, currentSlug } = Astro.props
 ---
 
 <div class="section-layout">
-  <PageLayout crumbs={crumbs} title={title} description={description} status={status}>
-    <div class="section-layout__body">
-      <aside class="section-layout__sidebar">
-        <SectionSidebar section={section} currentSlug={currentSlug} />
-      </aside>
+  <Breadcrumb crumbs={crumbs} />
+
+  <div class="section-layout__body">
+    <aside class="section-layout__sidebar">
+      <SectionSidebar section={section} currentSlug={currentSlug} />
+    </aside>
+
+    <div class="section-layout__main">
+      <header class="section-layout__header">
+        <h1>{title}</h1>
+        {description && <p class="section-layout__description">{description}</p>}
+        {status && <p class="section-layout__status">{status}</p>}
+      </header>
+
       <div class="section-layout__content">
         <slot />
       </div>
     </div>
-  </PageLayout>
+  </div>
 </div>
 
 <style>
+  .section-layout {
+    padding-top: var(--space-6);
+  }
+
   .section-layout__body {
     display: grid;
     grid-template-columns: 240px 1fr;
     gap: var(--space-8);
     align-items: start;
+    padding-top: var(--space-5);
   }
   .section-layout__sidebar {
     position: sticky;
     top: 4.5rem;
   }
+
+  /* Header — inside content column */
+  .section-layout__header {
+    padding-bottom: var(--space-5);
+    border-bottom: var(--border-subtle);
+  }
+  .section-layout__header h1 {
+    margin: 0;
+  }
+  .section-layout__description {
+    color: var(--color-muted);
+    margin-top: var(--space-2);
+    max-width: var(--container-content);
+  }
+  .section-layout__status {
+    font-family: var(--font-mono);
+    font-size: var(--text-metadata);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-top: var(--space-2);
+  }
+
+  /* Content */
+  .section-layout__content {
+    padding-top: var(--space-5);
+  }
+
   @media (max-width: 768px) {
     .section-layout__body {
       grid-template-columns: 1fr;
@@ -60,7 +102,7 @@ const { crumbs, title, description, status, section, currentSlug } = Astro.props
       border-bottom: 2px solid transparent;
       white-space: nowrap;
     }
-    .section-layout__sidebar :global(.section-sidebar__link--active) {
+    .section-layout__sidebar :global(.section-layout__link--active) {
       border-bottom-color: var(--color-accent);
     }
   }

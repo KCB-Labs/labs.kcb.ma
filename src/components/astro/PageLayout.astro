@@ -1,4 +1,6 @@
 ---
+import Breadcrumb from "./Breadcrumb.astro";
+
 interface Crumb {
   label: string;
   href?: string;
@@ -11,26 +13,20 @@ interface Props {
 }
 const { crumbs, title, description, status } = Astro.props;
 ---
+
 <div class="page-layout">
-  <nav aria-label="Breadcrumb" class="page-layout__breadcrumb">
-    <ol>
-      {crumbs.map((crumb, i) => (
-        <li>
-          {i > 0 && <span class="sep" aria-hidden="true">/</span>}
-          {crumb.href ? <a href={crumb.href}>{crumb.label}</a> : <span aria-current="page">{crumb.label}</span>}
-        </li>
-      ))}
-    </ol>
-  </nav>
+  <Breadcrumb crumbs={crumbs} />
 
-  <header class="page-layout__header">
-    <h1>{title}</h1>
-    {description && <p class="page-layout__description">{description}</p>}
-    {status && <p class="page-layout__status">{status}</p>}
-  </header>
+  <div class="page-layout__body">
+    <header class="page-layout__header">
+      <h1>{title}</h1>
+      {description && <p class="page-layout__description">{description}</p>}
+      {status && <p class="page-layout__status">{status}</p>}
+    </header>
 
-  <div class="page-layout__content">
-    <slot />
+    <div class="page-layout__content">
+      <slot />
+    </div>
   </div>
 </div>
 
@@ -39,49 +35,13 @@ const { crumbs, title, description, status } = Astro.props;
     padding-top: var(--space-6);
   }
 
-  /* Breadcrumb */
-  .page-layout__breadcrumb {
-    font-family: var(--font-mono);
-    font-size: var(--text-metadata);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-muted);
-    padding-bottom: var(--space-2);
-    border-bottom: var(--border-subtle);
-  }
-  .page-layout__breadcrumb ol {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .page-layout__breadcrumb li {
-    display: flex;
-    align-items: center;
-  }
-  .page-layout__breadcrumb .sep {
-    margin: 0 var(--space-1);
-    opacity: 0.5;
-  }
-  .page-layout__breadcrumb a {
-    color: var(--color-muted);
-    text-decoration: none;
-    transition: color var(--motion-duration-fast) var(--motion-ease);
-  }
-  .page-layout__breadcrumb a:hover {
-    color: var(--color-accent);
-  }
-  .page-layout__breadcrumb span[aria-current="page"] {
-    color: var(--color-text);
-    font-weight: var(--weight-medium);
+  .page-layout__body {
+    padding-top: var(--space-5);
   }
 
   /* Header */
   .page-layout__header {
-    padding-block: var(--space-3) var(--space-6);
+    padding-bottom: var(--space-5);
     border-bottom: var(--border-subtle);
   }
   .page-layout__header h1 {
@@ -103,6 +63,6 @@ const { crumbs, title, description, status } = Astro.props;
 
   /* Content */
   .page-layout__content {
-    padding-top: var(--space-6);
+    padding-top: var(--space-5);
   }
 </style>

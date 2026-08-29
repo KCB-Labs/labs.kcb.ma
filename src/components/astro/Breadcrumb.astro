@@ -1,0 +1,62 @@
+---
+interface Crumb {
+  label: string;
+  href?: string;
+}
+interface Props {
+  crumbs: Crumb[];
+}
+const { crumbs } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <ol>
+    {crumbs.map((crumb, i) => (
+      <li>
+        {i > 0 && <span class="sep" aria-hidden="true">/</span>}
+        {crumb.href ? <a href={crumb.href}>{crumb.label}</a> : <span aria-current="page">{crumb.label}</span>}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .breadcrumb {
+    font-family: var(--font-mono);
+    font-size: var(--text-metadata);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    padding-bottom: var(--space-2);
+    border-bottom: var(--border-subtle);
+  }
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .breadcrumb li {
+    display: flex;
+    align-items: center;
+  }
+  .breadcrumb .sep {
+    margin: 0 var(--space-1);
+    opacity: 0.5;
+  }
+  .breadcrumb a {
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color var(--motion-duration-fast) var(--motion-ease);
+  }
+  .breadcrumb a:hover {
+    color: var(--color-accent);
+  }
+  .breadcrumb span[aria-current="page"] {
+    color: var(--color-text);
+    font-weight: var(--weight-medium);
+  }
+</style>
