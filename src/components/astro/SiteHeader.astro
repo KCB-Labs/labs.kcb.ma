@@ -1,6 +1,5 @@
 ---
 import Container from "./Container.astro";
-import { Search } from "../react/Search.tsx";
 
 const { pathname } = Astro.url;
 
@@ -23,15 +22,13 @@ const aboutLinks = [
 const participateLinks = [
   { href: "/participate/sponsorship", label: "Sponsorship" },
   { href: "/participate/collaboration", label: "Collaboration" },
-  { href: "/contact", label: "Contact" },
 ];
 ---
 <header class="site-header">
   <Container>
     <nav class="nav" aria-label="Primary">
       <a href="/" class="brand" aria-label="KCB Labs — Home">
-        <img src="/logo.jpg" alt="KCB" class="logo" width="120" height="40" />
-        <span class="brand-text">Labs</span>
+        <img src="/kcb-labs-logo.png" alt="KCB Labs" class="logo" width="180" height="40" />
       </a>
 
       <div class="links">
@@ -63,9 +60,7 @@ const participateLinks = [
             ))}
           </div>
         </div>
-        <div class="search-wrapper">
-          <Search client:visible />
-        </div>
+        <a href="/contact" class:list={["nav-link", { "nav-link--active": isActive("/contact") }]}>Contact</a>
       </div>
 
       <details class="mobile-menu">
@@ -121,21 +116,12 @@ const participateLinks = [
   .brand {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
     text-decoration: none;
   }
   .logo {
-    height: 36px;
+    height: 40px;
     width: auto;
     mix-blend-mode: multiply;
-  }
-  .brand-text {
-    font-family: var(--font-mono);
-    font-size: var(--text-small);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--color-text-strong);
   }
 
   /* Desktop links */
