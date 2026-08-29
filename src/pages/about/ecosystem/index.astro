@@ -3,7 +3,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import SiteHeader from "../../../components/astro/SiteHeader.astro";
 import SiteFooter from "../../../components/astro/SiteFooter.astro";
 import Container from "../../../components/astro/Container.astro";
-import PageLayout from "../../../components/astro/PageLayout.astro";
+import SectionLayout from "../../../components/astro/SectionLayout.astro";
 import Section from "../../../components/astro/Section.astro";
 import OrganizationCard from "../../../components/cards/OrganizationCard.astro";
 import { getOrganizations } from "../../../lib/content/organizations.js";
@@ -28,10 +28,12 @@ const sortedTypes = [...grouped.keys()].sort((a, b) => typeOrder.indexOf(a) - ty
 <BaseLayout title="Ecosystem — KCB Labs" description="Partners, clients, sponsors, and organizations in the KCB Labs ecosystem.">
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
-    <PageLayout
+    <SectionLayout
       crumbs={[{ label: "About", href: "/about" }, { label: "Ecosystem" }]}
       title="Ecosystem"
       description="Partners, clients, sponsors, and organizations in the KCB Labs ecosystem. Built with an ecosystem."
+      section="about"
+      currentSlug="ecosystem"
     >
       {sortedTypes.map((type) => {
         const orgs = grouped.get(type)!;
@@ -52,7 +54,7 @@ const sortedTypes = [...grouped.keys()].sort((a, b) => typeOrder.indexOf(a) - ty
           <p class="text-small" style="color: var(--color-muted);">No organizations published yet.</p>
         </Section>
       )}
-    </PageLayout>
+    </SectionLayout>
   </Container>
   <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

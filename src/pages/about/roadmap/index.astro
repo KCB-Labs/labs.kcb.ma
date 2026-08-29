@@ -3,7 +3,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import SiteHeader from "../../../components/astro/SiteHeader.astro";
 import SiteFooter from "../../../components/astro/SiteFooter.astro";
 import Container from "../../../components/astro/Container.astro";
-import PageLayout from "../../../components/astro/PageLayout.astro";
+import SectionLayout from "../../../components/astro/SectionLayout.astro";
 import Section from "../../../components/astro/Section.astro";
 import { Timeline as ReactTimeline } from "../../../components/react/Timeline";
 import { getRoadmaps } from "../../../lib/content/roadmap.js";
@@ -16,10 +16,12 @@ const roadmaps = getRoadmaps();
 <BaseLayout title="Roadmap — KCB Labs" description="Upcoming exploration areas and themes for KCB Labs.">
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
-    <PageLayout
+    <SectionLayout
       crumbs={[{ label: "About", href: "/about" }, { label: "Roadmap" }]}
       title="Roadmap"
       description="Upcoming exploration areas and themes for KCB Labs. Directional timeline, not task-level project management."
+      section="about"
+      currentSlug="roadmap"
     >
       <Section>
         {roadmaps.length > 0 ? (
@@ -58,7 +60,7 @@ const roadmaps = getRoadmaps();
           <p class="text-small" style="color: var(--color-muted);">No roadmap entries published yet.</p>
         )}
       </Section>
-    </PageLayout>
+    </SectionLayout>
   </Container>
   <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

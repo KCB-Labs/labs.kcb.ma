@@ -3,7 +3,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import SiteHeader from "../../../components/astro/SiteHeader.astro";
 import SiteFooter from "../../../components/astro/SiteFooter.astro";
 import Container from "../../../components/astro/Container.astro";
-import PageLayout from "../../../components/astro/PageLayout.astro";
+import SectionLayout from "../../../components/astro/SectionLayout.astro";
 import Section from "../../../components/astro/Section.astro";
 import StatusBadge from "../../../components/ui/StatusBadge.astro";
 import RichContent from "../../../components/content/RichContent.astro";
@@ -36,11 +36,13 @@ const relatedProject = relatedProjectSlug ? getProjects().find((p) => p.slug ===
 <BaseLayout title={`${openSource.data.title as string} — KCB Labs Open Source`} description={openSource.data.description as string} ogImage={openSource.data.socialImage as string | undefined}>
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
-    <PageLayout
+    <SectionLayout
       crumbs={[{ label: "Explore", href: "/explore" }, { label: "Open Source", href: "/explore/open-source" }, { label: openSource.data.title as string }]}
       title={openSource.data.title as string}
       description={openSource.data.description as string}
       status={`${openSource.data.license as string} · ${openSource.data.status as string}`}
+      section="explore"
+      currentSlug="open-source"
     >
       <Section>
         <div style="display:flex; gap: var(--space-3); flex-wrap:wrap; align-items:center; margin-bottom: var(--space-4);">
@@ -127,7 +129,7 @@ const relatedProject = relatedProjectSlug ? getProjects().find((p) => p.slug ===
           color: var(--color-muted-strong);
         }
       </style>
-    </PageLayout>
+    </SectionLayout>
   </Container>
   <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

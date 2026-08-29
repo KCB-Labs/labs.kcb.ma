@@ -3,7 +3,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import SiteHeader from "../../../components/astro/SiteHeader.astro";
 import SiteFooter from "../../../components/astro/SiteFooter.astro";
 import Container from "../../../components/astro/Container.astro";
-import PageLayout from "../../../components/astro/PageLayout.astro";
+import SectionLayout from "../../../components/astro/SectionLayout.astro";
 import Section from "../../../components/astro/Section.astro";
 import ContactForm from "../../../components/astro/ContactForm.astro";
 
@@ -13,10 +13,12 @@ export const prerender = true;
 <BaseLayout title="Collaboration — KCB Labs" description="Research, technology, project, or startup partnerships with KCB Labs.">
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
-    <PageLayout
+    <SectionLayout
       crumbs={[{ label: "Participate", href: "/participate" }, { label: "Collaboration" }]}
       title="Collaboration"
       description="Research, technology, project, or startup partnerships with KCB Labs."
+      section="participate"
+      currentSlug="collaboration"
     >
       <Section>
         <p style="font-size: var(--text-h3); color: var(--color-text-strong); margin-bottom: var(--space-4);">
@@ -46,7 +48,7 @@ export const prerender = true;
           submitLabel="Submit Collaboration Inquiry"
         />
       </Section>
-    </PageLayout>
+    </SectionLayout>
   </Container>
   <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

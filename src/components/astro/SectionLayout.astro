@@ -1,0 +1,67 @@
+---
+import PageLayout from "./PageLayout.astro";
+import SectionSidebar from "./SectionSidebar.astro";
+
+interface Crumb {
+  label: string;
+  href?: string;
+}
+interface Props {
+  crumbs: Crumb[];
+  title: string;
+  description?: string;
+  status?: string;
+  section: "explore" | "about" | "participate";
+  currentSlug: string;
+}
+const { crumbs, title, description, status, section, currentSlug } = Astro.props;
+---
+
+<div class="section-layout">
+  <PageLayout crumbs={crumbs} title={title} description={description} status={status}>
+    <div class="section-layout__body">
+      <aside class="section-layout__sidebar">
+        <SectionSidebar section={section} currentSlug={currentSlug} />
+      </aside>
+      <div class="section-layout__content">
+        <slot />
+      </div>
+    </div>
+  </PageLayout>
+</div>
+
+<style>
+  .section-layout__body {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: var(--space-8);
+    align-items: start;
+  }
+  .section-layout__sidebar {
+    position: sticky;
+    top: 4.5rem;
+  }
+  @media (max-width: 768px) {
+    .section-layout__body {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    .section-layout__sidebar {
+      position: static;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .section-layout__sidebar :global(.section-sidebar ul) {
+      flex-direction: row;
+      gap: var(--space-2);
+    }
+    .section-layout__sidebar :global(.section-sidebar__link) {
+      border-left: none;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+    }
+    .section-layout__sidebar :global(.section-sidebar__link--active) {
+      border-bottom-color: var(--color-accent);
+    }
+  }
+</style>

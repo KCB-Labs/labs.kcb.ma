@@ -5,6 +5,7 @@ import SiteFooter from "../../components/astro/SiteFooter.astro";
 import Container from "../../components/astro/Container.astro";
 import PageLayout from "../../components/astro/PageLayout.astro";
 import Section from "../../components/astro/Section.astro";
+import ChildPageCard from "../../components/astro/ChildPageCard.astro";
 import { getParticipatePage } from "../../lib/content/pages.js";
 
 export const prerender = true;
@@ -28,20 +29,21 @@ const pContent = participate?.content ?? "";
       </Section>
 
       <Section>
-        <h2>Ways to Participate</h2>
-        <ul style="list-style:none; padding:0; display:grid; gap: var(--space-3);">
-          <li><a href="/participate/sponsorship" style="text-decoration:none; padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); display:block; background: var(--color-surface);">
-            <strong>Sponsorship</strong> - Support independent technology research and experimentation
-          </a></li>
-          <li><a href="/participate/collaboration" style="text-decoration:none; padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); display:block; background: var(--color-surface);">
-            <strong>Collaboration</strong> - Research, technology, project, or startup partnerships
-          </a></li>
-          <li><a href="/contact" style="text-decoration:none; padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); display:block; background: var(--color-surface);">
-            <strong>Contact</strong> - Get in touch with the team
-          </a></li>
-        </ul>
+        <div class="child-grid">
+          <ChildPageCard href="/participate/sponsorship" title="Sponsorship" description="Support independent technology research and experimentation." />
+          <ChildPageCard href="/participate/collaboration" title="Collaboration" description="Research, technology, project, or startup partnerships with KCB Labs." />
+          <ChildPageCard href="/contact" title="Contact" description="Get in touch with the team." />
+        </div>
       </Section>
     </PageLayout>
   </Container>
   <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>
+
+<style>
+  .child-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-4);
+  }
+</style>

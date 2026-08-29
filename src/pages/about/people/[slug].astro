@@ -3,7 +3,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import SiteHeader from "../../../components/astro/SiteHeader.astro";
 import SiteFooter from "../../../components/astro/SiteFooter.astro";
 import Container from "../../../components/astro/Container.astro";
-import PageLayout from "../../../components/astro/PageLayout.astro";
+import SectionLayout from "../../../components/astro/SectionLayout.astro";
 import Section from "../../../components/astro/Section.astro";
 import Prose from "../../../components/astro/Prose.astro";
 import LabCard from "../../../components/cards/LabCard.astro";
@@ -35,11 +35,13 @@ const relatedProjects = getProjects().filter((p: { slug: string }) => relatedPro
 <BaseLayout title={`${person.data.title as string} — KCB Labs People`} description={person.data.description as string} ogImage={person.data.socialImage as string | undefined}>
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
-    <PageLayout
+    <SectionLayout
       crumbs={[{ label: "About", href: "/about" }, { label: "People", href: "/about/people" }, { label: person.data.title as string }]}
       title={person.data.title as string}
       description={person.data.description as string}
       status={person.data.role as string | undefined}
+      section="about"
+      currentSlug="people"
     >
       <Section>
         <div style="display:flex; gap: var(--space-4); flex-wrap:wrap; align-items:center; margin-bottom: var(--space-4);">
@@ -80,7 +82,7 @@ const relatedProjects = getProjects().filter((p: { slug: string }) => relatedPro
           <p class="text-small" style="color: var(--color-muted);">No related labs or projects.</p>
         </Section>
       )}
-    </PageLayout>
+    </SectionLayout>
   </Container>
   <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

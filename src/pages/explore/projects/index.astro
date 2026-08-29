@@ -3,7 +3,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import SiteHeader from "../../../components/astro/SiteHeader.astro";
 import SiteFooter from "../../../components/astro/SiteFooter.astro";
 import Container from "../../../components/astro/Container.astro";
-import PageLayout from "../../../components/astro/PageLayout.astro";
+import SectionLayout from "../../../components/astro/SectionLayout.astro";
 import Section from "../../../components/astro/Section.astro";
 import ProjectCard from "../../../components/cards/ProjectCard.astro";
 import { ProjectsFilters } from "../../../components/react/Filters";
@@ -17,10 +17,12 @@ const projects = getProjects();
 <BaseLayout title="Projects — KCB Labs" description="Projects born in KCB Labs — from idea to implementation.">
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
-    <PageLayout
+    <SectionLayout
       crumbs={[{ label: "Explore", href: "/explore" }, { label: "Projects" }]}
       title="Projects"
       description="Something KCB has decided is worth implementing beyond pure exploration."
+      section="explore"
+      currentSlug="projects"
     >
       <Section>
         <ProjectsFilters client:visible />
@@ -33,7 +35,7 @@ const projects = getProjects();
         </div>
         {projects.length === 0 && <p class="text-small" style="color: var(--color-muted);">No projects yet.</p>}
       </Section>
-    </PageLayout>
+    </SectionLayout>
   </Container>
   <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

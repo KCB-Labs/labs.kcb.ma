@@ -3,7 +3,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import SiteHeader from "../../../components/astro/SiteHeader.astro";
 import SiteFooter from "../../../components/astro/SiteFooter.astro";
 import Container from "../../../components/astro/Container.astro";
-import PageLayout from "../../../components/astro/PageLayout.astro";
+import SectionLayout from "../../../components/astro/SectionLayout.astro";
 import Section from "../../../components/astro/Section.astro";
 import PersonCard from "../../../components/cards/PersonCard.astro";
 import { getPeople } from "../../../lib/content/people.js";
@@ -16,10 +16,12 @@ const people = getPeople();
 <BaseLayout title="People — KCB Labs" description="The team and collaborators at KCB Labs.">
   <Fragment slot="header"><SiteHeader /></Fragment>
   <Container>
-    <PageLayout
+    <SectionLayout
       crumbs={[{ label: "About", href: "/about" }, { label: "People" }]}
       title="People"
       description="The team and collaborators at KCB Labs."
+      section="about"
+      currentSlug="people"
     >
       <Section>
         {people.length > 0 ? (
@@ -32,7 +34,7 @@ const people = getPeople();
           <p class="text-small" style="color: var(--color-muted);">No people published yet.</p>
         )}
       </Section>
-    </PageLayout>
+    </SectionLayout>
   </Container>
   <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>

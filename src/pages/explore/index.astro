@@ -35,44 +35,85 @@ const displayOS = featuredOS.length ? featuredOS : openSource.slice(0, 3);
       description="Persistent areas of exploration, validated projects, and open source work from KCB Labs."
     >
       <Section>
-        <h2>Labs</h2>
-        <p class="text-small" style="color: var(--color-muted); margin-bottom: var(--space-4);">Persistent areas of exploration — each lab asks what we are continuously investigating.</p>
+        <div class="section-header">
+          <div>
+            <h2>Labs</h2>
+            <p class="text-small" style="color: var(--color-muted);">Persistent areas of exploration — each lab asks what we are continuously investigating.</p>
+          </div>
+          <a href="/explore/labs" class="view-all">View all &rarr;</a>
+        </div>
         {displayLabs.length > 0 ? (
-          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+          <div class="card-grid">
             {displayLabs.map((lab) => (
               <LabCard slug={lab.slug} title={lab.data.title as string} description={lab.data.description as string} status={lab.data.status as string} />
             ))}
           </div>
         ) : <p class="text-small" style="color: var(--color-muted);">No labs yet.</p>}
-        <p style="margin-top: var(--space-3);"><a href="/explore/labs" style="text-decoration:none; font-size: var(--text-small);">View all labs &rarr;</a></p>
       </Section>
 
       <Section>
-        <h2>Projects</h2>
-        <p class="text-small" style="color: var(--color-muted); margin-bottom: var(--space-4);">Something KCB has decided is worth implementing beyond pure exploration.</p>
+        <div class="section-header">
+          <div>
+            <h2>Projects</h2>
+            <p class="text-small" style="color: var(--color-muted);">Something KCB has decided is worth implementing beyond pure exploration.</p>
+          </div>
+          <a href="/explore/projects" class="view-all">View all &rarr;</a>
+        </div>
         {displayProjects.length > 0 ? (
-          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+          <div class="card-grid">
             {displayProjects.map((project) => (
               <ProjectCard slug={project.slug} title={project.data.title as string} description={project.data.description as string} type={project.data.type as string} stage={project.data.stage as string} originLab={project.data.originLab as string | undefined} />
             ))}
           </div>
         ) : <p class="text-small" style="color: var(--color-muted);">No projects yet.</p>}
-        <p style="margin-top: var(--space-3);"><a href="/explore/projects" style="text-decoration:none; font-size: var(--text-small);">View all projects &rarr;</a></p>
       </Section>
 
       <Section>
-        <h2>Open Source</h2>
-        <p class="text-small" style="color: var(--color-muted); margin-bottom: var(--space-4);">Open source projects and protocols distributed by KCB Labs.</p>
+        <div class="section-header">
+          <div>
+            <h2>Open Source</h2>
+            <p class="text-small" style="color: var(--color-muted);">Open source projects and protocols distributed by KCB Labs.</p>
+          </div>
+          <a href="/explore/open-source" class="view-all">View all &rarr;</a>
+        </div>
         {displayOS.length > 0 ? (
-          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+          <div class="card-grid">
             {displayOS.map((os) => (
               <OpenSourceCard slug={os.slug} title={os.data.title as string} description={os.data.description as string} status={os.data.status as string} license={os.data.license as string} originLab={os.data.originLab as string | undefined} />
             ))}
           </div>
         ) : <p class="text-small" style="color: var(--color-muted);">No open source projects yet.</p>}
-        <p style="margin-top: var(--space-3);"><a href="/explore/open-source" style="text-decoration:none; font-size: var(--text-small);">View all open source &rarr;</a></p>
       </Section>
     </PageLayout>
   </Container>
   <Fragment slot="footer"><SiteFooter /></Fragment>
 </BaseLayout>
+
+<style>
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+  .section-header h2 {
+    margin: 0;
+  }
+  .view-all {
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+    color: var(--color-accent);
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .view-all:hover {
+    text-decoration: underline;
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-4);
+  }
+</style>

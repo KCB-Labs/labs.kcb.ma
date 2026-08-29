@@ -1,0 +1,99 @@
+---
+interface SidebarItem {
+  slug: string;
+  label: string;
+  href: string;
+  description: string;
+}
+interface Props {
+  section: "explore" | "about" | "participate";
+  currentSlug: string;
+}
+const { section, currentSlug } = Astro.props;
+
+const sections: Record<string, SidebarItem[]> = {
+  explore: [
+    { slug: "labs", label: "Labs", href: "/explore/labs", description: "Persistent areas of exploration" },
+    { slug: "projects", label: "Projects", href: "/explore/projects", description: "Validated implementations" },
+    { slug: "open-source", label: "Open Source", href: "/explore/open-source", description: "Openly distributed work" },
+  ],
+  about: [
+    { slug: "vision", label: "Vision", href: "/about/vision", description: "Where KCB Labs is headed" },
+    { slug: "people", label: "People", href: "/about/people", description: "Team and collaborators" },
+    { slug: "ecosystem", label: "Ecosystem", href: "/about/ecosystem", description: "Partners and organizations" },
+    { slug: "roadmap", label: "Roadmap", href: "/about/roadmap", description: "Directional timeline" },
+  ],
+  participate: [
+    { slug: "sponsorship", label: "Sponsorship", href: "/participate/sponsorship", description: "Support the Labs" },
+    { slug: "collaboration", label: "Collaboration", href: "/participate/collaboration", description: "Partner with us" },
+  ],
+};
+
+const items = sections[section] ?? [];
+---
+
+<nav class="section-sidebar" aria-label={`${section} navigation`}>
+  <ul>
+    {items.map((item) => {
+      const isActive = item.slug === currentSlug;
+      return (
+        <li>
+          <a
+            href={item.href}
+            class:list={["section-sidebar__link", { "section-sidebar__link--active": isActive }]}
+            aria-current={isActive ? "page" : undefined}
+          >
+            <span class="section-sidebar__label">{item.label}</span>
+            <span class="section-sidebar__desc">{item.description}</span>
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</nav>
+
+<style>
+  .section-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  .section-sidebar__link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: var(--space-2) var(--space-3);
+    border-left: 2px solid transparent;
+    text-decoration: none;
+    color: var(--color-muted);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    transition: color var(--motion-duration-fast) var(--motion-ease),
+                border-color var(--motion-duration-fast) var(--motion-ease),
+                background var(--motion-duration-fast) var(--motion-ease);
+  }
+  .section-sidebar__link:hover {
+    color: var(--color-text);
+    background: var(--color-surface);
+  }
+  .section-sidebar__link--active {
+    color: var(--color-text-strong);
+    border-left-color: var(--color-accent);
+    font-weight: var(--weight-medium);
+  }
+  .section-sidebar__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .section-sidebar__desc {
+    font-size: var(--text-metadata);
+    color: var(--color-muted);
+  }
+  .section-sidebar__link--active .section-sidebar__desc {
+    color: var(--color-muted-strong);
+  }
+</style>

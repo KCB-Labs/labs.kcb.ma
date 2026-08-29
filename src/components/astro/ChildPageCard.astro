@@ -1,0 +1,56 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+}
+const { href, title, description } = Astro.props;
+---
+
+<a href={href} class="child-card">
+  <h3 class="child-card__title">{title}</h3>
+  <p class="child-card__desc">{description}</p>
+  <span class="child-card__arrow">&rarr;</span>
+</a>
+
+<style>
+  .child-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    background: var(--color-bg);
+    border: var(--border-subtle);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--motion-duration) var(--motion-ease),
+                box-shadow var(--motion-duration) var(--motion-ease);
+    position: relative;
+  }
+  .child-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+  .child-card__title {
+    font-family: var(--font-mono);
+    font-size: var(--text-h3);
+    line-height: var(--leading-h3);
+    margin: 0;
+  }
+  .child-card__desc {
+    font-size: var(--text-small);
+    color: var(--color-muted);
+    margin: 0;
+    line-height: var(--leading-body);
+  }
+  .child-card__arrow {
+    font-size: var(--text-body);
+    color: var(--color-accent);
+    margin-top: var(--space-1);
+    transition: transform var(--motion-duration) var(--motion-ease);
+  }
+  .child-card:hover .child-card__arrow {
+    transform: translateX(3px);
+  }
+</style>
