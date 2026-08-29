@@ -1,0 +1,175 @@
+- generic [active] [ref=f9e1]:
+  - link "Skip to content" [ref=f9e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f9e3]:
+    - navigation "Primary" [ref=f9e5]:
+      - link "KCB Labs — Home" [ref=f9e6] [cursor=pointer]:
+        - /url: /
+        - img "KCB Labs" [ref=f9e7]
+      - generic [ref=f9e8]:
+        - generic [ref=f9e9]:
+          - link "Explore" [ref=f9e10] [cursor=pointer]:
+            - /url: /explore
+          - button "Explore submenu" [ref=f9e11] [cursor=pointer]: ▾
+        - link "Journal" [ref=f9e12] [cursor=pointer]:
+          - /url: /journal
+        - generic [ref=f9e13]:
+          - link "About" [ref=f9e14] [cursor=pointer]:
+            - /url: /about
+          - button "About submenu" [ref=f9e15] [cursor=pointer]: ▾
+        - generic [ref=f9e16]:
+          - link "Participate" [ref=f9e17] [cursor=pointer]:
+            - /url: /participate
+          - button "Participate submenu" [ref=f9e18] [cursor=pointer]: ▾
+        - link "Contact" [ref=f9e19] [cursor=pointer]:
+          - /url: /contact
+  - main [ref=f9e20]:
+    - generic [ref=f9e22]:
+      - navigation "Breadcrumb" [ref=f9e23]:
+        - list [ref=f9e24]:
+          - listitem [ref=f9e25]:
+            - link "Explore" [ref=f9e26] [cursor=pointer]:
+              - /url: /explore
+          - listitem [ref=f9e27]:
+            - generic [ref=f9e28]: /
+            - link "Experiments" [ref=f9e29] [cursor=pointer]:
+              - /url: /explore/experiments
+          - listitem [ref=f9e30]:
+            - generic [ref=f9e31]: /
+            - generic [ref=f9e32]: Benchmarking Local LLMs Under Constrained Hardware
+      - generic [ref=f9e33]:
+        - complementary [ref=f9e34]:
+          - navigation "explore navigation" [ref=f9e35]:
+            - list [ref=f9e36]:
+              - listitem [ref=f9e37]:
+                - link "Labs Persistent areas of exploration" [ref=f9e38] [cursor=pointer]:
+                  - /url: /explore/labs
+                  - generic [ref=f9e39]: Labs
+                  - generic [ref=f9e40]: Persistent areas of exploration
+              - listitem [ref=f9e41]:
+                - link "Research Questions and hypotheses" [ref=f9e42] [cursor=pointer]:
+                  - /url: /explore/research
+                  - generic [ref=f9e43]: Research
+                  - generic [ref=f9e44]: Questions and hypotheses
+              - listitem [ref=f9e45]:
+                - link "Experiments Validation and benchmarking" [ref=f9e46] [cursor=pointer]:
+                  - /url: /explore/experiments
+                  - generic [ref=f9e47]: Experiments
+                  - generic [ref=f9e48]: Validation and benchmarking
+              - listitem [ref=f9e49]:
+                - link "Projects Validated implementations" [ref=f9e50] [cursor=pointer]:
+                  - /url: /explore/projects
+                  - generic [ref=f9e51]: Projects
+                  - generic [ref=f9e52]: Validated implementations
+              - listitem [ref=f9e53]:
+                - link "Open Source Openly distributed work" [ref=f9e54] [cursor=pointer]:
+                  - /url: /explore/open-source
+                  - generic [ref=f9e55]: Open Source
+                  - generic [ref=f9e56]: Openly distributed work
+        - generic [ref=f9e57]:
+          - generic [ref=f9e58]:
+            - generic [ref=f9e59]:
+              - heading "Benchmarking Local LLMs Under Constrained Hardware" [level=1] [ref=f9e60]
+              - generic "Knowledge 1 of 3, Creativity 1 of 3, Business 1 of 3" [ref=f9e62]:
+                - generic [ref=f9e63]: Knowledge
+                - generic [ref=f9e69]: Creativity
+                - generic [ref=f9e75]: Business
+            - paragraph [ref=f9e81]: Experiment measuring local language models on 4GB devices.
+            - paragraph [ref=f9e82]: active
+          - generic [ref=f9e83]:
+            - generic [ref=f9e84]:
+              - heading "Overview" [level=2] [ref=f9e85]
+              - paragraph [ref=f9e86]: "## Objective Measure accuracy/latency of small LLMs under 4GB. ## Results Validated — small models with retrieval meet the budget for document tasks."
+            - generic [ref=f9e87]:
+              - heading "Outcome" [level=2] [ref=f9e88]
+              - generic [ref=f9e89]:
+                - generic [ref=f9e90]: Validated
+                - generic [ref=f9e91]: VALIDATED
+            - generic [ref=f9e92]:
+              - heading "Objective" [level=2] [ref=f9e93]
+              - paragraph [ref=f9e94]: Measure accuracy and latency of small LLMs under 4GB.
+            - generic [ref=f9e95]:
+              - heading "Lab" [level=2] [ref=f9e96]
+              - link "Active AI Employees Persistent research program exploring autonomous software workers. Knowledge 1 of 3, Creativity 1 of 3, Business 1 of 3" [ref=f9e97] [cursor=pointer]:
+                - /url: /explore/labs/ai-employees
+                - generic [ref=f9e98]: Active
+                - heading "AI Employees" [level=3] [ref=f9e100]
+                - paragraph [ref=f9e101]: Persistent research program exploring autonomous software workers.
+                - generic "Knowledge 1 of 3, Creativity 1 of 3, Business 1 of 3" [ref=f9e103]:
+                  - generic [ref=f9e104]: Knowledge
+                  - generic [ref=f9e110]: Creativity
+                  - generic [ref=f9e116]: Business
+            - generic [ref=f9e122]:
+              - heading "Research" [level=2] [ref=f9e123]
+              - link [ref=f9e125] [cursor=pointer]:
+                - /url: /explore/research/local-ai-research
+                - paragraph [ref=f9e126]: Research
+                - heading "Local AI on Constrained Hardware" [level=3] [ref=f9e127]
+                - paragraph [ref=f9e128]: Can useful document intelligence run within a 4GB memory budget?
+                - generic "Knowledge 1 of 3, Creativity 1 of 3, Business 1 of 3" [ref=f9e130]:
+                  - generic [ref=f9e131]: Knowledge
+                  - generic [ref=f9e137]: Creativity
+                  - generic [ref=f9e143]: Business
+            - generic [ref=f9e149]:
+              - heading "Projects" [level=2] [ref=f9e150]
+              - link "Internal Implementation OPERANT AI Employee Framework — internal platform born in AI Employees Lab. ai-employees Knowledge 1 of 3, Creativity 1 of 3, Business 1 of 3" [ref=f9e152] [cursor=pointer]:
+                - /url: /explore/projects/operant
+                - generic [ref=f9e153]:
+                  - generic [ref=f9e154]: Internal
+                  - generic [ref=f9e155]: Implementation
+                - heading "OPERANT" [level=3] [ref=f9e156]
+                - paragraph [ref=f9e157]: AI Employee Framework — internal platform born in AI Employees Lab.
+                - paragraph [ref=f9e158]: ai-employees
+                - generic "Knowledge 1 of 3, Creativity 1 of 3, Business 1 of 3" [ref=f9e160]:
+                  - generic [ref=f9e161]: Knowledge
+                  - generic [ref=f9e167]: Creativity
+                  - generic [ref=f9e173]: Business
+            - generic [ref=f9e179]:
+              - heading "Related Journal" [level=2] [ref=f9e180]
+              - link [ref=f9e182] [cursor=pointer]:
+                - /url: /journal/building-ai-employees
+                - paragraph [ref=f9e183]: Article · Apr 15, 2026 · 1 min
+                - heading "Building Autonomous Software Workers" [level=3] [ref=f9e184]
+                - paragraph [ref=f9e185]: How we turn research into validated AI employee prototypes.
+  - contentinfo [ref=f9e186]:
+    - generic [ref=f9e187]:
+      - generic [ref=f9e188]:
+        - generic [ref=f9e189]:
+          - paragraph [ref=f9e190]: KCB LABS
+          - paragraph [ref=f9e191]: An open R&D process turning questions into research, experiments and validated projects.
+        - generic [ref=f9e192]:
+          - heading "Explore" [level=4] [ref=f9e193]
+          - list [ref=f9e194]:
+            - listitem [ref=f9e195]:
+              - link "Labs" [ref=f9e196] [cursor=pointer]:
+                - /url: /explore/labs
+            - listitem [ref=f9e197]:
+              - link "Projects" [ref=f9e198] [cursor=pointer]:
+                - /url: /explore/projects
+            - listitem [ref=f9e199]:
+              - link "Open Source" [ref=f9e200] [cursor=pointer]:
+                - /url: /explore/open-source
+        - generic [ref=f9e201]:
+          - heading "Journal" [level=4] [ref=f9e202]
+          - list [ref=f9e203]:
+            - listitem [ref=f9e204]:
+              - link "Articles" [ref=f9e205] [cursor=pointer]:
+                - /url: /journal
+        - generic [ref=f9e206]:
+          - heading "Participate" [level=4] [ref=f9e207]
+          - list [ref=f9e208]:
+            - listitem [ref=f9e209]:
+              - link "Sponsorship" [ref=f9e210] [cursor=pointer]:
+                - /url: /participate/sponsorship
+            - listitem [ref=f9e211]:
+              - link "Collaboration" [ref=f9e212] [cursor=pointer]:
+                - /url: /participate/collaboration
+            - listitem [ref=f9e213]:
+              - link "Contact" [ref=f9e214] [cursor=pointer]:
+                - /url: /contact
+      - generic [ref=f9e215]: © 2026 KCB Labs — labs.kcb.ma
+  - generic [ref=f9e218]:
+    - button [ref=f9e219]
+    - button [ref=f9e225]
+    - button [ref=f9e229]
+    - button [ref=f9e234]

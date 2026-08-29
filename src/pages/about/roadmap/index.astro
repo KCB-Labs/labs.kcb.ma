@@ -43,14 +43,14 @@ const roadmaps = getRoadmaps();
             {roadmaps.map((r) => (
               <div style="padding: var(--space-4); border: var(--border-subtle); border-radius: var(--radius-md); background: var(--color-surface);">
                 <div style="display:flex; gap: var(--space-3); flex-wrap:wrap; align-items:center; margin-bottom: var(--space-2);">
-                  <span class="badge badge--period" style="font-family: var(--font-mono); font-size: var(--text-metadata); padding: 0.2em 0.6em; border-radius: var(--radius-full); background: var(--color-accent); color: var(--color-accent-contrast);">{r.data.period as string ?? r.slug}</span>
-                  <span class="badge badge--status" style="font-family: var(--font-mono); font-size: var(--text-metadata); padding: 0.2em 0.6em; border-radius: var(--radius-full); background: var(--color-surface); border: var(--border-subtle); color: var(--color-muted-strong); text-transform: capitalize;">{(r.data.status as string) ?? "planned"}</span>
+                  <span class="badge badge--period" style="font-family: var(--font-body); font-size: var(--text-metadata); padding: 0.2em 0.6em; border-radius: var(--radius-full); background: var(--color-accent); color: var(--color-accent-contrast);">{r.data.period as string ?? r.slug}</span>
+                  <span class="badge badge--status" style="font-family: var(--font-body); font-size: var(--text-metadata); padding: 0.2em 0.6em; border-radius: var(--radius-full); background: var(--color-surface); border: var(--border-subtle); color: var(--color-muted-strong); text-transform: capitalize;">{(r.data.status as string) ?? "planned"}</span>
                 </div>
                 <h3 style="font-size: var(--text-h3); margin-bottom: var(--space-2);">{r.data.theme as string ?? r.data.description as string}</h3>
                 {r.data.objective && <p class="text-small" style="color: var(--color-muted); margin-bottom: var(--space-2);">{r.data.objective as string}</p>}
                 {r.data.areas && Array.isArray(r.data.areas) && r.data.areas.length > 0 && (
                   <ul style="list-style:none; padding:0; display:flex; flex-wrap:wrap; gap: var(--space-2);">
-                    {r.data.areas.map((a: string) => <li><span class="badge badge--area" style="font-family: var(--font-mono); font-size: var(--text-metadata); padding: 0.2em 0.6em; border-radius: var(--radius-full); background: var(--color-surface); border: var(--border-subtle); color: var(--color-muted-strong);">{a}</span></li>)}
+                    {r.data.areas.map((a: string) => <li><span class="badge badge--area" style="font-family: var(--font-body); font-size: var(--text-metadata); padding: 0.2em 0.6em; border-radius: var(--radius-full); background: var(--color-surface); border: var(--border-subtle); color: var(--color-muted-strong);">{a}</span></li>)}
                   </ul>
                 )}
               </div>

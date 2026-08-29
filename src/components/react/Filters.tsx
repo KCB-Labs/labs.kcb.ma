@@ -54,7 +54,7 @@ function FilterButton({ label, active, onClick }: FilterButtonProps) {
       style={{
         padding: "var(--space-1) var(--space-3)",
         fontSize: "var(--text-small)",
-        fontFamily: "var(--font-mono)",
+        fontFamily: "var(--font-body)",
         border: active ? "var(--border-strong)" : "var(--border-subtle)",
         borderRadius: "var(--radius-sm)",
         background: active ? "var(--color-accent)" : "var(--color-surface)",
@@ -79,7 +79,7 @@ interface FilterGroupProps {
 function FilterGroup({ label, options, selected, onSelect }: FilterGroupProps) {
   return (
     <fieldset style={{ border: "none", padding: 0, margin: 0 }}>
-      <legend style={{ fontSize: "var(--text-small)", fontFamily: "var(--font-mono)", color: "var(--color-muted)", marginBottom: "var(--space-2)" }}>
+      <legend style={{ fontSize: "var(--text-small)", fontFamily: "var(--font-body)", color: "var(--color-muted)", marginBottom: "var(--space-2)" }}>
         {label}
       </legend>
       <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>

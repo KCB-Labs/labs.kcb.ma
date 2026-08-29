@@ -94,7 +94,7 @@ export function Timeline({ events }: TimelineProps) {
             boxShadow: activeIndex === i ? "0 0 0 2px var(--color-accent)" : "none",
           }}
         >
-          <p style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-metadata)", color: "var(--color-muted)", margin: 0 }}>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--text-metadata)", color: "var(--color-muted)", margin: 0 }}>
             {event.label}
           </p>
           <p style={{ margin: "var(--space-1) 0 0", fontSize: "var(--text-body)" }}>

@@ -196,7 +196,7 @@ export function Search({ initialIndex = [] }: SearchProps) {
                   display: "inline-flex",
                   alignItems: "center",
                   fontSize: "var(--text-metadata)",
-                  fontFamily: "var(--font-mono)",
+                  fontFamily: "var(--font-body)",
                   fontWeight: "var(--weight-medium)",
                   padding: "0.15em 0.5em",
                   borderRadius: "var(--radius-full)",

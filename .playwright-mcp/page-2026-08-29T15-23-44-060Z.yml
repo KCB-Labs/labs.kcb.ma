@@ -1,0 +1,23 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - heading "Coolify" [level=1] [ref=e7]
+        - paragraph [ref=e8]: Sign in to manage your applications and infrastructure.
+      - generic [ref=e11]:
+        - generic [ref=e12]:
+          - generic [ref=e14]:
+            - text: Email
+            - generic [ref=e15]: "*"
+          - textbox [ref=e16]
+        - generic [ref=e17]:
+          - generic [ref=e19]:
+            - text: Password
+            - generic [ref=e20]: "*"
+          - generic [ref=e21]:
+            - textbox [ref=e22]
+            - button "Toggle password visibility" [ref=e23] [cursor=pointer]
+        - link "Forgot password?" [disabled] [ref=e29]
+        - button "Login" [ref=e30] [cursor=pointer]
+      - generic [ref=e31]: Registration is disabled. Please contact the administrator.
+  - list
