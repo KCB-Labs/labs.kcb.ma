@@ -19,6 +19,8 @@
 | Interactive Features | `specs/interactive-features/spec.md` | §23–§24, §31, §35, §74 | Proposed |
 | Production Hardening | `specs/production-hardening/spec.md` | §37, §39–§40, §59–§60, §63–§67 | Proposed |
 | Avionics Design System | `specs/avionics-design-system/spec.md` | Avionics design system application | Proposed — pending human review |
+| Header Redesign | `specs/header-redesign/spec.md` | Desktop nav + mobile hierarchical menu | Proposed |
+| Entity Rating | `specs/entity-rating/spec.md` | Rating system (Knowledge/Creativity/Business) for core entities | Proposed |
 
 Each spec's **Goal / Scope / Contracts / Anti-patterns / Decisions** are the guardrails; PBIs point at them and must not become stale copies.
 
@@ -97,6 +99,11 @@ Each spec's **Goal / Scope / Contracts / Anti-patterns / Decisions** are the gua
 | 26 | PBI-026 | Avionics — Logo & favicon branding | kcb/KCBLABS-26 | Todo | PBI-024 | master | agentic |
 | 27 | PBI-027 | Avionics — Components (cards, badges, footer, breadcrumbs) | kcb/KCBLABS-27 | Todo | PBI-024, PBI-025 | master | agentic |
 | 28 | PBI-028 | Avionics — Dark theme + final verification | kcb/KCBLABS-28 | Todo | PBI-024, PBI-025, PBI-026, PBI-027 | master | agentic |
+| 29 | PBI-029 | Header — Redesign desktop nav + mobile hierarchical menu | — | Proposed | none | master | agentic |
+| 30 | PBI-030 | Rating — Schema fields + RatingDots component | — | Proposed | none | master | agentic |
+| 31 | PBI-031 | Rating — Data access layer integration | — | Proposed | PBI-030 | master | agentic |
+| 32 | PBI-032 | Rating — Card component integration | — | Proposed | PBI-030 | master | agentic |
+| 33 | PBI-033 | Rating — Detail page header + index page integration | — | Proposed | PBI-030, PBI-031 | master | agentic |
 
 **Recommended start:** `PBI-001` (Foundation scaffold). After `PBI-001`, parallel opportunities:
 - `PBI-002` and `PBI-004` can proceed in parallel (disjoint files: `src/styles/*` vs `Dockerfile`/`api/health`)
@@ -169,9 +176,15 @@ graph TD
   PBI020 --> PBI023
   PBI021 --> PBI023
   PBI022 --> PBI023
+  PBI029[PBI-029 header redesign]
+  PBI030[PBI-030 rating schema+component]
+  PBI030 --> PBI031[PBI-031 rating DAL]
+  PBI030 --> PBI032[PBI-032 rating cards]
+  PBI030 --> PBI033[PBI-033 rating detail pages]
+  PBI031 --> PBI033
 ```
 
-Text fallback: `PBI-001 → PBI-002 → PBI-003 → PBI-009 → {PBI-010,PBI-011,PBI-012} → PBI-013 → PBI-017 → PBI-018` is the longest chain (≈9 deep). Shortest independent chain: `PBI-001 → PBI-004` (≈2).
+Text fallback: `PBI-001 → PBI-002 → PBI-003 → PBI-009 → {PBI-010,PBI-011,PBI-012} → PBI-013 → PBI-017 → PBI-018` is the longest chain (≈9 deep). Shortest independent chain: `PBI-001 → PBI-004` (≈2). New chains: `PBI-029` (header, standalone), `PBI-030 → {PBI-031, PBI-032, PBI-033}` (rating, ≈3 deep).
 
 ---
 
@@ -200,6 +213,8 @@ No PBI may start before a runnable gate exists (AGENTS.md §4). After PBI-001, g
 ### Human gates
 - **Spec review**: Each of the 6 specs requires human review before its first PBI merges (AGENTS.md §5 governance: "Reversed from code for brownfield and reviewed by human before PBI creation" — applies to forward specs too; no code change without spec).
 - **Card/design approval**: `PBI-009`/`PBI-013` visual check (Research Lab + Tech Company + Editorial Publication, not Agency/SaaS template).
+- **Header design approval**: `PBI-029` visual check — user must confirm the header matches asdlc.io reference before merge.
+- **Rating display approval**: `PBI-033` visual check — user must confirm rating dots placement in card and detail page contexts.
 - **Deploy approval**: `PBI-023` Coolify domain/port/env wiring requires human confirmation in Coolify dashboard.
 
 ---

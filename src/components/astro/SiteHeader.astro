@@ -1,6 +1,30 @@
 ---
 import Container from "./Container.astro";
 import { Search } from "../react/Search.tsx";
+
+const { pathname } = Astro.url;
+
+function isActive(path: string): boolean {
+  if (path === "/") return pathname === "/";
+  return pathname.startsWith(path);
+}
+
+const exploreLinks = [
+  { href: "/explore/labs", label: "Labs" },
+  { href: "/explore/projects", label: "Projects" },
+  { href: "/explore/open-source", label: "Open Source" },
+];
+const aboutLinks = [
+  { href: "/about/vision", label: "Vision" },
+  { href: "/about/people", label: "People" },
+  { href: "/about/ecosystem", label: "Ecosystem" },
+  { href: "/about/roadmap", label: "Roadmap" },
+];
+const participateLinks = [
+  { href: "/participate/sponsorship", label: "Sponsorship" },
+  { href: "/participate/collaboration", label: "Collaboration" },
+  { href: "/contact", label: "Contact" },
+];
 ---
 <header class="site-header">
   <Container>
@@ -9,54 +33,70 @@ import { Search } from "../react/Search.tsx";
         <img src="/logo.jpg" alt="KCB" class="logo" width="120" height="40" />
         <span class="brand-text">Labs</span>
       </a>
+
       <div class="links">
         <div class="group">
-          <a href="/explore">Explore</a>
+          <a href="/explore" class:list={["nav-link", { "nav-link--active": isActive("/explore") }]}>Explore</a>
           <button class="dropdown-toggle" aria-expanded="false" aria-controls="dropdown-explore" aria-label="Explore submenu">▾</button>
           <div class="dropdown" id="dropdown-explore" role="group" aria-label="Explore submenu">
-            <a href="/explore/labs">Labs</a>
-            <a href="/explore/projects">Projects</a>
-            <a href="/explore/open-source">Open Source</a>
+            {exploreLinks.map((link) => (
+              <a href={link.href} class:list={["dropdown-link", { "dropdown-link--active": isActive(link.href) }]}>{link.label}</a>
+            ))}
           </div>
         </div>
-        <a href="/journal">Journal</a>
+        <a href="/journal" class:list={["nav-link", { "nav-link--active": isActive("/journal") }]}>Journal</a>
         <div class="group">
-          <a href="/about">About</a>
+          <a href="/about" class:list={["nav-link", { "nav-link--active": isActive("/about") && !aboutLinks.some((l) => isActive(l.href)) }]}>About</a>
           <button class="dropdown-toggle" aria-expanded="false" aria-controls="dropdown-about" aria-label="About submenu">▾</button>
           <div class="dropdown" id="dropdown-about" role="group" aria-label="About submenu">
-            <a href="/about/vision">Vision</a>
-            <a href="/about/people">People</a>
-            <a href="/about/ecosystem">Ecosystem</a>
-            <a href="/about/roadmap">Roadmap</a>
+            {aboutLinks.map((link) => (
+              <a href={link.href} class:list={["dropdown-link", { "dropdown-link--active": isActive(link.href) }]}>{link.label}</a>
+            ))}
           </div>
         </div>
         <div class="group">
-          <a href="/participate">Participate</a>
+          <a href="/participate" class:list={["nav-link", { "nav-link--active": isActive("/participate") && !participateLinks.some((l) => isActive(l.href)) }]}>Participate</a>
           <button class="dropdown-toggle" aria-expanded="false" aria-controls="dropdown-participate" aria-label="Participate submenu">▾</button>
           <div class="dropdown" id="dropdown-participate" role="group" aria-label="Participate submenu">
-            <a href="/participate/sponsorship">Sponsorship</a>
-            <a href="/participate/collaboration">Collaboration</a>
-            <a href="/contact">Contact</a>
+            {participateLinks.map((link) => (
+              <a href={link.href} class:list={["dropdown-link", { "dropdown-link--active": isActive(link.href) }]}>{link.label}</a>
+            ))}
           </div>
         </div>
         <div class="search-wrapper">
           <Search client:visible />
         </div>
       </div>
+
       <details class="mobile-menu">
         <summary aria-label="Open navigation">Menu</summary>
         <nav class="mobile-links" aria-label="Mobile">
-          <a href="/explore/labs">Labs</a>
-          <a href="/explore/projects">Projects</a>
-          <a href="/explore/open-source">Open Source</a>
-          <a href="/journal">Journal</a>
-          <a href="/about/vision">Vision</a>
-          <a href="/about/people">People</a>
-          <a href="/about/ecosystem">Ecosystem</a>
-          <a href="/about/roadmap">Roadmap</a>
-          <a href="/participate/sponsorship">Sponsorship</a>
-          <a href="/participate/collaboration">Collaboration</a>
-          <a href="/contact">Contact</a>
+          <details class="mobile-group">
+            <summary class:list={["mobile-parent", { "mobile-parent--active": isActive("/explore") }]}>Explore</summary>
+            <div class="mobile-children">
+              {exploreLinks.map((link) => (
+                <a href={link.href} class:list={["mobile-child", { "mobile-child--active": isActive(link.href) }]}>{link.label}</a>
+              ))}
+            </div>
+          </details>
+          <a href="/journal" class:list={["mobile-parent", { "mobile-parent--active": isActive("/journal") }]}>Journal</a>
+          <details class="mobile-group">
+            <summary class:list={["mobile-parent", { "mobile-parent--active": isActive("/about") }]}>About</summary>
+            <div class="mobile-children">
+              {aboutLinks.map((link) => (
+                <a href={link.href} class:list={["mobile-child", { "mobile-child--active": isActive(link.href) }]}>{link.label}</a>
+              ))}
+            </div>
+          </details>
+          <details class="mobile-group">
+            <summary class:list={["mobile-parent", { "mobile-parent--active": isActive("/participate") }]}>Participate</summary>
+            <div class="mobile-children">
+              {participateLinks.map((link) => (
+                <a href={link.href} class:list={["mobile-child", { "mobile-child--active": isActive(link.href) }]}>{link.label}</a>
+              ))}
+            </div>
+          </details>
+          <a href="/contact" class:list={["mobile-parent", { "mobile-parent--active": isActive("/contact") }]}>Contact</a>
         </nav>
       </details>
     </nav>
@@ -75,7 +115,7 @@ import { Search } from "../react/Search.tsx";
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 3.5rem; /* layout-specific: 56px header height (between --space-7 and --space-8) */
+    height: 3.5rem;
     gap: var(--space-6);
   }
   .brand {
@@ -97,6 +137,8 @@ import { Search } from "../react/Search.tsx";
     letter-spacing: 0.06em;
     color: var(--color-text-strong);
   }
+
+  /* Desktop links */
   .links {
     display: flex;
     align-items: center;
@@ -110,6 +152,16 @@ import { Search } from "../react/Search.tsx";
   .links a:hover {
     color: var(--color-text);
   }
+  .nav-link {
+    padding-bottom: 2px solid transparent;
+    transition: color var(--motion-duration-fast) var(--motion-ease);
+  }
+  .nav-link--active {
+    color: var(--color-text);
+    border-bottom: 2px solid var(--color-accent);
+  }
+
+  /* Desktop dropdown */
   .group {
     position: relative;
   }
@@ -118,7 +170,7 @@ import { Search } from "../react/Search.tsx";
     position: absolute;
     top: 100%;
     left: 0;
-    min-width: 12rem; /* layout-specific: dropdown min width */
+    min-width: 12rem;
     background: var(--color-surface);
     border: var(--border-subtle);
     border-radius: var(--radius-md);
@@ -152,13 +204,19 @@ import { Search } from "../react/Search.tsx";
     outline-offset: 2px;
     border-radius: var(--radius-sm);
   }
-  .dropdown a {
+  .dropdown-link {
     padding: var(--space-1) var(--space-2);
     border-radius: var(--radius-sm);
   }
-  .dropdown a:hover {
+  .dropdown-link:hover {
     background: var(--color-bg);
   }
+  .dropdown-link--active {
+    color: var(--color-text);
+    font-weight: var(--weight-medium);
+  }
+
+  /* Mobile menu */
   .mobile-menu {
     display: none;
   }
@@ -173,8 +231,8 @@ import { Search } from "../react/Search.tsx";
   .mobile-menu[open] .mobile-links {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
-    padding: var(--space-3);
+    gap: 0;
+    padding: var(--space-2);
     position: absolute;
     top: 100%;
     right: var(--space-4);
@@ -188,7 +246,56 @@ import { Search } from "../react/Search.tsx";
   .mobile-links {
     display: none;
   }
-  @media (max-width: 768px) { /* --breakpoint-md, var() not valid in @media */
+
+  /* Mobile hierarchy */
+  .mobile-group {
+    border-bottom: var(--border-subtle);
+  }
+  .mobile-group:last-child {
+    border-bottom: none;
+  }
+  .mobile-parent {
+    display: block;
+    padding: var(--space-2) var(--space-2);
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
+    color: var(--color-text);
+    cursor: pointer;
+    list-style: none;
+  }
+  .mobile-parent::-webkit-details-marker {
+    display: none;
+  }
+  .mobile-parent::marker {
+    content: "";
+  }
+  .mobile-parent--active {
+    color: var(--color-accent);
+  }
+  .mobile-children {
+    display: flex;
+    flex-direction: column;
+    padding-left: var(--space-3);
+    padding-bottom: var(--space-1);
+  }
+  .mobile-child {
+    display: block;
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--text-small);
+    color: var(--color-muted);
+    text-decoration: none;
+    border-left: 2px solid var(--color-border);
+  }
+  .mobile-child:hover {
+    color: var(--color-text);
+    background: var(--color-bg);
+  }
+  .mobile-child--active {
+    color: var(--color-accent);
+    border-left-color: var(--color-accent);
+  }
+
+  @media (max-width: 768px) {
     .links {
       display: none;
     }

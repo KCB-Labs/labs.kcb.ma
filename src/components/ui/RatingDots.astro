@@ -1,0 +1,52 @@
+---
+interface Props {
+  knowledge: number;
+  creativity: number;
+  business: number;
+}
+const { knowledge, creativity, business } = Astro.props;
+
+function dots(score: number): string {
+  const filled = Math.max(0, Math.min(3, score));
+  return "●".repeat(filled) + "○".repeat(3 - filled);
+}
+---
+<span class="rating" aria-label={`Knowledge ${knowledge} of 3, Creativity ${creativity} of 3, Business ${business} of 3`}>
+  <span class="rating__criterion">
+    <span class="rating__label">Knowledge</span>
+    <span class="rating__dots">{dots(knowledge)}</span>
+  </span>
+  <span class="rating__criterion">
+    <span class="rating__label">Creativity</span>
+    <span class="rating__dots">{dots(creativity)}</span>
+  </span>
+  <span class="rating__criterion">
+    <span class="rating__label">Business</span>
+    <span class="rating__dots">{dots(business)}</span>
+  </span>
+</span>
+
+<style>
+  .rating {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--text-metadata);
+    color: var(--color-muted);
+    white-space: nowrap;
+  }
+  .rating__criterion {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+  .rating__label {
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .rating__dots {
+    letter-spacing: 0.1em;
+  }
+</style>

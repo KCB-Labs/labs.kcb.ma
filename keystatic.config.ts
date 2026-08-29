@@ -45,6 +45,9 @@ export default config({
         }),
         featured: fields.checkbox({ label: 'Featured', defaultValue: false }),
         priority: fields.integer({ label: 'Priority' }),
+        ratingKnowledge: fields.integer({ label: 'Knowledge Rating', validation: { isRequired: true } }),
+        ratingCreativity: fields.integer({ label: 'Creativity Rating', validation: { isRequired: true } }),
+        ratingBusiness: fields.integer({ label: 'Business Rating', validation: { isRequired: true } }),
         tags: fields.array(fields.text({ label: 'Tag' }), {
           label: 'Tags',
           itemLabel: (props) => props.value,
@@ -90,6 +93,9 @@ export default config({
         hypothesis: fields.text({ label: 'Hypothesis', multiline: true }),
         featured: fields.checkbox({ label: 'Featured', defaultValue: false }),
         priority: fields.integer({ label: 'Priority' }),
+        ratingKnowledge: fields.integer({ label: 'Knowledge Rating', validation: { isRequired: true } }),
+        ratingCreativity: fields.integer({ label: 'Creativity Rating', validation: { isRequired: true } }),
+        ratingBusiness: fields.integer({ label: 'Business Rating', validation: { isRequired: true } }),
         tags: fields.array(fields.text({ label: 'Tag' }), {
           label: 'Tags',
           itemLabel: (props) => props.value,
@@ -141,6 +147,9 @@ export default config({
         objective: fields.text({ label: 'Objective', multiline: true }),
         featured: fields.checkbox({ label: 'Featured', defaultValue: false }),
         priority: fields.integer({ label: 'Priority' }),
+        ratingKnowledge: fields.integer({ label: 'Knowledge Rating', validation: { isRequired: true } }),
+        ratingCreativity: fields.integer({ label: 'Creativity Rating', validation: { isRequired: true } }),
+        ratingBusiness: fields.integer({ label: 'Business Rating', validation: { isRequired: true } }),
         tags: fields.array(fields.text({ label: 'Tag' }), {
           label: 'Tags',
           itemLabel: (props) => props.value,
@@ -210,6 +219,9 @@ export default config({
         }),
         featured: fields.checkbox({ label: 'Featured', defaultValue: false }),
         priority: fields.integer({ label: 'Priority' }),
+        ratingKnowledge: fields.integer({ label: 'Knowledge Rating', validation: { isRequired: true } }),
+        ratingCreativity: fields.integer({ label: 'Creativity Rating', validation: { isRequired: true } }),
+        ratingBusiness: fields.integer({ label: 'Business Rating', validation: { isRequired: true } }),
         tags: fields.array(fields.text({ label: 'Tag' }), {
           label: 'Tags',
           itemLabel: (props) => props.value,
@@ -428,6 +440,9 @@ export default config({
         }),
         featured: fields.checkbox({ label: 'Featured', defaultValue: false }),
         priority: fields.integer({ label: 'Priority' }),
+        ratingKnowledge: fields.integer({ label: 'Knowledge Rating', validation: { isRequired: true } }),
+        ratingCreativity: fields.integer({ label: 'Creativity Rating', validation: { isRequired: true } }),
+        ratingBusiness: fields.integer({ label: 'Business Rating', validation: { isRequired: true } }),
         tags: fields.array(fields.text({ label: 'Tag' }), {
           label: 'Tags',
           itemLabel: (props) => props.value,
