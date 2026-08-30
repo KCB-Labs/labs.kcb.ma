@@ -30,6 +30,7 @@ RUN npm run build
 
 # Stage 2 — slim runtime
 FROM node:22-alpine AS runtime
+RUN apk add --no-cache curl
 WORKDIR /app
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
