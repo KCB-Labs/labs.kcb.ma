@@ -8,7 +8,6 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { validate } from './src/lib/content/validate.ts';
 import { writeSearchIndex } from './src/lib/search/buildIndex.ts';
-import keystaticConfig from './keystatic.config.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -45,7 +44,7 @@ export default defineConfig({
   integrations: [
     react(),
     markdoc(),
-    ...(!skipKeystatic ? [keystatic(keystaticConfig)] : []),
+    ...(!skipKeystatic ? [keystatic()] : []),
     validateIntegration,
     searchIndexIntegration,
     sitemap({
