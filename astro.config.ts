@@ -8,6 +8,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { validate } from './src/lib/content/validate.ts';
 import { writeSearchIndex } from './src/lib/search/buildIndex.ts';
+import keystaticConfig from './keystatic.config.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -34,6 +35,11 @@ const searchIndexIntegration = {
   },
 };
 
+const skipKeystatic = process.env.SKIP_KEYSTATIC === 'true' || process.env.SKIP_KEYSTATIC === '1';
+
+console.log('SKIP_KEYSTATIC raw:', JSON.stringify(process.env.SKIP_KEYSTATIC));
+console.log('Loading Keystatic:', !skipKeystatic);
+
 export default defineConfig({
   output: 'server',
   adapter: node({
@@ -42,7 +48,7 @@ export default defineConfig({
   integrations: [
     react(),
     markdoc(),
-    ...(!process.env.SKIP_KEYSTATIC ? [keystatic()] : []),
+    ...(!skipKeystatic ? [keystatic(keystaticConfig)] : []),
     validateIntegration,
     searchIndexIntegration,
     sitemap({
