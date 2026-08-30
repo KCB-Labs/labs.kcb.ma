@@ -1,15 +1,12 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
 
-const hasGitHubAuth = !!process.env.KEYSTATIC_GITHUB_CLIENT_ID;
-const githubRepo = (process.env.KEYSTATIC_GITHUB_REPO ?? 'kcb-labs/labs.kcb.ma') as `${string}/${string}`;
+const githubRepo = (process.env.KEYSTATIC_GITHUB_REPO ?? 'KCB-Labs/labs.kcb.ma') as `${string}/${string}`;
 
 export default config({
-  storage: hasGitHubAuth
-    ? {
-        kind: 'github',
-        repo: githubRepo,
-      }
-    : { kind: 'local' },
+  storage: {
+    kind: 'github',
+    repo: githubRepo,
+  },
   collections: {
     labs: collection({
       label: 'Labs',
