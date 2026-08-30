@@ -37,9 +37,6 @@ const searchIndexIntegration = {
 
 const skipKeystatic = process.env.SKIP_KEYSTATIC === 'true' || process.env.SKIP_KEYSTATIC === '1';
 
-console.log('SKIP_KEYSTATIC raw:', JSON.stringify(process.env.SKIP_KEYSTATIC));
-console.log('Loading Keystatic:', !skipKeystatic);
-
 export default defineConfig({
   output: 'server',
   adapter: node({
