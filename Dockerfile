@@ -2,9 +2,23 @@
 # Multi-stage Docker: install → build → runtime (node:22, port 4321, entry ./dist/server/entry.mjs)
 # Verified against @astrojs/node standalone docs (mcp.docs.astro.build/mcp)
 
+# Build args for Keystatic (required at build time)
+ARG KEYSTATIC_GITHUB_CLIENT_ID
+ARG KEYSTATIC_GITHUB_CLIENT_SECRET
+ARG KEYSTATIC_SECRET
+ARG PUBLIC_KEYSTATIC_GITHUB_APP_SLUG
+ARG KEYSTATIC_GITHUB_REPO
+
 # Stage 1 — install + build
 FROM node:22-alpine AS builder
 WORKDIR /app
+
+# Set build-time env vars for Keystatic
+ENV KEYSTATIC_GITHUB_CLIENT_ID=$KEYSTATIC_GITHUB_CLIENT_ID
+ENV KEYSTATIC_GITHUB_CLIENT_SECRET=$KEYSTATIC_GITHUB_CLIENT_SECRET
+ENV KEYSTATIC_SECRET=$KEYSTATIC_SECRET
+ENV PUBLIC_KEYSTATIC_GITHUB_APP_SLUG=$PUBLIC_KEYSTATIC_GITHUB_APP_SLUG
+ENV KEYSTATIC_GITHUB_REPO=$KEYSTATIC_GITHUB_REPO
 
 # Install deps (leverage cache)
 COPY package.json package-lock.json ./
