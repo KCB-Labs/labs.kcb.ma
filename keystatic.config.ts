@@ -2,10 +2,19 @@ import { config, fields, collection, singleton } from '@keystatic/core';
 
 const githubRepo = (process.env.KEYSTATIC_GITHUB_REPO ?? 'KCB-Labs/labs.kcb.ma') as `${string}/${string}`;
 
+// Allowed GitHub usernames for Keystatic admin access
+const ADMIN_GITHUB_USERS = ['kcb19'];
+
 export default config({
   storage: {
     kind: 'github',
     repo: githubRepo,
+  },
+  access: {
+    login: ({ session }) => {
+      if (!session?.item?.login) return false;
+      return ADMIN_GITHUB_USERS.includes(session.item.login);
+    },
   },
   collections: {
     labs: collection({
